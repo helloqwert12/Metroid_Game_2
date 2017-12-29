@@ -205,3 +205,13 @@ void Sprite::Render(int X, int Y)
 		D3DCOLOR_XRGB(255, 255, 255)
 	);
 }
+
+int Sprite::GetIndex()
+{
+	return _Index;
+}
+
+int Sprite::GetCount()
+{
+	return _Count;
+}

@@ -20,5 +20,5 @@ void ExplosionEffect::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 {
 	Effect::InitSprites(d3ddv);
 
-	effectSprite 
+	effectSprite = new Sprite(spriteHandler, EFFECT_SPRITE_PATH, EFFECT_EXPLOSION, EFFECT_EXPLOSION_WIDTH, EFFECT_EXPLOSION_HEIGHT, EFFECT_EXPLOSION_COUNT, 1);
 }

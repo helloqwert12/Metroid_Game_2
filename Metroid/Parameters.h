@@ -18,6 +18,8 @@ class Item;
 class MorphItem;
 class EnergyItem;
 class MissileItem;
+class Effect;
+class ExplosionEffect;
 
 //================ SCREEN RESOLUTION ================
 #define GAME_SCREEN_RESOLUTION_640_480_24   0
@@ -376,5 +378,13 @@ enum EFFECT_TYPE
 	EXPLOSION
 };
 
-#define EFFECT_TIME_SURVIVE 3
+#define EFFECT_TIME_SURVIVE 300
+#define EFFECT_SPRITE_PATH L"sprites\\effect\\explosion.png"
+
+//========== EFFECT EXPLOSION
+#define EFFECT_EXPLOSION "sprites\\effect\\EFFECT_EXPLOSION.txt"
+#define EFFECT_EXPLOSION_WIDTH 64
+#define EFFECT_EXPLOSION_HEIGHT 64
+#define EFFECT_EXPLOSION_COUNT 3
+
 //================ END EFFECT ===============

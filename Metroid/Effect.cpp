@@ -11,7 +11,7 @@ Effect::Effect(LPD3DXSPRITE spriteHandler, World * manager)
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
 	type = EFFECT;
-	time_survive = 0;
+	time_survive = EFFECT_TIME_SURVIVE;
 	isActive = false;
 
 	vx = 0;
@@ -70,7 +70,7 @@ void Effect::Render()
 
 Effect * Effect::CreateEffect(EFFECT_TYPE effectType, int pos_x, int pos_y, int param, LPD3DXSPRITE spriteHandler, World * manager)
 {
-	Effect* effect = new Effect();
+	Effect* effect = new Effect(spriteHandler, manager);
 
 	switch (effectType)
 	{

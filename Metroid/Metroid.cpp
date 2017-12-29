@@ -7,6 +7,7 @@
 #include "World.h"
 #include "Samus.h"
 #include "MorphItem.h"
+#include "ExplosionEffect.h"
 DWORD last_time;
 void Metroid::_InitBackground()
 {
@@ -628,14 +629,16 @@ void Metroid::OnKeyDown(int KeyCode)
 					world->samus->SetState(IDLING_SHOOTING_LEFT);
 
 					//_ShootMissile(ON_LEFT);
-					world->birdbullets->Next(NONE, world->samus->GetPosX(), world->samus->GetPosY());
+					//world->birdbullets->Next(NONE, world->samus->GetPosX(), world->samus->GetPosY());
+					world->explsEffect->Init(world->samus->GetPosX(), world->samus->GetPosY());
 				}
 				if (world->samus->GetState() == IDLE_RIGHT)
 				{
 					world->samus->SetState(IDLING_SHOOTING_RIGHT);
 
 					//_ShootMissile(ON_RIGHT);
-					world->birdbullets->Next(NONE, world->samus->GetPosX(), world->samus->GetPosY());
+					//world->birdbullets->Next(NONE, world->samus->GetPosX(), world->samus->GetPosY());
+					world->explsEffect->Init(world->samus->GetPosX(), world->samus->GetPosY());
 				}
 				break;
 

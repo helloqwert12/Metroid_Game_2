@@ -37,5 +37,10 @@ public:
 
 	// Render current sprite at location (X,Y)
 	void Render(int X, int Y);
+
+	//============== GET METHOD ======================
+	int GetIndex();
+	int GetCount();
+	//============== END GET METHOD ==================
 };
 #endif

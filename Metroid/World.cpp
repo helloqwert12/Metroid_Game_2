@@ -6,6 +6,7 @@
 #include "MorphItem.h"
 #include "EnergyItem.h"
 #include "MissileItem.h"
+#include "ExplosionEffect.h"
 
 World::World()
 {
@@ -35,6 +36,8 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	morphItem = new MorphItem(spriteHandler, this);
 	energyItem = new EnergyItem(spriteHandler, this);
 	missileItem = new MissileItem(spriteHandler, this);
+
+	explsEffect = new ExplosionEffect(spriteHandler, this);
 
 	motherBrain = new MotherBrain(spriteHandler, this);
 	ridley = new Ridley(spriteHandler, this);
@@ -84,6 +87,8 @@ void World::Update(float t)
 	energyItem->Update(t);
 	missileItem->Update(t);
 
+	explsEffect->Update(t);
+
 	quadtreeGroup->GetCollisionObjectQTree();
 	// Cập nhật các đối tượng có khả năng va chạm trong frame này
 	collisionGroup->GetCollisionObjects();
@@ -116,6 +121,8 @@ void World::Render()
 	energyItem->Render();
 	missileItem->Render();
 
+	explsEffect->Render();
+
 	quadtreeGroup->Render();
 	hog_yellow->Render();
 	hog_pink->Render();
@@ -143,4 +150,6 @@ void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	morphItem->InitSprites(d3ddv);
 	energyItem->InitSprites(d3ddv);
 	missileItem->InitSprites(d3ddv);
+
+	explsEffect->InitSprites(d3ddv);
 }

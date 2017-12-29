@@ -237,7 +237,8 @@ enum OBJECT_TYPE
 	ENEMY = 2,
 	BRICK = 3,
 	PROJECTILE = 4,
-	ITEM = 5
+	ITEM = 5,
+	EFFECT_TYPE = 6
 };
 //================= END OBJECT TYPE ============
 

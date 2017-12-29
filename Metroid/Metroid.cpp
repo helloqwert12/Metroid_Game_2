@@ -628,17 +628,13 @@ void Metroid::OnKeyDown(int KeyCode)
 				{
 					world->samus->SetState(IDLING_SHOOTING_LEFT);
 
-					//_ShootMissile(ON_LEFT);
-					//world->birdbullets->Next(NONE, world->samus->GetPosX(), world->samus->GetPosY());
-					world->explsEffect->Init(world->samus->GetPosX(), world->samus->GetPosY());
+					_ShootMissile(ON_LEFT);	
 				}
 				if (world->samus->GetState() == IDLE_RIGHT)
 				{
 					world->samus->SetState(IDLING_SHOOTING_RIGHT);
 
-					//_ShootMissile(ON_RIGHT);
-					//world->birdbullets->Next(NONE, world->samus->GetPosX(), world->samus->GetPosY());
-					world->explsEffect->Init(world->samus->GetPosX(), world->samus->GetPosY());
+					_ShootMissile(ON_RIGHT);
 				}
 				break;
 

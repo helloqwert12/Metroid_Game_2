@@ -10,7 +10,7 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 {
 	this->manager = manager;
 	//Create instance bullet_list
-	int num = 0;
+	
 	switch (bullet_type)
 	{
 	case STANDARD:
@@ -34,35 +34,35 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 	{
 	case STANDARD:
 		//bullet_list = new BulletObject*[STANDARD_NUM];
-		for (int i = 0; i < BULLET_COUNT; i++)
+		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new Bullet(manager);
 		}
 		break;
 	case MISSILE:
 		//bullet_list = new BulletObject*[MISSILE_NUM];
-		for (int i = 0; i < BULLET_COUNT; i++)
+		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new Missile(manager);
 		}
 		break;
 	case SENTRY:
 		//bullet_list = new BulletObject*[SENTRY_BULLET_NUM];
-		for (int i = 0; i < BULLET_COUNT; i++)
+		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new SentryBullet(manager);
 		}
 		break;
 	case BIRD_BULLET:
 		//bullet_list = new BulletObject*[BIRD_BULLET_NUM];
-		for (int i = 0; i < BULLET_COUNT; i++)
+		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new BirdBullet(manager);
 		}
 		break;
 	case BOOMERANG:
 		//bullet_list = new BulletObject*[BIRD_BULLET_NUM];
-		for (int i = 0; i < BULLET_COUNT; i++)
+		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new RidleyBoomerang(manager);
 		}
@@ -87,7 +87,7 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 
 BulletManager::~BulletManager()
 {
-	for (int i = 0; i < BULLET_COUNT; i++)
+	for (int i = 0; i < num; i++)
 	{
 		delete(bullet_list[i]);
 	}
@@ -96,7 +96,7 @@ BulletManager::~BulletManager()
 
 void BulletManager::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 {
-	for (int i = 0; i < BULLET_COUNT; i++)
+	for (int i = 0; i < num; i++)
 	{
 		bullet_list[i]->InitSprites(d3ddv);
 	}
@@ -104,7 +104,7 @@ void BulletManager::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 
 void BulletManager::InitPosition(int posX, int posY)
 {
-	for (int i = 0; i < BULLET_COUNT; i++)
+	for (int i = 0; i < num; i++)
 	{
 		bullet_list[i]->InitPosition(pos_x_holder, pos_y_holder);
 	}
@@ -113,7 +113,7 @@ void BulletManager::InitPosition(int posX, int posY)
 void BulletManager::ResetAll()
 {
 	_Index = 0;
-	for (int i = 0; i < BULLET_COUNT; i++)
+	for (int i = 0; i < num; i++)
 	{
 		bullet_list[i]->Reset();
 	}
@@ -128,12 +128,12 @@ void BulletManager::ResetAll()
 void BulletManager::Next(BULLET_DIRECTION dir, float posX, float posY)
 {
 	bullet_list[_Index]->Shoot(dir, posX, posY);
-	_Index = (_Index + BULLET_COUNT - 1) % BULLET_COUNT;
+	_Index = (_Index + num - 1) % num;
 }
 
 void BulletManager::Update(float t)
 {
-	for (int i = 0; i < BULLET_COUNT; i++)
+	for (int i = 0; i < num; i++)
 	{
 		bullet_list[i]->Update(t);
 	}
@@ -142,7 +142,7 @@ void BulletManager::Update(float t)
 
 void BulletManager::Render()
 {
-	for (int i = 0; i < BULLET_COUNT; i++)
+	for (int i = 0; i < num; i++)
 	{
 		bullet_list[i]->Render();
 	}

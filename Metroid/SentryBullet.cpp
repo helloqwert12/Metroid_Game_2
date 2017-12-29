@@ -17,6 +17,9 @@ SentryBullet::SentryBullet(World * manager)
 	limit_dist_x = 0;
 	limit_dist_y = 0;
 	isActive = false;
+
+	//Set collider
+	collider = new Collider(0, 0, -SENTRY_BULLET_HEIGHT, SENTRY_BULLET_WIDTH);
 }
 
 SentryBullet::~SentryBullet()

@@ -31,6 +31,9 @@ Missile::Missile(World * manager)
 	limit_dist_y = 0;
 	isActive = false;
 	this->manager = manager;
+
+	//Set collider
+	collider = new Collider(0, 0, -MISSILE_HEIGHT, MISSILE_WIDTH);
 }
 
 Missile::Missile(World * manager, int x_holder, int y_holder)

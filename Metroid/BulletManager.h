@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef _BULLETMANAGER_H_
 #define _BULLETMANAGER_H_
 #include "Bullet.h"
@@ -18,6 +18,7 @@ private:
 	DWORD start_shoot;
 	DWORD tick_per_frame;
 	int frame_rate;
+	int num;		// số lượng đạn tạo sẵn, tùy theo mỗi loại đạn mà có số lượng khác nhau
 	
 public:
 	//BulletManager();

@@ -29,7 +29,7 @@ public:
 	
 	void InitPosition(int posX, int posY);
 	void ResetPosition();
-	void Reset();
+	
 	BULLET_DIRECTION GetDirection();
 	void SetDirection(BULLET_DIRECTION value);
 
@@ -39,6 +39,7 @@ public:
 	virtual void Render();
 	virtual void Shoot(BULLET_DIRECTION dir);
 	virtual void Shoot(BULLET_DIRECTION dir, float posX, float posY);
+	virtual void Reset();
 	//============ END VIRTUAL METHOD =============
 };
 #endif

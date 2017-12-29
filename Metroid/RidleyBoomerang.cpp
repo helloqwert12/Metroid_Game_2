@@ -10,6 +10,9 @@ RidleyBoomerang::RidleyBoomerang(World * manager)
 	limit_dist_x = 0;
 	limit_dist_y = 0;
 	isActive = false;
+
+	//Set collider
+	collider = new Collider(0, 0, -RIDLEY_BOOMERANG_HEIGHT, RIDLEY_BOOMERANG_WIDTH);
 }
 
 RidleyBoomerang::~RidleyBoomerang()
@@ -31,6 +34,11 @@ void RidleyBoomerang::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 
 void RidleyBoomerang::Update(float t)
 {
+	if (!isActive)
+		return;
+
+	vy -= 0.1f;
+
 	// Xử lý va chạm
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
@@ -53,31 +61,45 @@ void RidleyBoomerang::Update(float t)
 	{
 	case ON_RIGHT:
 		isActive = true;
-		vx = SPEED;
+		vx = RIDLEY_BULLET_SPEED;
+		break;
+	case NONE:
+		isActive = false;
+		vx = 0;
 		vy = 0;
 		break;
+	}
+
+	time_push -= t;
+	if (time_push <= 0)
+	{
+		vy -= 0.1f;
+	}
+	else
+	{
+		vy += BULLET_PUSH_VELOCITY_Y;
 	}
 
 	pos_x += vx * t;
 	pos_y += vy * t;
 
-	int temp_x = vx * t;
-	int temp_y = vy * t;
+	//int temp_x = vx * t;
+	//int temp_y = vy * t;
 
-	if (temp_x < 0)
-		temp_x = -temp_x;
-	if (temp_y < 0)
-		temp_y = -temp_y;
+	//if (temp_x < 0)
+	//	temp_x = -temp_x;
+	//if (temp_y < 0)
+	//	temp_y = -temp_y;
 
-	limit_dist_x += temp_x;
-	limit_dist_y += temp_y;
+	//limit_dist_x += temp_x;
+	//limit_dist_y += temp_y;
 
 
-	//Check if the bullet reach the limit
-	if (limit_dist_x >= LIMIT_DISTANCE || limit_dist_y >= LIMIT_DISTANCE)
-	{
-		Reset();
-	}
+	////Check if the bullet reach the limit
+	//if (limit_dist_x >= LIMIT_DISTANCE || limit_dist_y >= LIMIT_DISTANCE)
+	//{
+	//	Reset();
+	//}
 }
 
 void RidleyBoomerang::Render()
@@ -98,6 +120,26 @@ void RidleyBoomerang::Render()
 void RidleyBoomerang::Shoot(BULLET_DIRECTION dir, float posX, float posY)
 {
 	direction = dir;	//cái này xem như set active
+	isActive = true;
 	pos_x = posX;
 	pos_y = posY;
+	time_push = RIDLEY_BOOMERANG_TIME_PUSH;
+}
+
+void RidleyBoomerang::Reset()
+{
+	//Ngung render
+	isActive = false;
+
+	//Reset vi tri
+	ResetPosition();
+
+	//Reset distance
+	limit_dist_x = 0;
+	limit_dist_y = 0;
+
+	//Set direction to NONE
+	direction = NONE;
+
+	time_push = RIDLEY_BOOMERANG_TIME_PUSH;
 }

@@ -222,6 +222,8 @@ enum BULLET_DIRECTION
 	ON_BOTTOMLEFT,
 	ON_BOTTOMRIGHT
 };
+
+#define BULLET_PUSH_VELOCITY_Y 0.14f
 //================= END BULLET ===========
 
 //================= BULLET MANAGER ================
@@ -229,7 +231,7 @@ enum BULLET_DIRECTION
 #define MISSILE_NUM 3
 #define SENTRY_BULLET_NUM 10
 #define BIRD_BULLET_NUM 2
-#define RIDLEY_BOOMERANG_NUM 2
+#define RIDLEY_BOOMERANG_NUM 5
 //================= END BULLET MANAGER ============
 
 //================= OBJECT TYPE ================
@@ -325,6 +327,8 @@ enum SENTRY_TYPE
 
 //================= RIDLEY =================
 #define RIDLEY_BOOMERANG_SPIRTE_PATH L"sprites\\bosses\\boss_sprtesheet.png"
+#define RIDLEY_BOOMERANG_TIME_PUSH 300
+#define RIDLEY_BULLET_SPEED 0.4f
 
 #define RIDLEY_WIDTH 62
 #define RIDLEY_HEIGHT 92

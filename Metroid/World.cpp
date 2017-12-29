@@ -26,9 +26,9 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	rootQNode = NULL;
 
 	bullets = new BulletManager(this, STANDARD);
-	bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
+	//bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
 	missiles = new BulletManager(this, MISSILE);
-	missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
+	//missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
 	sentrybullets = new BulletManager(this, SENTRY);
 	birdbullets = new BulletManager(this, BIRD_BULLET);
 	ridleyBoomerang = new BulletManager(this, BOOMERANG);

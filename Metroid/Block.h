@@ -25,7 +25,7 @@ public:
 
 	void InitSprites();
 	//============== OVERRIDE VIRTUAL METHOD ===================
-	virtual void Update(int t);
+	virtual void Update(float t);
 	virtual void Render();
 	//============== END OVERRIDE VIRTUAL METHOD ===============
 };

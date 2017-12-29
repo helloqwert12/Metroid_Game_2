@@ -1,7 +1,9 @@
 #pragma once
 #include "GameObject.h"
 #include "Parameters.h"
-class MotherBrain : public GameObject
+#include "Enemy.h"
+
+class MotherBrain : public Enemy
 {
 protected:
 	World * manager;
@@ -14,8 +16,7 @@ public:
 	~MotherBrain();
 
 	//============= OVERRIDE VIRTUAL METHOD ==================
-	void Update();
+	void Update(float t);
 	void Render();
 	//============= END OVERRIDE VIRTUAL METHOD ==============
 };
-

@@ -28,14 +28,6 @@ Sentry::~Sentry()
 	delete(a3);
 	delete(a4);
 	delete(a5);
-	//delete(top);
-	//delete(top_right);
-	//delete(right);
-	//delete(bottom_right);
-	//delete(bottom);
-	//delete(bottom_left);
-	//delete(left);
-	//delete(top_left);
 }
 
 
@@ -53,6 +45,7 @@ void Sentry::InitSprites()
 		bottom_right_path = SENTRY_BOTTOM_RIGHT_PATH;
 		bottom_path = SENTRY_BOTTOM_PATH;
 
+		// Khởi tạo sprite
 		a1 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, top_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
 		a2 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, top_right_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
 		a3 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, right_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
@@ -66,6 +59,7 @@ void Sentry::InitSprites()
 		bottom_left_path = SENTRY_BOTTOM_LEFT_PATH;
 		bottom_path = SENTRY_BOTTOM_PATH;
 
+		// Khởi tạo sprite
 		a1 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, top_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
 		a2 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, top_left_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
 		a3 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, left_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
@@ -79,6 +73,7 @@ void Sentry::InitSprites()
 		bottom_right_path = SENTRY_BOTTOM_RIGHT_PATH;
 		right_path = SENTRY_RIGHT_PATH;
 
+		// Khởi tạo sprite
 		a1 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, left_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
 		a2 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, bottom_left_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
 		a3 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, bottom_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
@@ -86,20 +81,9 @@ void Sentry::InitSprites()
 		a5 = new Sprite(spriteHandler, BOSS_SPRITE_PATH, right_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
 		break;
 	}
-
-	//// Khởi tạo sprite
-	//top = new Sprite(spriteHandler, BOSS_SPRITE_PATH, top_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-	//top_right = new Sprite(spriteHandler, BOSS_SPRITE_PATH, top_right_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-	//right = new Sprite(spriteHandler, BOSS_SPRITE_PATH, right_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-	//bottom_right = new Sprite(spriteHandler, BOSS_SPRITE_PATH, bottom_right_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-	//bottom = new Sprite(spriteHandler, BOSS_SPRITE_PATH, bottom_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-	//bottom_left = new Sprite(spriteHandler, BOSS_SPRITE_PATH, bottom_left_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-	//left = new Sprite(spriteHandler, BOSS_SPRITE_PATH, left_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-	//top_left = new Sprite(spriteHandler, BOSS_SPRITE_PATH, top_left_path, SENTRY_WIDTH, SENTRY_HEIGHT, SENTRY_SPRITE_COUNT, 1);
-
 }
 
-void Sentry::Update(int t)
+void Sentry::Update(float t)
 {
 	if (!isActive) return;
 
@@ -140,29 +124,89 @@ void Sentry::Update(int t)
 	//	}
 	//}
 
-	//pos_x += vx * t;
-	//pos_y += vy * t;
+	pos_x += vx * t;
+	pos_y += vy * t;
 
 	DWORD now = GetTickCount();
-	if (now - last_time > 1000 / 3)
+	if (now - last_time > 1000 / 1)
 	{
-		switch (state)
+		switch (sentry_type)
 		{
-		case ON_SENTRY_A1:
-			state = ON_SENTRY_A2;
+		case SENTRY_LEFT:
+			switch (state)
+			{
+			case ON_SENTRY_A1:
+				manager->sentrybullets->Next(ON_UP, pos_x, pos_y);
+				state = ON_SENTRY_A2;
+				break;
+			case ON_SENTRY_A2:
+				manager->sentrybullets->Next(ON_TOPRIGHT, pos_x, pos_y);
+				state = ON_SENTRY_A3;
+				break;
+			case ON_SENTRY_A3:
+				manager->sentrybullets->Next(ON_RIGHT, pos_x, pos_y);
+				state = ON_SENTRY_A4;
+				break;
+			case ON_SENTRY_A4:
+				manager->sentrybullets->Next(ON_BOTTOMRIGHT, pos_x, pos_y);
+				state = ON_SENTRY_A5;
+				break;
+			case ON_SENTRY_A5:
+				manager->sentrybullets->Next(ON_BOTTOM, pos_x, pos_y);
+				state = ON_SENTRY_A1;
+				break;
+			}
 			break;
-		case ON_SENTRY_A2:
-			state = ON_SENTRY_A3;
+		case SENTRY_TOP:
+			switch (state)
+			{
+			case ON_SENTRY_A1:
+				manager->sentrybullets->Next(ON_LEFT, pos_x, pos_y);
+				state = ON_SENTRY_A2;
+				break;
+			case ON_SENTRY_A2:
+				manager->sentrybullets->Next(ON_BOTTOMLEFT, pos_x, pos_y);
+				state = ON_SENTRY_A3;
+				break;
+			case ON_SENTRY_A3:
+				manager->sentrybullets->Next(ON_BOTTOM, pos_x, pos_y);
+				state = ON_SENTRY_A4;
+				break;
+			case ON_SENTRY_A4:
+				manager->sentrybullets->Next(ON_BOTTOMRIGHT, pos_x, pos_y);
+				state = ON_SENTRY_A5;
+				break;
+			case ON_SENTRY_A5:
+				manager->sentrybullets->Next(ON_RIGHT, pos_x, pos_y);
+				state = ON_SENTRY_A1;
+				break;
+			}
 			break;
-		case ON_SENTRY_A3:
-			state = ON_SENTRY_A4;
+		case SENTRY_RIGHT:
+			switch (state)
+			{
+			case ON_SENTRY_A1:
+				manager->sentrybullets->Next(ON_UP, pos_x, pos_y);
+				state = ON_SENTRY_A2;
+				break;
+			case ON_SENTRY_A2:
+				manager->sentrybullets->Next(ON_TOPLEFT, pos_x, pos_y);
+				state = ON_SENTRY_A3;
+				break;
+			case ON_SENTRY_A3:
+				manager->sentrybullets->Next(ON_LEFT, pos_x, pos_y);
+				state = ON_SENTRY_A4;
+				break;
+			case ON_SENTRY_A4:
+				manager->sentrybullets->Next(ON_BOTTOMLEFT, pos_x, pos_y);
+				state = ON_SENTRY_A5;
+				break;
+			case ON_SENTRY_A5:
+				manager->sentrybullets->Next(ON_BOTTOM, pos_x, pos_y);
+				state = ON_SENTRY_A1;
+				break;
+			}
 			break;
-		case ON_SENTRY_A4:
-			state = ON_SENTRY_A5;
-			break;
-		case ON_SENTRY_A5:
-			state = ON_SENTRY_A1;
-			break;			
 		}
 		last_time = now;
 	}
@@ -196,30 +240,6 @@ void Sentry::Render()
 	case ON_SENTRY_A5:
 		a5->Render(pos_x, pos_y);
 		break;
-	/*case ON_SENTRY_TOP:
-		top->Render(pos_x, pos_y);
-		break;
-	case ON_SENTRY_TOP_RIGHT:
-		top_right->Render(pos_x, pos_y);
-		break;
-	case ON_SENTRY_RIGHT:
-		right->Render(pos_x, pos_y);
-		break;
-	case ON_SENTRY_BOTTOM_RIGHT:
-		bottom_right->Render(pos_x, pos_y);
-		break;
-	case ON_SENTRY_BOTTOM:
-		bottom->Render(pos_x, pos_y);
-		break;
-	case ON_SENTRY_BOTTOM_LEFT:
-		bottom_left->Render(pos_x, pos_y);
-		break;
-	case ON_SENTRY_LEFT:
-		left->Render(pos_x, pos_y);
-		break;
-	case ON_SENTRY_TOP_LEFT:
-		top_left->Render(pos_x, pos_y);
-		break;*/
 	}
 	spriteHandler->End();
 }

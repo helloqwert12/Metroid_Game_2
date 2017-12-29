@@ -23,7 +23,7 @@ public:
 	//============= END GET - SET METHOD ==================
 
 	//============= OVERRIDE VIRTUAL METHOD ===============
-	void Update(int t);
+	void Update(float t);
 	void Render();
 	//============= END OVERRIDE VIRTUAL METHOD ===========
 };

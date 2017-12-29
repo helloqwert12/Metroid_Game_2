@@ -28,7 +28,11 @@ void Metroid::_InitPositions()
 	world->hog_pink->InitPostition(1800, 110);
 	world->bird->InitPostition(1500, 410);
 	world->block->InitPostition(1600,100);
-	world->sentry->InitPostition(1500, 200);
+	world->sentryLeft->InitPostition(1500, 350);
+	world->sentryTop->InitPostition(1700, 350);
+	world->sentryRight->InitPostition(1900, 350);
+	world->motherBrain->InitPostition(1900, 200);
+	world->ridley->InitPostition(1750, 120);
 
 	//world->morphItem->SetPosX(world->samus->GetPosX());
 	//world->morphItem->SetPosY(world->samus->GetPosX());

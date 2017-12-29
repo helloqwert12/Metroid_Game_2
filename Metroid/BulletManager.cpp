@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "SentryBullet.h"
 #include "BirdBullet.h"
+#include "RidleyBoomerang.h"
 
 BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 {
@@ -23,6 +24,9 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 		break;
 	case BIRD_BULLET:
 		num = BIRD_BULLET_NUM;
+		break;
+	case BOOMERANG:
+		num = RIDLEY_BOOMERANG_NUM;
 		break;
 	}
 	bullet_list = new BulletObject*[num];
@@ -54,6 +58,13 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 		for (int i = 0; i < BULLET_COUNT; i++)
 		{
 			bullet_list[i] = new BirdBullet(manager);
+		}
+		break;
+	case BOOMERANG:
+		//bullet_list = new BulletObject*[BIRD_BULLET_NUM];
+		for (int i = 0; i < BULLET_COUNT; i++)
+		{
+			bullet_list[i] = new RidleyBoomerang(manager);
 		}
 		break;
 		// ...

@@ -12,15 +12,6 @@ enum SENTRY_STATE
 	ON_SENTRY_A3,
 	ON_SENTRY_A4,
 	ON_SENTRY_A5,
-
-	//ON_SENTRY_TOP,
-	//ON_SENTRY_TOP_RIGHT,
-	//ON_SENTRY_RIGHT,
-	//ON_SENTRY_BOTTOM_RIGHT,
-	//ON_SENTRY_BOTTOM,
-	//ON_SENTRY_BOTTOM_LEFT,
-	//ON_SENTRY_LEFT,
-	//ON_SENTRY_TOP_LEFT,
 };
 
 class Sentry : public Enemy
@@ -32,14 +23,6 @@ protected:
 	Sprite * a3;
 	Sprite * a4;
 	Sprite * a5;
-	//Sprite * top;
-	//Sprite * top_right;
-	//Sprite * right;
-	//Sprite * bottom_right;
-	//Sprite * bottom;
-	//Sprite * bottom_left;
-	//Sprite * left;
-	//Sprite * top_left;
 
 public:
 	Sentry();
@@ -48,7 +31,7 @@ public:
 
 	void InitSprites();
 	//============== OVERRIDE VIRTUAL METHOD ===================
-	virtual void Update(int t);
+	virtual void Update(float t);
 	virtual void Render();
 	//============== END OVERRIDE VIRTUAL METHOD ===============
 };

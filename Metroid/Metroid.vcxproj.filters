@@ -198,6 +198,12 @@
     <ClCompile Include="MissileItem.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Ridley.cpp">
+      <Filter>Source Files\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="RidleyBoomerang.cpp">
+      <Filter>Source Files\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -322,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="MissileItem.h">
       <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Ridley.h">
+      <Filter>Header Files\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="RidleyBoomerang.h">
+      <Filter>Header Files\Boss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

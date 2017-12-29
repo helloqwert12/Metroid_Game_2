@@ -163,6 +163,8 @@
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="QTreeObject.cpp" />
     <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="Ridley.cpp" />
+    <ClCompile Include="RidleyBoomerang.cpp" />
     <ClCompile Include="Samus.cpp" />
     <ClCompile Include="Sentry.cpp" />
     <ClCompile Include="SentryBullet.cpp" />
@@ -205,6 +207,8 @@
     <ClInclude Include="QNode.h" />
     <ClInclude Include="QTreeObject.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="Ridley.h" />
+    <ClInclude Include="RidleyBoomerang.h" />
     <ClInclude Include="Samus.h" />
     <ClInclude Include="Sentry.h" />
     <ClInclude Include="SentryBullet.h" />

@@ -76,7 +76,7 @@ BRICK_TYPE Brick::GetBrickType()
 	return brick_type;
 }
 
-void Brick::Update(int t)
+void Brick::Update(float t)
 {
 	
 }

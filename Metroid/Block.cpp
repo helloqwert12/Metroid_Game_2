@@ -46,7 +46,7 @@ void Block::InitSprites()
 	right = new Sprite(spriteHandler, ENEMY_SPRITE_PATH, right_path, BLOCK_WIDTH, BLOCK_HEIGHT, BLOCK_SPRITE_COUNT, 1);
 }
 
-void Block::Update(int t)
+void Block::Update(float t)
 {
 	if (!isActive) return;
 

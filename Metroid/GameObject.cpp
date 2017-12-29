@@ -49,7 +49,7 @@ void GameObject::Destroy()
 {
 }
 
-void GameObject::Update(int t)
+void GameObject::Update(float t)
 {
 }
 

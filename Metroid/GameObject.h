@@ -93,7 +93,7 @@ public:
 	//=============================== VIRTUAL METHOD FOR INHERITANCE ================
 	virtual void InitSprites();
 	virtual ~GameObject();
-	virtual void Update(int t);
+	virtual void Update(float t);
 	virtual void Render();
 
 	

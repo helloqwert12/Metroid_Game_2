@@ -22,7 +22,7 @@ public:
 
 	//============== OVERRIDE VIRTUAL METHOD ===============
 	virtual void Render();
-	virtual void Update(int t);
+	virtual void Update(float t);
 	//virtual void Reset(int x, int y);	-- giữ mặc định không có modify nên không cần override
 	//virtual void Destroy();			-- giữ mặc định không có modify nên không cần override
 	//============== END OVERRIDE VIRTUAL METHOD ============

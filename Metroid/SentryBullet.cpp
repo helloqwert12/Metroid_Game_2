@@ -41,11 +41,8 @@ void SentryBullet::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	bottomright = new Sprite(_SpriteHandler, SENTRY_BULLET_SPIRTE_PATH, SENTRY_BULLET_BOTTOMRIGHT, SENTRY_BULLET_WIDTH, SENTRY_BULLET_HEIGHT, SENTRY_BULLET_SPRITE_COUNT, SPRITE_PER_ROW);
 }
 
-void SentryBullet::Update(int t)
+void SentryBullet::Update(float t)
 {
-	if (!isActive)
-		return;
-
 	// Xử lý va chạm
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{

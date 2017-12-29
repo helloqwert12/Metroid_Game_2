@@ -149,7 +149,7 @@ class MissileItem;
 #define BIRD_WIDTH 36
 #define BIRD_HEIGHT 52
 
-#define BIRD_FLY_SPRITE_COUNT 2
+#define BIRD_FLY_SPRITE_COUNT 3
 
 #define BIRD_FLY "sprites\\enemy\\BIRD_FLY.txt"
 
@@ -201,7 +201,8 @@ enum BULLET_TYPE
 	STANDARD,
 	MISSILE,
 	SENTRY,
-	BIRD_BULLET
+	BIRD_BULLET,
+	BOOMERANG,
 };
 //================ END BULLET TYPE ============
 
@@ -226,6 +227,7 @@ enum BULLET_DIRECTION
 #define MISSILE_NUM 3
 #define SENTRY_BULLET_NUM 10
 #define BIRD_BULLET_NUM 2
+#define RIDLEY_BOOMERANG_NUM 2
 //================= END BULLET MANAGER ============
 
 //================= OBJECT TYPE ================
@@ -271,6 +273,9 @@ enum ENEMY_TYPE
 #define MOTHER_BRAIN_HIT_HEIGHT 128
 #define MOTHER_BRAIN_HIT_SPRITE_COUNT 2
 
+#define MOTHER_BRAIN_UNBROKEN_PATH "sprites\\bosses\\MOTHER_BRAIN_STATE_1.txt"
+#define MOTHER_BRAIN_BROKEN_PATH "sprites\\bosses\\MOTHER_BRAIN_STATE_2.txt"
+
 //================= SENTRY =================
 //================= SENTRY TYPE =================
 enum SENTRY_TYPE
@@ -300,7 +305,7 @@ enum SENTRY_TYPE
 #define SENTRY_SPRITE_COUNT 1
 
 #define SENTRY_BULLET_SPRITE_COUNT 1
-#define SENTRY_BULLET_SPIRTE_PATH L"sprites\\bosses\\boss_sprtesheet.png"
+#define SENTRY_BULLET_SPIRTE_PATH L"sprites\\bosses\\boss_sprtesheet.png" 
 
 #define SENTRY_BULLET_UP "sprites\\bosses\\SENTRY_BULLET_TOP.txt"
 #define SENTRY_BULLET_TOPRIGHT "sprites\\bosses\\SENTRY_BULLET_TOP_RIGHT.txt"
@@ -315,8 +320,20 @@ enum SENTRY_TYPE
 
 //================= END MOTHER_BRAIN =============
 
+//================= RIDLEY =================
+#define RIDLEY_BOOMERANG_SPIRTE_PATH L"sprites\\bosses\\boss_sprtesheet.png"
 
+#define RIDLEY_WIDTH 62
+#define RIDLEY_HEIGHT 92
+#define RIDLEY_SPRITE_COUNT 4
 
+#define RIDLEY_BOOMERANG_WIDTH 14
+#define RIDLEY_BOOMERANG_HEIGHT 16
+#define RIDLEY_BOOMERANG_SPRITE_COUNT 4
+
+#define RIDLEY_FLY_PATH "sprites\\bosses\\RIDLEY_FLY.txt"
+#define RIDLEY_BOOMERANG_PATH "sprites\\bosses\\RIDLEY_BOOMERANG.txt"
+//================= END RIDLEY =================
 //================= END BOSSES =============
 
 

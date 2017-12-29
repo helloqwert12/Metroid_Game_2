@@ -46,7 +46,7 @@ void Enemy::SetEnemyType(ENEMY_TYPE enemy_type)
 {
 	this->enemy_type = enemy_type;
 }
-void Enemy::Update(int t)
+void Enemy::Update(float t)
 {
 }
 

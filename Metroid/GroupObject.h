@@ -33,10 +33,10 @@ public:
 	void AddGameObject(GameObject* target);
 
 	// Hàm update các GameObject có trong vector (dùng cho SpecialCollision và QuadtreeCollision)
-	void Update(int t);
+	void Update(float t);
 
 	// Hàm update các GameObject có trong vector (dùng cho Projectile, Enemy, ...)
-	void UpdateActive(int t);
+	void UpdateActive(float t);
 
 	// Hàm render các GameObject có trong vector (dùng cho SpecialCollision và QuadtreeCollision)
 	void Render();

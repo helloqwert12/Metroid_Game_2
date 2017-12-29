@@ -9,6 +9,9 @@
 #include "Block.h"
 #include "Bird.h"
 #include "Sentry.h"
+#include "MotherBrain.h"
+#include "Ridley.h"
+
 /*
 	Class này chứa tất cả những thứ trong Game
 	Các class khác chứa con trỏ đến class này để thao tác với các đối tượng trong class này
@@ -32,12 +35,18 @@ public:
 	Bird * bird;
 	Block * block;
 
-	Sentry * sentry;
+	Sentry * sentryLeft;
+	Sentry * sentryRight;
+	Sentry * sentryTop;
+
+	MotherBrain * motherBrain;
+	Ridley * ridley;
 
 	BulletManager * bullets;
 	BulletManager * missiles;
 	BulletManager * sentrybullets;
 	BulletManager * birdbullets;
+	BulletManager * ridleyBoomerang;
 
 	MorphItem * morphItem;
 	EnergyItem * energyItem;

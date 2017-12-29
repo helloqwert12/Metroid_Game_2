@@ -63,7 +63,7 @@ void Bedgehog::InitSprites()
 
 }
 
-void Bedgehog::Update(int t)
+void Bedgehog::Update(float t)
 {
 	isCollision = false;
 

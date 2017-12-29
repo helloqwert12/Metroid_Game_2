@@ -16,7 +16,7 @@ public:
 	SentryBullet(World * manager);
 	~SentryBullet();
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);
-	void Update(int t);
+	void Update(float t);
 	void Render();
 	void Shoot(BULLET_DIRECTION dir, float posX, float posY);
 };

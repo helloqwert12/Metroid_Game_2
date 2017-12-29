@@ -286,10 +286,10 @@ void Samus::Reset(int x, int y)
 	this->pos_y = y;
 }
 
-void Samus::Update(int t)
+void Samus::Update(float t)
 {
 	//
-	// Update mario status
+	// Update samus status
 	//
 	//GameObject::Update(t);
 
@@ -327,7 +327,7 @@ void Samus::Update(int t)
 	Camera::SetCameraY(pos_y);
 
 	// Animate samus if he is running
-	trace((LPWSTR)t);
+	//trace((LPWSTR)t);
 	DWORD now = GetTickCount();
 	if (now - last_time > 1000 / ANIMATE_RATE)
 	{

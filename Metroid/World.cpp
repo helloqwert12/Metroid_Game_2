@@ -30,10 +30,18 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
 	sentrybullets = new BulletManager(this, SENTRY);
 	birdbullets = new BulletManager(this, BIRD_BULLET);
+	ridleyBoomerang = new BulletManager(this, BOOMERANG);
 
 	morphItem = new MorphItem(spriteHandler, this);
 	energyItem = new EnergyItem(spriteHandler, this);
 	missileItem = new MissileItem(spriteHandler, this);
+
+	motherBrain = new MotherBrain(spriteHandler, this);
+	ridley = new Ridley(spriteHandler, this);
+
+	sentryLeft = new Sentry(spriteHandler, this, SENTRY_LEFT);
+	sentryTop = new Sentry(spriteHandler, this, SENTRY_TOP);
+	sentryRight = new Sentry(spriteHandler, this, SENTRY_RIGHT);
 
 	collisionGroup = new GroupObject(this);
 
@@ -44,12 +52,15 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	bird = new Bird(spriteHandler, this, BIRD);
 	block = new Block(spriteHandler, this, BLOCK);
 
-	sentry = new Sentry(spriteHandler, this, SENTRY_LEFT);
 	enemyGroup->AddGameObject(hog_yellow);
 	enemyGroup->AddGameObject(hog_pink);
 	enemyGroup->AddGameObject(bird);
 	enemyGroup->AddGameObject(block);
-	enemyGroup->AddGameObject(sentry);
+	enemyGroup->AddGameObject(sentryLeft);
+	enemyGroup->AddGameObject(sentryTop);
+	enemyGroup->AddGameObject(sentryRight);
+	enemyGroup->AddGameObject(motherBrain);
+	enemyGroup->AddGameObject(ridley);
 }
 
 
@@ -63,12 +74,12 @@ void World::Update(float t)
 	samus->Update(t);
 	// Cập nhật các đối tượng hiển thị trong camera
 
-	//zoomer->Update(t);
-
 	bullets->Update(t);
 	missiles->Update(t);
 	sentrybullets->Update(t);
 	birdbullets->Update(t);
+	ridleyBoomerang->Update(t);
+
 	morphItem->Update(t);
 	energyItem->Update(t);
 	missileItem->Update(t);
@@ -83,7 +94,12 @@ void World::Update(float t)
 	hog_pink->Update(t);
 	block->Update(t);
 	bird->Update(t);
-	sentry->Update(t);
+	sentryLeft->Update(t);
+	sentryTop->Update(t);
+	sentryRight->Update(t);
+
+	motherBrain->Update(t);
+	ridley->Update(t);
 }
 
 void World::Render()
@@ -94,6 +110,7 @@ void World::Render()
 	missiles->Render();
 	sentrybullets->Render();
 	birdbullets->Render();
+	ridleyBoomerang->Render();
 
 	morphItem->Render();
 	energyItem->Render();
@@ -104,7 +121,12 @@ void World::Render()
 	hog_pink->Render();
 	block->Render();
 	bird->Render();
-	sentry->Render();
+	sentryLeft->Render();
+	sentryTop->Render();
+	sentryRight->Render();
+	motherBrain->Render();
+	ridley->Render();
+
 	collisionGroup->Render();
 }
 
@@ -115,6 +137,7 @@ void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	missiles->InitSprites(d3ddv);
 	sentrybullets->InitSprites(d3ddv);
 	birdbullets->InitSprites(d3ddv);
+	ridleyBoomerang->InitSprites(d3ddv);
 
 	morphItem->InitSprites(d3ddv);
 	energyItem->InitSprites(d3ddv);

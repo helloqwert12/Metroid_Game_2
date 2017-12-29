@@ -50,7 +50,7 @@ void Bird::InitSprites()
 
 	state = ON_BIRD_FLY;
 }
-void Bird::Update(int t)
+void Bird::Update(float t)
 {
 	if (!isActive) return;
 

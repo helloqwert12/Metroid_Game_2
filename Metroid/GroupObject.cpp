@@ -41,7 +41,7 @@ void GroupObject::AddGameObject(GameObject * target)
 	size++;
 }
 
-void GroupObject::Update(int t)
+void GroupObject::Update(float t)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -49,7 +49,7 @@ void GroupObject::Update(int t)
 	}
 }
 
-void GroupObject::UpdateActive(int t)
+void GroupObject::UpdateActive(float t)
 {
 	for (int i = 0; i < size; i++)
 	{

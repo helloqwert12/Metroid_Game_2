@@ -4,6 +4,7 @@
 
 Item::Item(LPD3DXSPRITE sprietHandler, World * manager)
 {
+	this->type = ITEM;
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
 	this->time_survive = ITEM_TIME_SURVIVE;

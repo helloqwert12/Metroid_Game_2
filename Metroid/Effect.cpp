@@ -2,18 +2,20 @@
 #include "ExplosionEffect.h"
 
 
-Effect::Effect()
-{
-}
+//Effect::Effect()
+//{
+//}
 
 Effect::Effect(LPD3DXSPRITE spriteHandler, World * manager)
 {
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
-	type = EFFECT_TYPE;
-	Effect_Type = NONE;
+	type = EFFECT;
 	time_survive = 0;
 	isActive = false;
+
+	vx = 0;
+	vy = 0;
 }
 
 
@@ -35,7 +37,7 @@ void Effect::Init(int pos_x, int pos_y)
 	this->isActive = true;
 	this->pos_x = pos_x;
 	this->pos_y = pos_y;
-	time_survive = 3;
+	time_survive = EFFECT_TIME_SURVIVE;
 }
 
 void Effect::Update(const float Deltatime)
@@ -66,7 +68,7 @@ void Effect::Render()
 	spriteHandler->End();
 }
 
-Effect * Effect::CreateEffect(EffectType effectType, int pos_x, int pos_y, int heso, LPD3DXSPRITE spriteHandler, World * manager)
+Effect * Effect::CreateEffect(EFFECT_TYPE effectType, int pos_x, int pos_y, int param, LPD3DXSPRITE spriteHandler, World * manager)
 {
 	Effect* effect = new Effect();
 

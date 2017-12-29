@@ -238,7 +238,7 @@ enum OBJECT_TYPE
 	BRICK = 3,
 	PROJECTILE = 4,
 	ITEM = 5,
-	EFFECT_TYPE = 6
+	EFFECT = 6
 };
 //================= END OBJECT TYPE ============
 
@@ -368,3 +368,13 @@ enum ITEM_TYPE
 #define ITEM_MISSILE_COUNT 1
 
 //================ END ITEM ================
+
+
+//================ EFFECT ===================
+enum EFFECT_TYPE
+{
+	EXPLOSION
+};
+
+#define EFFECT_TIME_SURVIVE 3
+//================ END EFFECT ===============

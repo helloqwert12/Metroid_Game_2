@@ -5,7 +5,7 @@ class ExplosionEffect :
 {
 public:
 	ExplosionEffect(LPD3DXSPRITE spriteHandler, World *manager);
-	ExplosionEffect();
+	//ExplosionEffect();
 	~ExplosionEffect();
 
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);

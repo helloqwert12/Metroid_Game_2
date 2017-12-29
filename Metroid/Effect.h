@@ -2,20 +2,17 @@
 #define _EFFECT_H_
 
 #include "GameObject.h"
-enum EffectType
-{
-	NONE = -1,
-	EXPLOSION = 1
-};
+#include "Parameters.h"
+
 class Effect :
 	public GameObject
 {
 protected :
-	EffectType Effect_Type;
+	EFFECT_TYPE effect_type;
 	float time_survive;
 	Sprite * effectSprite;
 public:
-	Effect();
+	//Effect();
 	Effect(LPD3DXSPRITE spriteHandler, World *manager);
 	~Effect();
 
@@ -26,7 +23,7 @@ public:
 	virtual void Render();
 
 	// create new effect
-	static Effect* CreateEffect(EffectType effectType, int pos_x, int pos_y, int heso, LPD3DXSPRITE spriteHandler, World *_manager);
+	static Effect* CreateEffect(EFFECT_TYPE effectType, int pos_x, int pos_y, int heso, LPD3DXSPRITE spriteHandler, World *_manager);
 };
 #endif // !_EFFECT_H_
 

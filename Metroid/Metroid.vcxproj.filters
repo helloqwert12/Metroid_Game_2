@@ -73,6 +73,12 @@
     <Filter Include="Source Files\Item">
       <UniqueIdentifier>{ec3de67b-6d34-4a28-870f-228c8ef1dcbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Effect">
+      <UniqueIdentifier>{71dba492-bc28-4b91-b669-7a58160d8593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Effect">
+      <UniqueIdentifier>{e47de3ca-d067-4a43-91f5-47cc6b4c655f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -198,6 +204,12 @@
     <ClCompile Include="MissileItem.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Source Files\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionEffect.cpp">
+      <Filter>Source Files\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -322,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="MissileItem.h">
       <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Header Files\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionEffect.h">
+      <Filter>Header Files\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -36,7 +36,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	missileItem = new MissileItem(spriteHandler, this);
 
 	collisionGroup = new GroupObject(this);
-
+	effectgroup = new GroupObject(this);
 	enemyGroup = new GroupObject(this);
 
 	hog_yellow = new Bedgehog(spriteHandler, this, BEDGEHOG_YELLOW);
@@ -76,7 +76,7 @@ void World::Update(float t)
 	quadtreeGroup->GetCollisionObjectQTree();
 	// Cập nhật các đối tượng có khả năng va chạm trong frame này
 	collisionGroup->GetCollisionObjects();
-
+	effectgroup->Update(t);
 	collisionGroup->Update(t);
 
 	hog_yellow->Update(t);
@@ -105,7 +105,9 @@ void World::Render()
 	block->Render();
 	bird->Render();
 	sentry->Render();
+
 	collisionGroup->Render();
+	effectgroup->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
@@ -115,7 +117,6 @@ void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	missiles->InitSprites(d3ddv);
 	sentrybullets->InitSprites(d3ddv);
 	birdbullets->InitSprites(d3ddv);
-
 	morphItem->InitSprites(d3ddv);
 	energyItem->InitSprites(d3ddv);
 	missileItem->InitSprites(d3ddv);

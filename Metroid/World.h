@@ -45,6 +45,7 @@ public:
 
 	GroupObject * collisionGroup;	//Group chứa các gameobject có khả năng va chạm với nhau
 	GroupObject * enemyGroup;
+	GroupObject * effectgroup;
 
 	World();
 	World(LPD3DXSPRITE spriteHandler, Metroid * metroid);

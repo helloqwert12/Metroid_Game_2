@@ -27,4 +27,6 @@ public:
 	static void SetCameraY(float pos_y, float t);
 
 	static void SetDemension(int mode);
+
+	static bool IsInCamera(float x, float y, float width, float height);
 };

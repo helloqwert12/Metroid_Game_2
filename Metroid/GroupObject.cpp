@@ -96,5 +96,45 @@ void GroupObject::GetCollisionObjectQTree()
 void GroupObject::GetCollisionObjects()
 {
 	// Enemy cần để xét va chạm
-	this->GetGroupObjectFrom(manager->enemyGroup);
+	//this->GetGroupObjectFrom(manager->enemyGroup);
+}
+
+void GroupObject::SetEnemyActive(ENEMY_TYPE enemy_type, float posX, float posY)
+{
+	for (int i = 0; i < size; i++)
+	{
+		// Nếu unactive mới lấy
+		if (objects[i]->GetType() == enemy_type && objects[i]->IsActive() == false)
+		{
+			objects[i]->Init(posX, posY);
+		}
+	}
+}
+
+Enemy * GroupObject::GetUnActiveEnemy(GroupObject * enemygroup, ENEMY_TYPE enemy_type)
+{
+	for (int i = 0; i < enemygroup->size; i++)
+	{
+		// Nếu unactive mới lấy
+		if (enemygroup->objects[i]->GetType() == enemy_type && enemygroup->objects[i]->IsActive() == false)
+		{
+			return (Enemy*)enemygroup->objects[i];
+		}
+	}
+	// Nếu không có thì thôi
+	return NULL;
+}
+
+Item * GroupObject::GetUnActiveItem(GroupObject * itemgroup, ITEM_TYPE item_type)
+{
+	for (int i = 0; i < itemgroup->size; i++)
+	{
+		// Nếu unactive mới lấy
+		if (itemgroup->objects[i]->GetType() == item_type && itemgroup->objects[i]->IsActive() == false)
+		{
+			return (Item*)itemgroup->objects[i];
+		}
+	}
+	//Nếu không có thì thôi
+	return NULL;
 }

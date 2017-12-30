@@ -98,6 +98,8 @@ void Metroid::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 
 	first_room = new Loader(spriteHandler, 1, world);
 	first_room->Load();
+
+	
 	Game::gameSound->playSoundLoop(BACKGROUND_INTRO);
 }
 
@@ -200,11 +202,10 @@ void Metroid::RenderFrame(LPDIRECT3DDEVICE9 d3ddv)
 
 void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 {
-	
 	if (IsKeyDown(DIK_RIGHT))
 	{
-		world->samus->setNormalx(1.0f);
-		world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
+		//world->samus->setNormalx(1.0f);
+		//world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
 		world->samus->SetVelocityXLast(world->samus->GetVelocityX());
 		world->samus->SetVelocityX(SAMUS_SPEED);	
 		if (world->samus->GetState() != ON_MORPH_LEFT && world->samus->GetState() != ON_MORPH_RIGHT
@@ -238,8 +239,8 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 	}
 	else if (IsKeyDown(DIK_LEFT))
 	{
-		world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
-		world->samus->setNormalx(-1.0f);
+		//world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
+		//world->samus->setNormalx(-1.0f);
 		world->samus->SetVelocityXLast(world->samus->GetVelocityX());
 		world->samus->SetVelocityX(-SAMUS_SPEED);
 		if (world->samus->GetState() != ON_MORPH_LEFT && world->samus->GetState() != ON_MORPH_RIGHT
@@ -274,8 +275,8 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 	else if (IsKeyDown(DIK_X))
 	{
 		Game::gameSound->playSound(JUMP);
-		world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
-		world->samus->setNormaly(1.0f);
+		//world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
+		//world->samus->setNormaly(1.0f);
 		if (world->samus->GetVelocityXLast() < 0)
 		{
 			if (world->samus->GetState() != ON_JUMP_LEFT && world->samus->GetState() != ON_SOMERSAULT_LEFT 
@@ -462,7 +463,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 
 	if (world->samus->GetVelocityY() < 0)
 	{
-		world->samus->setNormaly(-1.0f);
+		//world->samus->setNormaly(-1.0f);
 	}
 }
 

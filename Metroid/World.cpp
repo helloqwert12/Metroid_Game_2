@@ -7,6 +7,10 @@
 #include "EnergyItem.h"
 #include "MissileItem.h"
 #include "ExplosionEffect.h"
+#include "PositionManager.h"
+#include <vector>
+
+using namespace std;
 
 World::World()
 {
@@ -66,6 +70,9 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	enemyGroup->AddGameObject(sentryRight);
 	enemyGroup->AddGameObject(motherBrain);
 	enemyGroup->AddGameObject(ridley);
+
+	posManager = new PositionManager(this);
+	posManager->ImportPositionFromFile();
 }
 
 
@@ -76,6 +83,18 @@ World::~World()
 
 void World::Update(float t)
 {
+	//====> Quan update - chưa test!!!
+	//Lấy danh sách các vị trí xuất hiện trong Camera
+	vector<PosInfo*> list = posManager->GetListInCamera();
+
+	// Tìm những gameobject đang unactive thả vào những vị trí này
+	for (int i = 0; i < list.size; i++)
+	{
+		enemyGroup->SetEnemyActive(list[i]->enemy_type, list[i]->x, list[i]->y);
+	}
+	//Note: khi gameobject ra ngoài camera thì tự động unactive nên không cần phải lo
+	//<=============
+
 	samus->Update(t);
 	// Cập nhật các đối tượng hiển thị trong camera
 

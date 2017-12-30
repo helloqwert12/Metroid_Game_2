@@ -103,3 +103,21 @@ void Camera::SetDemension(int mode)
 		break;
 	}
 }
+
+bool Camera::IsInCamera(float x, float y, float width, float height)
+{
+		 //Kiềm tra bên trái
+		if (x + width < Camera::currentCamX)
+			return false;
+		// Kiểm tra phía trên
+		if (y + height > Camera::currentCamY)
+			return false;
+		// Kiểm tra bên phải
+		if (x > Camera::currentCamX + Camera::width)
+			return false;
+		// Kiểm tra phía dưới
+		if (y < Camera::currentCamY - Camera::height)
+			return false;
+	
+		return true;
+}

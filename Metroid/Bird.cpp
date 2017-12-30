@@ -20,7 +20,7 @@ Bird::Bird(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) :
 	//Set animate rate ban đầu
 	animate_rate = BIRD_STANDARD_ANIMATE_RATE;
 
-	//--TO DO: Khởi tạo collider cho Bird (Khang)
+	//Set collider
 	collider = new Collider();
 	collider->SetCollider(0, 0, -BIRD_HEIGHT, BIRD_WIDTH);
 

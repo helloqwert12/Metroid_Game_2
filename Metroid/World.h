@@ -60,6 +60,8 @@ public:
 	GroupObject * enemyGroup;
 	GroupObject * effectgroup;
 
+	PositionManager* posManager;
+
 	World();
 	World(LPD3DXSPRITE spriteHandler, Metroid * metroid);
 	~World();

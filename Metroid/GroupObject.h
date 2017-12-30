@@ -51,6 +51,16 @@ public:
 	//Lấy ra những GameObject cần xử lý va chạm (không nằm trong quadtree)
 	void GetCollisionObjects();
 
+	//Set active enemy
+	void SetEnemyActive(ENEMY_TYPE enemy_type, float posX, float posY);
+
+	//===================== STATIC METHOD =================================================
+	//Hàm static trả về một Enemy đang unactive
+	static Enemy* GetUnActiveEnemy(GroupObject * enemygroup, ENEMY_TYPE enemy_type);
+
+	//Hàm static trả về một Item đang unactive
+	static Item* GetUnActiveItem(GroupObject * itemgroup, ITEM_TYPE item_type);
+	//===================== END STATIC METHOD ==============================================
 };
 #endif // !_GROUPOBJECT_H_
 

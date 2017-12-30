@@ -28,6 +28,7 @@ protected:
 	BulletManager * bulletManager;
 
 	Loader* first_room;
+	
 
 private:
 	void _InitBackground();

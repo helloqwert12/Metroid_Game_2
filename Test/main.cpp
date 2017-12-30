@@ -25,7 +25,7 @@ void main()
 	ifstream f;
 	try
 	{
-		f.open("quadtree\\info.txt");
+		f.open("quadtree\\location_enemy_room.txt");
 	}
 	catch (std::fstream::failure e)
 	{
@@ -42,11 +42,11 @@ void main()
 		istringstream iss(line);
 
 		// Nếu là dòng đầu tiên cũng bỏ qua, vì dòng đầu bị lỗi
-		if (row_count == 0)
+		/*if (row_count == 0)
 		{
 			row_count++;
 			continue;
-		}
+		}*/
 
 		
 

@@ -83,9 +83,8 @@ void Game::Run()
 		if (_DeltaTime >= (tick_per_frame))
 		{
 			frame_start = now;
-			Update(_DeltaTime);
+			Update(_DeltaTime/1000.0f);
 			_RenderFrame();		
-			
 		}
 		else
 		{
@@ -95,6 +94,7 @@ void Game::Run()
 		
 		_ProcessKeyBoard();
 		ProcessInput(_d3ddv, _DeltaTime);
+		
 	}
 }
 

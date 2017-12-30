@@ -299,16 +299,41 @@ void Samus::Update(float t)
 
 	vy -= gravity;
 
-	/*std::vector<GameObject*> list = manager->enemyGroup->GetListGO();
-	for (int i = 0; i < list.size(); i++)
+	//===========> Quan update - updating . . .
+	for (int i = 0; i < manager->enemyGroup->size; i++)
 	{	
-		float timeScale = SweptAABB(list[i], t);
-		if (timeScale < 1.0f)
+		if (manager->enemyGroup->objects[i]->IsActive())
 		{
-			this->SlideFromGround(list[i], t, timeScale);
+			float timeScale = SweptAABB(manager->enemyGroup->objects[i], t);
+			if (timeScale < 1.0f)
+			{
+				//Xử lý khi va chạm với enemy
+				// (đẩy ra chẳng hạn)
+				// xong rồi tùy con mà takedamage
+				switch (manager->enemyGroup->objects[i]->GetType())
+				{
+				case BEDGEHOG_YELLOW:
+					// take damge cho samus, truyen vao dame cua con nay
+					// co the them thuoc tinh damage cho moi con enemy de truyen vao
+					// Vd: this->TakeDamage(float enemy_damage)
+					break;
+				case BEDGEHOG_PINK:
+
+					break;
+				case BIRD:
+
+					break;
+				case BLOCK:
+
+					break;
+				// ...
+				}
+			}
 		}
-	}*/
+	}
+	//<======================
 	
+	//Xử lý va chạm với ground
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
 		switch (manager->quadtreeGroup->objects[i]->GetType())

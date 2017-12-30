@@ -9,10 +9,9 @@ class Bee : public Enemy
 {
 protected:
 	Sprite * fly;
-
 	Collider * collider_area;
+	float time_push;
 public:
-	Bee();
 	Bee(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type);
 	~Bee();
 

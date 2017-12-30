@@ -14,7 +14,7 @@ Block::Block(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type)
 	//Khởi tạo sprites
 	this->InitSprites();
 
-	//--TO DO: Khởi tạo collider cho Block (Khang)
+	//Set collider
 	collider = new Collider();
 	collider->SetCollider(0, 0, -BLOCK_HEIGHT, BLOCK_WIDTH);
 

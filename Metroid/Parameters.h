@@ -20,6 +20,7 @@ class EnergyItem;
 class MissileItem;
 class Effect;
 class ExplosionEffect;
+class PositionManager;
 
 //================ SCREEN RESOLUTION ================
 #define GAME_SCREEN_RESOLUTION_640_480_24   0
@@ -164,7 +165,7 @@ class ExplosionEffect;
 #define BLOCK_WIDTH 36
 #define BLOCK_HEIGHT 20
 #define BLOCK_SPRITE_COUNT 1
-#define BLOCK_SPEED 0.0001f
+#define BLOCK_SPEED 0.1f
 
 //--YElLOW
 #define BLOCK_LEFT "sprites\\enemy\\BLOCK_LEFT.txt"
@@ -260,11 +261,11 @@ enum OBJECT_TYPE
 enum ENEMY_TYPE
 {
 	//--TO DO: Bổ sung các type enemy
-	BEDGEHOG_YELLOW,
-	BEDGEHOG_PINK,
-	BIRD,
-	BLOCK,
-	BEE,
+	BEDGEHOG_YELLOW = 0,
+	BEDGEHOG_PINK = 1,
+	BIRD = 2,
+	BLOCK = 3,
+	BEE = 4,
 };
 //================= END ENEMY TYPE =============
 

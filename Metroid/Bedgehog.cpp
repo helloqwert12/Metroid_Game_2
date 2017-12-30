@@ -14,7 +14,7 @@ Bedgehog::Bedgehog(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy
 	//Khởi tạo sprites
 	this->InitSprites();
 
-	//--TO DO: Khởi tạo collider cho Bedgehog (Khang)
+	//Set collider
 	collider = new Collider();
 	collider->SetCollider(0, 0, -BEDGEHOG_HEIGHT, BEDGEHOG_WIDTH);
 
@@ -85,7 +85,23 @@ void Bedgehog::Update(float t)
 	//	vy -= FALLDOWN_VELOCITY_DECREASE;
 	vy -= gravity;
 
-	//Kiểm tra va chạm
+	//Kiểm tra va chạm với Samus
+	float clsTimeSamus = SweptAABB(manager->samus, t);
+	if (clsTimeSamus < 1.0f)
+	{
+		if (normalx < -0.1f)
+		{
+			// this = target
+			manager->samus->SetPosX((manager->samus->GetPosX() + manager->samus->GetCollider()->GetLeft() - this->GetCollider()->GetRight()) - 0.2f);
+			//manager->samus->SetPosX(manager->samus->GetPosX() - manager->samus->GetVelocityX()*t);
+		}
+		else if (normalx > 0.1f)
+		{
+
+		}
+	}
+
+	//Kiểm tra va chạm với ground
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
 		switch (manager->quadtreeGroup->objects[i]->GetType())
@@ -95,51 +111,51 @@ void Bedgehog::Update(float t)
 			if (timeScale < 1.0f)
 			{
 				isCollision = true;
-				//ResponseGround(manager->quadtreeGroup->objects[i], t, timeScale);
+				ResponseGround(manager->quadtreeGroup->objects[i], t, timeScale);
 				
-					pos_x += vx * timeScale;
-					pos_y += vy * timeScale;
-					if (normaly > 0.1f)
-					{
-						gravity = 0.03f;
-						pos_y += 0.1f;
-						vx = BEDGEHOG_SPEED;
-						//vy = 0.01f;
-					}
-					if (normalx < -0.1f)
-					{
-						pos_x -= 0.1f;
-						gravity = 0;
-						vy = 0.07f;
-						//vx = BEDGEHOG_SPEED;
-					}
-					if (normalx > 0.1f)
-					{
-						pos_x += 0.1f;
-						gravity = 0;
-						vy = -0.07f;
-						//vx = -BEDGEHOG_SPEED;
-					}
-					if (normaly < -0.1f)
-					{
-						gravity = -0.03f;
-						pos_y -= 0.1f;
-						vx = -BEDGEHOG_SPEED;
-						//vy = 0.01f;
-					}
+					//pos_x += vx * timeScale;
+					//pos_y += vy * timeScale;
+					//if (normaly > 0.1f)
+					//{
+					//	gravity = 0.03f;
+					//	pos_y += 0.1f;
+					//	vx = BEDGEHOG_SPEED;
+					//	vy = 0.05f;
+					//}
+					//if (normalx < -0.1f)
+					//{
+					//	pos_x -= 0.1f;
+					//	gravity = 0;
+					//	vy = 0.07f;
+					//	vx = BEDGEHOG_SPEED;
+					//}
+					///*if (normalx > 0.1f)
+					//{
+					//	pos_x += 0.1f;
+					//	gravity = 0;
+					//	vy = -0.07f;
+					//	vx = -BEDGEHOG_SPEED;
+					//}*/
+					//if (normaly < -0.1f)
+					//{
+					//	gravity = -0.03f;
+					//	pos_y -= 0.1f;
+					//	vx = -BEDGEHOG_SPEED;
+					//	vy = 0.05f;
+					//}
 
-					float magnitude = sqrt(vx*vx + vy*vy)*(1 - timeScale);
-					float dotprod = (vx*normaly + vy*normalx);
-					if (dotprod > 0.0f)
-					{
-						dotprod = 1.0f;
-					}
-					else if (dotprod < 0.0f)
-					{
-						dotprod = -1.0f;
-					}
-					vx = dotprod*normaly*magnitude;
-					vy = dotprod*normalx*magnitude;
+					//float magnitude = sqrt(vx*vx + vy*vy)*(1 - timeScale);
+					//float dotprod = (vx*normaly + vy*normalx);
+					//if (dotprod > 0.0f)
+					//{
+					//	dotprod = 1.0f;
+					//}
+					//else if (dotprod < 0.0f)
+					//{
+					//	dotprod = -1.0f;
+					//}
+					//vx = dotprod*normaly*magnitude;
+					//vy = dotprod*normalx*magnitude;
 			}
 			break;
 		}
@@ -147,7 +163,7 @@ void Bedgehog::Update(float t)
 
 	if (!isCollision)
 	{
-
+		float a = normaly;
 	}
 
 	// Nếu frame này không va chạm
@@ -240,22 +256,31 @@ void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const 
 	//ResponseFrom(target, _DeltaTime, collisionTimeScale);
 	// lỡ đụng 2,3 ground mà chạy cái này nhiều lần sẽ rất sai
 	// "góc lag" sẽ làm đi luôn vào trong tường
-
-
-	if (normalx > 0.1f)	// tông bên phải gạch
+	if (normaly > 0.1f) // trên xuống (không vào normaly được)
 	{
-		this->pos_x = (target->GetPosX() + target->GetCollider()->GetRight() - this->collider->GetLeft()) + 0.1f;
-		pos_x -= vx*DeltaTime;
+		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) + 0.1f;
+		pos_y -= vy*DeltaTime;
 
 		gravity = 0;
-		vx = -0.001;
+		vx = BEDGEHOG_SPEED;
 		vy = -0.05f;
 
-		state = ON_BEDGEHOG_RIGHT;
+		state = ON_BEDGEHOG_UP;
 
-		last_normalx = normalx;
+		last_normaly = normaly;
 	}
+	else if (normaly < -0.1f)	// tông ở dưới lên
+	{
+		this->pos_y = (target->GetPosY() + target->GetCollider()->GetBottom() - this->collider->GetTop()) - 0.1f;
+		pos_y -= vy*DeltaTime;
+		/*gravity = -FALLDOWN_VELOCITY_DECREASE + 0.02f;*/
+		vx = -BEDGEHOG_SPEED;
+		vy = 0.05f;
 
+		state = ON_BEDGEHOG_BOTTOM;
+
+		last_normaly = normaly;
+	}
 	else if (normalx < -0.1f)// tông bên trái gạch
 	{
 		this->pos_x = (target->GetPosX() + target->GetCollider()->GetLeft() - this->collider->GetRight()) - 0.1f;
@@ -271,31 +296,22 @@ void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const 
 
 		last_normalx = normalx;
 	}
+	//else if (normalx > 0.1f)	// tông bên phải gạch
+	//{
+	//	this->pos_x = (target->GetPosX() + target->GetCollider()->GetRight() - this->collider->GetLeft()) + 0.1f;
+	//	pos_x -= vx*DeltaTime;
 
-	else if (normaly > 0.1f) // trên xuống (không vào normaly được)
-	{
-		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) + 0.1f;
-		pos_y -= vy*DeltaTime;
+	//	gravity = 0;
+	//	vx = -0.001;
+	//	vy = -0.05f;
 
-		gravity = 0;
-		vx = BEDGEHOG_SPEED;
-		vy = -0.05f;
+	//	state = ON_BEDGEHOG_RIGHT;
 
-		state = ON_BEDGEHOG_UP;
+	//	last_normalx = normalx;
+	//}
 
-		last_normaly = normaly;
-	}
-	else if (normaly < -0.1f)	// tông ở dưới lên
-	{
-		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) - 0.1f;
-		pos_y -= vy*DeltaTime;
-		/*gravity = -FALLDOWN_VELOCITY_DECREASE + 0.02f;*/
-		vx = -BEDGEHOG_SPEED;
-		vy = 0.05f;
+	
 
-		state = ON_BEDGEHOG_BOTTOM;
-		
-		last_normaly = normaly;
-	}
+	
 	return;
 }//----------------------------------

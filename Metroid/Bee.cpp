@@ -2,9 +2,6 @@
 #include "World.h"
 #include "GroupObject.h"
 
-Bee::Bee()
-{
-}
 
 Bee::Bee(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : Enemy(spriteHandler, manager)
 {
@@ -20,6 +17,8 @@ Bee::Bee(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : E
 	// collider dùng khi samus đi vào vùng va chạm thì BEE bắt đầu bay (Chưa làm)
 	collider_area = new Collider();
 	collider_area->SetCollider(0, -width, -480, width * 2);
+
+	
 }
 
 
@@ -75,7 +74,6 @@ void Bee::Update(float t)
 			if (timeScale < 1.0f)
 			{
 				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
-				this->Destroy();
 			}
 			break;
 		}
@@ -108,6 +106,7 @@ void Bee::Render()
 	// Nếu không active thì không render
 	if (!isActive)
 		return;
+
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 	fly->Render(pos_x, pos_y);
 	spriteHandler->End();
@@ -117,6 +116,7 @@ bool Bee::IsCollide(GameObject * target)
 {
 	if (target->GetCollider() == NULL || this->collider_area == NULL)
 		return false;
+	// Kiểm tra bên trái
 	if (pos_x + collider_area->GetRight() < target->GetPosX())
 		return false;
 	// Kiểm tra phía trên

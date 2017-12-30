@@ -20,6 +20,9 @@ Bee::Bee(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : E
 	// collider dùng khi samus đi vào vùng va chạm thì BEE bắt đầu bay (Chưa làm)
 	collider_area = new Collider();
 	collider_area->SetCollider(0, -width, -480, width * 2);
+
+	vy = -0.1f;
+	vx = 0.04f;
 }
 
 
@@ -65,6 +68,11 @@ void Bee::Update(float t)
 	//		vx = -0.05f;
 	//	}
 	//}
+	if (this->pos_y <= GROUND_Y + 50)
+	{
+		vy *= (-1);
+	}
+	vy += gravity*t;
 
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
@@ -75,6 +83,7 @@ void Bee::Update(float t)
 			if (timeScale < 1.0f)
 			{
 				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
+				vy *= (-1);
 				this->Destroy();
 			}
 			break;

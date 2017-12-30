@@ -332,7 +332,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 			if (world->samus->GetState() != ON_MORPH_LEFT && world->samus->GetState() != ON_JUMP_LEFT && world->samus->GetState() != ON_JUMP_RIGHT
 				&& world->samus->GetState() != ON_JUMPING_SHOOTING_LEFT && world->samus->GetState() != ON_JUMPING_SHOOTING_RIGHT
 				&& world->samus->GetState() != ON_SOMERSAULT_LEFT && world->samus->GetState() != ON_SOMERSAULT_RIGHT
-				&& world->samus->GetState() != ON_JUMP_AIM_UP_LEFT)
+				&& world->samus->GetState() != ON_JUMP_AIM_UP_LEFT && world->samus->GetState() != APPEARANCE)
 			{
 				world->samus->SetState(IDLE_LEFT);
 				world->samus->ResetAllSprites();
@@ -343,7 +343,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 			if (world->samus->GetState() != ON_MORPH_RIGHT && world->samus->GetState() != ON_JUMP_LEFT && world->samus->GetState() != ON_JUMP_RIGHT
 				&& world->samus->GetState() != ON_JUMPING_SHOOTING_LEFT && world->samus->GetState() != ON_JUMPING_SHOOTING_RIGHT
 				&& world->samus->GetState() != ON_SOMERSAULT_LEFT && world->samus->GetState() != ON_SOMERSAULT_RIGHT
-				&& world->samus->GetState() != ON_JUMP_AIM_UP_RIGHT)
+				&& world->samus->GetState() != ON_JUMP_AIM_UP_RIGHT && world->samus->GetState() != APPEARANCE)
 			{
 				world->samus->SetState(IDLE_RIGHT);
 				world->samus->ResetAllSprites();

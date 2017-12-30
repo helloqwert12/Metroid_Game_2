@@ -32,11 +32,37 @@ void Ridley::Update(float t)
 		return;
 	}
 
+	for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	{
+		switch (manager->quadtreeGroup->objects[i]->GetType())
+		{
+		case BRICK:
+			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
+			if (timeScale < 1.0f)
+			{
+				//SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
+				time_push = 300;
+				vy = 0;
+			}
+			break;
+		}
+	}
+
+	time_push -= t;
+	if (time_push <= 0)
+	{
+		vy -= 0.005f;
+	}
+	else
+	{
+		vy += 0.011f;
+	}
+
 	pos_x += vx * t;
 	pos_y += vy * t;
 
 	DWORD now = GetTickCount();
-	if (now - last_time > 1000 / 2)
+	if (now - last_time > 1000 / RIDLEY_ANIMATE_RATE)
 	{
 		manager->ridleyBoomerang->Next(ON_RIGHT, pos_x, pos_y);
 		fly->Next();

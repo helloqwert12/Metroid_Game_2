@@ -120,6 +120,8 @@ Samus::Samus()
 	collider = new Collider();
 	//collider->SetCollider(0, 0, -this->height, this->width);
 	collider->SetCollider(0, 0, -64, 32);
+
+	state = APPEARANCE;
 }
 
 Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
@@ -136,7 +138,7 @@ Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
 	//Collider
 	this->collider = new Collider();
 	this->collider->SetCollider(0, 0, -this->height, this->width);
-
+	state = APPEARANCE;
 	gravity = FALLDOWN_VELOCITY_DECREASE;
 }
 
@@ -228,7 +230,7 @@ void Samus::InitPostition()
 	vy = 0;
 
 	//Init state of samus
-	state = IDLE_RIGHT;
+	state = APPEARANCE;
 }
 
 int max_camera_x = 300;
@@ -355,13 +357,6 @@ void Samus::Update(float t)
 	Camera::SetCameraX(pos_x, t);
 	Camera::SetCameraY(pos_y, t);
 
-	//DWORD now = GetTickCount();
-	//if (now - last_time > 8000 / 7)
-	//{
-	//	if (state == APPEARANCE)
-	//		appearing->Next();
-	//}
-
 	// Animate samus if he is running
 	//trace((LPWSTR)t);
 	DWORD now = GetTickCount();
@@ -369,6 +364,9 @@ void Samus::Update(float t)
 	{
 		switch (state)
 		{
+		case APPEARANCE:
+			appearing->Next();
+			break;
 		case RIGHTING:
 			running_right->Next();
 			break;

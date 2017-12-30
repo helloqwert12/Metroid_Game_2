@@ -162,6 +162,7 @@
     <ClCompile Include="MissileItem.cpp" />
     <ClCompile Include="MorphItem.cpp" />
     <ClCompile Include="MotherBrain.cpp" />
+    <ClCompile Include="PosInfo.cpp" />
     <ClCompile Include="PositionManager.cpp" />
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="QTreeObject.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="MorphItem.h" />
     <ClInclude Include="MotherBrain.h" />
     <ClInclude Include="Parameters.h" />
+    <ClInclude Include="PosInfo.h" />
     <ClInclude Include="PositionManager.h" />
     <ClInclude Include="QNode.h" />
     <ClInclude Include="QTreeObject.h" />

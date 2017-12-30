@@ -9,6 +9,7 @@
 #include "ExplosionEffect.h"
 #include "PositionManager.h"
 #include <vector>
+#include "PosInfo.h"
 
 using namespace std;
 
@@ -85,10 +86,10 @@ void World::Update(float t)
 {
 	//====> Quan update - chưa test!!!
 	//Lấy danh sách các vị trí xuất hiện trong Camera
-	vector<PosInfo*> list = posManager->GetListInCamera();
+	std::vector<PosInfo*> list = posManager->GetListInCamera();
 
 	// Tìm những gameobject đang unactive thả vào những vị trí này
-	for (int i = 0; i < list.size; i++)
+	for (int i = 0; i < list.size(); i++)
 	{
 		enemyGroup->SetEnemyActive(list[i]->enemy_type, list[i]->x, list[i]->y);
 	}

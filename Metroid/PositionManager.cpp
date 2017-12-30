@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <utility>
+#include "PosInfo.h"
 using namespace std;
 
 PositionManager::PositionManager()
@@ -86,7 +87,7 @@ void PositionManager::ImportPositionFromFile()
 
 			//Push vào vector
 			list_pos.push_back(info);
-			size++;
+			this->size++;
 		}
 
 		row_count++;
@@ -122,7 +123,7 @@ void PositionManager::Back()
 	}
 }
 
-vector<PosInfo*> PositionManager::GetListInCamera()
+std::vector<PosInfo*> PositionManager::GetListInCamera()
 {
 	vector<PosInfo*> result;
 	for (int i = 0; i < size; i++)

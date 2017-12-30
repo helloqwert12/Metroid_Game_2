@@ -85,21 +85,22 @@ void Bedgehog::Update(float t)
 	//	vy -= FALLDOWN_VELOCITY_DECREASE;
 	vy -= gravity;
 
+	// CODE NÀY DƠ, BỎ - QUAN
 	//Kiểm tra va chạm với Samus
-	float clsTimeSamus = SweptAABB(manager->samus, t);
-	if (clsTimeSamus < 1.0f)
-	{
-		if (normalx < -0.1f)
-		{
-			// this = target
-			manager->samus->SetPosX((manager->samus->GetPosX() + manager->samus->GetCollider()->GetLeft() - this->GetCollider()->GetRight()) - 0.2f);
-			//manager->samus->SetPosX(manager->samus->GetPosX() - manager->samus->GetVelocityX()*t);
-		}
-		else if (normalx > 0.1f)
-		{
+	//float clsTimeSamus = SweptAABB(manager->samus, t);
+	//if (clsTimeSamus < 1.0f)
+	//{
+	//	if (normalx < -0.1f)
+	//	{
+	//		// this = target
+	//		manager->samus->SetPosX((manager->samus->GetPosX() + manager->samus->GetCollider()->GetLeft() - this->GetCollider()->GetRight()) - 0.2f);
+	//		//manager->samus->SetPosX(manager->samus->GetPosX() - manager->samus->GetVelocityX()*t);
+	//	}
+	//	else if (normalx > 0.1f)
+	//	{
 
-		}
-	}
+	//	}
+	//}
 
 	//Kiểm tra va chạm với ground
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)

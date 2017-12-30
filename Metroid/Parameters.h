@@ -21,6 +21,7 @@ class MissileItem;
 class Effect;
 class ExplosionEffect;
 class PositionManager;
+class PosInfo;
 
 //================ SCREEN RESOLUTION ================
 #define GAME_SCREEN_RESOLUTION_640_480_24   0

@@ -6,19 +6,7 @@
 /*
 Class này quản lý một vector các vị trí xuất hiện của một enemy, dùng cho pooling
 */
-class PosInfo
-{
-public:
-	float x;
-	float y;
-	float width;
-	float height;
-	bool isActive;
-	ENEMY_TYPE enemy_type;
 
-	PosInfo() {}
-	~PosInfo() {}
-};
 
 class PositionManager
 {
@@ -43,7 +31,7 @@ public:
 	void Back();
 
 	//Hàm trả về vị trí, kích thước và loại GameObject xuất hiện trong Camera
-	vector<PosInfo*> GetListInCamera();
+	std::vector<PosInfo*> GetListInCamera();
 
 	// Kiểm tra pos cùng với width height có nằm trong camera hay không
 	//bool IsInCamera(PosInfo * target);

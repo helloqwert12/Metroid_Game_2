@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bedgehog.cpp" />
+    <ClCompile Include="Bee.cpp" />
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="BirdBullet.cpp" />
     <ClCompile Include="Block.cpp" />
@@ -179,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bedgehog.h" />
+    <ClInclude Include="Bee.h" />
     <ClInclude Include="Bird.h" />
     <ClInclude Include="BirdBullet.h" />
     <ClInclude Include="Block.h" />

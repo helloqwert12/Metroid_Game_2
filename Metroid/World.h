@@ -8,6 +8,7 @@
 #include "Bedgehog.h"
 #include "Block.h"
 #include "Bird.h"
+#include "Bee.h"
 #include "Sentry.h"
 #include "MotherBrain.h"
 #include "Ridley.h"
@@ -34,6 +35,7 @@ public:
 	Bedgehog * hog_pink;
 	Bird * bird;
 	Block * block;
+	Bee * bee;
 
 	Sentry * sentryLeft;
 	Sentry * sentryRight;

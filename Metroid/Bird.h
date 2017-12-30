@@ -5,16 +5,9 @@
 #include "Enemy.h"
 #include "Parameters.h"
 
-enum BIRD_STATE
-{
-	ON_BIRD_FLY
-};
-
 class Bird : public Enemy
 {
 protected:
-	BIRD_STATE state;
-
 	Sprite * fly;
 
 	Collider * collider_area;
@@ -36,4 +29,4 @@ public:
 	void Destroy();
 };
 
-#endif // !_Block_H_
+#endif // !_Bird_H_

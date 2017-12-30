@@ -332,13 +332,6 @@ void Samus::Update(float t)
 	Camera::SetCameraX(pos_x, t);
 	Camera::SetCameraY(pos_y, t);
 
-	//DWORD now = GetTickCount();
-	//if (now - last_time > 8000 / 7)
-	//{
-	//	if (state == APPEARANCE)
-	//		appearing->Next();
-	//}
-
 	// Animate samus if he is running
 	//trace((LPWSTR)t);
 	DWORD now = GetTickCount();

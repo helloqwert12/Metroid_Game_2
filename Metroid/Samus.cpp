@@ -323,8 +323,8 @@ void Samus::Update(float t)
 	pos_x += vx*t;
 	pos_y += vy*t;
 
-	Camera::SetCameraX(pos_x);
-	Camera::SetCameraY(pos_y);
+	Camera::SetCameraX(pos_x, t);
+	Camera::SetCameraY(pos_y, t);
 
 	// Animate samus if he is running
 	//trace((LPWSTR)t);

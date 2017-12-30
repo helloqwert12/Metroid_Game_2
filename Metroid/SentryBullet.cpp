@@ -46,6 +46,9 @@ void SentryBullet::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 
 void SentryBullet::Update(float t)
 {
+	if (!isActive)
+		return;
+
 	// Xử lý va chạm
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
@@ -116,23 +119,23 @@ void SentryBullet::Update(float t)
 	pos_x += vx*t;
 	pos_y += vy*t;
 
-	int temp_x = vx*t;
-	int temp_y = vy*t;
+	//int temp_x = vx*t;
+	//int temp_y = vy*t;
 
-	if (temp_x < 0)
-		temp_x = -temp_x;
-	if (temp_y < 0)
-		temp_y = -temp_y;
+	//if (temp_x < 0)
+	//	temp_x = -temp_x;
+	//if (temp_y < 0)
+	//	temp_y = -temp_y;
 
-	limit_dist_x += temp_x;
-	limit_dist_y += temp_y;
+	//limit_dist_x += temp_x;
+	//limit_dist_y += temp_y;
 
 
-	//Check if the bullet reach the limit
-	if (limit_dist_x >= LIMIT_DISTANCE || limit_dist_y >= LIMIT_DISTANCE)
-	{
-		Reset();
-	}
+	////Check if the bullet reach the limit
+	//if (limit_dist_x >= LIMIT_DISTANCE || limit_dist_y >= LIMIT_DISTANCE)
+	//{
+	//	Reset();
+	//}
 }
 
 void SentryBullet::Render()
@@ -174,6 +177,7 @@ void SentryBullet::Render()
 void SentryBullet::Shoot(BULLET_DIRECTION dir, float posX, float posY)
 {
 	direction = dir;	//cái này xem như set active
+	isActive = true;
 	pos_x = posX;
 	pos_y = posY;
 }

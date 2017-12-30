@@ -9,6 +9,7 @@ Class này dùng để load các thứ trong game
 #include "QNode.h"
 
 #include "Parameters.h"
+
 class Loader
 {
 protected:
@@ -22,7 +23,6 @@ protected:
 	std::string matrix_path;	// Đường dẫn đến file matrix
 	std::string quadtree_path; // Đường dẫn đến file quadtree
 	std::string info_path;		// Đường dẫn đến file chứa thông tin room (camera, samus, ...)
-	
 public:
 	Loader();
 	Loader(LPD3DXSPRITE spriteHandler, int room_number, World* manager);

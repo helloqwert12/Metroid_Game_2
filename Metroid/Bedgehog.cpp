@@ -20,8 +20,13 @@ Bedgehog::Bedgehog(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy
 
 	//Set vận tốc
 	gravity = FALLDOWN_VELOCITY_DECREASE;
-	vx = -BEDGEHOG_SPEED;
+	vx = BEDGEHOG_SPEED;
 	vy = 0;
+
+	last_normalx = 0;
+	last_normaly = 0;
+
+	isCollision = false;
 }
 
 
@@ -90,37 +95,86 @@ void Bedgehog::Update(float t)
 			if (timeScale < 1.0f)
 			{
 				isCollision = true;
-				ResponseGround(manager->quadtreeGroup->objects[i], t, timeScale);
+				//ResponseGround(manager->quadtreeGroup->objects[i], t, timeScale);
+				
+					pos_x += vx * timeScale;
+					pos_y += vy * timeScale;
+					if (normaly > 0.1f)
+					{
+						gravity = 0.03f;
+						pos_y += 0.1f;
+						vx = BEDGEHOG_SPEED;
+						//vy = 0.01f;
+					}
+					if (normalx < -0.1f)
+					{
+						pos_x -= 0.1f;
+						gravity = 0;
+						vy = 0.07f;
+						//vx = BEDGEHOG_SPEED;
+					}
+					if (normalx > 0.1f)
+					{
+						pos_x += 0.1f;
+						gravity = 0;
+						vy = -0.07f;
+						//vx = -BEDGEHOG_SPEED;
+					}
+					if (normaly < -0.1f)
+					{
+						gravity = -0.03f;
+						pos_y -= 0.1f;
+						vx = -BEDGEHOG_SPEED;
+						//vy = 0.01f;
+					}
+
+					float magnitude = sqrt(vx*vx + vy*vy)*(1 - timeScale);
+					float dotprod = (vx*normaly + vy*normalx);
+					if (dotprod > 0.0f)
+					{
+						dotprod = 1.0f;
+					}
+					else if (dotprod < 0.0f)
+					{
+						dotprod = -1.0f;
+					}
+					vx = dotprod*normaly*magnitude;
+					vy = dotprod*normalx*magnitude;
 			}
 			break;
 		}
 	}
 
+	if (!isCollision)
+	{
+
+	}
+
 	// Nếu frame này không va chạm
-	/*if (!isCollision && gravity = 0)
+	/*if (!isCollision && gravity == 0 && (last_normalx !=0 || last_normaly != 0))
 	{
 		if (last_normalx > 0.1f)
 		{
 			state = ON_BEDGEHOG_BOTTOM;
 			vx = -BEDGEHOG_SPEED;
-			vy = 0;
+			vy = 0.01f;
 		}
 		else if (last_normalx < -0.1f)
 		{
 			state = ON_BEDGEHOG_UP;
 			vx = BEDGEHOG_SPEED;
-			vy = 0;
+			vy = -0.01f;
 		}
 
 		if (last_normaly > 0.1f)
 		{
 			state = ON_BEDGEHOG_RIGHT;
-			vx = 0;
+			vx = -0.01f;
 			vy = -0.05f;
 		}
 		else if (last_normaly < -0.1f)
 		{
-			vx = 0;
+			vx = 0.15f;
 			vy = 0.05f;
 			state = ON_BEDGEHOG_LEFT;
 		}
@@ -193,13 +247,13 @@ void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const 
 		this->pos_x = (target->GetPosX() + target->GetCollider()->GetRight() - this->collider->GetLeft()) + 0.1f;
 		pos_x -= vx*DeltaTime;
 
-		//gravity = 0;
-		//vx = 0;
-		//vy = -0.05f;
+		gravity = 0;
+		vx = -0.001;
+		vy = -0.05f;
 
-		//state = ON_BEDGEHOG_RIGHT;
+		state = ON_BEDGEHOG_RIGHT;
 
-		//last_normalx = normalx;
+		last_normalx = normalx;
 	}
 
 	else if (normalx < -0.1f)// tông bên trái gạch
@@ -209,39 +263,39 @@ void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const 
 		//pos_y += 0.1f;
 		//
 		////Test 
-		//gravity = 0;
-		//vx = 0;
-		//vy = 0.05f;
+		gravity = 0;
+		vx = 0.001f;
+		vy = 0.05f;
 
-		//state = ON_BEDGEHOG_LEFT;
+		state = ON_BEDGEHOG_LEFT;
 
-		//last_normalx = normalx;
+		last_normalx = normalx;
 	}
 
-	if (normaly > 0.1f) // trên xuống (không vào normaly được)
+	else if (normaly > 0.1f) // trên xuống (không vào normaly được)
 	{
 		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) + 0.1f;
 		pos_y -= vy*DeltaTime;
 
-		//gravity = 0;
-		//vx = BEDGEHOG_SPEED;
-		vy = 0;
+		gravity = 0;
+		vx = BEDGEHOG_SPEED;
+		vy = -0.05f;
 
-		//state = ON_BEDGEHOG_UP;
+		state = ON_BEDGEHOG_UP;
 
-		//last_normaly = normaly;
+		last_normaly = normaly;
 	}
 	else if (normaly < -0.1f)	// tông ở dưới lên
 	{
 		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) - 0.1f;
 		pos_y -= vy*DeltaTime;
-		/*gravity = -FALLDOWN_VELOCITY_DECREASE + 0.02f;
-		vx = -BEDGEHOG_SPEED;*/
-		vy = 0;
+		/*gravity = -FALLDOWN_VELOCITY_DECREASE + 0.02f;*/
+		vx = -BEDGEHOG_SPEED;
+		vy = 0.05f;
 
-		/*state = ON_BEDGEHOG_BOTTOM;
+		state = ON_BEDGEHOG_BOTTOM;
 		
-		last_normaly = normaly;*/
+		last_normaly = normaly;
 	}
 	return;
 }//----------------------------------

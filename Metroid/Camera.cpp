@@ -1,16 +1,21 @@
 ﻿#include "Camera.h"
 
-int Camera::currentCamX = 0;
-int Camera::currentCamY = 0;
+float Camera::currentCamX = 0;
+float Camera::currentCamY = 500;
 
-int Camera::max_x = 2000;
-int Camera::min_x = 0;
+float Camera::max_x = 2000;
+float Camera::min_x = 0;
 
-int Camera::max_y = 0;
-int Camera::min_y = 0;
+float Camera::max_y = 0;
+float Camera::min_y = 0;
 
 int Camera::width = 640;
 int Camera::height = 480;
+
+float Camera::speed = 0.2f;
+
+bool Camera::moveLeft = false;
+bool Camera::moveRight = false;
 
 Camera::Camera()
 {
@@ -22,34 +27,62 @@ Camera::~Camera()
 {
 }
 
-void Camera::SetCameraX(int pos_x)
+void Camera::SetCameraX(float pos_x, float t)
 {
+	
+
+	if (max_x == 0) return;
+
+	if (moveRight == true)
+	{
+		currentCamX += speed * t;
+		// Nếu current đã chạy đến vị trí max
+		if (currentCamX >= max_x)
+		{
+			
+			moveRight = false;	//Ngừng hiệu ứng chuyển camera
+			min_x = max_x;		//Gán min bằng max, rồi max gán mức tiếp theo
+		}
+		return;
+	}
+	if (moveLeft == true)
+	{
+		currentCamX -= speed * t;
+		// Nếu góc phải camera đã chạy đến vị trí min
+		if (currentCamX + width <= min_x)
+		{
+			moveLeft = false;	//Ngừng hiệu ứng chuyển camera
+			max_x = min_x;		//Gán max bằng min, rồi min gán mức nhỏ hơn
+		}
+		return;
+	}
+
 	currentCamX = pos_x - 320;
+	
 	if (currentCamX < min_x)
 	{
 		currentCamX = min_x;
 	}
-	if (currentCamX + width >= max_x)
+	else if (currentCamX + width >= max_x)
 	{
 		currentCamX = max_x - width;
 	}
 }
 
-void Camera::SetCameraY(int pos_y)
+void Camera::SetCameraY(float pos_y, float t)
 {
-	if (max_y == 0)
-	{
-		currentCamY = 500;
-		return;
-	}
-	/*if (currentCamY < min_y)
+	if (max_y == 0) return;
+	
+	currentCamY = pos_y - 240;
+
+	if (currentCamY < min_y)
 	{
 		currentCamY = min_y;
 	}
-	if (currentCamY >= max_y)
+	if (currentCamY + height >= max_y)
 	{
 		currentCamY = max_y;
-	}*/
+	}
 }
 
 void Camera::SetDemension(int mode)
@@ -70,9 +103,3 @@ void Camera::SetDemension(int mode)
 		break;
 	}
 }
-
-//void Camera::SetCameraY()
-//{
-//	int result = 600;
-//	return result;
-//}

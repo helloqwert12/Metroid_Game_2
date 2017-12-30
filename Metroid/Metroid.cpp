@@ -132,7 +132,9 @@ void Metroid::UpdateIntro(float Delta)
 
 void Metroid::UpdateFrame(float Delta)
 {
+	
 	world->Update(Delta);
+	//Camera::MoveCameraX(0.05f, Delta);
 	//bulletManager->Update(Delta, world->samus->GetPosX(), world->samus->GetPosY());
 }
 
@@ -635,6 +637,7 @@ void Metroid::OnKeyDown(int KeyCode)
 					world->samus->SetState(IDLING_SHOOTING_RIGHT);
 
 					_ShootMissile(ON_RIGHT);
+					
 				}
 				break;
 

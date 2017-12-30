@@ -6,6 +6,8 @@
 #include <utility>
 #include <string.h>
 #include "World.h"
+#include "Camera.h"
+
 Loader::Loader()
 {
 }
@@ -23,7 +25,8 @@ Loader::Loader(LPD3DXSPRITE spriteHandler, int room_number, World * manager)
 	this->quadtree_path = "map\\quadtree_room_" + std::to_string(room_number) + ".txt";
 
 	// Build đường dẩn đến file info dựa vào room
-	this->info_path = "map\\info_room_" + std::to_string(room_number) + ".txt";
+	//this->info_path = "map\\info_room_" + std::to_string(room_number) + ".txt";
+	this->info_path = "map\\info_room.txt";
 
 	// Đọc file matrix
 	this->ReadMatrixFromFile(matrix_path.c_str());
@@ -268,11 +271,11 @@ void Loader::ReadInfoFromFile(const char * path)
 		istringstream iss(line);
 
 		// Nếu là dòng đầu tiên cũng bỏ qua, vì dòng đầu bị lỗi
-		if (row_count == 0)
+		/*if (row_count == 0)
 		{
 			row_count++;
 			continue;
-		}
+		}*/
 
 
 		// tách từng dòng ra thành các chuỗi dựa vào \t
@@ -294,13 +297,29 @@ void Loader::ReadInfoFromFile(const char * path)
 		if (pos[0] == "END")
 			break;
 
+		//Thông tin camera
+		/*if (row_count >= 0 && row_count <= 1)
+		{
+			CameraInfo * info = new CameraInfo();
+			info->min_x = stoi(pos[0]);
+			info->max_x = stoi(pos[1]);
+			info->min_y = stoi(pos[2]);
+			info->max_y = stoi(pos[3]);
+			Camera::cameraInfo.push_back(info);
+			delete(info);
+		}
+		else if (row_count == 2) // thông tin samus
+		{
+			manager->samus->SetPosX(stoi(pos[0]));
+			manager->samus->SetPosY(stoi(pos[1]));
+		}*/
 		switch (row_count)
 		{
-		case 1:	//Camera
+		case 0:	//Camera
 			Camera::min_x = stoi(pos[0]);
 			Camera::max_x = stoi(pos[1]);
 			break;
-		case 2:	//Vị trí samus
+		case 1:	//Vị trí samus
 			manager->samus->SetPosX(stoi(pos[0]));
 			manager->samus->SetPosY(stoi(pos[1]));
 			break;

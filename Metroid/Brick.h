@@ -9,7 +9,7 @@ protected:
 	int width_count;
 	int height_count;
 	LPWSTR sprite_path;
-
+	bool isPassable;	// có khả năng băng qua
 public:
 	Brick();
 	Brick(LPD3DXSPRITE spriteHandler, World* manager, BRICK_TYPE type, int id, int posX, int posY);
@@ -20,6 +20,8 @@ public:
 	int GetId();
 	void SetId(int id);
 	BRICK_TYPE GetBrickType();
+	void SetPassable(bool value);
+	bool IsPassable(bool value);
 	//============= END GET - SET METHOD ==================
 
 	//============= OVERRIDE VIRTUAL METHOD ===============

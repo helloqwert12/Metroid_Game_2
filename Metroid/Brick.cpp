@@ -76,6 +76,16 @@ BRICK_TYPE Brick::GetBrickType()
 	return brick_type;
 }
 
+void Brick::SetPassable(bool value)
+{
+	isPassable = value;
+}
+
+bool Brick::IsPassable(bool value)
+{
+	return isPassable;
+}
+
 void Brick::Update(float t)
 {
 	

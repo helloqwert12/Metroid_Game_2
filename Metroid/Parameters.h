@@ -131,7 +131,7 @@ class ExplosionEffect;
 #define BEDGEHOG_WIDTH 36
 #define BEDGEHOG_HEIGHT 32
 #define BEDGEHOG_SPRITE_COUNT 2
-#define BEDGEHOG_SPEED 0.05f;
+#define BEDGEHOG_SPEED 0.07f;
 
 //--YElLOW
 #define BEDGEHOG_YELLOW_UP "sprites\\enemy\\BEDGEHOG_YELLOW_UP.txt"

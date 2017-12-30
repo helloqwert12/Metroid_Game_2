@@ -8,7 +8,7 @@
 #include "Samus.h"
 #include "MorphItem.h"
 #include "ExplosionEffect.h"
-DWORD last_time;
+
 void Metroid::_InitBackground()
 {
 }
@@ -29,6 +29,7 @@ void Metroid::_InitPositions()
 	world->hog_pink->InitPostition(1800, 110);
 	world->bird->InitPostition(1500, 410);
 	world->block->InitPostition(1600,100);
+	world->bee->InitPostition(1600, 410);
 	world->sentryLeft->InitPostition(1500, 350);
 	world->sentryTop->InitPostition(1700, 350);
 	world->sentryRight->InitPostition(1900, 350);

@@ -171,6 +171,16 @@ class ExplosionEffect;
 #define BLOCK_RIGHT "sprites\\enemy\\BLOCK_RIGHT.txt"
 //================== END BLOCK =================
 
+//================== BEE  =====================
+
+#define BEE_WIDTH 52
+#define BEE_HEIGHT 42
+
+#define BEE_FLY_SPRITE_COUNT 2
+
+#define BEE_FLY "sprites\\enemy\\BEE_FLY.txt"
+//================== END BEE =================
+
 //================== END ENEMY =================
 
 //================= BRICK ====================
@@ -253,7 +263,8 @@ enum ENEMY_TYPE
 	BEDGEHOG_YELLOW,
 	BEDGEHOG_PINK,
 	BIRD,
-	BLOCK
+	BLOCK,
+	BEE,
 };
 //================= END ENEMY TYPE =============
 

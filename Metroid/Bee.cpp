@@ -1,12 +1,12 @@
-﻿#include "Bird.h"
+﻿#include "Bee.h"
 #include "World.h"
 #include "GroupObject.h"
 
-Bird::Bird()
+Bee::Bee()
 {
 }
 
-Bird::Bird(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : Enemy(spriteHandler, manager)
+Bee::Bee(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : Enemy(spriteHandler, manager)
 {
 	this->enemy_type = enemy_type;
 	this->isActive = true;
@@ -14,41 +14,34 @@ Bird::Bird(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) :
 	//Khởi tạo sprites
 	this->InitSprites();
 
-	width = BIRD_WIDTH;
-	height = BIRD_HEIGHT;
-
-	//Set animate rate ban đầu
-	animate_rate = BIRD_STANDARD_ANIMATE_RATE;
-
-	//--TO DO: Khởi tạo collider cho Bird (Khang)
 	collider = new Collider();
-	collider->SetCollider(0, 0, -BIRD_HEIGHT, BIRD_WIDTH);
+	collider->SetCollider(0, 0, -BEE_HEIGHT, BEE_WIDTH);
 
-	// collider dùng khi samus đi vào vùng va chạm
+	// collider dùng khi samus đi vào vùng va chạm thì BEE bắt đầu bay (Chưa làm)
 	collider_area = new Collider();
 	collider_area->SetCollider(0, -width, -480, width * 2);
 }
 
 
-Bird::~Bird()
+Bee::~Bee()
 {
 	delete(fly);
 }
 
-void Bird::InitSprites()
+void Bee::InitSprites()
 {
 	char  *fly_path = NULL;
 	switch (enemy_type)
 	{
-	case BIRD:
-		fly_path = BIRD_FLY;
+	case BEE:
+		fly_path = BEE_FLY;
 		break;
 	}
 
 	// Khởi tạo sprite
-	fly = new Sprite(spriteHandler, ENEMY_SPRITE_PATH, fly_path, BIRD_WIDTH, BIRD_HEIGHT, BIRD_FLY_SPRITE_COUNT, 1);
+	fly = new Sprite(spriteHandler, ENEMY_SPRITE_PATH, fly_path, BEE_WIDTH, BEE_HEIGHT, BEE_FLY_SPRITE_COUNT, 1);
 }
-void Bird::Update(float t)
+void Bee::Update(float t)
 {
 	if (!isActive) return;
 
@@ -58,21 +51,20 @@ void Bird::Update(float t)
 		isActive = false;
 		return;
 	}
-	// khi samus đi vào vùng va chạm
 
-	if (this->IsCollide(manager->samus) == true)
-	{
-		vy = -0.1f;
-		animate_rate = BIRD_BOOST_ANIMATE_RATE;
-		if (pos_x < manager->samus->GetPosX())
-		{
-			vx = 0.05f;
-		}
-		else
-		{
-			vx = -0.05f;
-		}
-	}
+	//// khi samus đi vào vùng va chạm (chưa làm)
+	//if (this->IsCollide(manager->samus) == true)
+	//{
+	//	vy = -0.1f;
+	//	if (pos_x < manager->samus->GetPosX())
+	//	{
+	//		vx = 0.05f;
+	//	}
+	//	else
+	//	{
+	//		vx = -0.05f;
+	//	}
+	//}
 
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
@@ -92,14 +84,14 @@ void Bird::Update(float t)
 	/*float scaletime = SweptAABB(manager->samus, t);
 	if (scaletime < 1.0f)
 	{
-		Deflect(manager->samus, t, scaletime);
+	Deflect(manager->samus, t, scaletime);
 	}*/
 
 	pos_x += vx * t;
 	pos_y += vy * t;
 
 	DWORD now = GetTickCount();
-	if (now - last_time > 1000 / animate_rate)
+	if (now - last_time > 1000 / ANIMATE_RATE)
 	{
 		fly->Next();
 		last_time = now;
@@ -111,7 +103,7 @@ void Bird::Update(float t)
 	//	
 }
 
-void Bird::Render()
+void Bee::Render()
 {
 	// Nếu không active thì không render
 	if (!isActive)
@@ -121,7 +113,7 @@ void Bird::Render()
 	spriteHandler->End();
 }
 
-bool Bird::IsCollide(GameObject * target)
+bool Bee::IsCollide(GameObject * target)
 {
 	if (target->GetCollider() == NULL || this->collider_area == NULL)
 		return false;
@@ -137,14 +129,4 @@ bool Bird::IsCollide(GameObject * target)
 	if (pos_y < target->GetPosY() - target->GetCollider()->GetBottom())
 		return false;
 	return true;
-}
-
-void Bird::Response(GameObject * target, const float & DeltaTime, const float & CollisionTimeScale)
-{
-
-}
-
-void Bird::Destroy()
-{
-	vx = 0;
 }

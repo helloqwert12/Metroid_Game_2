@@ -11,6 +11,9 @@ void Samus::Render()
 
 	switch (state)
 	{
+	case APPEARANCE:
+		appearing->Render(pos_x, pos_y);
+		break;
 	case RIGHTING:
 		running_right->Render(pos_x, pos_y);
 		break;
@@ -115,7 +118,8 @@ Samus::Samus()
 	height = 64;
 
 	collider = new Collider();
-	collider->SetCollider(0, 0, -this->height, this->width);
+	//collider->SetCollider(0, 0, -this->height, this->width);
+	collider->SetCollider(0, 0, -64, 32);
 }
 
 Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
@@ -325,6 +329,13 @@ void Samus::Update(float t)
 
 	Camera::SetCameraX(pos_x, t);
 	Camera::SetCameraY(pos_y, t);
+
+	//DWORD now = GetTickCount();
+	//if (now - last_time > 8000 / 7)
+	//{
+	//	if (state == APPEARANCE)
+	//		appearing->Next();
+	//}
 
 	// Animate samus if he is running
 	//trace((LPWSTR)t);

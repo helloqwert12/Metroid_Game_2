@@ -99,7 +99,6 @@ void Metroid::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 	first_room = new Loader(spriteHandler, 1, world);
 	first_room->Load();
 
-	
 	Game::gameSound->playSoundLoop(BACKGROUND_INTRO);
 }
 
@@ -118,6 +117,8 @@ void Metroid::Update(float Delta)
 	case GAMEMODE_GAMERUN:
 		UpdateFrame(_DeltaTime);
 		break;
+		// game over
+	case GAMEMODE_GAMEOVER:
 	default:
 		break;
 	}
@@ -134,11 +135,15 @@ void Metroid::UpdateIntro(float Delta)
 }
 
 void Metroid::UpdateFrame(float Delta)
-{
-	
+{	
 	world->Update(Delta);
 	//Camera::MoveCameraX(0.05f, Delta);
 	//bulletManager->Update(Delta, world->samus->GetPosX(), world->samus->GetPosY());
+	if (world->samus->isSamusDeath() == true)
+	{
+		screenMode = GAMEMODE_GAMEOVER;
+		return;
+	}
 }
 
 void Metroid::Render(LPDIRECT3DDEVICE9 d3ddv)
@@ -157,6 +162,9 @@ void Metroid::Render(LPDIRECT3DDEVICE9 d3ddv)
 	case GAMEMODE_GAMERUN:
 		RenderFrame(d3ddv);	
 		break;
+		// game over
+	case GAMEMODE_GAMEOVER:
+		RenderGameOver(d3ddv);
 	default:
 		break;
 	}
@@ -196,8 +204,18 @@ void Metroid::RenderFrame(LPDIRECT3DDEVICE9 d3ddv)
 	world->Render();
 	//first_room->TestRenderMapGO();
 	//bulletManager->Render();
-	//tiles->_Render(xc, world->samus->GetPosX());
-	
+	//tiles->_Render(xc, world->samus->GetPosX());	
+}
+
+void Metroid::RenderGameOver(LPDIRECT3DDEVICE9 d3ddv)
+{
+	d3ddv->StretchRect(
+		gameoverscreen,		// from 
+		NULL,				// which portion?
+		_BackBuffer,		// to 
+		NULL,				// which portion?
+		D3DTEXF_NONE);
+	gameoverscreen = CreateSurfaceFromFile(_d3ddv, GAMEOVERSCREEN_FILE);
 }
 
 void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
@@ -471,12 +489,12 @@ void Metroid::OnKeyDown(int KeyCode)
 {
 	switch (screenMode)
 	{
-			// intro
+		// intro
 		case GAMEMODE_INTRO:
 		{
 			if (KeyCode == DIK_RETURN)
 			{
-				this->screenMode = GAMEMODE_START;
+				screenMode = GAMEMODE_START;
 			}
 			break;
 		}
@@ -485,7 +503,7 @@ void Metroid::OnKeyDown(int KeyCode)
 		{
 			if (KeyCode == DIK_RETURN)
 			{
-				this->screenMode = GAMEMODE_GAMERUN;
+				screenMode = GAMEMODE_GAMERUN;
 				Game::gameSound->stopSound(BACKGROUND_INTRO);
 				Game::gameSound->playSoundLoop(BACKGROUND_MAP);
 			}
@@ -644,6 +662,17 @@ void Metroid::OnKeyDown(int KeyCode)
 				break;
 
 			}
+		}
+		// game over
+		case GAMEMODE_GAMEOVER://------------------------------------------------
+		{
+			if (KeyCode == DIK_RETURN)
+			{
+				screenMode = GAMEMODE_INTRO;
+				Game::gameSound->playSound(BACKGROUND_INTRO);
+				world->samus->Reset(1270, 150);
+			}
+			break;
 		}
 	}
 }

@@ -74,8 +74,8 @@ protected:
 
 	//DirectCollision direction;
 public:
-	float health = HEALTH_SAMUS;	// Máu của Samus
-
+	float health;	// Máu của Samus
+	bool isDeath;	// Trạng thái chết của Samus
 	Samus();
 	Samus(LPD3DXSPRITE spriteHandler, World * manager);
 	~Samus();
@@ -89,7 +89,7 @@ public:
 	void SetState(SAMUS_STATE value);
 
 	void ResetAllSprites();
-	
+	bool isSamusDeath();
 	//================ OVERRIDE VIRTUAL METHOD ==================
 	void Reset(int  x, int y);
 	void Update(float t);

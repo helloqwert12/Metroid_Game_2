@@ -2,15 +2,6 @@
 #ifndef _METROID_H_
 #define _METROID_H_
 
-#define STARTSCREEN_FILE L"Resources\\intro\\start_background.png"
-#define INTROSCREEN_FILE L"Resources\\intro\\intro_background.png"
-#define INTRO_FILE L"Resources\\intro\\intro.png"
-#define INTRO "Resources\\intro\\intro.txt"
-
-#define GAMEMODE_INTRO 0
-#define GAMEMODE_START 1
-#define GAMEMODE_GAMERUN 2
-
 #include "Game.h"
 #include "World.h"
 #include "Parameters.h"
@@ -21,6 +12,7 @@ class Metroid : public Game
 protected:
 	LPDIRECT3DSURFACE9 startscreen;
 	LPDIRECT3DSURFACE9 introscreen;
+	LPDIRECT3DSURFACE9 gameoverscreen;
 
 	LPD3DXSPRITE spriteHandler;
 	World * world;
@@ -59,6 +51,7 @@ public:
 	virtual void RenderStartScreen(LPDIRECT3DDEVICE9 d3ddv);
 	virtual void RenderIntro(LPDIRECT3DDEVICE9 d3ddv);
 	virtual void RenderFrame(LPDIRECT3DDEVICE9 d3ddv);
+	virtual void RenderGameOver(LPDIRECT3DDEVICE9 d3ddv);
 	// ---------------------------
 	virtual void ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta);
 	virtual void OnKeyDown(int KeyCode);

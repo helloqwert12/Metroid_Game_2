@@ -36,6 +36,21 @@ class PosInfo;
 //================ FACTOR OF QUADTREE NODE ===========
 #define NODE_FACTOR 8;
 
+//================ GAME SCENEE ====================
+
+#define STARTSCREEN_FILE L"Resources\\scene\\start_background.png"
+#define INTROSCREEN_FILE L"Resources\\scene\\intro_background.png"
+#define GAMEOVERSCREEN_FILE L"Resources\\scene\\gameover_background.png"
+#define INTRO_FILE L"Resources\\intro\\intro.png"
+#define INTRO "Resources\\intro\\intro.txt"
+
+#define GAMEMODE_INTRO 0
+#define GAMEMODE_START 1
+#define GAMEMODE_GAMERUN 2
+#define GAMEMODE_GAMEOVER 3
+
+//================ END GAME SCENEE ====================
+
 //================== SAMUS ===================
 #define SHOOTING_SPEED 15
 #define SAMUS_SPEED 0.25f

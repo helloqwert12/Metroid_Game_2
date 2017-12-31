@@ -51,12 +51,24 @@ void Bedgehog::InitSprites()
 		bottom_path = BEDGEHOG_YELLOW_BOTTOM;
 		left_path = BEDGEHOG_YELLOW_LEFT;
 		right_path = BEDGEHOG_YELLOW_RIGHT;
+
+		//Khởi tạo máu
+		health = HEALTH_BEDGEHOG_YELLOW;
+
+		//Khởi tạo sát thương
+		damage = DAMAGE_BEDGEHOG;
 		break;
 	case BEDGEHOG_PINK:
 		up_path = BEDGEHOG_PINK_UP;
 		bottom_path = BEDGEHOG_PINK_BOTTOM;
 		left_path = BEDGEHOG_PINK_LEFT;
 		right_path = BEDGEHOG_PINK_RIGHT;
+
+		//Khởi tạo máu
+		health = HEALTH_BEDGEHOG_PINK;
+
+		//Khởi tạo sát thương
+		damage = DAMAGE_BEDGEHOG;
 		break;
 	}
 

@@ -4,6 +4,7 @@
 #include "GroupObject.h"
 #include "World.h"
 #include "trace.h"
+#include "Bedgehog.h"
 
 void Samus::Render()
 {
@@ -104,6 +105,20 @@ void Samus::Destroy()
 	isActive = false;
 
 	//--TO DO: Đưa Samus ra khỏi viewport
+}
+
+void Samus::TakeDamage(float damage)
+{
+	health -= damage;
+	Game::gameSound->playSound(SAMUS_HIT_ENEMY);
+
+	//int randomX = rand() % 32 - 16;
+	//int randomY = rand() % 32 - 16;
+	//Effect* newEffect = Effect::CreateEffect(EFFECT_HIT, this->postX + randomX, this->postY + randomY, 1, spriteHandler, manager);
+	//manager->groupEffect->AddObject(newEffect);
+
+	if (health <= 0)
+		Destroy();
 }
 
 Samus::Samus()
@@ -315,19 +330,45 @@ void Samus::Update(float t)
 				switch (manager->enemyGroup->objects[i]->GetType())
 				{
 				case BEDGEHOG_YELLOW:
-					// take damge cho samus, truyen vao dame cua con nay
+				{// take damge cho samus, truyen vao dame cua con nay
 					// co the them thuoc tinh damage cho moi con enemy de truyen vao
 					// Vd: this->TakeDamage(float enemy_damage)
-					break;
+					Bedgehog* hog_yellow = (Bedgehog*)manager->enemyGroup->objects[i];
+					TakeDamage(hog_yellow->damage);
+				}
+				break;
 				case BEDGEHOG_PINK:
+				{
+					Bedgehog * hog_pink = (Bedgehog*)manager->enemyGroup->objects[i];
+					TakeDamage(hog_pink->damage);
+				}
 
-					break;
+				break;
 				case BIRD:
+				{
+					Bird * bird = (Bird*)manager->enemyGroup->objects[i];
+					TakeDamage(bird->damage);
+				}
 
-					break;
+				break;
 				case BLOCK:
-
-					break;
+				{
+					Block * block = (Block*)manager->enemyGroup->objects[i];
+					TakeDamage(block->damage);
+				}
+				break;
+				case BEE:
+				{
+					Bee * bee = (Bee*)manager->enemyGroup->objects[i];
+					TakeDamage(bee->damage);
+				}
+				break;
+				case RIDLEY:
+				{
+					Ridley * ridley = (Ridley*)manager->enemyGroup->objects[i];
+					TakeDamage(ridley->damage);
+				}
+				break;
 				// ...
 				}
 			}

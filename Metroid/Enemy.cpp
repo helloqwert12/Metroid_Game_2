@@ -1,6 +1,7 @@
 #include "Enemy.h"
-
-
+#include "Game.h"
+#include "World.h"
+#include "ExplosionEffect.h"
 
 Enemy::Enemy()
 {
@@ -48,6 +49,18 @@ void Enemy::SetEnemyType(ENEMY_TYPE enemy_type)
 }
 void Enemy::Update(float t)
 {
+}
+
+void Enemy::TakeDamage(float damage)
+{
+	health -= damage;
+	Game::gameSound->playSound(BULLET_HIT_ENEMY);
+
+	if (health <= 0)
+	{
+		Destroy();
+		manager->explsEffect->Init(pos_x, pos_y);
+	}
 }
 
 void Enemy::Render()

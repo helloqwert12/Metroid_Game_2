@@ -34,7 +34,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	//bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
 	missiles = new BulletManager(this, MISSILE);
 	//missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
-	sentrybullets = new BulletManager(this, SENTRY);
+	sentrybullets = new BulletManager(this, SENTRY_BULLET);
 	birdbullets = new BulletManager(this, BIRD_BULLET);
 	ridleyBoomerang = new BulletManager(this, BOOMERANG);
 

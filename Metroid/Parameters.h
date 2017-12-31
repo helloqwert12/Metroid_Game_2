@@ -214,7 +214,7 @@ enum BULLET_TYPE
 {
 	STANDARD,
 	MISSILE,
-	SENTRY,
+	SENTRY_BULLET,
 	BIRD_BULLET,
 	BOOMERANG,
 };
@@ -267,6 +267,7 @@ enum ENEMY_TYPE
 	BIRD = 2,
 	BLOCK = 3,
 	BEE = 4,
+	RIDLEY = 5,
 };
 //================= END ENEMY TYPE =============
 
@@ -405,3 +406,44 @@ enum EFFECT_TYPE
 #define EFFECT_EXPLOSION_COUNT 3
 
 //================ END EFFECT ===============
+
+//================ HEALTH ===================
+
+// ENEMY
+#define HEALTH_BEDGEHOG_YELLOW 2
+#define HEALTH_BEDGEHOG_PINK 3
+#define HEALTH_BIRD 2
+#define HEALTH_BLOCK 999
+#define HEALTH_BEE 4
+
+// GATE
+#define HEALTH_GATE 1
+
+// SAMUS
+#define HEALTH_SAMUS 30
+
+// BOSSES
+#define HEALTH_MOTHER_BRAIN 40
+#define HEALTH_RIDLEY 30
+
+//================ END HEALTH ===============
+
+//================ DAMAGE ===================
+
+// ENEMY
+#define DAMAGE_BEDGEHOG 8
+#define DAMAGE_BIRD 8
+#define DAMAGE_BIRD_BULLET 5
+#define DAMAGE_BEE 8
+#define DAMAGE_BLOCK 5
+
+// SAMUS
+#define DAMAGE_SAMUS_BULLET 1
+#define DAMAGE_SAMUS_MISSILE 5
+
+// BOSSES
+#define DAMAGE_RIDLEY 8
+#define DAMAGE_RIDLEY_BOOMERANG 5
+#define DAMAGE_SENTRY_BULLET 5
+
+//================ END DAMAGE ===============

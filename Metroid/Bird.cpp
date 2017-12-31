@@ -14,6 +14,12 @@ Bird::Bird(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) :
 	//Khởi tạo sprites
 	this->InitSprites();
 
+	//Khởi tạo máu
+	health = HEALTH_BIRD;
+
+	//Khởi tạo sát thương
+	damage = DAMAGE_BIRD;
+
 	width = BIRD_WIDTH;
 	height = BIRD_HEIGHT;
 

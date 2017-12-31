@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef _SAMUS_H
 #define _SAMUS_H_
 #include "Sprite.h"
@@ -74,6 +74,8 @@ protected:
 
 	//DirectCollision direction;
 public:
+	float health = HEALTH_SAMUS;	// Máu của Samus
+
 	Samus();
 	Samus(LPD3DXSPRITE spriteHandler, World * manager);
 	~Samus();
@@ -93,6 +95,7 @@ public:
 	void Update(float t);
 	void Render();
 	void Destroy();
+	void TakeDamage(float damage);
 	void Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	void SlideFromGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	//================= END OVERRIDE VIRTUAL METHOD =============

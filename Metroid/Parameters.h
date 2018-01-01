@@ -163,6 +163,12 @@ class Energy;
 #define NUMBER_WIDTH 14
 #define NUMBER_HEIGHT 14
 #define NUMBER_PATH "sprites\\font\\font.txt"
+//////MISSILEINFO
+#define MISSILE_SPRITE_PATH L"sprites\\missile\\missile.png"
+#define MISSILE_WIDTH 20
+#define MISSILE_HEIGHT 30
+#define MISSILE_PATH "sprites\\missile\\missile.txt"
+#define MISSILE_SPRITE_COUNT 1
 
 //--YElLOW
 #define BEDGEHOG_YELLOW_UP "sprites\\enemy\\BEDGEHOG_YELLOW_UP.txt"

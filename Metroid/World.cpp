@@ -64,9 +64,13 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	bee = new Bee(spriteHandler, this, BEE);
 
 
-	energy = new Energy(spriteHandler, this, ENERGY);
-	number1 = new Number(spriteHandler, this, CHUC);
-	number2 = new Number(spriteHandler, this, DONVI);
+	energy = new Energy(spriteHandler, this, ENERGYINFO);
+	missileinfo = new Energy(spriteHandler, this, MISSILEINFO);
+
+	numberofenergy1 = new Number(spriteHandler, this, CHUC, NUMBEROFENERGY);
+	numberofenergy2 = new Number(spriteHandler, this, DONVI, NUMBEROFENERGY);
+	numberofmissile1 = new Number(spriteHandler, this, CHUC, NUMBEROFMISSILE);
+	numberofmissile2 = new Number(spriteHandler, this, DONVI, NUMBEROFMISSILE);
 
 
 	enemyGroup->AddGameObject(hog_yellow);
@@ -80,8 +84,11 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	enemyGroup->AddGameObject(motherBrain);
 	enemyGroup->AddGameObject(ridley);
 	enemyGroup->AddGameObject(energy);
-	enemyGroup->AddGameObject(number1);
-	enemyGroup->AddGameObject(number2);
+	enemyGroup->AddGameObject(missileinfo);
+	enemyGroup->AddGameObject(numberofenergy1);
+	enemyGroup->AddGameObject(numberofenergy2);
+	enemyGroup->AddGameObject(numberofmissile1);
+	enemyGroup->AddGameObject(numberofmissile2);
 
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();
@@ -138,8 +145,13 @@ void World::Update(float t)
 	sentryRight->Update(t);
 
 	energy->Update(t);
-	number1->Update(t);
-	number2->Update(t);
+	missileinfo->Update(t);
+
+	numberofenergy1->Update(t);
+	numberofenergy2->Update(t);
+
+	numberofmissile1->Update(t);
+	numberofmissile2->Update(t);
 
 	motherBrain->Update(t);
 	ridley->Update(t);
@@ -172,10 +184,14 @@ void World::Render()
 	sentryRight->Render();
 	motherBrain->Render();
 	ridley->Render();
-
 	energy->Render();
-	number1->Render();
-	number2->Render();
+	missileinfo->Render();
+
+	numberofenergy1->Render();
+	numberofenergy2->Render();
+
+	numberofmissile1->Render();
+	numberofmissile2->Render();
 
 	collisionGroup->Render();
 	effectgroup->Render();

@@ -4,9 +4,14 @@
 
 #include "Enemy.h"
 #include "Parameters.h"
-enum NUMBER_TYPE
+enum NUMBER_TYPE //Chia type number ra 2 loại là energy và missile
 {
-	CHUC,  //Chia type number ra 2 loại chục và đơn vị
+	NUMBEROFENERGY,
+	NUMBEROFMISSILE
+};
+enum NUMBER_PATH_TYPE
+{
+	CHUC,  //Chia type path number ra 2 loại chục và đơn vị
 	DONVI
 };
 class Number : public Enemy
@@ -16,10 +21,11 @@ protected:
 	Sprite * number2; //Số đơn vị
 					  //Sprite * number;
 	int health;  //Hiển thị health của energy
+	NUMBER_PATH_TYPE numberpath;
 	NUMBER_TYPE numbertype;
 public:
 	Number();
-	Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_TYPE enemy_type);
+	Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE number_path, NUMBER_TYPE number_type);
 	~Number();
 
 	void InitSprites();

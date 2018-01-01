@@ -45,11 +45,14 @@ public:
 
 	MotherBrain * motherBrain;
 	Ridley * ridley;
-
 	Energy* energy;
+	Energy* missileinfo;
 
-	Number *number1;
-	Number *number2;
+	Number *numberofenergy1;
+	Number *numberofenergy2;
+
+	Number *numberofmissile1;
+	Number *numberofmissile2;
 
 	BulletManager * bullets;
 	BulletManager * missiles;

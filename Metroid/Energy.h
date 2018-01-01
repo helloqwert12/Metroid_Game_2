@@ -1,18 +1,22 @@
-#pragma once
+﻿#pragma once
 #ifndef _Energy_H_
 #define _Energy_H_
 
 #include "Enemy.h"
 #include "Parameters.h"
-
+enum TYPE //Chia type ra 2 loại là Energyinfo và missileinfo
+{
+	ENERGYINFO,
+	MISSILEINFO
+};
 class Energy : public Enemy
 {
 protected:
 	Sprite * energy;
-
+	TYPE type;
 public:
 	Energy();
-	Energy(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type);
+	Energy(LPD3DXSPRITE spriteHandler, World * manager, TYPE type);
 	~Energy();
 
 	void InitSprites();

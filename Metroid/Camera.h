@@ -26,6 +26,10 @@ public:
 	static void SetCameraX(float pos_x, float t);
 	static void SetCameraY(float pos_y, float t);
 
+	static int GetCameraX(); 
+	static int GetCameraY();
+
+
 	static void SetDemension(int mode);
 
 	static bool IsInCamera(float x, float y, float width, float height);

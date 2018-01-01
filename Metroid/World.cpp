@@ -10,6 +10,8 @@
 #include "PositionManager.h"
 #include <vector>
 #include "PosInfo.h"
+#include "Energy.h"
+#include "Number.h"
 
 using namespace std;
 
@@ -61,6 +63,12 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	block = new Block(spriteHandler, this, BLOCK);
 	bee = new Bee(spriteHandler, this, BEE);
 
+
+	energy = new Energy(spriteHandler, this, ENERGY);
+	number1 = new Number(spriteHandler, this, CHUC);
+	number2 = new Number(spriteHandler, this, DONVI);
+
+
 	enemyGroup->AddGameObject(hog_yellow);
 	enemyGroup->AddGameObject(hog_pink);
 	enemyGroup->AddGameObject(bird);
@@ -71,6 +79,9 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	enemyGroup->AddGameObject(sentryRight);
 	enemyGroup->AddGameObject(motherBrain);
 	enemyGroup->AddGameObject(ridley);
+	enemyGroup->AddGameObject(energy);
+	enemyGroup->AddGameObject(number1);
+	enemyGroup->AddGameObject(number2);
 
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();
@@ -126,6 +137,10 @@ void World::Update(float t)
 	sentryTop->Update(t);
 	sentryRight->Update(t);
 
+	energy->Update(t);
+	number1->Update(t);
+	number2->Update(t);
+
 	motherBrain->Update(t);
 	ridley->Update(t);
 }
@@ -157,6 +172,10 @@ void World::Render()
 	sentryRight->Render();
 	motherBrain->Render();
 	ridley->Render();
+
+	energy->Render();
+	number1->Render();
+	number2->Render();
 
 	collisionGroup->Render();
 	effectgroup->Render();

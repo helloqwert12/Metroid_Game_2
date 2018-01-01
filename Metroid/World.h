@@ -12,6 +12,8 @@
 #include "Sentry.h"
 #include "MotherBrain.h"
 #include "Ridley.h"
+#include "Number.h"
+#include "Energy.h"
 
 /*
 	Class này chứa tất cả những thứ trong Game
@@ -43,6 +45,11 @@ public:
 
 	MotherBrain * motherBrain;
 	Ridley * ridley;
+
+	Energy* energy;
+
+	Number *number1;
+	Number *number2;
 
 	BulletManager * bullets;
 	BulletManager * missiles;

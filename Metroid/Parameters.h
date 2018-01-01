@@ -22,6 +22,8 @@ class Effect;
 class ExplosionEffect;
 class PositionManager;
 class PosInfo;
+class Number;
+class Energy;
 
 //================ SCREEN RESOLUTION ================
 #define GAME_SCREEN_RESOLUTION_640_480_24   0
@@ -149,6 +151,18 @@ class PosInfo;
 #define BEDGEHOG_HEIGHT 32
 #define BEDGEHOG_SPRITE_COUNT 2
 #define BEDGEHOG_SPEED 0.07f;
+
+///////ENERGY
+#define ENERGY_SPRITE_PATH L"sprites\\energy\\energy.png"
+#define ENERGY_WIDTH 60
+#define ENERGY_HEIGHT 50
+#define ENERGY_PATH "sprites\\energy\\energy.txt"
+#define ENERGY_SPRITE_COUNT 1
+///////NUMBER
+#define NUMBER_SPRITE_PATH L"sprites\\font\\font.png"
+#define NUMBER_WIDTH 14
+#define NUMBER_HEIGHT 14
+#define NUMBER_PATH "sprites\\font\\font.txt"
 
 //--YElLOW
 #define BEDGEHOG_YELLOW_UP "sprites\\enemy\\BEDGEHOG_YELLOW_UP.txt"
@@ -283,6 +297,8 @@ enum ENEMY_TYPE
 	BLOCK = 3,
 	BEE = 4,
 	RIDLEY = 5,
+	ENERGY,
+	NUMBER
 };
 //================= END ENEMY TYPE =============
 

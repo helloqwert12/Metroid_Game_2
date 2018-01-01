@@ -36,6 +36,11 @@ void Metroid::_InitPositions()
 	world->motherBrain->InitPostition(1900, 200);
 	world->ridley->InitPostition(1750, 120);
 
+	world->energy->InitPostition(1440, 400);
+
+	world->number1->InitPostition(1480, 410);
+	world->number2->InitPostition(1500, 410);
+
 	//world->morphItem->SetPosX(world->samus->GetPosX());
 	//world->morphItem->SetPosY(world->samus->GetPosX());
 	//bulletManager->InitPosition(world->samus->GetPosX(), world->samus->GetPosY());

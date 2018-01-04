@@ -226,9 +226,9 @@ enum MOTHERBRAIN_STATE
 
 //================ BULLET TYPE ================
 enum BULLET_TYPE
-{
-	STANDARD,
-	MISSILE,
+{	
+	STANDARD,	// Đạn thường của samus
+	MISSILE,	// Missile của samus
 	SENTRY_BULLET,
 	BIRD_BULLET,
 	BOOMERANG,
@@ -283,6 +283,7 @@ enum ENEMY_TYPE
 	BLOCK = 3,
 	BEE = 4,
 	RIDLEY = 5,
+	MOTHER_BRAIN = 6,
 };
 //================= END ENEMY TYPE =============
 
@@ -454,7 +455,7 @@ enum EFFECT_TYPE
 
 // SAMUS
 #define DAMAGE_SAMUS_BULLET 1
-#define DAMAGE_SAMUS_MISSILE 5
+#define DAMAGE_SAMUS_MISSILE 3
 
 // BOSSES
 #define DAMAGE_RIDLEY 8

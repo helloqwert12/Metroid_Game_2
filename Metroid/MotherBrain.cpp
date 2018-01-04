@@ -7,6 +7,8 @@ MotherBrain::MotherBrain(LPD3DXSPRITE spriteHandler, World * manager)
 	this->manager = manager;
 	this->isActive = true;
 
+	health = HEALTH_MOTHER_BRAIN;
+
 	unbroken = new Sprite(spriteHandler, BOSS_SPRITE_PATH, MOTHER_BRAIN_UNBROKEN_PATH, MOTHER_BRAIN_WIDTH, MOTHER_BRAIN_HEIGHT, MOTHER_BRAIN_SPRITE_COUNT, SPRITE_PER_ROW);
 	broken = new Sprite(spriteHandler, BOSS_SPRITE_PATH, MOTHER_BRAIN_BROKEN_PATH, MOTHER_BRAIN_WIDTH, MOTHER_BRAIN_HEIGHT, MOTHER_BRAIN_SPRITE_COUNT, SPRITE_PER_ROW);
 
@@ -21,7 +23,6 @@ MotherBrain::~MotherBrain()
 	delete(broken);
 }
 
-int x = 0;
 void MotherBrain::Update(float t)
 {
 	if (!isActive) return;
@@ -42,9 +43,9 @@ void MotherBrain::Update(float t)
 		switch (state)
 		{
 		case UNBROKEN:
-			x++;
 			unbroken->Next();
-			if (x == 50) state = BROKEN;
+			if (this->health <= HEALTH_MOTHER_BRAIN - 10) 
+				state = BROKEN;
 			break;
 		case BROKEN:
 			broken->Next();

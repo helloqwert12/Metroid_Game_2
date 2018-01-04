@@ -30,7 +30,6 @@ public:
 	Bedgehog();
 	Bedgehog(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type);
 	~Bedgehog();
-
 	void InitSprites();
 	void ResponseGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	//============== OVERRIDE VIRTUAL METHOD ===================

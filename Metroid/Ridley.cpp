@@ -9,6 +9,8 @@ Ridley::Ridley(LPD3DXSPRITE spriteHandler, World * manager)
 	this->manager = manager;
 	this->isActive = true;
 
+	health = HEALTH_RIDLEY;
+
 	fly = new Sprite(spriteHandler, BOSS_SPRITE_PATH, RIDLEY_FLY_PATH, RIDLEY_WIDTH, RIDLEY_HEIGHT, RIDLEY_SPRITE_COUNT, SPRITE_PER_ROW);
 
 	//--TO DO: Khởi tạo collider cho Ridley

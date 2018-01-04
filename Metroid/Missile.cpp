@@ -31,6 +31,8 @@ Missile::Missile(World * manager)
 	limit_dist_y = 0;
 	isActive = false;
 	this->manager = manager;
+	this->bulletType = MISSILE;
+	damage = DAMAGE_SAMUS_MISSILE;
 
 	//Set collider
 	collider = new Collider(0, 0, -MISSILE_HEIGHT, MISSILE_WIDTH);
@@ -45,6 +47,8 @@ Missile::Missile(World * manager, int x_holder, int y_holder)
 	limit_dist_y = 0;
 	isActive = false;
 	this->manager = manager;
+	this->bulletType = MISSILE;
+	damage = DAMAGE_SAMUS_MISSILE;
 
 	pos_x_holder = x_holder;
 	pos_y_holder = y_holder;

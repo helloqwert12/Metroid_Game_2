@@ -68,6 +68,103 @@ void BulletObject::Update(float t)
 	if (!isActive)
 		return;
 
+	//// Đạn va chạm với samus	====>	Không dùng được ========> Xét từng TH riêng cho mỗi loại đạn trong class con
+	//if (manager->samus->GetStateActive())
+	//{
+	//	float timeScale = SweptAABB(manager->samus, t);
+	//	if (timeScale < 1.0f)
+	//	{
+	//		switch (getBulletType())
+	//		{
+	//		case BIRD_BULLET:
+	//			manager->samus->TakeDamage(this->damage);
+	//		case BOOMERANG:
+	//			manager->samus->TakeDamage(this->damage);
+	//		case SENTRY_BULLET:
+	//			manager->samus->TakeDamage(this->damage);
+	//		}
+	//	}
+	//}
+
+	// Đạn samus va chạm với Enemy (Hiện chỉ có Missile của samus là tác dụng va chạm dc tới enemy)
+	for (int i = 0; i < manager->enemyGroup->size; i++)
+	{
+		if (manager->enemyGroup->objects[i]->IsActive())
+		{
+			float timeScale = SweptAABB(manager->enemyGroup->objects[i], t);
+			if (timeScale < 1.0f)
+			{
+				switch (manager->enemyGroup->objects[i]->GetType())
+				{
+				case BEDGEHOG_YELLOW:
+				{
+					Bedgehog * hog_yellow = (Bedgehog*)manager->enemyGroup->objects[i];
+					switch (getBulletType())
+					{
+					case STANDARD:	hog_yellow->TakeDamage(this->damage); break;
+					case MISSILE:	hog_yellow->TakeDamage(this->damage); break;
+					}
+				}
+				break;
+				case BEDGEHOG_PINK:
+				{
+					Bedgehog * hog_pink = (Bedgehog*)manager->enemyGroup->objects[i];
+					switch (getBulletType())
+					{
+					case STANDARD:	hog_pink->TakeDamage(this->damage); break;
+					case MISSILE:	hog_pink->TakeDamage(this->damage); break;
+					}
+				}
+
+				break;
+				case BIRD:
+				{
+					Bird * bird = (Bird*)manager->enemyGroup->objects[i];
+					switch (getBulletType())
+					{
+					case STANDARD:	bird->TakeDamage(this->damage); break;
+					case MISSILE:	bird->TakeDamage(this->damage); break;
+					}
+				}
+				break;
+				case BEE:
+				{
+					Bee * bee = (Bee*)manager->enemyGroup->objects[i];
+					switch (getBulletType())
+					{
+					case STANDARD:	bee->TakeDamage(this->damage); break;
+					case MISSILE:	bee->TakeDamage(this->damage); break;
+					}
+				}
+				break;
+				case RIDLEY:
+				{
+					Ridley * ridley = (Ridley*)manager->enemyGroup->objects[i];
+					switch (getBulletType())
+					{
+					case STANDARD:	ridley->TakeDamage(this->damage); break;
+					case MISSILE:	ridley->TakeDamage(this->damage); break;
+					}
+				}
+				break;
+				case MOTHER_BRAIN:
+				{
+					MotherBrain * motherBrain = (MotherBrain*)manager->enemyGroup->objects[i];
+					switch (getBulletType())
+					{
+					case STANDARD:	motherBrain->TakeDamage(this->damage); break;
+					case MISSILE:	motherBrain->TakeDamage(this->damage); break;
+					}
+				}
+				break;
+				case BLOCK:
+					break;
+				}
+			}
+		}
+	}
+	//<======================
+
 	// Xử lý va chạm
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
@@ -110,11 +207,11 @@ void BulletObject::Update(float t)
 		break;
 	}
 
-	pos_x += vx*t;
-	pos_y += vy*t;
+	pos_x += vx * t;
+	pos_y += vy * t;
 
-	int temp_x = vx*t;
-	int temp_y = vy*t;
+	int temp_x = vx * t;
+	int temp_y = vy * t;
 
 	if (temp_x < 0)
 		temp_x = -temp_x;

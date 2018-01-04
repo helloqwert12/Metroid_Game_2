@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef _BULLETOBJECT_H_
 #define _BULLETOBJECT_H_
 
@@ -18,11 +18,13 @@ protected:
 	int limit_dist_y;		//limit distance of y;
 
 	World * manager;
-
+	BULLET_TYPE bulletType;
 
 	LPD3DXSPRITE _SpriteHandler;
 	BULLET_DIRECTION direction;
 public:
+	float damage;		// Lượng sát thương gây ra của BulletObject
+
 	BulletObject();
 	BulletObject(World * manager);
 	~BulletObject();
@@ -32,6 +34,15 @@ public:
 	
 	BULLET_DIRECTION GetDirection();
 	void SetDirection(BULLET_DIRECTION value);
+
+	BULLET_TYPE getBulletType()
+	{
+		return this->bulletType;
+	}
+	void setBulletType(BULLET_TYPE type)
+	{
+		this->bulletType = type;
+	}
 
 	//============ VIRTUAL METHOD =================
 	virtual void InitSprites(LPDIRECT3DDEVICE9 d3ddv);

@@ -11,6 +11,9 @@ RidleyBoomerang::RidleyBoomerang(World * manager)
 	limit_dist_y = 0;
 	isActive = false;
 
+	damage = DAMAGE_RIDLEY_BOOMERANG;
+
+	this->bulletType = BOOMERANG;
 	//Set collider
 	collider = new Collider(0, 0, -RIDLEY_BOOMERANG_HEIGHT, RIDLEY_BOOMERANG_WIDTH);
 }
@@ -38,6 +41,13 @@ void RidleyBoomerang::Update(float t)
 		return;
 
 	vy -= 0.1f;
+
+	// Va chạm của Ridley_Boomerang đối với Samus
+	float TimeScale = SweptAABB(manager->samus, t);
+	if (TimeScale < 1.0f)
+	{
+		manager->samus->TakeDamage(this->damage);
+	}
 
 	// Xử lý va chạm
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)

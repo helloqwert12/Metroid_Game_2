@@ -90,6 +90,8 @@ public:
 
 	void ResetAllSprites();
 	bool isSamusDeath();
+	bool GetStateActive();
+
 	//================ OVERRIDE VIRTUAL METHOD ==================
 	void Reset(int  x, int y);
 	void Update(float t);

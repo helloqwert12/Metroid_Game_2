@@ -144,7 +144,7 @@ Samus::Samus()
 	collider = new Collider();
 	//collider->SetCollider(0, 0, -this->height, this->width);
 	collider->SetCollider(0, 0, -64, 32);
-
+	this->isActive = true;
 	state = APPEARANCE;
 }
 
@@ -313,6 +313,11 @@ bool Samus::isSamusDeath()
 {
 	if (isDeath == true)
 		return true;
+}
+
+bool Samus::GetStateActive()
+{
+	return isActive;
 }
 
 

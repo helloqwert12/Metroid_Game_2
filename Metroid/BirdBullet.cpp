@@ -9,11 +9,15 @@ BirdBullet::BirdBullet(World * manager)
 	limit_dist_x = 0;
 	limit_dist_y = 0;
 	isActive = false;
-	this->manager = manager;
+	this->manager = manager;	
+
+	//damage = DAMAGE_BIRD_BULLET;
 
 	for (int i = 0; i < BIRD_BULLET_COUNT; i++)
 	{
 		bullets[i] = new Bullet(this->manager);
+		bullets[i]->damage = DAMAGE_BIRD_BULLET;
+		this->bulletType = BIRD_BULLET;
 	}
 }
 
@@ -35,7 +39,7 @@ void BirdBullet::Update(float t)
 	if (!isActive)
 		return;
 
-	for (int i = 0; i<BIRD_BULLET_COUNT; i++)
+	for (int i = 0; i < BIRD_BULLET_COUNT; i++)
 	{
 		bullets[i]->Update(t);
 	}
@@ -43,7 +47,7 @@ void BirdBullet::Update(float t)
 
 void BirdBullet::Render()
 {
-	for (int i = 0; i<BIRD_BULLET_COUNT; i++)
+	for (int i = 0; i < BIRD_BULLET_COUNT; i++)
 	{
 		bullets[i]->Render();
 	}

@@ -1,4 +1,4 @@
-#include "Enemy.h"
+﻿#include "Enemy.h"
 #include "Game.h"
 #include "World.h"
 #include "ExplosionEffect.h"
@@ -59,8 +59,13 @@ void Enemy::TakeDamage(float damage)
 	if (health <= 0)
 	{
 		Destroy();
-		manager->explsEffect->Init(pos_x, pos_y);
 	}
+}
+
+void Enemy::Destroy()
+{
+	this->isActive = false;
+	manager->explsEffect->Init(this->pos_x, this->pos_y); // Xảy ra lỗi khi giết những mục tiêu to (Ridley, Mother Brain)
 }
 
 void Enemy::Render()

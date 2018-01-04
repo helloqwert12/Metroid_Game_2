@@ -38,6 +38,8 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 		{
 			bullet_list[i] = new Bullet(manager);
 		}
+		manager->samus->setNum(num);
+		manager->samus->setListBullet(bullet_list);
 		break;
 	case MISSILE:
 		//bullet_list = new BulletObject*[MISSILE_NUM];

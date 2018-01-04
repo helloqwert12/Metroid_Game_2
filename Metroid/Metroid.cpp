@@ -8,6 +8,7 @@
 #include "Samus.h"
 #include "MorphItem.h"
 #include "ExplosionEffect.h"
+#include "BulletObject.h"
 
 void Metroid::_InitBackground()
 {
@@ -482,6 +483,20 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 				world->samus->SetState(IDLING_SHOOTING_RIGHT);
 
 				_Shoot(ON_RIGHT);
+			}
+
+			BulletObject ** list = world->samus->getlistbullet();
+			int num = world->samus->getNumBullet();
+			for (int i = 0; i < world->enemyGroup->size; i++)
+			{
+				for (int j = 0; j < num; j++)
+				{
+					float TimeScale = world->enemyGroup->objects[i]->SweptAABB(list[j], Delta);
+					if (TimeScale < 1.0f)
+					{
+						world->enemyGroup->objects[i]->Destroy();
+					}
+				}
 			}
 		}
 

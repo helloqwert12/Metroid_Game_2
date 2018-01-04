@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "trace.h"
 #include "Camera.h"
+#include "BulletObject.h"
 
 enum SAMUS_STATE {
 	APPEARANCE,
@@ -71,6 +72,8 @@ protected:
 
 	SAMUS_STATE state;
 
+	BulletObject ** listBullet;
+	int num;
 	//DirectCollision direction;
 public:
 	float health;	// Máu của Samus
@@ -90,6 +93,22 @@ public:
 	void ResetAllSprites();
 	bool isSamusDeath();
 	bool GetStateActive();
+	void setListBullet(BulletObject ** listbullet)
+	{
+		this->listBullet = listbullet;
+	}
+	BulletObject ** getlistbullet()
+	{
+		return this->listBullet;
+	}
+	int getNumBullet()
+	{
+		return num;
+	}
+	void setNum(int num)
+	{
+		this->num = num;
+	}
 
 	//================ OVERRIDE VIRTUAL METHOD ==================
 	void Reset(int  x, int y);

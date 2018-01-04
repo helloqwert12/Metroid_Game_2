@@ -65,7 +65,7 @@ void Enemy::TakeDamage(float damage)
 void Enemy::Destroy()
 {
 	this->isActive = false;
-	manager->explsEffect->Init(this->pos_x, this->pos_y); // Xảy ra lỗi khi giết những mục tiêu to (Ridley, Mother Brain)
+	//manager->explsEffect->Init(this->pos_x, this->pos_y); // Xảy ra lỗi khi giết những mục tiêu to (Ridley, Mother Brain)
 }
 
 void Enemy::Render()

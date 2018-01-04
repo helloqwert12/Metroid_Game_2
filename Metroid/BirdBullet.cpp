@@ -44,7 +44,7 @@ void BirdBullet::Update(float t)
 		float TimeScale = bullets[i]->SweptAABB(manager->samus, t);
 		if (TimeScale < 1.0f)
 		{
-			manager->samus->Destroy();
+			manager->samus->TakeDamage(this->damage);
 		}
 	}
 

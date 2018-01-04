@@ -37,7 +37,6 @@ public:
 	{
 		return this->bullet_list;
 	}
-	
 };
 
 #endif // !_BULLETMANAGER_H_

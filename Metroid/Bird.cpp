@@ -1,6 +1,7 @@
 ﻿#include "Bird.h"
 #include "World.h"
 #include "GroupObject.h"
+#include "Parameters.h"
 
 Bird::Bird()
 {
@@ -89,7 +90,11 @@ void Bird::Update(float t)
 			if (timeScale < 1.0f)
 			{
 				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
-				this->Destroy();
+
+				if (pos_y <= GROUND_Y + 50)
+				{
+					this->Destroy();
+				}
 			}
 			break;
 		}

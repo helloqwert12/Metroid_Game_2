@@ -41,6 +41,15 @@ void BirdBullet::Update(float t)
 
 	for (int i = 0; i < BIRD_BULLET_COUNT; i++)
 	{
+		float TimeScale = bullets[i]->SweptAABB(manager->samus, t);
+		if (TimeScale < 1.0f)
+		{
+			manager->samus->Destroy();
+		}
+	}
+
+	for (int i = 0; i < BIRD_BULLET_COUNT; i++)
+	{
 		bullets[i]->Update(t);
 	}
 }

@@ -334,6 +334,21 @@ enum ENEMY_TYPE
 #define MOTHER_BRAIN_UNBROKEN_PATH "sprites\\bosses\\MOTHER_BRAIN_STATE_1.txt"
 #define MOTHER_BRAIN_BROKEN_PATH "sprites\\bosses\\MOTHER_BRAIN_STATE_2.txt"
 
+//================= GATE TO MOTHER_BRAIN =================
+#define MOTHER_BRAIN_GATE_STATE_1_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_1.txt"
+#define MOTHER_BRAIN_GATE_STATE_2_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_2.txt"
+#define MOTHER_BRAIN_GATE_STATE_3_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_3.txt"
+#define MOTHER_BRAIN_GATE_STATE_4_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_4.txt"
+
+#define MOTHER_BRAIN_GATE_SPRITE_COUNT 1
+
+#define MOTHER_BRAIN_GATE_STATE_1_WIDTH 30
+#define MOTHER_BRAIN_GATE_STATE_2_WIDTH 24
+#define MOTHER_BRAIN_GATE_STATE_3_WIDTH 16
+#define MOTHER_BRAIN_GATE_STATE_4_WIDTH 8
+#define MOTHER_BRAIN_GATE_HEIGHT 64
+//================= END GATE TO MOTHER_BRAIN =================
+
 //================= SENTRY =================
 //================= SENTRY TYPE =================
 enum SENTRY_TYPE

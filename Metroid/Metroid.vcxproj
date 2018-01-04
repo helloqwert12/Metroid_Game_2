@@ -148,6 +148,7 @@
     <ClCompile Include="dxutil.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Energy.cpp" />
     <ClCompile Include="EnergyItem.cpp" />
     <ClCompile Include="ExplosionEffect.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="MissileItem.cpp" />
     <ClCompile Include="MorphItem.cpp" />
     <ClCompile Include="MotherBrain.cpp" />
+    <ClCompile Include="Number.cpp" />
     <ClCompile Include="PosInfo.cpp" />
     <ClCompile Include="PositionManager.cpp" />
     <ClCompile Include="QNode.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="dxutil.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Energy.h" />
     <ClInclude Include="EnergyItem.h" />
     <ClInclude Include="ExplosionEffect.h" />
     <ClInclude Include="Game.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="MissileItem.h" />
     <ClInclude Include="MorphItem.h" />
     <ClInclude Include="MotherBrain.h" />
+    <ClInclude Include="Number.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="PosInfo.h" />
     <ClInclude Include="PositionManager.h" />

@@ -10,6 +10,8 @@
 #include "PositionManager.h"
 #include <vector>
 #include "PosInfo.h"
+#include "Energy.h"
+#include "Number.h"
 
 using namespace std;
 
@@ -61,6 +63,16 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	block = new Block(spriteHandler, this, BLOCK);
 	bee = new Bee(spriteHandler, this, BEE);
 
+
+	energy = new Energy(spriteHandler, this, ENERGYINFO);
+	missileinfo = new Energy(spriteHandler, this, MISSILEINFO);
+
+	numberofenergy1 = new Number(spriteHandler, this, CHUC, NUMBEROFENERGY);
+	numberofenergy2 = new Number(spriteHandler, this, DONVI, NUMBEROFENERGY);
+	numberofmissile1 = new Number(spriteHandler, this, CHUC, NUMBEROFMISSILE);
+	numberofmissile2 = new Number(spriteHandler, this, DONVI, NUMBEROFMISSILE);
+
+
 	enemyGroup->AddGameObject(hog_yellow);
 	enemyGroup->AddGameObject(hog_pink);
 	enemyGroup->AddGameObject(bird);
@@ -71,6 +83,12 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	enemyGroup->AddGameObject(sentryRight);
 	enemyGroup->AddGameObject(motherBrain);
 	enemyGroup->AddGameObject(ridley);
+	enemyGroup->AddGameObject(energy);
+	enemyGroup->AddGameObject(missileinfo);
+	enemyGroup->AddGameObject(numberofenergy1);
+	enemyGroup->AddGameObject(numberofenergy2);
+	enemyGroup->AddGameObject(numberofmissile1);
+	enemyGroup->AddGameObject(numberofmissile2);
 
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();
@@ -126,6 +144,15 @@ void World::Update(float t)
 	sentryTop->Update(t);
 	sentryRight->Update(t);
 
+	energy->Update(t);
+	missileinfo->Update(t);
+
+	numberofenergy1->Update(t);
+	numberofenergy2->Update(t);
+
+	numberofmissile1->Update(t);
+	numberofmissile2->Update(t);
+
 	motherBrain->Update(t);
 	ridley->Update(t);
 }
@@ -157,6 +184,14 @@ void World::Render()
 	sentryRight->Render();
 	motherBrain->Render();
 	ridley->Render();
+	energy->Render();
+	missileinfo->Render();
+
+	numberofenergy1->Render();
+	numberofenergy2->Render();
+
+	numberofmissile1->Render();
+	numberofmissile2->Render();
 
 	collisionGroup->Render();
 	effectgroup->Render();

@@ -4,11 +4,17 @@
 #include "GroupObject.h"
 #include "World.h"
 #include "trace.h"
+#include "ExplosionEffect.h"
+#include "Metroid.h"
 #include "Brick.h"
 #include "PositionManager.h"
 
 void Samus::Render()
-{
+{	
+	// Nếu không active thì không render
+	if (!isActive)
+		return;
+
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
 	switch (state)
@@ -95,7 +101,6 @@ void Samus::Render()
 		jump_shooting_up_right->Render(pos_x, pos_y);
 		break;
 	}
-
 	
 	spriteHandler->End();
 }
@@ -104,8 +109,37 @@ void Samus::Destroy()
 {
 	//Ngưng active
 	isActive = false;
-
+	Game::gameSound->stopSound(BACKGROUND_MAP);
+	Game::gameSound->playSound(BACKGROUND_SAMUS_DEATH);
+	manager->explsEffect->Init(pos_x, pos_y);
+	
+	isDeath = true;
 	//--TO DO: Đưa Samus ra khỏi viewport
+
+}
+
+void Samus::TakeDamage(float damage)
+{
+	health -= damage;
+	Game::gameSound->playSound(SAMUS_HIT_ENEMY);
+
+	//int randomX = rand() % 32 - 16;
+	//int randomY = rand() % 32 - 16;
+	//Effect* newEffect = Effect::CreateEffect(EFFECT_HIT, this->postX + randomX, this->postY + randomY, 1, spriteHandler, manager);
+	//manager->groupEffect->AddObject(newEffect);
+
+	if (health <= 0)
+		Destroy();
+}
+
+void Samus::SetHealth(float value)
+{
+	health = value;
+}
+
+float Samus::GetHealth()
+{
+	return health;
 }
 
 Samus::Samus()
@@ -122,7 +156,7 @@ Samus::Samus()
 	collider = new Collider();
 	//collider->SetCollider(0, 0, -this->height, this->width);
 	collider->SetCollider(0, 0, -64, 32);
-
+	this->isActive = true;
 	state = APPEARANCE;
 }
 
@@ -130,9 +164,13 @@ Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
 {
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
-
+	this->isActive = true;
+	this->isDeath = false;
 	//Set type
 	this->type = SAMUS;
+
+	// Khởi tạo máu cho Samus
+	health = HEALTH_SAMUS;
 
 	width = 40;
 	height = 50;
@@ -281,7 +319,18 @@ void Samus::ResetAllSprites()
 	idle_shooting_up_right->Reset();
 	jump_shooting_up_left->Reset();
 	jump_shooting_up_right->Reset();
-}	
+}
+
+bool Samus::isSamusDeath()
+{
+	if (isDeath == true)
+		return true;
+}
+
+bool Samus::GetStateActive()
+{
+	return isActive;
+}
 
 
 void Samus::Reset(int x, int y)
@@ -292,6 +341,9 @@ void Samus::Reset(int x, int y)
 	//Đặt lại vị trí
 	this->pos_x = x;
 	this->pos_y = y;
+
+	isDeath = false;
+	health = HEALTH_SAMUS;
 }
 
 void Samus::Update(float t)
@@ -317,19 +369,45 @@ void Samus::Update(float t)
 				switch (manager->enemyGroup->objects[i]->GetType())
 				{
 				case BEDGEHOG_YELLOW:
-					// take damge cho samus, truyen vao dame cua con nay
+				{// take damge cho samus, truyen vao dame cua con nay
 					// co the them thuoc tinh damage cho moi con enemy de truyen vao
 					// Vd: this->TakeDamage(float enemy_damage)
-					break;
+					Bedgehog* hog_yellow = (Bedgehog*)manager->enemyGroup->objects[i];
+					TakeDamage(hog_yellow->damage);
+				}
+				break;
 				case BEDGEHOG_PINK:
+				{
+					Bedgehog * hog_pink = (Bedgehog*)manager->enemyGroup->objects[i];
+					TakeDamage(hog_pink->damage);
+				}
 
-					break;
+				break;
 				case BIRD:
+				{
+					Bird * bird = (Bird*)manager->enemyGroup->objects[i];
+					TakeDamage(bird->damage);
+				}
 
-					break;
+				break;
 				case BLOCK:
-
-					break;
+				{
+					Block * block = (Block*)manager->enemyGroup->objects[i];
+					TakeDamage(block->damage);
+				}
+				break;
+				case BEE:
+				{
+					Bee * bee = (Bee*)manager->enemyGroup->objects[i];
+					TakeDamage(bee->damage);
+				}
+				break;
+				case RIDLEY:
+				{
+					Ridley * ridley = (Ridley*)manager->enemyGroup->objects[i];
+					TakeDamage(ridley->damage);
+				}
+				break;
 				// ...
 				}
 			}

@@ -10,6 +10,8 @@
 #include "PositionManager.h"
 #include <vector>
 #include "PosInfo.h"
+#include "Energy.h"
+#include "Number.h"
 
 using namespace std;
 
@@ -37,7 +39,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	//bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
 	missiles = new BulletManager(this, MISSILE);
 	//missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
-	sentrybullets = new BulletManager(this, SENTRY);
+	sentrybullets = new BulletManager(this, SENTRY_BULLET);
 	birdbullets = new BulletManager(this, BIRD_BULLET);
 	ridleyBoomerang = new BulletManager(this, BOOMERANG);
 
@@ -104,6 +106,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 		enemyGroup->AddGameObject(bees[i]);
 	}
 
+
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();
 
@@ -168,6 +171,15 @@ void World::Update(float t)
 	sentryTop->Update(t);
 	sentryRight->Update(t);
 
+	energy->Update(t);
+	missileinfo->Update(t);
+
+	numberofenergy1->Update(t);
+	numberofenergy2->Update(t);
+
+	numberofmissile1->Update(t);
+	numberofmissile2->Update(t);
+
 	motherBrain->Update(t);
 	ridley->Update(t);
 
@@ -206,6 +218,14 @@ void World::Render()
 	sentryRight->Render();
 	motherBrain->Render();
 	ridley->Render();
+	energy->Render();
+	missileinfo->Render();
+
+	numberofenergy1->Render();
+	numberofenergy2->Render();
+
+	numberofmissile1->Render();
+	numberofmissile2->Render();
 
 	collisionGroup->Render();
 	effectgroup->Render();

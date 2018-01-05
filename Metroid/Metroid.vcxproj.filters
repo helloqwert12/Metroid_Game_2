@@ -49,9 +49,6 @@
     <Filter Include="Source Files\Collision">
       <UniqueIdentifier>{234b7a44-d0c5-4891-9cf7-72580441122b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Enemy">
-      <UniqueIdentifier>{371e9cda-051b-4a91-8104-0bdb24677748}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Enemy">
       <UniqueIdentifier>{2a4a10de-e8a0-45d9-8225-2584c732e34f}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     </Filter>
     <Filter Include="Header Files\Effect">
       <UniqueIdentifier>{e47de3ca-d067-4a43-91f5-47cc6b4c655f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enemy">
+      <UniqueIdentifier>{371e9cda-051b-4a91-8104-0bdb24677748}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="PosInfo.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Number.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Energy.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ColliderBrick.cpp">
       <Filter>Source Files</Filter>
@@ -367,6 +373,12 @@
     </ClInclude>
     <ClInclude Include="PosInfo.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Number.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Energy.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ColliderBrick.h">
       <Filter>Header Files</Filter>

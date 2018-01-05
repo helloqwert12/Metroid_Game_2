@@ -11,6 +11,12 @@ Bee::Bee(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : E
 	//Khởi tạo sprites
 	this->InitSprites();
 
+	//Khởi tạo máu
+	health = HEALTH_BEE;
+	
+	//Khởi tạo sát thương
+	damage = DAMAGE_BEE;
+
 	collider = new Collider();
 	collider->SetCollider(0, 0, -BEE_HEIGHT, BEE_WIDTH);
 

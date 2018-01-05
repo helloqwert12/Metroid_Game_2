@@ -19,7 +19,10 @@ Bullet::Bullet(World * manager)
 	limit_dist_x = 0;
 	limit_dist_y = 0;
 	isActive = false;
+
+	this->bulletType = STANDARD;
 	this->manager = manager;
+	collider = new Collider(0, 0, -BULLET_HEIGHT, BULLET_WIDTH);
 }
 
 Bullet::Bullet(World * manager, int x_holder, int y_holder)
@@ -29,9 +32,12 @@ Bullet::Bullet(World * manager, int x_holder, int y_holder)
 	limit_dist_y = 0;
 	isActive = false;
 	this->manager = manager;
-	
+
+	damage = DAMAGE_SAMUS_BULLET;
+	this->bulletType = STANDARD;
 	pos_x_holder = x_holder;
 	pos_y_holder = y_holder;
+	collider = new Collider(0, 0, -BULLET_HEIGHT, BULLET_WIDTH);
 }
 
 
@@ -72,6 +78,13 @@ void Bullet::Update(float t)
 			}
 			break;
 		}
+	}
+
+	// Va chạm của Bird_bullet đối với samus
+	float TimeScale = SweptAABB(manager->samus, t);
+	if (TimeScale < 1.0f)
+	{
+		manager->samus->TakeDamage(this->damage);
 	}
 
 	//

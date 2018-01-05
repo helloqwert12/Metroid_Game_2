@@ -1,6 +1,7 @@
 ﻿#include "Bird.h"
 #include "World.h"
 #include "GroupObject.h"
+#include "Parameters.h"
 
 Bird::Bird()
 {
@@ -13,6 +14,12 @@ Bird::Bird(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) :
 
 	//Khởi tạo sprites
 	this->InitSprites();
+
+	//Khởi tạo máu
+	health = HEALTH_BIRD;
+
+	//Khởi tạo sát thương
+	damage = DAMAGE_BIRD;
 
 	width = BIRD_WIDTH;
 	height = BIRD_HEIGHT;
@@ -83,7 +90,11 @@ void Bird::Update(float t)
 			if (timeScale < 1.0f)
 			{
 				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
-				this->Destroy();
+
+				if (pos_y <= GROUND_Y + 50 && normalx == 0)
+				{
+					this->Destroy();
+				}
 			}
 			break;
 		}
@@ -146,5 +157,8 @@ void Bird::Response(GameObject * target, const float & DeltaTime, const float & 
 
 void Bird::Destroy()
 {
+	//isActive = false; // Nếu để true thì hiện tại Bird sẽ nổ và được xem như là bị destroy
 	vx = 0;
+	manager->birdbullets->Next(ON_LEFT, this->pos_x, pos_y);
+	isActive = false;
 }

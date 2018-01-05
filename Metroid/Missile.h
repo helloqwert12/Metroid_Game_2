@@ -12,8 +12,10 @@
 #define MISSILE_LEFT_SPRITE "sprites\\bullet\\MISSILE_LEFT.txt"
 #define MISSILE_RIGHT_SPRITE "sprites\\bullet\\MISSILE_RIGHT.txt"
 
+
 #define MISSILE_WIDTH 26
 #define MISSILE_HEIGHT 20
+
 
 #define MISSILE_UP_WIDTH 20
 #define MISSILE_UP_HEIGHT 26

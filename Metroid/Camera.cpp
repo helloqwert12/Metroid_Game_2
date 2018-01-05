@@ -111,6 +111,17 @@ void Camera::SetDemension(int mode)
 	}
 }
 
+
+int Camera::GetCameraX()
+{
+	return currentCamX;
+}
+
+int Camera::GetCameraY()
+{
+	return currentCamY;
+}
+
 bool Camera::IsInCamera(float x, float y, float width, float height)
 {
 		 //Kiềm tra bên trái

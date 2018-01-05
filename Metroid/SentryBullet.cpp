@@ -18,6 +18,10 @@ SentryBullet::SentryBullet(World * manager)
 	limit_dist_y = 0;
 	isActive = false;
 
+	damage = DAMAGE_SENTRY_BULLET;
+
+	this->bulletType = SENTRY_BULLET;
+
 	//Set collider
 	collider = new Collider(0, 0, -SENTRY_BULLET_HEIGHT, SENTRY_BULLET_WIDTH);
 }
@@ -48,6 +52,13 @@ void SentryBullet::Update(float t)
 {
 	if (!isActive)
 		return;
+
+	// Va chạm của Sentry_Bullet đối với Samus
+	float TimeScale = SweptAABB(manager->samus, t);
+	if (TimeScale < 1.0f)
+	{
+		manager->samus->TakeDamage(this->damage);
+	}
 
 	// Xử lý va chạm
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)

@@ -19,7 +19,7 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 	case MISSILE:
 		num = MISSILE_NUM;
 		break;
-	case SENTRY:
+	case SENTRY_BULLET:
 		num = SENTRY_BULLET_NUM;
 		break;
 	case BIRD_BULLET:
@@ -38,6 +38,8 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 		{
 			bullet_list[i] = new Bullet(manager);
 		}
+		manager->samus->setNum(num);
+		manager->samus->setListBullet(bullet_list);
 		break;
 	case MISSILE:
 		//bullet_list = new BulletObject*[MISSILE_NUM];
@@ -46,7 +48,7 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 			bullet_list[i] = new Missile(manager);
 		}
 		break;
-	case SENTRY:
+	case SENTRY_BULLET:
 		//bullet_list = new BulletObject*[SENTRY_BULLET_NUM];
 		for (int i = 0; i < num; i++)
 		{

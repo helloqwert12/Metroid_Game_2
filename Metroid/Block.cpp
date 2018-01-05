@@ -14,6 +14,12 @@ Block::Block(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type)
 	//Khởi tạo sprites
 	this->InitSprites();
 
+	//Khởi tạo máu
+	health = HEALTH_BLOCK;
+
+	//Khởi tạo sát thương
+	damage = DAMAGE_BLOCK;
+
 	//Set collider
 	collider = new Collider();
 	collider->SetCollider(0, 0, -BLOCK_HEIGHT, BLOCK_WIDTH);

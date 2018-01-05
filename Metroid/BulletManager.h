@@ -33,8 +33,10 @@ public:
 	void Update(float t);
 	void Render();
 	//void Shoot(BULLET_DIRECTION dir);
-	
-	
+	BulletObject ** Getlist()
+	{
+		return this->bullet_list;
+	}
 };
 
 #endif // !_BULLETMANAGER_H_

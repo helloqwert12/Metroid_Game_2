@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef _SAMUS_H
 #define _SAMUS_H_
 #include "Sprite.h"
@@ -8,8 +8,8 @@
 #include "GameObject.h"
 #include "trace.h"
 #include "Camera.h"
+#include "BulletObject.h"
 
-#define GROUND_Y 120
 enum SAMUS_STATE {
 	APPEARANCE,
 	IDLE_LEFT, 
@@ -72,8 +72,12 @@ protected:
 
 	SAMUS_STATE state;
 
+	BulletObject ** listBullet;
+	int num;
 	//DirectCollision direction;
 public:
+	float health;	// Máu của Samus
+	bool isDeath;	// Trạng thái chết của Samus
 	Samus();
 	Samus(LPD3DXSPRITE spriteHandler, World * manager);
 	~Samus();
@@ -87,12 +91,33 @@ public:
 	void SetState(SAMUS_STATE value);
 
 	void ResetAllSprites();
-	
+	bool isSamusDeath();
+	bool GetStateActive();
+	void setListBullet(BulletObject ** listbullet)
+	{
+		this->listBullet = listbullet;
+	}
+	BulletObject ** getlistbullet()
+	{
+		return this->listBullet;
+	}
+	int getNumBullet()
+	{
+		return num;
+	}
+	void setNum(int num)
+	{
+		this->num = num;
+	}
+
 	//================ OVERRIDE VIRTUAL METHOD ==================
 	void Reset(int  x, int y);
 	void Update(float t);
 	void Render();
 	void Destroy();
+	void SetHealth(float value);
+	float GetHealth();
+	void TakeDamage(float damage);
 	void Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	void SlideFromGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	//================= END OVERRIDE VIRTUAL METHOD =============

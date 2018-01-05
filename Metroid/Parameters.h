@@ -22,6 +22,8 @@ class Effect;
 class ExplosionEffect;
 class PositionManager;
 class PosInfo;
+class Number;
+class Energy;
 
 //================ SCREEN RESOLUTION ================
 #define GAME_SCREEN_RESOLUTION_640_480_24   0
@@ -36,7 +38,23 @@ class PosInfo;
 //================ FACTOR OF QUADTREE NODE ===========
 #define NODE_FACTOR 8;
 
+//================ GAME SCENEE ====================
+
+#define STARTSCREEN_FILE L"Resources\\scene\\start_background.png"
+#define INTROSCREEN_FILE L"Resources\\scene\\intro_background.png"
+#define GAMEOVERSCREEN_FILE L"Resources\\scene\\gameover_background.png"
+#define INTRO_FILE L"Resources\\intro\\intro.png"
+#define INTRO "Resources\\intro\\intro.txt"
+
+#define GAMEMODE_INTRO 0
+#define GAMEMODE_START 1
+#define GAMEMODE_GAMERUN 2
+#define GAMEMODE_GAMEOVER 3
+
+//================ END GAME SCENEE ====================
+
 //================== SAMUS ===================
+#define GROUND_Y 120
 #define SHOOTING_SPEED 15
 #define SAMUS_SPEED 0.25f
 //#define SAMUS_SPEED 0.05f
@@ -135,6 +153,24 @@ class PosInfo;
 #define BEDGEHOG_SPRITE_COUNT 2
 #define BEDGEHOG_SPEED 0.07f;
 
+///////ENERGY
+#define ENERGY_SPRITE_PATH L"sprites\\energy\\energy.png"
+#define ENERGY_WIDTH 60
+#define ENERGY_HEIGHT 50
+#define ENERGY_PATH "sprites\\energy\\energy.txt"
+#define ENERGY_SPRITE_COUNT 1
+///////NUMBER
+#define NUMBER_SPRITE_PATH L"sprites\\font\\font.png"
+#define NUMBER_WIDTH 14
+#define NUMBER_HEIGHT 14
+#define NUMBER_PATH "sprites\\font\\font.txt"
+//////MISSILEINFO
+#define MISSILE_INFO_SPRITE_PATH L"sprites\\missile\\missile.png"
+#define MISSILE_INFO_WIDTH 20
+#define MISSILE_INFO_HEIGHT 30
+#define MISSILE_PATH "sprites\\missile\\missile.txt"
+#define MISSILE_SPRITE_COUNT 1
+
 //--YElLOW
 #define BEDGEHOG_YELLOW_UP "sprites\\enemy\\BEDGEHOG_YELLOW_UP.txt"
 #define BEDGEHOG_YELLOW_BOTTOM "sprites\\enemy\\BEDGEHOG_YELLOW_BOTTOM.txt"
@@ -222,10 +258,10 @@ enum MOTHERBRAIN_STATE
 
 //================ BULLET TYPE ================
 enum BULLET_TYPE
-{
-	STANDARD,
-	MISSILE,
-	SENTRY,
+{	
+	STANDARD,	// Đạn thường của samus
+	MISSILE,	// Missile của samus
+	SENTRY_BULLET,
 	BIRD_BULLET,
 	BOOMERANG,
 };
@@ -278,6 +314,8 @@ enum ENEMY_TYPE
 	BIRD = 2,
 	BLOCK = 3,
 	BEE = 4,
+	RIDLEY = 5,
+	MOTHER_BRAIN = 6,
 };
 //================= END ENEMY TYPE =============
 
@@ -304,6 +342,21 @@ enum ENEMY_TYPE
 
 #define MOTHER_BRAIN_UNBROKEN_PATH "sprites\\bosses\\MOTHER_BRAIN_STATE_1.txt"
 #define MOTHER_BRAIN_BROKEN_PATH "sprites\\bosses\\MOTHER_BRAIN_STATE_2.txt"
+
+//================= GATE TO MOTHER_BRAIN =================
+#define MOTHER_BRAIN_GATE_STATE_1_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_1.txt"
+#define MOTHER_BRAIN_GATE_STATE_2_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_2.txt"
+#define MOTHER_BRAIN_GATE_STATE_3_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_3.txt"
+#define MOTHER_BRAIN_GATE_STATE_4_PATH "sprites\\bosses\\MOTHER_BRAIN_GATE_STATE_4.txt"
+
+#define MOTHER_BRAIN_GATE_SPRITE_COUNT 1
+
+#define MOTHER_BRAIN_GATE_STATE_1_WIDTH 30
+#define MOTHER_BRAIN_GATE_STATE_2_WIDTH 24
+#define MOTHER_BRAIN_GATE_STATE_3_WIDTH 16
+#define MOTHER_BRAIN_GATE_STATE_4_WIDTH 8
+#define MOTHER_BRAIN_GATE_HEIGHT 64
+//================= END GATE TO MOTHER_BRAIN =================
 
 //================= SENTRY =================
 //================= SENTRY TYPE =================
@@ -416,3 +469,44 @@ enum EFFECT_TYPE
 #define EFFECT_EXPLOSION_COUNT 3
 
 //================ END EFFECT ===============
+
+//================ HEALTH ===================
+
+// ENEMY
+#define HEALTH_BEDGEHOG_YELLOW 2
+#define HEALTH_BEDGEHOG_PINK 3
+#define HEALTH_BIRD 2
+#define HEALTH_BLOCK 999
+#define HEALTH_BEE 4
+
+// GATE
+#define HEALTH_GATE 1
+
+// SAMUS
+#define HEALTH_SAMUS 69
+
+// BOSSES
+#define HEALTH_MOTHER_BRAIN 40
+#define HEALTH_RIDLEY 30
+
+//================ END HEALTH ===============
+
+//================ DAMAGE ===================
+
+// ENEMY
+#define DAMAGE_BEDGEHOG 8
+#define DAMAGE_BIRD 8
+#define DAMAGE_BIRD_BULLET 5
+#define DAMAGE_BEE 8
+#define DAMAGE_BLOCK 5
+
+// SAMUS
+#define DAMAGE_SAMUS_BULLET 1
+#define DAMAGE_SAMUS_MISSILE 3
+
+// BOSSES
+#define DAMAGE_RIDLEY 8
+#define DAMAGE_RIDLEY_BOOMERANG 5
+#define DAMAGE_SENTRY_BULLET 5
+
+//================ END DAMAGE ===============

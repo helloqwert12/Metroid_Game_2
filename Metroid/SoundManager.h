@@ -34,6 +34,9 @@ enum eSoundId
 	//Nhạc nền nhặt Item
 	BACKGROUND_ITEM_ACQUIRED,
 
+	//Nhạc nền Samus chết
+	BACKGROUND_SAMUS_DEATH,
+
 	// Nhảy
 	JUMP,
 

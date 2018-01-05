@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "GameObject.h"
+#include "BulletManager.h"
 
 #define SPRITE_PER_ROW 1
 #define ANIMATE_RATE 7
@@ -10,6 +11,9 @@ protected:
 	ENEMY_TYPE enemy_type;
 	SENTRY_TYPE sentry_type; //NEW
 public:
+	float health;		// Máu của object
+	float damage;		// Lượng sát thương gây ra của object
+
 	Enemy();
 	Enemy(LPD3DXSPRITE spriteHandler, World * manager);
 	~Enemy();
@@ -19,10 +23,11 @@ public:
 
 	ENEMY_TYPE GetEnemyType();
 	void SetEnemyType(ENEMY_TYPE enemy_type);
-
 	//============== OVERRIDE VIRTUAL METHOD ===============
 	virtual void Render();
 	virtual void Update(float t);
+	virtual void TakeDamage(float damage);
+	void Destroy();
 	//virtual void Reset(int x, int y);	-- giữ mặc định không có modify nên không cần override
 	//virtual void Destroy();			-- giữ mặc định không có modify nên không cần override
 	//============== END OVERRIDE VIRTUAL METHOD ============

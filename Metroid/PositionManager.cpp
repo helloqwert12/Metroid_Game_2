@@ -28,6 +28,11 @@ PositionManager::~PositionManager()
 {
 }
 
+int PositionManager::GetIndexRoom()
+{
+	return index_room;
+}
+
 void PositionManager::ImportPositionFromFile()
 {
 	int row_count = 0;
@@ -112,7 +117,9 @@ void PositionManager::Next()
 	//	return;
 	//}
 	if (index_room + 1 >= list.size())
+	{
 		return;
+	}
 	index_room++;
 }
 

@@ -161,6 +161,7 @@ void BulletObject::Update(float t)
 					break;
 				}
 			}
+			Reset();
 		}
 	}
 	//<======================
@@ -178,6 +179,13 @@ void BulletObject::Update(float t)
 			}
 			break;
 		}
+	}
+
+	for (int i = 0; i < manager->colBrick->size; i++)
+	{
+		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+		if (timeScale < 1.0f)
+			Reset();
 	}
 
 	//

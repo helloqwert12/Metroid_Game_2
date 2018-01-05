@@ -81,6 +81,17 @@ void Block::Update(float t)
 		
 	}
 
+	for (int i = 0; i < manager->colBrick->objects.size(); i++)
+	{
+		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+		// Nếu có va chạm
+		if (timeScale < 1.0f)
+		{
+			// Đổi hướng di chuyển
+			vx = -vx;
+		}
+	}
+
 	pos_x += vx*t;
 	pos_y += vy*t;
 

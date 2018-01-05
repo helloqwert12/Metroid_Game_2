@@ -80,11 +80,19 @@ void Bullet::Update(float t)
 		}
 	}
 
+	for (int i = 0; i < manager->colBrick->size; i++)
+	{
+		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+		if (timeScale < 1.0f)
+			Reset();
+	}
+
 	// Va chạm của Bird_bullet đối với samus
 	float TimeScale = SweptAABB(manager->samus, t);
 	if (TimeScale < 1.0f)
 	{
 		manager->samus->TakeDamage(this->damage);
+		Reset();
 	}
 
 	//

@@ -40,6 +40,7 @@ class Energy;
 
 //================ GAME SCENEE ====================
 
+
 #define STARTSCREEN_FILE L"Resources\\scene\\start_background.png"
 #define INTROSCREEN_FILE L"Resources\\scene\\intro_background.png"
 #define GAMEOVERSCREEN_FILE L"Resources\\scene\\gameover_background.png"
@@ -301,7 +302,9 @@ enum OBJECT_TYPE
 	BRICK = 3,
 	PROJECTILE = 4,
 	ITEM = 5,
-	EFFECT = 6
+	EFFECT = 6,
+	COLLIDER_BRICK = 7,
+	GATE = 8
 };
 //================= END OBJECT TYPE ============
 
@@ -456,6 +459,29 @@ enum ITEM_TYPE
 
 //================ END ITEM ================
 
+//================ GATE ===============
+#define GATE_SPRITES_PATH L"sprites\\gate\\GATE_32.png"
+#define GATE_WIDTH_COUNT 1
+#define GATE_HEIGHT_COUNT 3
+#define GATE_WIDTH 32
+#define GATE_HEIGHT 96
+#define GATE_SPRITE_COUNT 1
+#define GATE_LEFT "sprites\\gate\\GATE_LEFT.txt"
+#define GATE_RIGHT "sprites\\gate\\GATE_RIGHT.txt"
+
+#define GATE_SURVIVE 3
+
+#define GATE_STATE_LEFT 0
+#define GATE_STATE_RIGHT 0
+
+
+enum GATE_TYPE
+{
+	LEFT,
+	RIGHT
+};
+//================= END GATE ===========
+
 
 //================ EFFECT ===================
 enum EFFECT_TYPE
@@ -514,3 +540,7 @@ enum EFFECT_TYPE
 #define DAMAGE_SENTRY_BULLET 5
 
 //================ END DAMAGE ===============
+
+//================ MAP ======================
+#define ROOM_FLOOR 3
+//================ END MAP ==================

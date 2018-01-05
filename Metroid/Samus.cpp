@@ -8,6 +8,7 @@
 #include "Metroid.h"
 #include "Brick.h"
 #include "PositionManager.h"
+#include "ColliderBrick.h"
 #include "EnergyItem.h"
 #include "MissileItem.h"
 #include "MorphItem.h"
@@ -449,14 +450,16 @@ void Samus::Update(float t)
 					if (this->vx > 0)
 					{
 						Camera::moveRight = true;
-						this->pos_x += 65;
 						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+						
+						this->pos_x += 65;
 					}
-					if (this->vx < 0)
+					else if (this->vx < 0)
 					{
 						Camera::moveLeft = true;
-						this->pos_x -= 65;
 						manager->posManager->Back();	// giảm index pooling đến room phía sau
+						
+						this->pos_x -= 65;
 					}
 				}
 				else
@@ -467,15 +470,35 @@ void Samus::Update(float t)
 		}
 	}
 
-	//Xử lý va chạm với colBrick
+	//Xử lý va chạm với colBrick khi đang ở floor
 	for (int i = 0; i < manager->colBrick->size; i++)
 	{
 		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
 		if (timeScale < 1.0f)
 		{
-			SlideFromGround(manager->colBrick->objects[i], t, timeScale);
+			ColliderBrick * brick = (ColliderBrick*)manager->colBrick->objects[i];
+			if (brick->isPassable == true)
+			{
+				if (this->vx > 0)
+					{
+						Camera::moveRight = true;
+						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+						
+						this->pos_x += 65;
+					}
+					else if (this->vx < 0)
+					{
+						Camera::moveLeft = true;
+						manager->posManager->Back();	// giảm index pooling đến room phía sau
+						this->pos_x -= 65;
+						
+					}
+			}
+			else
+				SlideFromGround(brick, t, timeScale);
 		}
 	}
+
 	
 	pos_x += vx*t;
 	pos_y += vy*t;

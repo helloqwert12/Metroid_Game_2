@@ -31,6 +31,8 @@ class Metroid;
 class World
 {
 public:
+	bool isOnFloor;	//Xét xem có đang ở floor không
+
 	Metroid * metroid;
 	Samus * samus;
 

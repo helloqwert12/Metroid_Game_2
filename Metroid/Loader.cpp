@@ -8,6 +8,7 @@
 #include "World.h"
 #include "Camera.h"
 #include "ColliderBrick.h"
+#include "Brick.h"
 
 Loader::Loader()
 {
@@ -41,7 +42,7 @@ Loader::Loader(LPD3DXSPRITE spriteHandler, int room_number, World * manager)
 	// Link các node lại
 	this->LinkNodes();
 
-	this->ReadColliderFile("map\\floor_pooling_demo.txt");
+	this->ReadColliderFile("map\\floor_pooling_full.txt");
 
 	// rootGONode tại manager sẽ do ở đây quản lý
 	switch (room_number)
@@ -527,18 +528,25 @@ void Loader::ReadColliderFile(const char * path)
 			break;
 
 		// Đọc info
-		for (int i = 0; i < size; i++)
-		{
+		//for (int i = 0; i < size; i++)
+		//{
 			//int pos_x = (i + 160 - 33) * 32;
 			//int pos_y = 97 * 32 - ((row_count - 3) * 32) - (15 * 32);
 
-			int x = stoi(pos[0]) + (160 - 33) * 32;
-			int y = (97 * 32) - stoi(pos[1]) -(15 * 32);
-			int w = stoi(pos[2]);
-			int h = stoi(pos[3]);
+			float x = stoi(pos[0]) + (160 - 33) * 32;
+			float y = (97 * 32) - stoi(pos[1]) -(15 * 32);
+			float w = stoi(pos[2]);
+			float h = stoi(pos[3]);
 			ColliderBrick *cbrick = new ColliderBrick(this->manager, x, y, w, h);
+			
+			//Cổng
+			if (row_count >= 60 && row_count <= 62)
+			{
+				cbrick->isPassable = true;
+			}
 			manager->colBrick->AddGameObject(cbrick);
-		}
+			
+		//}
 		row_count++;
 	}
 	f.close();

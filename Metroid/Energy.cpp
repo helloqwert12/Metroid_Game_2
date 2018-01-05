@@ -43,63 +43,22 @@ void Energy::InitSprites()
 
 void Energy::Update(int t)
 {
-
-	if (!isActive) return;
-
-	// Nếu không nằm trong Camera thì unactive
-	if (!IsInCamera())
-	{
-		isActive = false;
-		return;
-	}
 	switch (type)
 	{
 	case ENERGYINFO:
 	{
-		if (tempenergy != Camera::GetCameraX() && (Camera::GetCameraX() - tempenergy<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của energy
-		{
-			int a = Camera::GetCameraX() - tempenergy;//a là quãng đường x mà Camera đã đi so với vị trí ban đầu (temp) 
-			pos_x += a;//Cộng thêm a để cập nhật vị trí energy
-		}
-
-		tempenergy = Camera::GetCameraX();//Cập nhật lại vị trí temp hiện tại
+		this->pos_x = Camera::currentCamX + 50;
+		this->pos_y = Camera::currentCamY - 70;
 	}
 	break;
 	case MISSILEINFO:
 	{
-		if (tempmissile != Camera::GetCameraX() && (Camera::GetCameraX() - tempmissile<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của energy
-		{
-			int a = Camera::GetCameraX() - tempmissile;//a là quãng đường x mà Camera đã đi so với vị trí ban đầu (temp) 
-			pos_x += a;//Cộng thêm a để cập nhật vị trí energy
-		}
-
-		tempmissile = Camera::GetCameraX();//Cập nhật lại vị trí temp hiện tại
-	}
-	break;
-	}
-
-
-}
-
-void Energy::InitPosition()
-{
-	switch (type)
-	{
-	case ENERGYINFO:
-	{
-		this->pos_x = Camera::currentCamX + 1440;
-		this->pos_y = 400;
-	}
-	break;
-	case MISSILEINFO:
-	{
-		this->pos_x = Camera::currentCamX + 1440;
-		this->pos_y = 380;
+		this->pos_x = Camera::currentCamX + 50;
+		this->pos_y = Camera::currentCamY - 90;
 	}
 	break;
 	}
 }
-
 void Energy::Render()
 {
 	// Nếu không active thì không render

@@ -111,6 +111,14 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	posManager->ImportPositionFromFile();
 
 	colBrick = new GroupObject(this);
+
+	energy = new Energy(spriteHandler, this, ENERGYINFO);
+	missileinfo = new Energy(spriteHandler, this, MISSILEINFO);
+
+	numberofenergy1 = new Number(spriteHandler, this, CHUC, NUMBEROFENERGY);
+	numberofenergy2 = new Number(spriteHandler, this, DONVI, NUMBEROFENERGY);
+	numberofmissile1 = new Number(spriteHandler, this, CHUC, NUMBEROFMISSILE);
+	numberofmissile2 = new Number(spriteHandler, this, DONVI, NUMBEROFMISSILE);
 }
 
 

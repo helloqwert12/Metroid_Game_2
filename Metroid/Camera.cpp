@@ -3,7 +3,7 @@ vector<CamInfo> Camera::list;
 
 int Camera::index = 0;
 
-float Camera::currentCamX = 5120;
+float Camera::currentCamX = 480;
 float Camera::currentCamY = 480;
 //float Camera::currentCamY = 4000;
 

@@ -305,8 +305,6 @@ enum ENEMY_TYPE
 	BEE = 4,
 	RIDLEY = 5,
 	MOTHER_BRAIN = 6,
-	ENERGY,
-	NUMBER
 };
 //================= END ENEMY TYPE =============
 
@@ -474,7 +472,7 @@ enum EFFECT_TYPE
 #define HEALTH_GATE 1
 
 // SAMUS
-#define HEALTH_SAMUS 30
+#define HEALTH_SAMUS 69
 
 // BOSSES
 #define HEALTH_MOTHER_BRAIN 40

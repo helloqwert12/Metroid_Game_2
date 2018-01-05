@@ -115,6 +115,8 @@ public:
 	void Update(float t);
 	void Render();
 	void Destroy();
+	void SetHealth(float value);
+	float GetHealth();
 	void TakeDamage(float damage);
 	void Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	void SlideFromGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);

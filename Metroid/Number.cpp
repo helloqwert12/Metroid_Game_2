@@ -2,7 +2,6 @@
 #include "World.h"
 #include "GroupObject.h"
 #include "Samus.h"
-#include "Enemy.h"
 #include "Camera.h"
 #include <fstream>
 #include <iostream>
@@ -12,20 +11,22 @@
 #include "Sprite.h"
 using namespace std;
 
-int temp1, temp2, temp5, temp4;
+int tce, tde, tcm, tdm;
 Number::Number()
 {
 }
 
-Number::Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE number_path, NUMBER_TYPE number_type) :Enemy(spriteHandler, manager)
+Number::Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE number_path, NUMBER_TYPE number_type) 
 {
+	this->spriteHandler = spriteHandler;
+	this->manager = manager;
 	this->numberpath = number_path; //Lấy type path của Number (Chục hoặc đơn vị)
 	this->numbertype = number_type; //Lấy type của Number(energy hay missile)
 	switch (numbertype)
 	{
 	case NUMBEROFENERGY:
 	{
-		this->SetHealth(50);
+		this->SetHealth(manager->samus->GetHealth());
 	}
 	break;
 	case NUMBEROFMISSILE:
@@ -41,19 +42,57 @@ Number::Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE num
 
 
 	collider = new Collider();
-
-
-	vy = 0;
-	vx = BLOCK_SPEED;
-
 }
-
 
 Number::~Number()
 {
 	delete(number1);
 	delete(number2);
+}
 
+void Number::InitPosition()
+{
+	switch (numbertype)
+	{
+	case NUMBEROFENERGY:
+	{
+		switch (numberpath)
+		{
+		case CHUC:
+		{
+			this->pos_x = Camera::currentCamX + 1480;
+			this->pos_y = 410;
+		}
+		break;
+		case DONVI:
+		{
+			this->pos_x = Camera::currentCamX + 1500;
+			this->pos_y = 410;
+		}
+		break;
+		}
+	}
+	break;
+	case NUMBEROFMISSILE:
+	{
+		switch (numberpath)
+		{
+		case CHUC:
+		{
+			this->pos_x =Camera::currentCamX+ 1480;
+			this->pos_y = 380;
+		}
+		break;
+		case DONVI:
+		{
+			this->pos_x = Camera::currentCamX + 1500;
+			this->pos_y = 380;
+		}
+		break;
+		}
+	}
+	break;
+	}
 }
 
 void Number::InitSprites()
@@ -67,10 +106,10 @@ void Number::InitSprites()
 			switch (numberpath)
 			{
 			case CHUC:
-				Check1(0);//Số chục là 0
+				Check_C(0);//Số chục là 0
 				break;
 			case DONVI:
-				Check2(0);//Số dơn vị là 0
+				Check_DV(0);//Số dơn vị là 0
 				break;
 			}
 
@@ -80,10 +119,10 @@ void Number::InitSprites()
 			switch (numberpath)
 			{
 			case CHUC:
-				Check1(0); //Số chục là 0
+				Check_C(0); //Số chục là 0
 				break;
 			case DONVI:
-				Check2(this->GetHealth()); //Số đơn vị
+				Check_DV(this->GetHealth()); //Số đơn vị
 				break;
 			}
 
@@ -96,13 +135,13 @@ void Number::InitSprites()
 			case CHUC:
 			{
 				int chuc = this->GetHealth() / 10; //Lấy phần nguyên là số chục 
-				Check1(chuc);
+				Check_C(chuc);
 			}
 			break;
 			case DONVI:
 			{
-				int b = this->GetHealth() % 10;//Lấy phần dư là số đơn vị
-				Check2(b);
+				int dv = this->GetHealth() % 10;//Lấy phần dư là số đơn vị
+				Check_DV(dv);
 			}
 			break;
 			}
@@ -113,10 +152,10 @@ void Number::InitSprites()
 			switch (numberpath)
 			{
 			case CHUC:
-				Check1(9);//Số chục là 9
+				Check_C(9);//Số chục là 9
 				break;
 			case DONVI:
-				Check2(9);//Số đơn vị là 9
+				Check_DV(9);//Số đơn vị là 9
 				break;
 			}
 
@@ -130,10 +169,10 @@ void Number::InitSprites()
 			switch (numberpath)
 			{
 			case CHUC:
-				Check1(0);//Số chục là 0
+				Check_C(0);//Số chục là 0
 				break;
 			case DONVI:
-				Check2(0);//Số dơn vị là 0
+				Check_DV(0);//Số dơn vị là 0
 				break;
 			}
 
@@ -143,10 +182,10 @@ void Number::InitSprites()
 			switch (numberpath)
 			{
 			case CHUC:
-				Check1(0); //Số chục là 0
+				Check_C(0); //Số chục là 0
 				break;
 			case DONVI:
-				Check2(this->GetHealth()); //Số đơn vị
+				Check_DV(this->GetHealth()); //Số đơn vị
 				break;
 			}
 
@@ -159,13 +198,13 @@ void Number::InitSprites()
 			case CHUC:
 			{
 				int chuc = this->GetHealth() / 10; //Lấy phần nguyên là số chục 
-				Check1(chuc);
+				Check_C(chuc);
 			}
 			break;
 			case DONVI:
 			{
-				int b = this->GetHealth() % 10;//Lấy phần dư là số đơn vị
-				Check2(b);
+				int dv = this->GetHealth() % 10;//Lấy phần dư là số đơn vị
+				Check_DV(dv);
 			}
 			break;
 			}
@@ -176,27 +215,23 @@ void Number::InitSprites()
 			switch (numberpath)
 			{
 			case CHUC:
-				Check1(9);//Số chục là 9
+				Check_C(9);//Số chục là 9
 				break;
 			case DONVI:
-				Check2(9);//Số đơn vị là 9
+				Check_DV(9);//Số đơn vị là 9
 				break;
 			}
 
 		}
 	}
 	break;
-	}
-	
+	}	
 }
 
 void Number::Update(int t)
 {
 
 	if (!isActive) return;
-
-
-
 	// Nếu không nằm trong Camera thì unactive
 	if (!IsInCamera())
 	{
@@ -207,19 +242,24 @@ void Number::Update(int t)
 	{
 	case NUMBEROFENERGY:
 	{
-		if (temp1 != Camera::GetCameraX() && (Camera::GetCameraX() - temp1<Camera::GetCameraX()) || temp2 != Camera::GetCameraX() && (Camera::GetCameraX() - temp2<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của number
+		if (manager->samus->GetHealth() != this->GetHealth()) //Nếu Health của samus khác shealth hiện tại thì sẽ update số health
+		{
+			this->SetHealth(manager->samus->GetHealth());
+			this->InitSprites();
+		}
+		if (tce != Camera::GetCameraX() && (Camera::GetCameraX() - tce<Camera::GetCameraX()) || tde != Camera::GetCameraX() && (Camera::GetCameraX() - tde<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của number
 		{
 			switch (numberpath)
 			{
 			case CHUC: //Trường hợp số chục
 			{
-				int d = Camera::GetCameraX() - temp1; //d là quãng đường x mà Camera đã đi so với vị trí ban đầu (temp1) 
+				int d = Camera::GetCameraX() - tce; //d là quãng đường x mà Camera đã đi so với vị trí ban đầu (tce) 
 				this->pos_x += d; //Cộng thêm d để cập nhật vị trí number1(số chục)
 			}
 			break;
 			case DONVI: //Trường hợp số đơn vị 
 			{
-				int e = Camera::GetCameraX() - temp2;//e là quãng đường x mà Camera đã đi so với vị trí ban đầu (temp2) 
+				int e = Camera::GetCameraX() - tde;//e là quãng đường x mà Camera đã đi so với vị trí ban đầu (tde) 
 				this->pos_x += e;//Cộng thêm e để cập nhật vị trí number2 (số dơn vị)
 			}
 			break;
@@ -229,10 +269,10 @@ void Number::Update(int t)
 		switch (numberpath)
 		{
 		case CHUC:
-			temp1 = Camera::GetCameraX();//Cập nhật lại vị trí temp1 hiện tại
+			tce = Camera::GetCameraX();//Cập nhật lại vị trí tce hiện tại
 			break;
 		case DONVI:
-			temp2 = Camera::GetCameraX();//Cập nhật lại vị trí temp2 hiện tại
+			tde = Camera::GetCameraX();//Cập nhật lại vị trí tde hiện tại
 			break;
 		}
 
@@ -240,19 +280,19 @@ void Number::Update(int t)
 	break;
 	case NUMBEROFMISSILE:
 	{
-		if (temp5 != Camera::GetCameraX() && (Camera::GetCameraX() - temp5<Camera::GetCameraX()) || temp4 != Camera::GetCameraX() && (Camera::GetCameraX() - temp4<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của number
+		if (tcm != Camera::GetCameraX() && (Camera::GetCameraX() - tcm<Camera::GetCameraX()) || tdm != Camera::GetCameraX() && (Camera::GetCameraX() - tdm<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của number
 		{
 			switch (numberpath)
 			{
 			case CHUC: //Trường hợp số chục
 			{
-				int d = Camera::GetCameraX() - temp5; //d là quãng đường x mà Camera đã đi so với vị trí ban đầu (temp5) 
+				int d = Camera::GetCameraX() - tcm; //d là quãng đường x mà Camera đã đi so với vị trí ban đầu (tcm) 
 				this->pos_x += d; //Cộng thêm d để cập nhật vị trí number1(số chục)
 			}
 			break;
 			case DONVI: //Trường hợp số đơn vị 
 			{
-				int e = Camera::GetCameraX() - temp4;//e là quãng đường x mà Camera đã đi so với vị trí ban đầu (temp4) 
+				int e = Camera::GetCameraX() - tdm;//e là quãng đường x mà Camera đã đi so với vị trí ban đầu (tdm) 
 				this->pos_x += e;//Cộng thêm e để cập nhật vị trí number2 (số dơn vị)
 			}
 			break;
@@ -262,10 +302,10 @@ void Number::Update(int t)
 		switch (numberpath)
 		{
 		case CHUC:
-			temp5 = Camera::GetCameraX();//Cập nhật lại vị trí temp5 hiện tại
+			tcm = Camera::GetCameraX();//Cập nhật lại vị trí tcm hiện tại
 			break;
 		case DONVI:
-			temp4 = Camera::GetCameraX();//Cập nhật lại vị trí temp4 hiện tại
+			tdm = Camera::GetCameraX();//Cập nhật lại vị trí tdm hiện tại
 			break;
 		}
 
@@ -275,7 +315,7 @@ void Number::Update(int t)
 
 
 }
-void Number::Check1(int n)
+void Number::Check_C(int n)
 {
 	fstream f;
 	try
@@ -324,7 +364,7 @@ void Number::Check1(int n)
 	}
 	f.close();
 }
-void Number::Check2(int n)
+void Number::Check_DV(int n)
 {
 	fstream f;
 	try

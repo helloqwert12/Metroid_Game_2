@@ -2,14 +2,14 @@
 #ifndef _Energy_H_
 #define _Energy_H_
 
-#include "Enemy.h"
+#include "GameObject.h"
 #include "Parameters.h"
 enum TYPE //Chia type ra 2 loại là Energyinfo và missileinfo
 {
 	ENERGYINFO,
 	MISSILEINFO
 };
-class Energy : public Enemy
+class Energy : public GameObject
 {
 protected:
 	Sprite * energy;
@@ -20,6 +20,7 @@ public:
 	~Energy();
 
 	void InitSprites();
+	void InitPosition();
 	//============== OVERRIDE VIRTUAL METHOD ===================
 	virtual void Update(int t);
 	virtual void Render();

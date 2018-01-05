@@ -2,16 +2,17 @@
 #include "World.h"
 #include "GroupObject.h"
 #include "Samus.h"
-#include "Enemy.h"
 #include "Camera.h"
 
-int tempenergy, tempmissile; 
+int tempenergy, tempmissile;
 Energy::Energy()
 {
 }
 
-Energy::Energy(LPD3DXSPRITE spriteHandler, World * manager, TYPE type) :Enemy(spriteHandler, manager)
+Energy::Energy(LPD3DXSPRITE spriteHandler, World * manager, TYPE type)
 {
+	this->spriteHandler = spriteHandler;
+	this->manager = manager;
 	this->type = type;
 	this->isActive = true;
 
@@ -19,18 +20,12 @@ Energy::Energy(LPD3DXSPRITE spriteHandler, World * manager, TYPE type) :Enemy(sp
 	this->InitSprites();
 
 	collider = new Collider();
-
-
-	vy = 0;
-	vx = BLOCK_SPEED;
-
 }
 
 
 Energy::~Energy()
 {
 	delete(energy);
-
 }
 
 void Energy::InitSprites()
@@ -44,18 +39,12 @@ void Energy::InitSprites()
 		energy = new Sprite(spriteHandler, MISSILE_SPRITE_PATH, MISSILE_PATH, MISSILE_WIDTH, MISSILE_HEIGHT, MISSILE_SPRITE_COUNT, 1);
 		break;
 	}
-
-	// Khởi tạo sprite
-
-	//	temp = Camera::GetCameraX();
 }
 
 void Energy::Update(int t)
 {
 
 	if (!isActive) return;
-
-
 
 	// Nếu không nằm trong Camera thì unactive
 	if (!IsInCamera())
@@ -90,6 +79,25 @@ void Energy::Update(int t)
 	}
 
 
+}
+
+void Energy::InitPosition()
+{
+	switch (type)
+	{
+	case ENERGYINFO:
+	{
+		this->pos_x = Camera::currentCamX + 1440;
+		this->pos_y = 400;
+	}
+	break;
+	case MISSILEINFO:
+	{
+		this->pos_x = Camera::currentCamX + 1440;
+		this->pos_y = 380;
+	}
+	break;
+	}
 }
 
 void Energy::Render()

@@ -83,12 +83,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	enemyGroup->AddGameObject(sentryRight);
 	enemyGroup->AddGameObject(motherBrain);
 	enemyGroup->AddGameObject(ridley);
-	enemyGroup->AddGameObject(energy);
-	enemyGroup->AddGameObject(missileinfo);
-	enemyGroup->AddGameObject(numberofenergy1);
-	enemyGroup->AddGameObject(numberofenergy2);
-	enemyGroup->AddGameObject(numberofmissile1);
-	enemyGroup->AddGameObject(numberofmissile2);
+
 
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();

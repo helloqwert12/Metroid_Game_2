@@ -130,6 +130,16 @@ void Samus::TakeDamage(float damage)
 		Destroy();
 }
 
+void Samus::SetHealth(float value)
+{
+	health = value;
+}
+
+float Samus::GetHealth()
+{
+	return health;
+}
+
 Samus::Samus()
 {
 	appearing = NULL;

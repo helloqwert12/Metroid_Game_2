@@ -16,17 +16,26 @@ Brick::Brick(LPD3DXSPRITE spriteHandler, World * manager, BRICK_TYPE type, int i
 	this->id = id;
 	this->pos_x = posX;
 	this->pos_y = posY;
-
+	this->isPassable = false;
 	this->isActive = true;
 	
 	//lấy ra số lượng sprite theo width và height, đường dẫn đến sprite tùy vào loại gạch nào
 	switch (type)
 	{
-	case BLUE:
+	case GROUND:
 		width_count = BRICK_1_WIDTH_COUNT;
 		height_count = BRICK_1_HEIGHT_COUNT;
 		sprite_path = BRICK_1_PATH;
 		break;
+	case FLOOR:
+		width_count = BRICK_2_WIDTH_COUNT;
+		height_count = BRICK_2_HEIGHT_COUNT;
+		sprite_path = BRICK_2_PATH;
+		break;
+	case ALL:
+		width_count = BRICK_WIDTH_COUNT;
+		height_count = BRICK_HEIGHT_COUNT;
+		sprite_path = BRICK_PATH;
 	}
 
 	// đặt vx và vy bằng 0 (vì là gameobject tĩnh)
@@ -81,7 +90,7 @@ void Brick::SetPassable(bool value)
 	isPassable = value;
 }
 
-bool Brick::IsPassable(bool value)
+bool Brick::IsPassable()
 {
 	return isPassable;
 }

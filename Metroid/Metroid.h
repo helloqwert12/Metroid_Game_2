@@ -28,6 +28,10 @@ protected:
 	BulletManager * bulletManager;
 
 	Loader* first_room;
+	Loader* second_room;
+	Loader* room;
+
+	float time_jump;
 	
 
 private:
@@ -60,7 +64,7 @@ public:
 	virtual void RenderIntro(LPDIRECT3DDEVICE9 d3ddv);
 	virtual void RenderFrame(LPDIRECT3DDEVICE9 d3ddv);
 	// ---------------------------
-	virtual void ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta);
+	virtual void ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta);
 	virtual void OnKeyDown(int KeyCode);
 
 	DWORD GetTickPerFrame();

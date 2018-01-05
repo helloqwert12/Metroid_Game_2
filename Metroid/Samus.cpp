@@ -4,6 +4,8 @@
 #include "GroupObject.h"
 #include "World.h"
 #include "trace.h"
+#include "Brick.h"
+#include "PositionManager.h"
 
 void Samus::Render()
 {
@@ -341,13 +343,40 @@ void Samus::Update(float t)
 		switch (manager->quadtreeGroup->objects[i]->GetType())
 		{
 		case BRICK:
+			Brick * brick = (Brick*)(manager->quadtreeGroup->objects[i]);
 			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
 			if (timeScale < 1.0f)
 			{
-				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
+				if (brick->IsPassable())
+				{
+					if (this->vx > 0)
+					{
+						Camera::moveRight = true;
+						this->pos_x += 65;
+						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+					}
+					if (this->vx < 0)
+					{
+						Camera::moveLeft = true;
+						this->pos_x -= 65;
+						manager->posManager->Back();	// giảm index pooling đến room phía sau
+					}
+				}
+				else
+					SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
 				//Response(manager->quadtreeGroup->objects[i], t, timeScale);
 			}
 			break;
+		}
+	}
+
+	//Xử lý va chạm với colBrick
+	for (int i = 0; i < manager->colBrick->size; i++)
+	{
+		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+		if (timeScale < 1.0f)
+		{
+			SlideFromGround(manager->colBrick->objects[i], t, timeScale);
 		}
 	}
 	

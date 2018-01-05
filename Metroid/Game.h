@@ -64,7 +64,7 @@ protected:
 	// Đã bỏ delta time cho phương thức Render
 	virtual void Render(LPDIRECT3DDEVICE9 d3ddv);
 	virtual void LoadResources(LPDIRECT3DDEVICE9 d3ddv);
-	virtual void ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta);
+	virtual void ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta);
 
 	virtual void OnKeyDown(int KeyCode);
 	virtual void OnKeyUp(int KeyCode);

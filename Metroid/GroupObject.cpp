@@ -64,7 +64,7 @@ void GroupObject::Render()
 {
 	// Do trong mỗi GameObject đã có kiểm tra isActive trước khi render 
 	// nên không cần kiểm tra nữa
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Render();
 	}
@@ -83,14 +83,23 @@ void GroupObject::GetGroupObjectFrom(GroupObject * group)
 	}
 }
 
-void GroupObject::GetCollisionObjectQTree()
+void GroupObject::GetCollisionObjectQTree(int root_num)
 {
 	// Xóa trước khi thêm cái khác
 	this->objects.clear();
 	this->size = 0;
 
 	// Gửi những game objects va chạm với viewport vào trong GroupObject này
-	manager->rootQNode->SendObjectsToGroup(this);
+	switch (root_num)
+	{
+	case 1:
+		manager->rootQNode1->SendObjectsToGroup(this);
+		break;
+	case 2:
+		manager->rootQNode2->SendObjectsToGroup(this);
+		break;
+	}
+	
 }
 
 void GroupObject::GetCollisionObjects()
@@ -103,10 +112,11 @@ void GroupObject::SetEnemyActive(ENEMY_TYPE enemy_type, float posX, float posY)
 {
 	for (int i = 0; i < size; i++)
 	{
+		Enemy * enemy = (Enemy*)objects[i];
 		// Nếu unactive mới lấy
-		if (objects[i]->GetType() == enemy_type && objects[i]->IsActive() == false)
+		if (enemy->GetEnemyType() == enemy_type && enemy->IsActive() == false)
 		{
-			objects[i]->Init(posX, posY);
+			enemy->Init(posX, posY);
 		}
 	}
 }

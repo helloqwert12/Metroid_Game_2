@@ -18,6 +18,9 @@ PositionManager::PositionManager(World * manager)
 	
 	// khởi tạo index;
 	index = 0;
+
+	//khởi tạo index_room
+	index_room = 0;	// phòng đầu tiên
 }
 
 
@@ -31,13 +34,14 @@ void PositionManager::ImportPositionFromFile()
 	ifstream f;
 	try
 	{
-		f.open("map\\location_enemy_room.txt");
+		f.open("map\\location_enemy_separate.txt");
 	}
 	catch (std::fstream::failure e)
 	{
 		return;
 	}
 	string line;
+	vector<PostInfo> infos;	// vecotr dùng để chứa những PostInfo cùng 1 room
 	while (!f.eof())
 	{
 		vector<string> pos;		// vector dùng để chứa dữ liệu từng dòng
@@ -63,9 +67,10 @@ void PositionManager::ImportPositionFromFile()
 			size++;
 		}
 
-		// Nếu dòng không có gì thì bỏ qua
+		// Nếu dòng không có gì thì push vào vector và tiếp tục
 		if (size == 0)
-		{
+		{	list.push_back(infos);	// push vào room
+			infos.clear();			// clear để add các PostInfo cho room tiếp theo
 			row_count++;
 			continue;
 		}
@@ -75,20 +80,19 @@ void PositionManager::ImportPositionFromFile()
 			break;
 
 		// Đọc info
-		for (int i = 0; i < size; i++)
-		{
-			PosInfo * info = new PosInfo();
-			info->x = stoi(pos[0]);
-			info->y = stoi(pos[1]);
-			info->width = stoi(pos[2]);
-			info->height = stoi(pos[3]);
-			info->enemy_type = (ENEMY_TYPE)stoi(pos[4]);
-			info->isActive = false;
-
-			//Push vào vector
-			list_pos.push_back(info);
-			this->size++;
-		}
+		PostInfo info;
+		info.x = stoi(pos[0]);
+		info.y = stoi(pos[1]);
+		info.width = stoi(pos[2]);
+		info.height = stoi(pos[3]);
+		info.enemy_type = (ENEMY_TYPE)stoi(pos[4]);
+		info.isActive = false;
+		//vector<PostInfo> test;
+		//test.push_back(info);
+		//list.push_back(test);
+		infos.push_back(info);
+		this->size++;
+		
 
 		row_count++;
 	}
@@ -98,50 +102,57 @@ void PositionManager::ImportPositionFromFile()
 void PositionManager::Next()
 {
 	// Kiểm tra xem các pos từ index+1 đến cuối vector xem còn điểm nào chưa xuất hiện trong viewport
-	for (int i = index + 1; i < size; i++)
-	{
-		// Nếu điểm tiếp theo đã nằm trong camera (đã hiển thị rồi) thì bỏ qua
-		if (Camera::IsInCamera(list_pos[i]->x, list_pos[i]->y, list_pos[i]->width, list_pos[i]->height));
-			continue;
-		// Nếu không thì gán index bằng i rồi nghỉ
-		index = i;
+	//for (int i = index + 1; i < size; i++)
+	//{
+	//	// Nếu điểm tiếp theo đã nằm trong camera (đã hiển thị rồi) thì bỏ qua
+	//	if (Camera::IsInCamera(list[index], list_pos[i]->y, list_pos[i]->width, list_pos[i]->height));
+	//		continue;
+	//	// Nếu không thì gán index bằng i rồi nghỉ
+	//	index = i;
+	//	return;
+	//}
+	if (index_room + 1 >= list.size())
 		return;
-	}
+	index_room++;
 }
 
 void PositionManager::Back()
 {
 	// Kiểm tra xem các pos từ index-1 đến đầu vector xem còn điểm nào chưa xuất hiện trong viewport
-	for (int i = index - 1; i > 0; i--)
-	{
-		// Nếu điểm tiếp theo đã nằm trong camera (đã hiển thị rồi) thì bỏ qua
-		if (Camera::IsInCamera(list_pos[i]->x, list_pos[i]->y, list_pos[i]->width, list_pos[i]->height));
-			continue;
-		// Nếu không thì gán index bằng i rồi nghỉ
-		index = i;
+	//for (int i = index - 1; i > 0; i--)
+	//{
+	//	// Nếu điểm tiếp theo đã nằm trong camera (đã hiển thị rồi) thì bỏ qua
+	//	if (Camera::IsInCamera(list_pos[i]->x, list_pos[i]->y, list_pos[i]->width, list_pos[i]->height));
+	//		continue;
+	//	// Nếu không thì gán index bằng i rồi nghỉ
+	//	index = i;
+	//	return;
+	//}
+	if (index_room - 1 < 0)
 		return;
-	}
+	index_room--;
 }
 
-std::vector<PosInfo*> PositionManager::GetListInCamera()
+std::vector<PostInfo> PositionManager::GetListInCamera()
 {
-	vector<PosInfo*> result;
-	for (int i = 0; i < size; i++)
+	vector<PostInfo> result;
+	for (int i = 0; i < list[index_room].size(); i++)
 	{
 		// Nếu nằm trong camera nhưng chưa active thì active
-		if (Camera::IsInCamera(list_pos[i]->x, list_pos[i]->y, list_pos[i]->width, list_pos[i]->height))
+		if (Camera::IsInCamera(list[index_room][i].x, list[index_room][i].y, list[index_room][i].width, list[index_room][i].height))
 		{
-			if (list_pos[i]->isActive == false)
+			// Nếu chưa được active
+			if (list[index_room][i].isActive == false)
 			{
-				list_pos[i]->isActive = true;
+				list[index_room][i].isActive = true;
 				//Thêm vào vector trả về
-				result.push_back(list_pos[i]);
+				result.push_back(list[index_room][i]);
 			}
 		}
 		//Sẵn tiện cập nhật những vị trí nằm ngoài camera thành unactive
 		else
 		{
-			list_pos[i]->isActive = false;
+			list[index_room][i].isActive = false;
 		}
 	}
 	return result;

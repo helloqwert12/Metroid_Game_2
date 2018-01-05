@@ -121,7 +121,7 @@ class PosInfo;
 
 #define ANIMATE_RATE 15
 
-#define JUMP_VELOCITY_BOOST 0.05f
+#define JUMP_VELOCITY_BOOST 0.1f
 #define JUMP_VELOCITY_BOOST_FIRST 0.6f
 #define FALLDOWN_VELOCITY_DECREASE 0.07f
 #define GRAVITY_VELOCITY 0.005f
@@ -186,15 +186,26 @@ class PosInfo;
 //================== END ENEMY =================
 
 //================= BRICK ====================
-#define BRICK_1_PATH L"map\\brick_blue.png"
+#define BRICK_1_PATH L"map\\brick_room_1.png"
 #define BRICK_1_WIDTH_COUNT 5
 #define BRICK_1_HEIGHT_COUNT 4
+
+#define BRICK_2_PATH L"map\\brick_room_2.png"
+#define BRICK_2_WIDTH_COUNT 9
+#define BRICK_2_HEIGHT_COUNT 5
+
+#define BRICK_PATH L"map\\brick_sheet.png"
+#define BRICK_WIDTH_COUNT 10
+#define BRICK_HEIGHT_COUNT 6
+
 #define BRICK_WIDTH 32
 #define BRICK_HEIGHT 32
 
 enum BRICK_TYPE
 {
-	BLUE = 1
+	GROUND = 1,
+	FLOOR = 2,
+	ALL = 3
 };
 //================ END BRICK ==================
 

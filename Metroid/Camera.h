@@ -1,8 +1,21 @@
 ﻿#pragma once
 #include "Parameters.h"
+#include <vector>
+using namespace std;
+struct CamInfo
+{
+	float min_x;
+	float max_x;
+	float min_y;
+	float max_y;
+};
 class Camera
 {
 public:
+	static vector<CamInfo> list;
+
+	static int index;
+
 	static float max_x;
 	static float min_x;
 

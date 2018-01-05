@@ -356,7 +356,7 @@ void Game::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 {
 }
 
-void Game::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
+void Game::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 {
 }
 

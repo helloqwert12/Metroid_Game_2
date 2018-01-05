@@ -21,7 +21,7 @@ public:
 	void SetId(int id);
 	BRICK_TYPE GetBrickType();
 	void SetPassable(bool value);
-	bool IsPassable(bool value);
+	bool IsPassable();
 	//============= END GET - SET METHOD ==================
 
 	//============= OVERRIDE VIRTUAL METHOD ===============

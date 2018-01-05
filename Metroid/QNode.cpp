@@ -45,34 +45,26 @@ QNode::~QNode()
 
 bool QNode::IsIntersectViewPort()
 {
+
 	// Kiểm tra phía trên viewport
-	if (y >= Camera::currentCamY)
+	/*if (y > Camera::currentCamY)
+		return false;*/
+	if (y - height > Camera::currentCamY)
 		return false;
 
 	// Kiểm tra bên phải viewport
-	if (x >= Camera::currentCamX + Camera::width)
+	if (x > Camera::currentCamX + Camera::width)
 		return false;
 
 	// Kiểm tra phía dưới viewport
-	if (y + height <= Camera::currentCamY - Camera::height)
+	/*if (y + height < Camera::currentCamY - Camera::height)
+		return false;*/
+	if (y < Camera::currentCamY - Camera::height)
 		return false;
 
 	// Kiểm tra phía bên trái viewport
-	if (x + width <= Camera::currentCamX)
+	if (x + width < Camera::currentCamX)
 		return  false;
-
-	//// Kiểm tra bên trái
-	//if (Camera::currentCamX + Camera::width < x)
-	//	return false;
-	//// Kiểm tra bên trên
-	//if (Camera::currentCamY + Camera::height < y)
-	//	return false;
-	//// Kiểm tra bên phải
-	//if (Camera::currentCamX > x + width)
-	//	return false;
-	//// Kiểm tra bên dưới
-	//if (Camera::currentCamY > y + height)
-	//	return false;
 
 	return true;
 }

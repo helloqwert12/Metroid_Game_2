@@ -27,8 +27,11 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	samus = new Samus(spriteHandler, this);
 	//brick = new Brick(spriteHandler, this, BLUE, 1, 32*3, 32*10);
 
+	//qtreeGroup = new GroupObject(this);
 	quadtreeGroup = new GroupObject(this);
-	rootQNode = NULL;
+	
+	rootQNode1 = NULL;
+	rootQNode2 = NULL;
 
 	bullets = new BulletManager(this, STANDARD);
 	//bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
@@ -60,20 +63,51 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	bird = new Bird(spriteHandler, this, BIRD);
 	block = new Block(spriteHandler, this, BLOCK);
 	bee = new Bee(spriteHandler, this, BEE);
+	
+	// hog yellow
+	for (int i = 0; i < BEDGEHOG_YELLOW_COUNT; i++)
+	{
+		hogs_yellow[i] = new Bedgehog(spriteHandler, this, BEDGEHOG_YELLOW);
+		hogs_yellow[i]->SetActive(false);
+		enemyGroup->AddGameObject(hogs_yellow[i]);
+	}
 
-	enemyGroup->AddGameObject(hog_yellow);
-	enemyGroup->AddGameObject(hog_pink);
-	enemyGroup->AddGameObject(bird);
-	enemyGroup->AddGameObject(block);
-	enemyGroup->AddGameObject(bee);
-	enemyGroup->AddGameObject(sentryLeft);
-	enemyGroup->AddGameObject(sentryTop);
-	enemyGroup->AddGameObject(sentryRight);
-	enemyGroup->AddGameObject(motherBrain);
-	enemyGroup->AddGameObject(ridley);
+	// hog pink
+	for (int i = 0; i < BEDGEHOG_PINK_COUNT; i++)
+	{
+		hogs_pink[i] = new Bedgehog(spriteHandler, this, BEDGEHOG_PINK);
+		hogs_pink[i]->SetActive(false);
+		enemyGroup->AddGameObject(hogs_pink[i]);
+	}
+
+	// bird
+	for (int i = 0; i < BIRD_COUNT; i++)
+	{
+		birds[i] = new Bird(spriteHandler, this, BIRD);
+		birds[i]->SetActive(false);
+		enemyGroup->AddGameObject(birds[i]);
+	}
+
+	// block
+	for (int i = 0; i < BLOCK_COUNT; i++)
+	{
+		blocks[i] = new Block(spriteHandler, this, BLOCK);
+		blocks[i]->SetActive(false);
+		enemyGroup->AddGameObject(blocks[i]);
+	}
+
+	// bee
+	for (int i = 0; i < BEE_COUNT; i++)
+	{
+		bees[i] = new Bee(spriteHandler, this, BEE);
+		bees[i]->SetActive(false);
+		enemyGroup->AddGameObject(bees[i]);
+	}
 
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();
+
+	colBrick = new GroupObject(this);
 }
 
 
@@ -85,15 +119,14 @@ World::~World()
 void World::Update(float t)
 {
 	//====> Quan update - chưa test!!!
-	//Lấy danh sách các vị trí xuất hiện trong Camera
-	std::vector<PosInfo*> list = posManager->GetListInCamera();
 
-	// Tìm những gameobject đang unactive thả vào những vị trí này
+	//Lấy danh sách các vị trí xuất hiện trong camera nhưng chưa được active
+	std::vector<PostInfo> list = posManager->GetListInCamera();
 	for (int i = 0; i < list.size(); i++)
 	{
-		enemyGroup->SetEnemyActive(list[i]->enemy_type, list[i]->x, list[i]->y);
+		enemyGroup->SetEnemyActive(list[i].enemy_type, list[i].x, list[i].y);
 	}
-	//Note: khi gameobject ra ngoài camera thì tự động unactive nên không cần phải lo
+
 	//<=============
 
 	samus->Update(t);
@@ -111,23 +144,34 @@ void World::Update(float t)
 
 	explsEffect->Update(t);
 
-	quadtreeGroup->GetCollisionObjectQTree();
+	quadtreeGroup->GetCollisionObjectQTree(1);
+	//qtreeGroup->GetCollisionObjectQTree(1);
+
+	//qtreeGroup->Update(t);
+
+	quadtreeGroup->Update(t);
+
 	// Cập nhật các đối tượng có khả năng va chạm trong frame này
 	collisionGroup->GetCollisionObjects();
 	effectgroup->Update(t);
 	collisionGroup->Update(t);
 
-	hog_yellow->Update(t);
+	/*hog_yellow->Update(t);
 	hog_pink->Update(t);
-	block->Update(t);
+	
 	bird->Update(t);
-	bee->Update(t);
+	bee->Update(t);*/
+
+	block->Update(t);
+
 	sentryLeft->Update(t);
 	sentryTop->Update(t);
 	sentryRight->Update(t);
 
 	motherBrain->Update(t);
 	ridley->Update(t);
+
+	enemyGroup->UpdateActive(t);
 }
 
 void World::Render()
@@ -145,13 +189,18 @@ void World::Render()
 	missileItem->Render();
 
 	explsEffect->Render();
-
+	//qtreeGroup->Render();
 	quadtreeGroup->Render();
-	hog_yellow->Render();
+	
+
+	/*hog_yellow->Render();
 	hog_pink->Render();
-	block->Render();
+	
 	bird->Render();
-	bee->Render();
+	bee->Render();*/
+
+	block->Render();
+
 	sentryLeft->Render();
 	sentryTop->Render();
 	sentryRight->Render();
@@ -160,6 +209,7 @@ void World::Render()
 
 	collisionGroup->Render();
 	effectgroup->Render();
+	enemyGroup->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)

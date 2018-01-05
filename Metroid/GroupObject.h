@@ -46,7 +46,7 @@ public:
 	void GetGroupObjectFrom(GroupObject* group);
 
 	//Lấy ra những GameObject trong quadtree nằm trong viewport
-	void GetCollisionObjectQTree();	//--TO-DO: Hoàn thành hàm này sau khi code QNode
+	void GetCollisionObjectQTree(int root_num);	//--TO-DO: Hoàn thành hàm này sau khi code QNode
 	
 	//Lấy ra những GameObject cần xử lý va chạm (không nằm trong quadtree)
 	void GetCollisionObjects();

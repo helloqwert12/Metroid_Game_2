@@ -28,7 +28,7 @@ void Metroid::_InitPositions()
 	world->hog_yellow->InitPostition(1350, 420);
 	world->hog_pink->InitPostition(1800, 110);
 	world->bird->InitPostition(1500, 410);
-	world->block->InitPostition(1600,100);
+	world->block->InitPostition(1664,32);
 	world->bee->InitPostition(1600, 410);
 	world->sentryLeft->InitPostition(1500, 350);
 	world->sentryTop->InitPostition(1700, 350);
@@ -68,6 +68,8 @@ Metroid::Metroid(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, i
 	tick_per_frame = 1000 / _FrameRate;
 	start_shoot = 0;
 
+	time_jump = 3 * _DeltaTime;
+
 	//bulletManager = new BulletManager();
 }
 
@@ -79,7 +81,8 @@ Metroid::~Metroid()
 	//delete(bulletManager);
 
 	delete(first_room);
-
+	delete(second_room);
+	delete(room);
 	delete(intro);
 }
 
@@ -96,8 +99,12 @@ void Metroid::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 	_InitSprites(d3ddv);
 	_InitPositions();
 
+	//room = new Loader(spriteHandler, 1, world);
 	first_room = new Loader(spriteHandler, 1, world);
+	//room->Load();
+	second_room = new Loader(spriteHandler, 2, world);
 	first_room->Load();
+	second_room->Load();
 
 	
 	Game::gameSound->playSoundLoop(BACKGROUND_INTRO);
@@ -194,16 +201,23 @@ void Metroid::RenderIntro(LPDIRECT3DDEVICE9 d3ddv)
 void Metroid::RenderFrame(LPDIRECT3DDEVICE9 d3ddv)
 {		
 	world->Render();
+	second_room->TestRenderMapGO();
+	//room->TestRenderMapGO();
 	//first_room->TestRenderMapGO();
 	//bulletManager->Render();
 	//tiles->_Render(xc, world->samus->GetPosX());
 	
 }
 
-void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
+void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 {
+	//float c = Delta;
 	if (IsKeyDown(DIK_RIGHT))
 	{
+
+		/*Camera::currentCamX += 2.0f;
+		float c = Camera::currentCamY + 5;*/
+
 		//world->samus->setNormalx(1.0f);
 		//world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
 		world->samus->SetVelocityXLast(world->samus->GetVelocityX());
@@ -221,16 +235,29 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 				{
 					start_jump = GetTickCount();
 					now_jump = GetTickCount();
+
+					//time_jump = 50;
+
 					world->samus->SetState(ON_SOMERSAULT_RIGHT);
 					world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
 				}
-				else
+				else  // nếu đang nhảy
 				{
 					now_jump = GetTickCount();
 					if ((now_jump - start_jump) <= 20 * tick_per_frame)
 					{
 						world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
 					}
+					/*time_jump -= Delta;
+					if (time_jump > 0)
+					{
+						world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
+					}*/
+					/*else
+					{
+						float c = time_jump;
+					}*/
+					
 				}
 			}
 			else if (world->samus->GetState() != ON_SOMERSAULT_RIGHT)
@@ -239,6 +266,8 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 	}
 	else if (IsKeyDown(DIK_LEFT))
 	{
+		//Camera::currentCamX -= 2.0f;
+
 		//world->samus->setgravity(FALLDOWN_VELOCITY_DECREASE);
 		//world->samus->setNormalx(-1.0f);
 		world->samus->SetVelocityXLast(world->samus->GetVelocityX());
@@ -262,7 +291,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 				else
 				{
 					now_jump = GetTickCount();
-					if ((now_jump - start_jump) <= 20 * tick_per_frame)
+					if ((now_jump - start_jump) <=  20 * tick_per_frame)
 					{
 						world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
 					}
@@ -460,6 +489,11 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int Delta)
 		}
 
 		
+		/*if (IsKeyDown(DIK_UP))
+			Camera::currentCamY += 2.0f;
+
+		if (IsKeyDown(DIK_DOWN))
+			Camera::currentCamY -= 2.0f;*/
 
 	if (world->samus->GetVelocityY() < 0)
 	{

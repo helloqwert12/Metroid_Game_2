@@ -32,8 +32,10 @@ public:
 	std::map<int, QNode*> mapQNodes;
 	//============== LOAD FILE METHOD ====================
 	void ReadMatrixFromFile(const char* path);
+	void ReadFullMatrixFromFile(const char* path);
 	void ReadQuadTreeFromFile(const char* path);
 	void ReadInfoFromFile(const char* path);
+	void ReadColliderFile(const char* path);
 	//============== END LOAD FILE METHOD ================
 
 	//Link các node lại với nhau

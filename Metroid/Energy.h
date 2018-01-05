@@ -20,7 +20,6 @@ public:
 	~Energy();
 
 	void InitSprites();
-	void InitPosition();
 	//============== OVERRIDE VIRTUAL METHOD ===================
 	virtual void Update(int t);
 	virtual void Render();

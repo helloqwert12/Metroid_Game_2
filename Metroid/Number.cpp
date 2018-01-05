@@ -16,7 +16,7 @@ Number::Number()
 {
 }
 
-Number::Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE number_path, NUMBER_TYPE number_type) 
+Number::Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE number_path, NUMBER_TYPE number_type)
 {
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
@@ -36,8 +36,6 @@ Number::Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE num
 	break;
 	}
 	this->isActive = true;
-	//Set giá trị Health mặc định là 50 
-	//Khởi tạo sprites
 	this->InitSprites();
 
 
@@ -48,51 +46,6 @@ Number::~Number()
 {
 	delete(number1);
 	delete(number2);
-}
-
-void Number::InitPosition()
-{
-	switch (numbertype)
-	{
-	case NUMBEROFENERGY:
-	{
-		switch (numberpath)
-		{
-		case CHUC:
-		{
-			this->pos_x = Camera::currentCamX + 1480;
-			this->pos_y = 410;
-		}
-		break;
-		case DONVI:
-		{
-			this->pos_x = Camera::currentCamX + 1500;
-			this->pos_y = 410;
-		}
-		break;
-		}
-	}
-	break;
-	case NUMBEROFMISSILE:
-	{
-		switch (numberpath)
-		{
-		case CHUC:
-		{
-			this->pos_x =Camera::currentCamX+ 1480;
-			this->pos_y = 380;
-		}
-		break;
-		case DONVI:
-		{
-			this->pos_x = Camera::currentCamX + 1500;
-			this->pos_y = 380;
-		}
-		break;
-		}
-	}
-	break;
-	}
 }
 
 void Number::InitSprites()
@@ -225,146 +178,62 @@ void Number::InitSprites()
 		}
 	}
 	break;
-	}	
+	}
 }
 
 void Number::Update(int t)
 {
 	switch (numbertype)
 	{
-		case NUMBEROFENERGY:
+	case NUMBEROFENERGY:
+	{
+		if (manager->samus->GetHealth() != this->GetHealth()) //Nếu Health của samus khác shealth hiện tại thì sẽ update số health
 		{
-			if (manager->samus->GetHealth() != this->GetHealth()) //Nếu Health của samus khác shealth hiện tại thì sẽ update số health
-			{
-				this->SetHealth(manager->samus->GetHealth());
-				this->InitSprites();
-			}
-			
-				switch (numberpath)
-				{
-				case CHUC: //Trường hợp số chục
-				{
-					this->pos_x = Camera::currentCamX + 20;
-					this->pos_y = Camera::currentCamY - 20;
-				}
-				break;
-				case DONVI: //Trường hợp số đơn vị 
-				{
-					this->pos_x = Camera::currentCamX + 20 + 30;
-					this->pos_y = Camera::currentCamY - 20;
-				}
-				break;
-				}
+			this->SetHealth(manager->samus->GetHealth());
+			this->InitSprites();
+		}
 
-			
-		}
-		break;
-		case NUMBEROFMISSILE:
+		switch (numberpath)
 		{
-		
-				switch (numberpath)
-				{
-				case CHUC: //Trường hợp số chục
-				{
-					this->pos_x = Camera::currentCamX + 20;
-					this->pos_y = Camera::currentCamY - 20 - 20;
-				}
-				break;
-				case DONVI: //Trường hợp số đơn vị 
-				{
-					this->pos_x = Camera::currentCamX + 20 + 30;
-					this->pos_y = Camera::currentCamY - 20 - 20;
-				}
-				break;
-				}
-			
+		case CHUC: //Trường hợp số chục
+		{
+			this->pos_x = Camera::currentCamX + 90;
+			this->pos_y = Camera::currentCamY - 60;
 		}
 		break;
+		case DONVI: //Trường hợp số đơn vị 
+		{
+			this->pos_x = Camera::currentCamX + 110;
+			this->pos_y = Camera::currentCamY - 60;
+		}
+		break;
+		}
+
+
 	}
+	break;
+	case NUMBEROFMISSILE:
+	{
 
-	//if (!isActive) return;
-	//// Nếu không nằm trong Camera thì unactive
-	//if (!IsInCamera())
-	//{
-	//	isActive = false;
-	//	return;
-	//}
-	//switch (numbertype)
-	//{
-	//case NUMBEROFENERGY:
-	//{
-	//	if (manager->samus->GetHealth() != this->GetHealth()) //Nếu Health của samus khác shealth hiện tại thì sẽ update số health
-	//	{
-	//		this->SetHealth(manager->samus->GetHealth());
-	//		this->InitSprites();
-	//	}
-	//	if (tce != Camera::GetCameraX() && (Camera::GetCameraX() - tce<Camera::GetCameraX()) || tde != Camera::GetCameraX() && (Camera::GetCameraX() - tde<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của number
-	//	{
-	//		switch (numberpath)
-	//		{
-	//		case CHUC: //Trường hợp số chục
-	//		{
-	//			int d = Camera::GetCameraX() - tce; //d là quãng đường x mà Camera đã đi so với vị trí ban đầu (tce) 
-	//			this->pos_x += d; //Cộng thêm d để cập nhật vị trí number1(số chục)
-	//		}
-	//		break;
-	//		case DONVI: //Trường hợp số đơn vị 
-	//		{
-	//			int e = Camera::GetCameraX() - tde;//e là quãng đường x mà Camera đã đi so với vị trí ban đầu (tde) 
-	//			this->pos_x += e;//Cộng thêm e để cập nhật vị trí number2 (số dơn vị)
-	//		}
-	//		break;
-	//		}
+		switch (numberpath)
+		{
+		case CHUC: //Trường hợp số chục
+		{
+			this->pos_x = Camera::currentCamX + 90;
+			this->pos_y = Camera::currentCamY - 90;
+		}
+		break;
+		case DONVI: //Trường hợp số đơn vị 
+		{
+			this->pos_x = Camera::currentCamX + 110;
+			this->pos_y = Camera::currentCamY - 90;
+		}
+		break;
+		}
 
-	//	}
-	//	switch (numberpath)
-	//	{
-	//	case CHUC:
-	//		tce = Camera::GetCameraX();//Cập nhật lại vị trí tce hiện tại
-	//		break;
-	//	case DONVI:
-	//		tde = Camera::GetCameraX();//Cập nhật lại vị trí tde hiện tại
-	//		break;
-	//	}
-
-	//}
-	//break;
-	//case NUMBEROFMISSILE:
-	//{
-	//	if (tcm != Camera::GetCameraX() && (Camera::GetCameraX() - tcm<Camera::GetCameraX()) || tdm != Camera::GetCameraX() && (Camera::GetCameraX() - tdm<Camera::GetCameraX())) //Kiểm tra Camera có thay đổi vị trí so với hiện tại ,nếu có thì set lại vị trí của number
-	//	{
-	//		switch (numberpath)
-	//		{
-	//		case CHUC: //Trường hợp số chục
-	//		{
-	//			int d = Camera::GetCameraX() - tcm; //d là quãng đường x mà Camera đã đi so với vị trí ban đầu (tcm) 
-	//			this->pos_x += d; //Cộng thêm d để cập nhật vị trí number1(số chục)
-	//		}
-	//		break;
-	//		case DONVI: //Trường hợp số đơn vị 
-	//		{
-	//			int e = Camera::GetCameraX() - tdm;//e là quãng đường x mà Camera đã đi so với vị trí ban đầu (tdm) 
-	//			this->pos_x += e;//Cộng thêm e để cập nhật vị trí number2 (số dơn vị)
-	//		}
-	//		break;
-	//		}
-
-	//	}
-	//	switch (numberpath)
-	//	{
-	//	case CHUC:
-	//		tcm = Camera::GetCameraX();//Cập nhật lại vị trí tcm hiện tại
-	//		break;
-	//	case DONVI:
-	//		tdm = Camera::GetCameraX();//Cập nhật lại vị trí tdm hiện tại
-	//		break;
-	//	}
-
-	//}
-	//break;
-	//}
-
-
+	}
+	break;
+	}
 }
 void Number::Check_C(int n)
 {

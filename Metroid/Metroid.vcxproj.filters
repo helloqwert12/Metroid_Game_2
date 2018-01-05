@@ -231,6 +231,9 @@
     <ClCompile Include="ColliderBrick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Gate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -381,6 +384,9 @@
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ColliderBrick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

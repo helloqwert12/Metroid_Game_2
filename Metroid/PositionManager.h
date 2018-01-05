@@ -31,6 +31,8 @@ public:
 	PositionManager(World * manager);
 	~PositionManager();
 
+	int GetIndexRoom();
+
 	//-- TO DO: Load từ file vào vector
 	void ImportPositionFromFile();
 

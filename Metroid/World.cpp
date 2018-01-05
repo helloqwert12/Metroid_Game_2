@@ -21,6 +21,8 @@ World::World()
 
 World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 {
+	isOnFloor = false;
+
 	//Gán
 	this->spriteHandler = spriteHandler;
 	this->metroid = metroid;

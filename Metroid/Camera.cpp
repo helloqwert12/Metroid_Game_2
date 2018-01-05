@@ -33,15 +33,12 @@ Camera::~Camera()
 
 void Camera::SetCameraX(float pos_x, float t)
 {
-	
-
-	if (list[index].max_x == 0) return;
 
 	if (moveRight == true)
 	{
 		currentCamX += speed * t;
 		// Nếu current đã chạy đến vị trí max
-		if (currentCamX >= list[index].max_x)
+		if (currentCamX >= list[index + 1].min_x)
 		{
 			
 			moveRight = false;	//Ngừng hiệu ứng chuyển camera
@@ -55,7 +52,7 @@ void Camera::SetCameraX(float pos_x, float t)
 	{
 		currentCamX -= speed * t;
 		// Nếu góc phải camera đã chạy đến vị trí min
-		if (currentCamX + width <= list[index].min_x)
+		if (currentCamX + width <= list[index - 1].max_x)
 		{
 			moveLeft = false;	//Ngừng hiệu ứng chuyển camera
 			index--;
@@ -63,6 +60,8 @@ void Camera::SetCameraX(float pos_x, float t)
 		}
 		return;
 	}
+
+	if (list[index].max_x == list[index].min_x) return;
 
 	currentCamX = pos_x - 320;
 	
@@ -78,7 +77,7 @@ void Camera::SetCameraX(float pos_x, float t)
 
 void Camera::SetCameraY(float pos_y, float t)
 {
-	if (list[index].max_y == 0) return;
+	if (list[index].max_y == list[index].min_y) return;
 	
 	currentCamY = pos_y + 240;
 

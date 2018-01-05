@@ -1,6 +1,7 @@
 ﻿#include "Bedgehog.h"
 #include "World.h"
 #include "GroupObject.h"
+#include "ColliderBrick.h"
 
 Bedgehog::Bedgehog()
 {
@@ -95,7 +96,8 @@ void Bedgehog::Update(float t)
 
 	//if (onGround)
 	//	vy -= FALLDOWN_VELOCITY_DECREASE;
-	vy -= gravity;
+	if (!isCollision)
+		vy -= gravity;
 
 	// CODE NÀY DƠ, BỎ - QUAN
 	//Kiểm tra va chạm với Samus
@@ -115,6 +117,7 @@ void Bedgehog::Update(float t)
 	//}
 
 	//Kiểm tra va chạm với ground
+	
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
 		switch (manager->quadtreeGroup->objects[i]->GetType())
@@ -174,9 +177,44 @@ void Bedgehog::Update(float t)
 		}
 	}
 
-	if (!isCollision)
+	for (int i = 0; i < manager->colBrick->objects.size(); i++)
 	{
-		float a = normaly;
+		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+		// Nếu có va chạm
+		if (timeScale < 1.0f)
+		{
+			isCollision = true;
+			ResponseGround(manager->colBrick->objects[i], t, timeScale);
+		}
+	}
+
+	if (!isCollision && gravity == 0)
+	{
+		if (last_normalx > 0.1f)
+		{
+			state = ON_BEDGEHOG_BOTTOM;
+			vx = -BEDGEHOG_SPEED;
+			vy = 0.01f;
+		}
+		else if (last_normalx < -0.1f)
+		{
+			state = ON_BEDGEHOG_UP;
+			vx = BEDGEHOG_SPEED;
+			vy = -0.01f;
+		}
+
+		if (last_normaly > 0.1f)
+		{
+			state = ON_BEDGEHOG_RIGHT;
+			vx = -0.01f;
+			vy = -0.05f;
+		}
+		else if (last_normaly < -0.1f)
+		{
+			vx = 0.01f;
+			vy = 0.05f;
+			state = ON_BEDGEHOG_LEFT;
+		}
 	}
 
 	// Nếu frame này không va chạm
@@ -266,10 +304,8 @@ void Bedgehog::Render()
 // Phản xạ khi va chạm với ground
 void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale)
 {
-	//ResponseFrom(target, _DeltaTime, collisionTimeScale);
-	// lỡ đụng 2,3 ground mà chạy cái này nhiều lần sẽ rất sai
-	// "góc lag" sẽ làm đi luôn vào trong tường
-	if (normaly > 0.1f) // trên xuống (không vào normaly được)
+
+	if (normaly > 0.1f) // trên xuống ()
 	{
 		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) + 0.1f;
 		pos_y -= vy*DeltaTime;
@@ -281,6 +317,7 @@ void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const 
 		state = ON_BEDGEHOG_UP;
 
 		last_normaly = normaly;
+		last_normalx = 0;
 	}
 	else if (normaly < -0.1f)	// tông ở dưới lên
 	{
@@ -293,6 +330,7 @@ void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const 
 		state = ON_BEDGEHOG_BOTTOM;
 
 		last_normaly = normaly;
+		last_normalx = 0;
 	}
 	else if (normalx < -0.1f)// tông bên trái gạch
 	{
@@ -308,6 +346,7 @@ void Bedgehog::ResponseGround(GameObject *target, const float &DeltaTime, const 
 		state = ON_BEDGEHOG_LEFT;
 
 		last_normalx = normalx;
+		last_normaly = 0;
 	}
 	//else if (normalx > 0.1f)	// tông bên phải gạch
 	//{

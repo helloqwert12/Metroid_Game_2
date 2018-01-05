@@ -64,6 +64,13 @@ void RidleyBoomerang::Update(float t)
 		}
 	}
 
+	for (int i = 0; i < manager->colBrick->size; i++)
+	{
+		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+		if (timeScale < 1.0f)
+			Reset();
+	}
+
 	//
 	// Update bullet status
 	//

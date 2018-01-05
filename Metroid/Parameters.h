@@ -444,11 +444,15 @@ enum ITEM_TYPE
 #define ITEM_ENERGY "sprites\\item\\ITEM_ENERGY.txt"
 #define ITEM_ENERGY_COUNT 2
 
+#define ITEM_ENERGY_HEALTH_GAIN 5
+
 //========= ITEM MISSILE
 #define ITEM_MISSILE_WIDTH 16
 #define ITEM_MISSILE_HEIGHT 24
 #define ITEM_MISSILE "sprites\\item\\ITEM_MISSILE.txt"
 #define ITEM_MISSILE_COUNT 1
+
+#define ITEM_MISSILE_GAIN 3
 
 //================ END ITEM ================
 
@@ -483,7 +487,7 @@ enum EFFECT_TYPE
 #define HEALTH_GATE 1
 
 // SAMUS
-#define HEALTH_SAMUS 69
+#define HEALTH_SAMUS 30
 
 // BOSSES
 #define HEALTH_MOTHER_BRAIN 40

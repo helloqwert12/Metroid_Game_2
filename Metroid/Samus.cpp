@@ -8,6 +8,9 @@
 #include "Metroid.h"
 #include "Brick.h"
 #include "PositionManager.h"
+#include "EnergyItem.h"
+#include "MissileItem.h"
+#include "MorphItem.h"
 
 void Samus::Render()
 {	
@@ -354,19 +357,20 @@ void Samus::Update(float t)
 	//GameObject::Update(t);
 
 	vy -= gravity;
-
+	
 	//===========> Quan update - updating . . .
 	for (int i = 0; i < manager->enemyGroup->size; i++)
 	{	
-		if (manager->enemyGroup->objects[i]->IsActive())
+		Enemy * enemy = (Enemy*)manager->enemyGroup->objects[i];
+		if (enemy->IsActive())
 		{
-			float timeScale = SweptAABB(manager->enemyGroup->objects[i], t);
+			float timeScale = SweptAABB(enemy, t);
 			if (timeScale < 1.0f)
 			{
 				//Xử lý khi va chạm với enemy
 				// (đẩy ra chẳng hạn)
 				// xong rồi tùy con mà takedamage
-				switch (manager->enemyGroup->objects[i]->GetType())
+				switch (enemy->GetEnemyType())
 				{
 				case BEDGEHOG_YELLOW:
 				{// take damge cho samus, truyen vao dame cua con nay
@@ -381,14 +385,12 @@ void Samus::Update(float t)
 					Bedgehog * hog_pink = (Bedgehog*)manager->enemyGroup->objects[i];
 					TakeDamage(hog_pink->damage);
 				}
-
 				break;
 				case BIRD:
 				{
 					Bird * bird = (Bird*)manager->enemyGroup->objects[i];
 					TakeDamage(bird->damage);
 				}
-
 				break;
 				case BLOCK:
 				{
@@ -414,6 +416,23 @@ void Samus::Update(float t)
 		}
 	}
 	//<======================
+
+	// Xử lý va chạm với Item
+	if (SweptAABB(manager->energyItem, t) < 1.0f)
+	{
+		this->health += manager->energyItem->getNumberGain();
+		manager->energyItem->Destroy();
+	}
+	if (SweptAABB(manager->missileItem, t) < 1.0f)
+	{
+		//this-> += manager->missileItem->getNumberGain();
+		manager->missileItem->Destroy();
+	}
+	if (SweptAABB(manager->morphItem, t) < 1.0f)
+	{
+		manager->morphItem->Destroy();
+	}
+	//----------------------------
 	
 	//Xử lý va chạm với ground
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)

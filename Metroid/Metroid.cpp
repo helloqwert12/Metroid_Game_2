@@ -26,16 +26,16 @@ void Metroid::_InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 void Metroid::_InitPositions()
 {
 	world->samus->InitPostition();
-	world->hog_yellow->InitPostition(1350, 420);
-	world->hog_pink->InitPostition(1800, 110);
-	world->bird->InitPostition(1500, 410);
-	world->block->InitPostition(1664,32);
-	world->bee->InitPostition(1600, 410);
-	world->sentryLeft->InitPostition(1500, 350);
-	world->sentryTop->InitPostition(1700, 350);
-	world->sentryRight->InitPostition(1900, 350);
-	world->motherBrain->InitPostition(1900, 200);
-	world->ridley->InitPostition(1750, 120);
+	//world->hog_yellow->InitPostition(1350, 420);
+	//world->hog_pink->InitPostition(1800, 110);
+	//world->bird->InitPostition(1500, 410);
+	//world->block->InitPostition(1664,32);
+	//world->bee->InitPostition(1600, 410);
+	//world->sentryLeft->InitPostition(1500, 350);
+	//world->sentryTop->InitPostition(1700, 350);
+	//world->sentryRight->InitPostition(1900, 350);
+	world->motherBrain->InitPostition(1400, 200);
+	world->ridley->InitPostition(1550, 120);
 	
 	//world->morphItem->SetPosX(world->samus->GetPosX());
 	//world->morphItem->SetPosY(world->samus->GetPosX());

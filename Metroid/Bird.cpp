@@ -157,8 +157,8 @@ void Bird::Response(GameObject * target, const float & DeltaTime, const float & 
 
 void Bird::Destroy()
 {
-	//isActive = false; // Nếu để true thì hiện tại Bird sẽ nổ và được xem như là bị destroy
 	vx = 0;
-	manager->birdbullets->Next(ON_LEFT, this->pos_x, pos_y);
-	isActive = false;
+	if (this->health > 0)
+		manager->birdbullets->Next(ON_LEFT, this->pos_x, pos_y);
+	Enemy::Destroy();
 }

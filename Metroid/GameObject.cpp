@@ -1,6 +1,7 @@
 ﻿#include "GameObject.h"
 #include <limits>
 #include "Camera.h"
+#include "Enemy.h"
 
 GameObject::GameObject()
 {

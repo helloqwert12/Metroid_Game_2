@@ -1,6 +1,7 @@
 ﻿#include "GameObject.h"
 #include <limits>
 #include "Camera.h"
+#include "Enemy.h"
 
 GameObject::GameObject()
 {
@@ -461,41 +462,13 @@ float GameObject::SweptAABB(GameObject *target, const float &DeltaTime)
 // di chuyển sát tường (xử lý va chạm)
 void GameObject::Response(GameObject *target, const float &DeltaTime)
 {
-	/*pos_x += vx * (CollisionTime * DeltaTime);
-	pos_y += vy * (CollisionTime * DeltaTime);*/
-	float vectorx = this->normalx;
-	float vectory = this->normaly;
-	float scale = SweptAABB(target, DeltaTime);
-	if (scale < 1.0f)
-	{
-		pos_x = lastPosX + vx*vectorx*scale*DeltaTime;
-		pos_y = lastPosY + vy*vectory*scale*DeltaTime;
-
-		if (vectory < 0)
-		{
-			SetVelocityY(0.0f);
-			if (vectorx > 0)
-			{
-				//(Samus*)
-			}
-			else if (vectorx < 0)
-			{
-
-			}
-		}
-	}
-	else
-	{
-		lastPosX = this->GetPosX();
-		lastPosY = this->GetPosY();
-	}
 }
 // bật ngược ra khi va chạm (Xử lý va chạm)
 void GameObject::Deflect(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale)
 {
 	// di chuyển vào sát tường trước
 	//this->Response(target, DeltaTime, CollisionTimeScale);
-
+	float distance = 0.0f;
 	// rồi mới bật ra
 	if (normalx > 0.1f)	// tông bên phải
 	{

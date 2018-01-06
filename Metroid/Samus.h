@@ -120,6 +120,8 @@ public:
 	void TakeDamage(float damage);
 	void Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	void SlideFromGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
+
+	void Deflect(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	//================= END OVERRIDE VIRTUAL METHOD =============
 };
 #endif // !_SAMUS_H

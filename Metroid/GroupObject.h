@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "Parameters.h"
+#include "Enemy.h"
 
 /*
 	Class này có tác dụng gom nhóm các GameObject cùng loại lại để quản lý cho dễ

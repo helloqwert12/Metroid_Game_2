@@ -18,6 +18,16 @@ Item::~Item()
 	delete(itemSprite);
 }
 
+int Item::getNumberGain()
+{
+	return number_gain;
+}
+
+void Item::setNumberGain(int num)
+{
+	number_gain = num;
+}
+
 void Item::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 {
 	if (d3ddv == NULL) return;
@@ -33,6 +43,8 @@ void Item::Init(float posX, float posY)
 	this->isActive = true;
 	time_survive = ITEM_TIME_SURVIVE;
 }
+
+
 
 void Item::Update(int t)
 {

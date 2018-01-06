@@ -2,6 +2,9 @@
 #include "Game.h"
 #include "World.h"
 #include "ExplosionEffect.h"
+#include <time.h>
+#include "MissileItem.h"
+#include "EnergyItem.h"
 
 Enemy::Enemy()
 {
@@ -58,14 +61,27 @@ void Enemy::TakeDamage(float damage)
 
 	if (health <= 0)
 	{
+		//manager->explsEffect->Init(this->pos_x, this->pos_y);	 // Xảy ra lỗi khi giết những mục tiêu to (Ridley, Mother Brain)
 		Destroy();
 	}
 }
 
 void Enemy::Destroy()
 {
+	int random;
+
+	/* initialize random seed: */
+	srand(time(NULL));
+
+	/* generate secret number between 1 and 10: */
+	random = rand() % 5 + 1;
+
+	if (random == 1 || random == 3 || random == 5)
+		manager->energyItem->Init(this->pos_x, this->pos_y);
+	else
+		manager->missileItem->Init(this->pos_x, this->pos_y);
+
 	this->isActive = false;
-	//manager->explsEffect->Init(this->pos_x, this->pos_y); // Xảy ra lỗi khi giết những mục tiêu to (Ridley, Mother Brain)
 }
 
 void Enemy::Render()

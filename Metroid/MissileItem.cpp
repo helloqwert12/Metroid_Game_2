@@ -4,7 +4,7 @@
 MissileItem::MissileItem(LPD3DXSPRITE spriteHandler, World * manager) : Item(spriteHandler, manager)
 {
 	item_type = MISSILE_ITEM;
-
+	number_gain = ITEM_MISSILE_GAIN;
 	//Set collider
 	collider = new Collider(0, 0, -(ITEM_MISSILE_HEIGHT + 5.0f), ITEM_MISSILE_WIDTH);
 }

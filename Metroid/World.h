@@ -43,6 +43,7 @@ public:
 	GroupObject * quadtreeGroup;
 	GroupObject * qtreeGroup;
 	GroupObject * colBrick;
+	GroupObject * otherGO;
 
 	//Enemy
 	Bedgehog * hogs_yellow[BEDGEHOG_YELLOW_COUNT];

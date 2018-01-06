@@ -5,6 +5,7 @@
 
 Ridley::Ridley(LPD3DXSPRITE spriteHandler, World * manager)
 {
+	this->enemy_type = RIDLEY;
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
 	this->isActive = true;
@@ -47,6 +48,17 @@ void Ridley::Update(float t)
 				vy = 0;
 			}
 			break;
+		}
+	}
+
+	for (int i = 0; i < manager->colBrick->size; i++)
+	{
+		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+		if (timeScale < 1.0f)
+		{
+			SlideFromGround(manager->colBrick->objects[i], t, timeScale);
+			time_push = 300;
+			vy = 0;
 		}
 	}
 

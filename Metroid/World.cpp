@@ -61,6 +61,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	collisionGroup = new GroupObject(this);
 	effectgroup = new GroupObject(this);
 	enemyGroup = new GroupObject(this);
+	otherGO = new GroupObject(this);
 
 	hog_yellow = new Bedgehog(spriteHandler, this, BEDGEHOG_YELLOW);
 	hog_pink = new Bedgehog(spriteHandler, this, BEDGEHOG_PINK);
@@ -108,6 +109,10 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 		enemyGroup->AddGameObject(bees[i]);
 	}
 
+	// boss
+	enemyGroup->AddGameObject(motherBrain);
+	enemyGroup->AddGameObject(ridley);
+
 
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();
@@ -139,6 +144,8 @@ void World::Update(float t)
 	{
 		enemyGroup->SetEnemyActive(list[i].enemy_type, list[i].x, list[i].y);
 	}
+	
+	otherGO->SetOtherGOActive();
 
 	//<=============
 
@@ -190,10 +197,11 @@ void World::Update(float t)
 	numberofmissile1->Update(t);
 	numberofmissile2->Update(t);
 
-	motherBrain->Update(t);
-	ridley->Update(t);
+	//motherBrain->Update(t);
+	//ridley->Update(t);
 
 	enemyGroup->UpdateActive(t);
+	otherGO->UpdateActive(t);
 }
 
 void World::Render()
@@ -226,8 +234,8 @@ void World::Render()
 	sentryLeft->Render();
 	sentryTop->Render();
 	sentryRight->Render();
-	motherBrain->Render();
-	ridley->Render();
+	//motherBrain->Render();
+	//ridley->Render();
 	energy->Render();
 	missileinfo->Render();
 
@@ -240,6 +248,7 @@ void World::Render()
 	collisionGroup->Render();
 	effectgroup->Render();
 	enemyGroup->Render();
+	otherGO->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)

@@ -121,6 +121,17 @@ void GroupObject::SetEnemyActive(ENEMY_TYPE enemy_type, float posX, float posY)
 	}
 }
 
+void GroupObject::SetOtherGOActive()
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (Camera::IsInCamera(objects[i]->GetPosX(), objects[i]->GetPosY(), objects[i]->GetWidth(), objects[i]->GetHeight()))
+			objects[i]->SetActive(true);
+		else
+			objects[i]->SetActive(false);
+	}
+}
+
 Enemy * GroupObject::GetUnActiveEnemy(GroupObject * enemygroup, ENEMY_TYPE enemy_type)
 {
 	for (int i = 0; i < enemygroup->size; i++)
@@ -147,4 +158,9 @@ Item * GroupObject::GetUnActiveItem(GroupObject * itemgroup, ITEM_TYPE item_type
 	}
 	//Nếu không có thì thôi
 	return NULL;
+}
+
+void GroupObject::LoadOtherGO(char * path)
+{
+
 }

@@ -15,6 +15,9 @@ Sentry::Sentry(LPD3DXSPRITE spriteHandler, World * manager, SENTRY_TYPE sentry_t
 	//Khởi tạo sprites
 	this->InitSprites();
 
+	this->width = SENTRY_WIDTH;
+	this->height = SENTRY_HEIGHT;
+
 	//--TO DO: Khởi tạo collider cho Sentry
 	collider = new Collider();
 	collider->SetCollider(0, 0, -SENTRY_HEIGHT, SENTRY_WIDTH);

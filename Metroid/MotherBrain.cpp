@@ -3,6 +3,7 @@
 
 MotherBrain::MotherBrain(LPD3DXSPRITE spriteHandler, World * manager)
 {
+	this->enemy_type = MOTHER_BRAIN;
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
 	this->isActive = true;

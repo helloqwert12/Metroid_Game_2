@@ -365,9 +365,9 @@ enum ENEMY_TYPE
 //================= SENTRY TYPE =================
 enum SENTRY_TYPE
 {
-	SENTRY_LEFT,
-	SENTRY_TOP,
-	SENTRY_RIGHT
+	SENTRY_LEFT = 0,
+	SENTRY_TOP = 1,
+	SENTRY_RIGHT = 2
 };
 //================= END SENTRY TYPE =============
 

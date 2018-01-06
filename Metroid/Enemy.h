@@ -13,7 +13,7 @@ protected:
 public:
 	float health;		// Máu của object
 	float damage;		// Lượng sát thương gây ra của object
-
+	bool DeathByShoot;
 	Enemy();
 	Enemy(LPD3DXSPRITE spriteHandler, World * manager);
 	~Enemy();

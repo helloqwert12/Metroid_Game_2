@@ -7,5 +7,6 @@ public:
 	~EnergyItem();
 
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);
+	void Destroy();
 };
 

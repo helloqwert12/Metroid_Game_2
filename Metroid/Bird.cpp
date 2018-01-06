@@ -91,7 +91,8 @@ void Bird::Update(float t)
 			{
 				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
 
-				if (pos_y <= GROUND_Y + 50 && normalx == 0)
+				DeathByShoot = false;
+				if (pos_y - height <= GROUND_Y && normalx == 0)
 				{
 					this->Destroy();
 				}

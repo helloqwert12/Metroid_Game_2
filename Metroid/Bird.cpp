@@ -9,6 +9,7 @@ Bird::Bird()
 
 Bird::Bird(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : Enemy(spriteHandler, manager)
 {
+	this->isHit = false;
 	this->enemy_type = enemy_type;
 	this->isActive = true;
 
@@ -99,6 +100,12 @@ void Bird::Update(float t)
 			}
 			break;
 		}
+	}
+
+	if (isHit)
+	{
+		isHit = false;
+		return;
 	}
 
 	/*float scaletime = SweptAABB(manager->samus, t);

@@ -10,6 +10,7 @@
 class GameObject
 {
 protected:
+	
 	World * manager;	// con trỏ đến world để thao tác với các object ở world khi cần thiết
 
 	float pos_x;		// x postition of samus
@@ -44,6 +45,8 @@ protected:
 	
 	float gravity;
 public:
+	bool isHit;
+
 	DWORD last_time; // this is to control the animate rate of kitty
 	GameObject();
 	//======================== GET - SET METHOD ================================

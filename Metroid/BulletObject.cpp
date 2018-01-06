@@ -94,6 +94,7 @@ void BulletObject::Update(float t)
 			float timeScale = SweptAABB(manager->enemyGroup->objects[i], t);
 			if (timeScale < 1.0f)
 			{
+				manager->enemyGroup->objects[i]->isHit = true;
 				switch (manager->enemyGroup->objects[i]->GetType())
 				{
 				case BEDGEHOG_YELLOW:

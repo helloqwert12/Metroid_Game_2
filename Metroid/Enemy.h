@@ -10,6 +10,7 @@ class Enemy : public GameObject
 protected:
 	ENEMY_TYPE enemy_type;
 	SENTRY_TYPE sentry_type; //NEW
+	
 public:
 	float health;		// Máu của object
 	float damage;		// Lượng sát thương gây ra của object

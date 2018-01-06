@@ -79,7 +79,9 @@ void Enemy::Destroy()
 	if (random == 1 || random == 3 || random == 5)
 		manager->energyItem->Init(this->pos_x, this->pos_y);
 	else
+	{
 		manager->missileItem->Init(this->pos_x, this->pos_y);
+	}
 
 	this->isActive = false;
 }

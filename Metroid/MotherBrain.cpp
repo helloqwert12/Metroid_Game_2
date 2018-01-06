@@ -38,6 +38,9 @@ void MotherBrain::Update(float t)
 	pos_x += vx * t;
 	pos_y += vy * t;
 
+	if (this->health <= HEALTH_MOTHER_BRAIN - 20)
+		state = BROKEN;
+
 	DWORD now = GetTickCount();
 	if (now - last_time > 1000 / ANIMATE_RATE)
 	{
@@ -45,8 +48,6 @@ void MotherBrain::Update(float t)
 		{
 		case UNBROKEN:
 			unbroken->Next();
-			if (this->health <= HEALTH_MOTHER_BRAIN - 10) 
-				state = BROKEN;
 			break;
 		case BROKEN:
 			broken->Next();
@@ -55,10 +56,6 @@ void MotherBrain::Update(float t)
 		last_time = now;
 	}
 
-	// --TO DO: Xử lý va chạm
-	// ...
-	// Khi cần xử lý va chạm, gọi groupCollision ở world
-	//	
 }
 
 void MotherBrain::Render()

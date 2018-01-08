@@ -12,6 +12,7 @@
 #include "PosInfo.h"
 #include "Energy.h"
 #include "Number.h"
+#include "Gate.h"
 
 using namespace std;
 
@@ -62,6 +63,9 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	effectgroup = new GroupObject(this);
 	enemyGroup = new GroupObject(this);
 	otherGO = new GroupObject(this);
+
+	//gateleft = new Gate(spriteHandler, this, LEFT, 2500, 290);
+	//gateright = new Gate(spriteHandler, this, LEFT, 2500, 290);
 
 	//hog_yellow = new Bedgehog(spriteHandler, this, BEDGEHOG_YELLOW);
 	//hog_pink = new Bedgehog(spriteHandler, this, BEDGEHOG_PINK);
@@ -126,6 +130,8 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	numberofenergy2 = new Number(spriteHandler, this, DONVI, NUMBEROFENERGY);
 	numberofmissile1 = new Number(spriteHandler, this, CHUC, NUMBEROFMISSILE);
 	numberofmissile2 = new Number(spriteHandler, this, DONVI, NUMBEROFMISSILE);
+
+
 }
 
 
@@ -202,6 +208,9 @@ void World::Update(float t)
 
 	enemyGroup->UpdateActive(t);
 	otherGO->UpdateActive(t);
+
+	//gateleft->Update(t);
+	//gateright->Update(t);
 }
 
 void World::Render()
@@ -249,6 +258,9 @@ void World::Render()
 	effectgroup->Render();
 	enemyGroup->Render();
 	otherGO->Render();
+
+	//gateleft->Render();
+	//gateright->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)

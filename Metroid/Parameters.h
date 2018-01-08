@@ -283,7 +283,7 @@ enum BULLET_DIRECTION
 	ON_BOTTOMRIGHT
 };
 
-#define BULLET_PUSH_VELOCITY_Y 0.14f
+#define BULLET_PUSH_VELOCITY_Y 0.8f
 //================= END BULLET ===========
 
 //================= BULLET MANAGER ================
@@ -291,7 +291,7 @@ enum BULLET_DIRECTION
 #define MISSILE_NUM 3
 #define SENTRY_BULLET_NUM 10
 #define BIRD_BULLET_NUM 2
-#define RIDLEY_BOOMERANG_NUM 5
+#define RIDLEY_BOOMERANG_NUM 10
 //================= END BULLET MANAGER ============
 
 //================= OBJECT TYPE ================
@@ -469,10 +469,12 @@ enum ITEM_TYPE
 #define GATE_LEFT "sprites\\gate\\GATE_LEFT.txt"
 #define GATE_RIGHT "sprites\\gate\\GATE_RIGHT.txt"
 
-#define GATE_SURVIVE 3
+#define GATE_SURVIVE 3000
 
 #define GATE_STATE_LEFT 0
 #define GATE_STATE_RIGHT 0
+#define GATE_LEFT_PATH "sprites\\gate\\GATE_LEFT_PATH.txt"
+#define GATE_RIGHT_PATH "sprites\\gate\\GATE_RIGHT_PATH.txt"
 
 
 enum GATE_TYPE
@@ -513,11 +515,11 @@ enum EFFECT_TYPE
 #define HEALTH_GATE 1
 
 // SAMUS
-#define HEALTH_SAMUS 30
+#define HEALTH_SAMUS 80
 
 // BOSSES
 #define HEALTH_MOTHER_BRAIN 40
-#define HEALTH_RIDLEY 30
+#define HEALTH_RIDLEY 300
 
 //================ END HEALTH ===============
 

@@ -502,6 +502,24 @@ void Samus::Update(float t)
 		}
 	}
 
+
+	//float collisiontime = SweptAABB(manager->gateleft, t);
+	//	if (collisiontime < 1.0f)
+	//	{
+	//		if (manager->gateleft->IsActive())
+	//		{
+	//			this->SlideFromGround(manager->gateleft, t, collisiontime);
+	//		}
+	//	}
+
+	//	float collisiontime1 = SweptAABB(manager->gateright, t);
+	//	if (collisiontime1 < 1.0f)
+	//	{
+	//		if (manager->gateright->IsActive())
+	//		{
+	//			this->SlideFromGround(manager->gateright, t, collisiontime1);
+	//		}
+	//	}
 	
 	pos_x += vx*t;
 	pos_y += vy*t;

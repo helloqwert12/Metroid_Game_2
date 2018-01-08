@@ -17,6 +17,16 @@ void GameObject::SetType(OBJECT_TYPE type)
 	this->type = type;
 }
 
+int GameObject::GetHealth()
+{
+	return health;
+}
+
+void GameObject::SetHealth(int value)
+{
+	health = value;
+}
+
 void GameObject::InitSprites()
 {
 }
@@ -101,7 +111,7 @@ bool GameObject::IsActive()
 
 void GameObject::SetActive(bool value)
 {
-	isActive = value;
+	this->isActive = value;
 }
 
 void GameObject::SetlastPosX(float posx)

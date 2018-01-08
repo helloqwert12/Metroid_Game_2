@@ -20,6 +20,7 @@
 #include "Ridley.h"
 #include "Number.h"
 #include "Energy.h"
+#include "Gate.h"
 
 /*
 	Class này chứa tất cả những thứ trong Game
@@ -90,6 +91,9 @@ public:
 	GroupObject * effectgroup;
 
 	PositionManager* posManager;
+
+	Gate * gateleft;
+	Gate * gateright;
 
 	World();
 	World(LPD3DXSPRITE spriteHandler, Metroid * metroid);

@@ -36,6 +36,7 @@ public:
 	virtual void Update(float t);
 	virtual void Render();
 	//============== END OVERRIDE VIRTUAL METHOD ===============
+	void Destroy();
 };
 
 #endif // !_BEDGEHOG_H_

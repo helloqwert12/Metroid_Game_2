@@ -25,7 +25,6 @@ public:
 	//============== END OVERRIDE VIRTUAL METHOD ===============
 	bool IsCollide(GameObject* target);
 	void Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
-
 	void Destroy();
 };
 

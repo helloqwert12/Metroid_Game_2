@@ -65,7 +65,7 @@ void Ridley::Update(float t)
 	time_push -= t;
 	if (time_push <= 0)
 	{
-		vy -= 0.005f;
+		vy -= 0.007f;
 	}
 	else
 	{

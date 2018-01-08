@@ -95,7 +95,11 @@ void Bird::Update(float t)
 				DeathByShoot = false;
 				if (pos_y - height <= GROUND_Y && normalx == 0)
 				{
-					this->Destroy();
+					if (this->DeathByShoot == false)
+					{
+						manager->birdbullets->Next(ON_LEFT, this->pos_x, pos_y);
+						isActive = false;
+					}
 				}
 			}
 			break;
@@ -165,8 +169,24 @@ void Bird::Response(GameObject * target, const float & DeltaTime, const float & 
 
 void Bird::Destroy()
 {
+	// Effect explosion
+
+	// Destroy
 	vx = 0;
-	if (this->health > 0)
-		manager->birdbullets->Next(ON_LEFT, this->pos_x, pos_y);
+
+	manager->explsEffect->Init(this->pos_x, this->pos_y);	 // Xảy ra lỗi khi giết những mục tiêu to (Ridley, Mother Brain)
+	// Drop item after destroyed
+	int random;
+
+	/* initialize random seed: */
+	srand(time(NULL));
+
+	/* generate secret number between 1 and 10: */
+	random = rand() % 10 + 1;
+
+	if (random == 1 || random == 5)
+		manager->energyItem->Init(this->pos_x, this->pos_y);
+	else if (random == 7 || random == 9)
+		manager->missileItem->Init(this->pos_x, this->pos_y);
 	Enemy::Destroy();
 }

@@ -1,6 +1,10 @@
 ﻿#pragma once
 #include "GameObject.h"
 #include "BulletManager.h"
+#include "ExplosionEffect.h"
+#include <time.h>
+#include "MissileItem.h"
+#include "EnergyItem.h"
 
 #define SPRITE_PER_ROW 1
 #define ANIMATE_RATE 7

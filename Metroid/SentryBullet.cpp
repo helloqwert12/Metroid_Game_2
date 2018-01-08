@@ -58,6 +58,7 @@ void SentryBullet::Update(float t)
 	if (TimeScale < 1.0f)
 	{
 		manager->samus->TakeDamage(this->damage);
+		//Reset();
 	}
 
 	// Xử lý va chạm

@@ -44,6 +44,7 @@ protected:
 	float normaly;
 	
 	float gravity;
+	int health;
 public:
 	bool isHit;
 
@@ -52,6 +53,9 @@ public:
 	//======================== GET - SET METHOD ================================
 	OBJECT_TYPE GetType();
 	void SetType(OBJECT_TYPE type);
+
+	int GetHealth();
+	void SetHealth(int value);
 
 	bool IsActive();
 	void SetActive(bool value);

@@ -21,6 +21,7 @@ public:
 	virtual void Render();
 	//============== END OVERRIDE VIRTUAL METHOD ===============
 	bool IsCollide(GameObject* target);
+	void Destroy();
 };
 
 #endif // !_Bee_H_

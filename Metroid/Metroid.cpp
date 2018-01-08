@@ -515,13 +515,34 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 					float TimeScale = world->enemyGroup->objects[i]->SweptAABB(list[j], Delta);
 					if (TimeScale < 1.0f)
 					{
-						float damge = DAMAGE_SAMUS_BULLET;
-						((Enemy*)(world->enemyGroup->objects[i]))->DeathByShoot = true;
-						((Enemy*)(world->enemyGroup->objects[i]))->TakeDamage(damge);
-						break;
+						if (world->enemyGroup->objects[i]->IsActive())
+						{
+							float damge = DAMAGE_SAMUS_BULLET;
+							((Enemy*)(world->enemyGroup->objects[i]))->DeathByShoot = true;
+							((Enemy*)(world->enemyGroup->objects[i]))->TakeDamage(damge);
+							//list[j]->Reset();
+							break;
+						}
 					}
+
 				}
 			}
+		/*	for (int j = 0; j < num; j++)
+			{
+				float TimeScale1 = list[j]->SweptAABB(world->gateleft, Delta);
+				if (TimeScale1 < 1.0f)
+				{
+				world->gateleft->SetActive(false);
+					break;
+				}
+
+				float TimeScale2 = list[j]->SweptAABB(world->gateright, Delta);
+				if (TimeScale2 < 1.0f)
+				{
+					world->gateright->SetActive(false);
+					break;
+				}
+			}*/
 		}
 
 		

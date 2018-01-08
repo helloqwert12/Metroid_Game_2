@@ -2,6 +2,8 @@
 #include "World.h"
 #include "GroupObject.h"
 
+#define LIMIT_DISTANCE_BOOMERANG 500
+
 RidleyBoomerang::RidleyBoomerang(World * manager)
 {
 	this->manager = manager;
@@ -47,6 +49,7 @@ void RidleyBoomerang::Update(float t)
 	if (TimeScale < 1.0f)
 	{
 		manager->samus->TakeDamage(this->damage);
+		//Reset();
 	}
 
 	// Xử lý va chạm
@@ -113,7 +116,7 @@ void RidleyBoomerang::Update(float t)
 
 
 	////Check if the bullet reach the limit
-	//if (limit_dist_x >= LIMIT_DISTANCE || limit_dist_y >= LIMIT_DISTANCE)
+	//if (limit_dist_x >= LIMIT_DISTANCE_BOOMERANG || limit_dist_y >= LIMIT_DISTANCE_BOOMERANG)
 	//{
 	//	Reset();
 	//}

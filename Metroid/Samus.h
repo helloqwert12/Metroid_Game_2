@@ -74,6 +74,7 @@ protected:
 
 	BulletObject ** listBullet;
 	int num;
+	bool isMorph;	// Kiểm tra xem Samus đã nhặt Morph ball Item chưa để có thể crouch
 	//DirectCollision direction;
 public:
 	float health;	// Máu của Samus
@@ -91,6 +92,7 @@ public:
 	void SetState(SAMUS_STATE value);
 
 	void ResetAllSprites();
+	bool isSamusCrouch();
 	bool isSamusDeath();
 	bool GetStateActive();
 	void setListBullet(BulletObject ** listbullet)

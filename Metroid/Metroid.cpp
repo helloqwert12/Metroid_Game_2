@@ -26,6 +26,7 @@ void Metroid::_InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 void Metroid::_InitPositions()
 {
 	world->samus->InitPostition();
+	world->morphItem->Init(1100, 120);
 	//world->hog_yellow->InitPostition(1350, 420);
 	//world->hog_pink->InitPostition(1800, 110);
 	//world->bird->InitPostition(1500, 410);
@@ -589,37 +590,40 @@ void Metroid::OnKeyDown(int KeyCode)
 			{
 			case DIK_DOWN:
 				//if samus is idle then do morph
-				if (world->samus->GetState() == IDLE_LEFT)
+				if (world->samus->isSamusCrouch() == true)
 				{
-					world->samus->SetVelocityX(0);
-					world->samus->ResetAllSprites();
-					world->samus->SetState(ON_MORPH_LEFT);
-					world->samus->GetCollider()->SetCollider(0, 0, -MORPH_BALL_HEIGHT, MORPH_BALL_WIDTH);
+					if (world->samus->GetState() == IDLE_LEFT)
+					{
+						world->samus->SetVelocityX(0);
+						world->samus->ResetAllSprites();
+						world->samus->SetState(ON_MORPH_LEFT);
+						world->samus->GetCollider()->SetCollider(0, 0, -MORPH_BALL_HEIGHT, MORPH_BALL_WIDTH);
+					}
+					else if (world->samus->GetState() == IDLE_RIGHT)
+					{
+						world->samus->SetVelocityX(0);
+						world->samus->ResetAllSprites();
+						world->samus->SetState(ON_MORPH_RIGHT);
+						world->samus->GetCollider()->SetCollider(0, 0, -MORPH_BALL_HEIGHT, MORPH_BALL_WIDTH);
+					}
+					else if (world->samus->GetState() == ON_MORPH_LEFT) //otherwise, reset to idle (left of right)
+					{
+						world->samus->SetVelocityX(0);
+						world->samus->ResetAllSprites();
+						world->samus->SetState(IDLE_LEFT);
+						//world->samus->setDirection(DirectCollision::RIGHT);
+						world->samus->GetCollider()->SetCollider(0, 0, -70, 32);
+					}
+					else if (world->samus->GetState() == ON_MORPH_RIGHT)
+					{
+						world->samus->SetVelocityX(0);
+						world->samus->ResetAllSprites();
+						world->samus->SetState(IDLE_RIGHT);
+						world->samus->GetCollider()->SetCollider(0, 0, -70, 32);
+						//world->samus->setDirection(DirectCollision::LEFT);
+					}
+					break;
 				}
-				else if (world->samus->GetState() == IDLE_RIGHT)
-				{
-					world->samus->SetVelocityX(0);
-					world->samus->ResetAllSprites();
-					world->samus->SetState(ON_MORPH_RIGHT);
-					world->samus->GetCollider()->SetCollider(0, 0, -MORPH_BALL_HEIGHT, MORPH_BALL_WIDTH);
-				}
-				else if (world->samus->GetState() == ON_MORPH_LEFT) //otherwise, reset to idle (left of right)
-				{
-					world->samus->SetVelocityX(0);
-					world->samus->ResetAllSprites();
-					world->samus->SetState(IDLE_LEFT);
-					//world->samus->setDirection(DirectCollision::RIGHT);
-					world->samus->GetCollider()->SetCollider(0, 0, -70, 32);
-				}
-				else if (world->samus->GetState() == ON_MORPH_RIGHT)
-				{
-					world->samus->SetVelocityX(0);
-					world->samus->ResetAllSprites();
-					world->samus->SetState(IDLE_RIGHT);
-					world->samus->GetCollider()->SetCollider(0, 0, -70, 32);
-					//world->samus->setDirection(DirectCollision::LEFT);
-				}
-				break;
 				//case DIK_X:
 				//	//**********************************************************************************
 				//	// [CAUTION!!!] Vi pos_y chua chinh theo toa do World, code duoi day chi la tam thoi,

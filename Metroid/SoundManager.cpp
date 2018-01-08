@@ -26,7 +26,7 @@ void SoundManager::LoadSound(HWND _hWnd)
 
 	DSBuffer[JUMP] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\jump.wav");
 	DSBuffer[BULLET_HIT_ENEMY] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\butllet_hit_enemy.wav");
-	DSBuffer[BULLET_HIT_LIFE_POINT] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\samus_hit_life_point.wav");
+	DSBuffer[SAMUS_HIT_LIFE_POINT] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\samus_hit_life_point.wav");
 	DSBuffer[SAMUS_HIT_ENEMY] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\samus_hit_enemy.wav");
 	DSBuffer[SHOOT_BULLET] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\bullet.wav");
 	DSBuffer[SHOOT_MISSILE] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\missile.wav");

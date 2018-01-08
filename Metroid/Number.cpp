@@ -31,7 +31,7 @@ Number::Number(LPD3DXSPRITE spriteHandler, World * manager, NUMBER_PATH_TYPE num
 	break;
 	case NUMBEROFMISSILE:
 	{
-		this->SetHealth(01);
+		this->SetHealth(manager->missiles->getNum());
 	}
 	break;
 	}

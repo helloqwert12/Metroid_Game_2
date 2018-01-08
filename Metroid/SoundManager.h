@@ -53,7 +53,7 @@ enum eSoundId
 	SAMUS_HIT_ENEMY,
 
 	// Samus hit life point
-	BULLET_HIT_LIFE_POINT,
+	SAMUS_HIT_LIFE_POINT,
 };
 
 class SoundManager

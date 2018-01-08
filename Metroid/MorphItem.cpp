@@ -52,4 +52,9 @@ void MorphItem::Update(float t)
 	// xxx
 }
 
+void MorphItem::Destroy()
+{
+	isActive = false;
+}
+
 

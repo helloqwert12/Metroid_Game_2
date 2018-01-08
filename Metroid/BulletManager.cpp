@@ -150,6 +150,16 @@ void BulletManager::Render()
 	}
 }
 
+void BulletManager::setNum(int numBullet)
+{
+	num = numBullet;
+}
+
+int BulletManager::getNum()
+{
+	return num;
+}
+
 // Cái này chưa dùng được bị sai
 //void BulletManager::Shoot(BULLET_DIRECTION dir)
 //{

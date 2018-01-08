@@ -18,3 +18,8 @@ void MissileItem::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	Item::InitSprites(d3ddv);
 	itemSprite = new Sprite(spriteHandler, ITEM_SPRITE_PATH, ITEM_MISSILE, ITEM_MISSILE_WIDTH, ITEM_MISSILE_HEIGHT, ITEM_MISSILE_COUNT, 1);
 }
+
+void MissileItem::Destroy()
+{
+	isActive = false;
+}

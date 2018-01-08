@@ -170,6 +170,7 @@ Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
 	this->manager = manager;
 	this->isActive = true;
 	this->isDeath = false;
+	this->isMorph = false;
 	//Set type
 	this->type = SAMUS;
 
@@ -331,6 +332,12 @@ bool Samus::isSamusDeath()
 		return true;
 }
 
+bool Samus::isSamusCrouch()
+{
+	if (isMorph == true)
+		return true;
+}
+
 bool Samus::GetStateActive()
 {
 	return isActive;
@@ -345,7 +352,7 @@ void Samus::Reset(int x, int y)
 	//Đặt lại vị trí
 	this->pos_x = x;
 	this->pos_y = y;
-
+	isMorph = false;
 	isDeath = false;
 	health = HEALTH_SAMUS;
 }
@@ -423,18 +430,30 @@ void Samus::Update(float t)
 	{
 		if (manager->energyItem->IsActive() == true)
 		{
+			Game::gameSound->playSound(SAMUS_HIT_LIFE_POINT);
 			this->health += manager->energyItem->getNumberGain();
 			manager->energyItem->Destroy();
 		}
 	}
+
 	if (SweptAABB(manager->missileItem, t) < 1.0f)
 	{
-		//this-> += manager->missileItem->getNumberGain();
-		manager->missileItem->Destroy();
+		if (manager->missileItem->IsActive() == true)
+		{
+			Game::gameSound->playSound(SAMUS_HIT_LIFE_POINT);
+			//manager->missiles->setNum(manager->missile.getNum() +manager->missileItem->getNumberGain(); Chưa dùng được
+			manager->missileItem->Destroy();
+		}
+
 	}
 	if (SweptAABB(manager->morphItem, t) < 1.0f)
 	{
-		manager->morphItem->Destroy();
+		if (manager->morphItem->IsActive() == true)
+		{
+			isMorph = true;
+			Game::gameSound->playSound(BACKGROUND_ITEM_ACQUIRED);
+			manager->morphItem->Destroy();
+		}
 	}
 	//----------------------------
 	

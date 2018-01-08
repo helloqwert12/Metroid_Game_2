@@ -32,6 +32,8 @@ public:
 	void Next(BULLET_DIRECTION dir, float posX, float posY);
 	void Update(float t);
 	void Render();
+	void setNum(int numBullet);
+	int getNum();
 	//void Shoot(BULLET_DIRECTION dir);
 	BulletObject ** Getlist()
 	{

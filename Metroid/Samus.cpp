@@ -158,8 +158,7 @@ Samus::Samus()
 	height = 64;
 
 	collider = new Collider();
-	//collider->SetCollider(0, 0, -this->height, this->width);
-	collider->SetCollider(0, 0, -64, 32);
+	collider->SetCollider(0, 0, -this->height, this->width);
 	this->isActive = true;
 	state = APPEARANCE;
 }

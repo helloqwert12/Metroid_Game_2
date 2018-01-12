@@ -474,21 +474,27 @@ void Samus::Update(float t)
 					if (this->vx > 0)
 					{
 						Camera::moveRight = true;
-						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
-										
-						this->pos_x += 65;
-
-						if (manager->posManager->GetIndexRoom() == 3)
+						
+						if (manager->posManager->GetIndexRoom() <= 1)
+							manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+						else if (manager->posManager->GetIndexRoom() == 2)
+						{
+							manager->posManager->Next();
 							manager->metroid->isOnFloor = true;
+						}
+						else if (manager->posManager->GetIndexRoom() == 4)
+							manager->posManager->Back();
+
+						this->pos_x += 65;
 					}
 					else if (this->vx < 0)
 					{
 						Camera::moveLeft = true;
 
-						if (manager->posManager->GetIndexRoom() != 3)
+						if (manager->posManager->GetIndexRoom() < 3)
 							manager->posManager->Back();	// giảm index pooling đến room phía sau
-						else
-							manager->metroid->isOnFloor = false;
+						else if (manager->posManager->GetIndexRoom() == 3)
+							manager->posManager->Next();	// vào room boss
 						
 						this->pos_x -= 65;
 					}
@@ -515,14 +521,36 @@ void Samus::Update(float t)
 					if (this->vx > 0)
 					{
 						Camera::moveRight = true;
-						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+
+						if (manager->posManager->GetIndexRoom() <= 1)
+							manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+						else if (manager->posManager->GetIndexRoom() == 2)
+						{
+							manager->posManager->Next();
+							manager->metroid->isOnFloor = true;
+						}
+						else if (manager->posManager->GetIndexRoom() == 4)	// ra khỏi phòng boss
+						{
+							manager->posManager->Back();
+
+							//Tắt nhạc phòng boss và bật nhạc nền ở đây
+						}
 
 						this->pos_x += 65;
 					}
 					else if (this->vx < 0)
 					{
 						Camera::moveLeft = true;
-						manager->posManager->Back();	// giảm index pooling đến room phía sau
+
+						if (manager->posManager->GetIndexRoom() < 3)
+							manager->posManager->Back();	// giảm index pooling đến room phía sau
+						else if (manager->posManager->GetIndexRoom() == 3)
+						{
+							manager->posManager->Next();	// vào room boss
+							
+							//tắt nhạc nền và thêm nhạc phòng boss ở đây
+						}
+
 						this->pos_x -= 65;
 
 					}

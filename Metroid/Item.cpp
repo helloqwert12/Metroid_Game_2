@@ -52,7 +52,7 @@ void Item::Update(int t)
 		return;
 
 	//vy -= 0.005f*t;
-	vy -= GRAVITY_VELOCITY*t;
+	//vy -= GRAVITY_VELOCITY*t;
 	
 
 	// Xét va chạm với ground

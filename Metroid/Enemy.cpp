@@ -15,6 +15,8 @@ Enemy::Enemy(LPD3DXSPRITE spriteHandler, World * manager)
 
 	//Set type
 	this->type = ENEMY;
+
+	this->time_freeze = ENEMY_FREEZE;
 }
 
 

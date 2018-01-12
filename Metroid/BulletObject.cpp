@@ -161,8 +161,8 @@ void BulletObject::Update(float t)
 				case BLOCK:
 					break;
 				}
+				Reset();
 			}
-			Reset();
 		}
 	}
 	//<======================

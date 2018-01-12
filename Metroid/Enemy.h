@@ -8,6 +8,7 @@
 
 #define SPRITE_PER_ROW 1
 #define ANIMATE_RATE 7
+#define ENEMY_FREEZE 1000;
 
 class Enemy : public GameObject
 {
@@ -16,6 +17,7 @@ protected:
 	SENTRY_TYPE sentry_type; //NEW
 	
 public:
+	float time_freeze;	// thời gian dừng khi bị hit
 	float health;		// Máu của object
 	float damage;		// Lượng sát thương gây ra của object
 	bool DeathByShoot;

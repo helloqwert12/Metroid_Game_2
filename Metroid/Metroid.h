@@ -2,7 +2,7 @@
 #ifndef _METROID_H_
 #define _METROID_H_
 
-#define TIME_FREEZING 1000
+#define TIME_FREEZING 5000
 
 #include "Game.h"
 #include "World.h"

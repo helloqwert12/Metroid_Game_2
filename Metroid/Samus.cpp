@@ -450,6 +450,7 @@ void Samus::Update(float t)
 		if (manager->morphItem->IsActive() == true)
 		{
 			isMorph = true;
+			Game::gameSound->stopSound(BACKGROUND_MAP);
 			Game::gameSound->playSound(BACKGROUND_ITEM_ACQUIRED);
 			manager->morphItem->Destroy();
 

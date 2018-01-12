@@ -154,6 +154,7 @@ void Metroid::UpdateFrame(float Delta)
 		time_freezing -= Delta;
 		if (time_freezing <= 0)
 		{
+			Game::gameSound->playSound(BACKGROUND_MAP);
 			isFreezing = false;
 			time_freezing = TIME_FREEZING;
 		}

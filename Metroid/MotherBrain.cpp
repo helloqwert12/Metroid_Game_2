@@ -1,5 +1,5 @@
 ﻿#include "MotherBrain.h"
-
+#include "Game.h"
 
 MotherBrain::MotherBrain(LPD3DXSPRITE spriteHandler, World * manager)
 {
@@ -74,4 +74,10 @@ void MotherBrain::Render()
 		break;
 	}
 	spriteHandler->End();
+}
+
+void MotherBrain::Destroy()
+{
+	Enemy::Destroy();
+	Game::gameSound->playSound(BACKGROUND_MOTHER_BRAIN_DEATH);
 }

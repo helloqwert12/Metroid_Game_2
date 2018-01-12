@@ -23,6 +23,7 @@ void SoundManager::LoadSound(HWND _hWnd)
 	DSBuffer[BACKGROUND_RIDLEY_LAIR] = LoadWaveToSoundBuffer(L"Resources\\sound\\background\\Ridley's Lair.wav");
 	DSBuffer[BACKGROUND_ITEM_ACQUIRED] = LoadWaveToSoundBuffer(L"Resources\\sound\\background\\Item acquired.wav");
 	DSBuffer[BACKGROUND_SAMUS_DEATH] = LoadWaveToSoundBuffer(L"Resources\\sound\\background\\samus_death.wav");
+	DSBuffer[BACKGROUND_MOTHER_BRAIN_DEATH] = LoadWaveToSoundBuffer(L"Resources\\sound\\background\\mother_brain_death.wav");
 
 	DSBuffer[JUMP] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\jump.wav");
 	DSBuffer[BULLET_HIT_ENEMY] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\butllet_hit_enemy.wav");

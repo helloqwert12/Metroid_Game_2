@@ -37,6 +37,9 @@ enum eSoundId
 	//Nhạc nền Samus chết
 	BACKGROUND_SAMUS_DEATH,
 
+	//Nhạc nền Mother Brain chết
+	BACKGROUND_MOTHER_BRAIN_DEATH,
+
 	// Nhảy
 	JUMP,
 

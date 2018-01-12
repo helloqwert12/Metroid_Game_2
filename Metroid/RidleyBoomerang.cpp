@@ -39,6 +39,9 @@ void RidleyBoomerang::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 
 void RidleyBoomerang::Update(float t)
 {
+	//if (!IsInCamera())
+	//	Reset();
+
 	if (!isActive)
 		return;
 

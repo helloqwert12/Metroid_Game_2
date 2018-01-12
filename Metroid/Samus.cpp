@@ -534,6 +534,8 @@ void Samus::Update(float t)
 							manager->posManager->Back();
 
 							//Tắt nhạc phòng boss và bật nhạc nền ở đây
+							Game::gameSound->stopSound(BACKGROUND_MOTHER_BRAIN_BOSS);
+							Game::gameSound->playSoundLoop(BACKGROUND_MAP);
 						}
 
 						this->pos_x += 65;
@@ -549,6 +551,8 @@ void Samus::Update(float t)
 							manager->posManager->Next();	// vào room boss
 							
 							//tắt nhạc nền và thêm nhạc phòng boss ở đây
+							Game::gameSound->playSoundLoop(BACKGROUND_MOTHER_BRAIN_BOSS);
+							Game::gameSound->stopSound(BACKGROUND_MAP);
 						}
 
 						this->pos_x -= 65;

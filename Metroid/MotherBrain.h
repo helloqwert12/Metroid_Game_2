@@ -19,4 +19,5 @@ public:
 	void Update(float t);
 	void Render();
 	//============= END OVERRIDE VIRTUAL METHOD ==============
+	void Destroy();
 };

@@ -283,7 +283,7 @@ enum BULLET_DIRECTION
 	ON_BOTTOMRIGHT
 };
 
-#define BULLET_PUSH_VELOCITY_Y 0.8f
+#define BULLET_PUSH_VELOCITY_Y 0.11f
 //================= END BULLET ===========
 
 //================= BULLET MANAGER ================
@@ -518,7 +518,7 @@ enum EFFECT_TYPE
 
 // BOSSES
 #define HEALTH_MOTHER_BRAIN 40
-#define HEALTH_RIDLEY 300
+#define HEALTH_RIDLEY 40
 
 //================ END HEALTH ===============
 

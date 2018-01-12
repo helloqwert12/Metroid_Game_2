@@ -74,7 +74,9 @@ Metroid::Metroid(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, i
 
 	isFreezing = false;
 	time_freezing = TIME_FREEZING;
+	time_in_game = TIME_IN_GAME;
 	isOnFloor = false;
+	isInGame = false;
 
 	//bulletManager = new BulletManager();
 }
@@ -149,12 +151,23 @@ void Metroid::UpdateIntro(float Delta)
 
 void Metroid::UpdateFrame(float Delta)
 {	
+	if (isInGame)
+	{
+		time_in_game -= Delta;
+		if (time_in_game <= 0)
+		{
+			Game::gameSound->stopSound(BACKGROUND_APPEARANCE);
+			Game::gameSound->playSoundLoop(BACKGROUND_MAP);
+			isInGame = false;
+		}
+	}
+
 	if (isFreezing)
 	{
 		time_freezing -= Delta;
 		if (time_freezing <= 0)
 		{
-			Game::gameSound->playSound(BACKGROUND_MAP);
+			Game::gameSound->playSoundLoop(BACKGROUND_MAP);
 			isFreezing = false;
 			time_freezing = TIME_FREEZING;
 		}
@@ -249,6 +262,9 @@ void Metroid::RenderGameOver(LPDIRECT3DDEVICE9 d3ddv)
 
 void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 {
+	if (isInGame)
+		return;
+
 	//float c = Delta;
 	if (IsKeyDown(DIK_RIGHT))
 	{
@@ -282,7 +298,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 				else  // nếu đang nhảy
 				{
 					now_jump = GetTickCount();
-					if ((now_jump - start_jump) <= 20 * tick_per_frame)
+					if ((now_jump - start_jump) <= 10 * tick_per_frame)
 					{
 						world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
 					}
@@ -329,7 +345,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 				else
 				{
 					now_jump = GetTickCount();
-					if ((now_jump - start_jump) <=  20 * tick_per_frame)
+					if ((now_jump - start_jump) <=  10 * tick_per_frame)
 					{
 						world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
 					}
@@ -360,7 +376,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 			else
 			{
 				now_jump = GetTickCount();
-				if ((now_jump - start_jump) <= 20 * tick_per_frame)
+				if ((now_jump - start_jump) <= 10 * tick_per_frame)
 				{
 					world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
 				}
@@ -382,7 +398,7 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 			else
 			{
 				now_jump = GetTickCount();
-				if ((now_jump - start_jump) <= 20 * tick_per_frame)
+				if ((now_jump - start_jump) <= 10 * tick_per_frame)
 				{
 					world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
 					
@@ -597,7 +613,8 @@ void Metroid::OnKeyDown(int KeyCode)
 			{
 				screenMode = GAMEMODE_GAMERUN;
 				Game::gameSound->stopSound(BACKGROUND_INTRO);
-				Game::gameSound->playSoundLoop(BACKGROUND_MAP);
+				Game::gameSound->playSound(BACKGROUND_APPEARANCE);
+				isInGame = true;
 			}
 		}
 		break;

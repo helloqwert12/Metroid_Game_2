@@ -3,6 +3,7 @@
 #define _METROID_H_
 
 #define TIME_FREEZING 5000
+#define TIME_IN_GAME 7000
 
 #include "Game.h"
 #include "World.h"
@@ -27,6 +28,7 @@ protected:
 
 	float time_jump;
 	float time_freezing;
+	float time_in_game;
 	
 
 private:
@@ -68,6 +70,7 @@ public:
 	int screenMode;
 	bool isFreezing;
 	bool isOnFloor;
+	bool isInGame;
 };
 
 #endif // !_METROID_

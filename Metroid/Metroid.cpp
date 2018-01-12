@@ -72,6 +72,10 @@ Metroid::Metroid(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, i
 
 	time_jump = 3 * _DeltaTime;
 
+	isFreezing = false;
+	time_freezing = TIME_FREEZING;
+	isOnFloor = false;
+
 	//bulletManager = new BulletManager();
 }
 
@@ -145,6 +149,17 @@ void Metroid::UpdateIntro(float Delta)
 
 void Metroid::UpdateFrame(float Delta)
 {	
+	if (isFreezing)
+	{
+		time_freezing -= Delta;
+		if (time_freezing <= 0)
+		{
+			isFreezing = false;
+			time_freezing = TIME_FREEZING;
+		}
+		return;
+	}
+
 	world->Update(Delta);
 	//Camera::MoveCameraX(0.05f, Delta);
 	//bulletManager->Update(Delta, world->samus->GetPosX(), world->samus->GetPosY());
@@ -211,7 +226,9 @@ void Metroid::RenderIntro(LPDIRECT3DDEVICE9 d3ddv)
 void Metroid::RenderFrame(LPDIRECT3DDEVICE9 d3ddv)
 {		
 	world->Render();
-	second_room->TestRenderMapGO();
+
+	if (isOnFloor)
+		second_room->TestRenderMapGO();
 	//room->TestRenderMapGO();
 	//first_room->TestRenderMapGO();
 	//bulletManager->Render();

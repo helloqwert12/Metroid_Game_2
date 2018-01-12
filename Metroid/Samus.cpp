@@ -452,6 +452,8 @@ void Samus::Update(float t)
 			isMorph = true;
 			Game::gameSound->playSound(BACKGROUND_ITEM_ACQUIRED);
 			manager->morphItem->Destroy();
+
+			manager->metroid->isFreezing = true;
 		}
 	}
 	//----------------------------
@@ -472,13 +474,20 @@ void Samus::Update(float t)
 					{
 						Camera::moveRight = true;
 						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
-						
+										
 						this->pos_x += 65;
+
+						if (manager->posManager->GetIndexRoom() == 3)
+							manager->metroid->isOnFloor = true;
 					}
 					else if (this->vx < 0)
 					{
 						Camera::moveLeft = true;
-						manager->posManager->Back();	// giảm index pooling đến room phía sau
+
+						if (manager->posManager->GetIndexRoom() != 3)
+							manager->posManager->Back();	// giảm index pooling đến room phía sau
+						else
+							manager->metroid->isOnFloor = false;
 						
 						this->pos_x -= 65;
 					}
@@ -492,19 +501,21 @@ void Samus::Update(float t)
 	}
 
 	//Xử lý va chạm với colBrick khi đang ở floor
-	for (int i = 0; i < manager->colBrick->size; i++)
+	if (manager->metroid->isOnFloor)
 	{
-		float timeScale = SweptAABB(manager->colBrick->objects[i], t);
-		if (timeScale < 1.0f)
+		for (int i = 0; i < manager->colBrick->size; i++)
 		{
-			ColliderBrick * brick = (ColliderBrick*)manager->colBrick->objects[i];
-			if (brick->isPassable == true)
+			float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+			if (timeScale < 1.0f)
 			{
-				if (this->vx > 0)
+				ColliderBrick * brick = (ColliderBrick*)manager->colBrick->objects[i];
+				if (brick->isPassable == true)
+				{
+					if (this->vx > 0)
 					{
 						Camera::moveRight = true;
 						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
-						
+
 						this->pos_x += 65;
 					}
 					else if (this->vx < 0)
@@ -512,11 +523,12 @@ void Samus::Update(float t)
 						Camera::moveLeft = true;
 						manager->posManager->Back();	// giảm index pooling đến room phía sau
 						this->pos_x -= 65;
-						
+
 					}
+				}
+				else
+					SlideFromGround(brick, t, timeScale);
 			}
-			else
-				SlideFromGround(brick, t, timeScale);
 		}
 	}
 

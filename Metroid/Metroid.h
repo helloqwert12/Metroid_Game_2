@@ -2,6 +2,8 @@
 #ifndef _METROID_H_
 #define _METROID_H_
 
+#define TIME_FREEZING 1000
+
 #include "Game.h"
 #include "World.h"
 #include "Parameters.h"
@@ -24,6 +26,7 @@ protected:
 	Loader* room;
 
 	float time_jump;
+	float time_freezing;
 	
 
 private:
@@ -63,6 +66,8 @@ public:
 	DWORD GetTickPerFrame();
 
 	int screenMode;
+	bool isFreezing;
+	bool isOnFloor;
 };
 
 #endif // !_METROID_

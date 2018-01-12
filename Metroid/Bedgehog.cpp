@@ -298,6 +298,7 @@ void Bedgehog::Update(float t)
 			isHit = false;
 			time_freeze = ENEMY_FREEZE;
 		}
+		return;
 	}
 
 	//if (onGround)

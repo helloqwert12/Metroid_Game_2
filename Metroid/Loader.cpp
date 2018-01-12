@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "ColliderBrick.h"
 #include "Brick.h"
+#include "Gate.h"
 
 Loader::Loader()
 {
@@ -155,32 +156,58 @@ void Loader::ReadMatrixFromFile(const char* path)
 				continue;
 			}
 
-			Brick* brick;
+			
+
+			
 			// Tính pos_x và pos_y cho Brick
 			if (room_number == 1)
 			{
 
 				int pos_x = i * 32;
 				int pos_y = (97) * 32 - (((row_count - 3) + 97 - 15) * 32);	// trừ đi 3 dòng đầu không tính	-- 97 là số height của map 2
-				brick = new Brick(spriteHandler, manager, GROUND, id, pos_x, pos_y);
-				// Nếu gạch ngay cổng thì cho phép băng qua
-				if (id == 12)
-					brick->SetPassable(true);
+				if (id == 99)
+				{
+					Gate * gate = new Gate(spriteHandler, manager, GATE_TYPE::LEFT);
+					gate->SetPosX(pos_x);
+					gate->SetPosY(pos_y);
+
+					pair<int, GameObject*> pair_to_add(counter, gate);
+					mapGameObjects.insert(pair_to_add);
+				}
+				else if (id == 98)
+				{
+					Gate * gate = new Gate(spriteHandler, manager, GATE_TYPE::RIGHT);
+					gate->SetPosX(pos_x);
+					gate->SetPosY(pos_y);
+
+					pair<int, GameObject*> pair_to_add(counter, gate);
+					mapGameObjects.insert(pair_to_add);
+				}
+				else
+				{
+					Brick * brick = new Brick(spriteHandler, manager, GROUND, id, pos_x, pos_y);
+					// Nếu gạch ngay cổng thì cho phép băng qua
+					if (id == 12)
+						brick->SetPassable(true);
+
+					pair<int, GameObject*> pair_to_add(counter, brick);
+					mapGameObjects.insert(pair_to_add);
+				}
 			}
 			else if (room_number == 2)
 			{
 				int pos_x = (i + 160 - 33) * 32;
 				int pos_y = 97 * 32 - ((row_count - 3) * 32) -(15 * 32);
 
-				brick = new Brick(spriteHandler, manager, FLOOR, id, pos_x, pos_y);
+				Brick * brick = new Brick(spriteHandler, manager, FLOOR, id, pos_x, pos_y);
 				// Nếu gạch ngay cổng thì cho phép băng qua
 				if (id == 19)
 					brick->SetPassable(true);
+
+				pair<int, GameObject*> pair_to_add(counter, brick);
+				mapGameObjects.insert(pair_to_add);
 			}
 			// chỗ y trên này tính theo world???
-
-			pair<int, GameObject*> pair_to_add(counter, brick);
-			mapGameObjects.insert(pair_to_add);
 
 			// cập nhật counter
 			counter++;
@@ -373,7 +400,7 @@ void Loader::ReadQuadTreeFromFile(const char* path)
 			int index = stoi(pos[i]);
 
 			// Phải xem trước xem index đó có trong map hay không?
-			// (Vì trong map matrix có id = 8 không xét do là nền)
+			// (Vì trong map matrix có id = 9 không xét do là nền)
 			map<int, GameObject*>::const_iterator temp = mapGameObjects.find(index);
 			// Nếu không tồn tại thì bỏ qua
 			if (temp == mapGameObjects.end())
@@ -382,10 +409,18 @@ void Loader::ReadQuadTreeFromFile(const char* path)
 			switch (mapGameObjects[index]->GetType())
 			{
 			case BRICK:
+			{
 				// ép kiểu về Brick
 				Brick* brick = (Brick*)mapGameObjects[index];
 				node->objects->AddGameObject(brick);
 				break;
+			}
+			case GATE:
+			{
+				Gate * gate = (Gate*)mapGameObjects[index];
+				node->objects->AddGameObject(gate);
+				break;
+			}
 			}
 		}
 		

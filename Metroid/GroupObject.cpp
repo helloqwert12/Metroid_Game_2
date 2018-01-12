@@ -66,6 +66,11 @@ void GroupObject::Render()
 	// nên không cần kiểm tra nữa
 	for (int i = 0; i < objects.size(); i++)
 	{
+		if (objects[i]->GetType() == GATE)
+		{
+			float a = 5;
+			float c = a + 5;
+		}
 		objects[i]->Render();
 	}
 }
@@ -108,15 +113,19 @@ void GroupObject::GetCollisionObjects()
 	//this->GetGroupObjectFrom(manager->enemyGroup);
 }
 
-void GroupObject::SetEnemyActive(ENEMY_TYPE enemy_type, float posX, float posY)
+void GroupObject::SetEnemyActive(int object_type, int detail_type, float posX, float posY)
 {
 	for (int i = 0; i < size; i++)
 	{
-		Enemy * enemy = (Enemy*)objects[i];
-		// Nếu unactive mới lấy
-		if (enemy->GetEnemyType() == enemy_type && enemy->IsActive() == false)
+		// Nếu object_type là enemy mới xét
+		if (object_type == 2)
 		{
-			enemy->Init(posX, posY);
+			Enemy * enemy = (Enemy*)objects[i];
+			// Nếu unactive mới lấy
+			if ((int)enemy->GetEnemyType() == detail_type && enemy->IsActive() == false)
+			{
+				enemy->Init(posX, posY);
+			}
 		}
 	}
 }
@@ -159,6 +168,31 @@ Item * GroupObject::GetUnActiveItem(GroupObject * itemgroup, ITEM_TYPE item_type
 	//Nếu không có thì thôi
 	return NULL;
 }
+
+void GroupObject::SetGameObjectActive(GroupObject * groupObject, int object_type, int detail_type, float posX, float posY)
+{
+	for (int i = 0; i < groupObject->size; i++)
+	{
+		switch (object_type)
+		{
+		case 2:	//ENEMY
+		{
+			Enemy * enemy = (Enemy*)groupObject->objects[i];
+
+			// Nếu unactive mới lấy
+			if ((int)enemy->GetEnemyType() == detail_type && enemy->IsActive() == false)
+			{
+				enemy->Init(posX, posY);
+			}
+			break;
+		}
+		case 8:	//GATE
+
+			break;
+		}
+	}
+}
+
 
 void GroupObject::LoadOtherGO(char * path)
 {

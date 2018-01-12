@@ -87,6 +87,12 @@ void Bullet::Update(float t)
 			Reset();
 	}
 
+	//Xử lý va chạm với gate
+	float timeScale = SweptAABB(manager->gate, t);
+	if (timeScale < 1.0f)
+		manager->gate->DestroyGate();
+	
+
 	// Va chạm của Bird_bullet đối với samus
 	float TimeScale = SweptAABB(manager->samus, t);
 	if (TimeScale < 1.0f)

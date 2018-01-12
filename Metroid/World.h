@@ -92,8 +92,7 @@ public:
 
 	PositionManager* posManager;
 
-	Gate * gateleft;
-	Gate * gateright;
+	Gate * gate;
 
 	World();
 	World(LPD3DXSPRITE spriteHandler, Metroid * metroid);

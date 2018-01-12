@@ -460,21 +460,19 @@ enum ITEM_TYPE
 //================ END ITEM ================
 
 //================ GATE ===============
-#define GATE_SPRITES_PATH L"sprites\\gate\\GATE_32.png"
-#define GATE_WIDTH_COUNT 1
-#define GATE_HEIGHT_COUNT 3
-#define GATE_WIDTH 32
+#define GATE_SPRITES_PATH L"sprites\\gate\\gate_32.png"
+#define GATE_LEFT_EXISTS "sprites\\gate\\GATE_LEFT_EXISTS.txt"
+#define GATE_RIGHT_EXISTS "sprites\\gate\\GATE_RIGHT_EXISTS.txt"
+#define GATE_EXISTS_COUNT 1
+
+#define GATE_LEFT_DESTROYING "sprites\\gate\\GATE_LEFT_DESTROYING.txt"
+#define GATE_RIGHT_DESTROYING "sprites\\gate\\GATE_RIGHT_DESTROYING.txt"
+#define GATE_DESTROYING_COUNT 3
+
+#define GATE_WIDTH 16
 #define GATE_HEIGHT 96
-#define GATE_SPRITE_COUNT 1
-#define GATE_LEFT "sprites\\gate\\GATE_LEFT.txt"
-#define GATE_RIGHT "sprites\\gate\\GATE_RIGHT.txt"
 
-#define GATE_SURVIVE 3000
-
-#define GATE_STATE_LEFT 0
-#define GATE_STATE_RIGHT 0
-#define GATE_LEFT_PATH "sprites\\gate\\GATE_LEFT_PATH.txt"
-#define GATE_RIGHT_PATH "sprites\\gate\\GATE_RIGHT_PATH.txt"
+#define GATE_TIME_SURVIVE 3
 
 
 enum GATE_TYPE

@@ -64,8 +64,8 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	enemyGroup = new GroupObject(this);
 	otherGO = new GroupObject(this);
 
-	//gateleft = new Gate(spriteHandler, this, LEFT, 2500, 290);
-	//gateright = new Gate(spriteHandler, this, LEFT, 2500, 290);
+	gate = new Gate(spriteHandler, this, LEFT);
+	gate->Init(1700, 150);
 
 	//hog_yellow = new Bedgehog(spriteHandler, this, BEDGEHOG_YELLOW);
 	//hog_pink = new Bedgehog(spriteHandler, this, BEDGEHOG_PINK);
@@ -148,7 +148,8 @@ void World::Update(float t)
 	std::vector<PostInfo> list = posManager->GetListInCamera();
 	for (int i = 0; i < list.size(); i++)
 	{
-		enemyGroup->SetEnemyActive(list[i].enemy_type, list[i].x, list[i].y);
+		//enemyGroup->SetEnemyActive(list[i].detail_type, list[i].x, list[i].y);
+		GroupObject::SetGameObjectActive(enemyGroup, list[i].object_type, list[i].detail_type, list[i].x, list[i].y);
 	}
 	
 	otherGO->SetOtherGOActive();
@@ -209,6 +210,8 @@ void World::Update(float t)
 	enemyGroup->UpdateActive(t);
 	otherGO->UpdateActive(t);
 
+	gate->Update(t);
+
 	//gateleft->Update(t);
 	//gateright->Update(t);
 }
@@ -259,8 +262,7 @@ void World::Render()
 	enemyGroup->Render();
 	otherGO->Render();
 
-	//gateleft->Render();
-	//gateright->Render();
+	gate->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)

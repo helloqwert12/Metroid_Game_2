@@ -56,14 +56,6 @@ void PositionManager::ImportPositionFromFile()
 
 		istringstream iss(line);
 
-		// Nếu là dòng đầu tiên cũng bỏ qua, vì dòng đầu bị lỗi
-		/*if (row_count == 0)
-		{
-		row_count++;
-		continue;
-		}*/
-
-
 		// tách từng dòng ra thành các chuỗi dựa vào \t
 		while (getline(iss, split, '\t'))
 		{
@@ -90,7 +82,8 @@ void PositionManager::ImportPositionFromFile()
 		info.y = stoi(pos[1]);
 		info.width = stoi(pos[2]);
 		info.height = stoi(pos[3]);
-		info.enemy_type = (ENEMY_TYPE)stoi(pos[4]);
+		info.object_type = stoi(pos[4]);
+		info.detail_type = /*(ENEMY_TYPE)*/stoi(pos[5]);
 		info.isActive = false;
 		//vector<PostInfo> test;
 		//test.push_back(info);

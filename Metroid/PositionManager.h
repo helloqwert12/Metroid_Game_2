@@ -1,6 +1,4 @@
 ﻿#pragma once
-#ifndef _POSITION_H_
-#define _POSITION_H_
 #include <vector>
 #include "Parameters.h"
 /*
@@ -14,7 +12,8 @@ struct PostInfo
 	float width;
 	float height;
 	bool isActive;
-	ENEMY_TYPE enemy_type;
+	int object_type;
+	int detail_type;
 };
 class PositionManager
 {
@@ -50,4 +49,3 @@ public:
 	//bool IsInCamera(PosInfo * target);
 };
 
-#endif

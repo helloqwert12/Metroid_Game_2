@@ -158,7 +158,8 @@ Sprite::~Sprite()
 
 void Sprite::Next()
 {
-	_Index = (_Index + _Count - 1) % _Count;
+	//_Index = (_Index + _Count - 1) % _Count;
+	_Index = (_Index + 1) % _Count;
 }
 
 void Sprite::Reset()

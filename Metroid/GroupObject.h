@@ -53,7 +53,10 @@ public:
 	void GetCollisionObjects();
 
 	//Set active enemy
-	void SetEnemyActive(ENEMY_TYPE enemy_type, float posX, float posY);
+	void SetEnemyActive(int object_type, int detail_type, float posX, float posY);
+
+	//void SetObjectActive()
+
 
 	void SetOtherGOActive();
 
@@ -63,6 +66,8 @@ public:
 
 	//Hàm static trả về một Item đang unactive
 	static Item* GetUnActiveItem(GroupObject * itemgroup, ITEM_TYPE item_type);
+
+	static void SetGameObjectActive(GroupObject * groupObject, int object_type, int detail_type, float posX, float posY);
 	//===================== END STATIC METHOD ==============================================
 
 	static void LoadOtherGO(char * path);

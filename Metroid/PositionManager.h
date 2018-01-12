@@ -43,7 +43,7 @@ public:
 
 
 	//Hàm trả về vị trí, kích thước và loại GameObject xuất hiện trong Camera
-	std::vector<PostInfo> GetListInCamera();
+	std::vector<PostInfo> GetListInCamera(int object_type);
 
 	// Kiểm tra pos cùng với width height có nằm trong camera hay không
 	//bool IsInCamera(PosInfo * target);

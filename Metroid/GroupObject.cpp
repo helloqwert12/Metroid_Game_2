@@ -66,11 +66,6 @@ void GroupObject::Render()
 	// nên không cần kiểm tra nữa
 	for (int i = 0; i < objects.size(); i++)
 	{
-		if (objects[i]->GetType() == GATE)
-		{
-			float a = 5;
-			float c = a + 5;
-		}
 		objects[i]->Render();
 	}
 }
@@ -187,7 +182,13 @@ void GroupObject::SetGameObjectActive(GroupObject * groupObject, int object_type
 			break;
 		}
 		case 8:	//GATE
+			Gate * gate = (Gate*)groupObject->objects[i];
 
+			// Nếu unactive mới lấy
+			if ((int)gate->GetGateType() == detail_type && gate->IsActive() == false)
+			{
+				gate->Init(posX, posY);
+			}
 			break;
 		}
 	}

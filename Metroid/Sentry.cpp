@@ -11,6 +11,7 @@ Sentry::Sentry(LPD3DXSPRITE spriteHandler, World * manager, SENTRY_TYPE sentry_t
 {
 	this->sentry_type = sentry_type;
 	this->isActive = true;
+	this->type = SENTRY;
 
 	//Khởi tạo sprites
 	this->InitSprites();

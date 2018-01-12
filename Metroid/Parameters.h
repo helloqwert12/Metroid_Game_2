@@ -304,7 +304,8 @@ enum OBJECT_TYPE
 	ITEM = 5,
 	EFFECT = 6,
 	COLLIDER_BRICK = 7,
-	GATE = 8
+	GATE = 8,
+	SENTRY = 9
 };
 //================= END OBJECT TYPE ============
 
@@ -477,8 +478,8 @@ enum ITEM_TYPE
 
 enum GATE_TYPE
 {
-	LEFT,
-	RIGHT
+	LEFT = 0,
+	RIGHT = 1
 };
 //================= END GATE ===========
 

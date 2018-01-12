@@ -88,9 +88,22 @@ void Bullet::Update(float t)
 	}
 
 	//Xử lý va chạm với gate
-	float timeScale = SweptAABB(manager->gate, t);
-	if (timeScale < 1.0f)
-		manager->gate->DestroyGate();
+	for (int i = 0; i < manager->otherGO->size; i++)
+	{
+		float timeScale = SweptAABB(manager->otherGO->objects[i], t);
+		if (timeScale < 1.0f)
+		{
+			switch (manager->otherGO->objects[i]->GetType())
+			{
+			case GATE:
+			{
+				Gate * gate = (Gate*)manager->otherGO->objects[i];
+				gate->DestroyGate();
+				break;
+			}
+			}
+		}
+	}
 	
 
 	// Va chạm của Bird_bullet đối với samus

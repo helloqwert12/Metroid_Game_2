@@ -5,6 +5,8 @@ Gate::Gate(LPD3DXSPRITE spriteHandler, World * manager, GATE_TYPE type)
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
 	this->type = GATE;
+	this->width = GATE_WIDTH;
+	this->height = GATE_HEIGHT;
 
 	char* exists_path = NULL;
 	char* destroy_path = NULL;
@@ -15,10 +17,12 @@ Gate::Gate(LPD3DXSPRITE spriteHandler, World * manager, GATE_TYPE type)
 	case GATE_TYPE::LEFT:
 		exists_path = GATE_LEFT_EXISTS;
 		destroy_path = GATE_LEFT_DESTROYING;
+		gate_type = LEFT;
 		break;
 	case GATE_TYPE::RIGHT:
 		exists_path = GATE_RIGHT_EXISTS;
 		destroy_path = GATE_RIGHT_DESTROYING;
+		gate_type = RIGHT;
 		break;
 	}
 
@@ -39,6 +43,11 @@ Gate::~Gate()
 {
 	delete(exists);
 	delete(destroying);
+}
+
+GATE_TYPE Gate::GetGateType()
+{
+	return gate_type;
 }
 
 void Gate::Update(float t)
@@ -62,6 +71,8 @@ void Gate::Update(float t)
 			if (destroying->GetIndex() == destroying->GetCount() - 1)
 			{
 				state = OPEN;
+				isActive = false;
+				collider = NULL;
 			}
 			break;
 		}

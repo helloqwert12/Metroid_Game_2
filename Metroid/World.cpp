@@ -63,6 +63,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	effectgroup = new GroupObject(this);
 	enemyGroup = new GroupObject(this);
 	otherGO = new GroupObject(this);
+	staticGroup = new GroupObject(this);
 
 	gate = new Gate(spriteHandler, this, LEFT);
 	gate->Init(1700, 150);
@@ -145,12 +146,18 @@ void World::Update(float t)
 	//====> Quan update - chưa test!!!
 
 	//Lấy danh sách các vị trí xuất hiện trong camera nhưng chưa được active
-	std::vector<PostInfo> list = posManager->GetListInCamera();
-	for (int i = 0; i < list.size(); i++)
+	std::vector<PostInfo> listEnemy = posManager->GetListInCamera((int)OBJECT_TYPE::ENEMY);
+	for (int i = 0; i < listEnemy.size(); i++)
 	{
 		//enemyGroup->SetEnemyActive(list[i].detail_type, list[i].x, list[i].y);
-		GroupObject::SetGameObjectActive(enemyGroup, list[i].object_type, list[i].detail_type, list[i].x, list[i].y);
+		GroupObject::SetGameObjectActive(enemyGroup, listEnemy[i].object_type, listEnemy[i].detail_type, listEnemy[i].x, listEnemy[i].y);
 	}
+
+	/*std::vector<PostInfo> listStatic = posManager->GetListInCamera((int)OBJECT_TYPE::GATE);
+	for (int i = 0; i < listStatic.size(); i++)
+	{
+		GroupObject::SetGameObjectActive(staticGroup, listStatic[i].object_type, listStatic[i].detail_type, listStatic[i].x, listStatic[i].y);
+	}*/
 	
 	otherGO->SetOtherGOActive();
 

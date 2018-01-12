@@ -20,9 +20,12 @@ protected:
 	Sprite * destroying;
 	float time_survive;
 	GATE_STATE state;
+	GATE_TYPE gate_type;
 public:
 	Gate(LPD3DXSPRITE spriteHandler, World * manager, GATE_TYPE type);
 	~Gate();
+
+	GATE_TYPE GetGateType();
 
 	void Update(float t);
 	void Render();

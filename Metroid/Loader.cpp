@@ -637,21 +637,31 @@ void Loader::ReadOtherGO(const char * path)
 		//int pos_x = (i + 160 - 33) * 32;
 		//int pos_y = 97 * 32 - ((row_count - 3) * 32) - (15 * 32);
 
-		float x = stoi(pos[0]) + (160 - 33) * 32;
+		/*float x = stoi(pos[0]) + (160 - 33) * 32;
 		float y = (97 * 32) - stoi(pos[1]) - (15 * 32);
 		float w = stoi(pos[2]);
 		float h = stoi(pos[3]);
-		int type = stoi(pos[4]);
+		int type = stoi(pos[4]);*/
 
-		if (row_count >= 0 && row_count <= 9)
+		float x = stoi(pos[0]);
+		float y = stoi(pos[1]);
+		float w = stoi(pos[2]);
+		float h = stoi(pos[3]);
+		int object_type = stoi(pos[4]);
+		int detail_type = stoi(pos[5]);
+
+		if (object_type == 9)	//SENTRY
 		{
-			Sentry *sentry = new Sentry(spriteHandler, manager, (SENTRY_TYPE)type);
+			Sentry *sentry = new Sentry(spriteHandler, manager, (SENTRY_TYPE)detail_type);
 			sentry->Init(x, y);
 			manager->otherGO->AddGameObject(sentry);
 		}
-		else
+		else if (object_type == 8)	//GATE
 		{
-
+			Gate * gate = new Gate(spriteHandler, manager, (GATE_TYPE)detail_type);
+			gate->SetPosX(x);
+			gate->SetPosY(y);
+			manager->otherGO->AddGameObject(gate);
 		}
 
 		//}

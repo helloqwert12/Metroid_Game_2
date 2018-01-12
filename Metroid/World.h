@@ -44,7 +44,7 @@ public:
 	GroupObject * quadtreeGroup;
 	GroupObject * qtreeGroup;
 	GroupObject * colBrick;
-	GroupObject * otherGO;
+	GroupObject * otherGO;	// hiện đang chứa sentry
 
 	//Enemy
 	Bedgehog * hogs_yellow[BEDGEHOG_YELLOW_COUNT];
@@ -87,8 +87,9 @@ public:
 	ExplosionEffect * explsEffect;
 
 	GroupObject * collisionGroup;	//Group chứa các gameobject có khả năng va chạm với nhau
-	GroupObject * enemyGroup;
-	GroupObject * effectgroup;
+	GroupObject * enemyGroup;		//Group chứa enemy
+	GroupObject * effectgroup;		// Group chứa effect
+	GroupObject * staticGroup;		//Group chứa gate, item morph
 
 	PositionManager* posManager;
 

@@ -521,6 +521,24 @@ void Samus::Update(float t)
 		}
 	}
 
+	//Xử lý va chạm với static object
+	for (int i = 0; i < manager->otherGO->size; i++)
+	{
+		float timeScale = SweptAABB(manager->otherGO->objects[i], t);
+		if (timeScale < 1.0f)
+		{
+			switch (manager->otherGO->objects[i]->GetType())
+			{
+			case SENTRY:
+			case GATE:
+			{
+				this->SlideFromGround(manager->otherGO->objects[i], t, timeScale);
+				break;
+			}
+			}
+		}
+	}
+
 
 	//float collisiontime = SweptAABB(manager->gateleft, t);
 	//	if (collisiontime < 1.0f)

@@ -102,6 +102,13 @@ void Game::_SetScreenDimension(int Mode)
 {
 	switch (Mode)
 	{
+	case GAME_SCREEN_RESOLUTION_480_480_24:
+		_ScreenWidth = 480;
+		_ScreenHeight = 480;
+		_Depth = 24;
+		_BackBufferFormat = D3DFMT_X8R8G8B8;
+		break;
+
 	case GAME_SCREEN_RESOLUTION_640_480_24:
 		_ScreenWidth = 640;
 		_ScreenHeight = 480;

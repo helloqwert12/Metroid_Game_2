@@ -13,7 +13,7 @@ float Camera::min_x = 0;
 float Camera::max_y = 0;
 float Camera::min_y = 0;
 
-int Camera::width =  640;
+int Camera::width =  480;
 int Camera::height =  500;
 
 float Camera::speed = 0.2f;
@@ -23,7 +23,7 @@ bool Camera::moveRight = false;
 
 Camera::Camera()
 {
-	Camera::SetDemension(GAME_SCREEN_RESOLUTION_640_480_24);
+	Camera::SetDemension(GAME_SCREEN_RESOLUTION_480_480_24);
 }
 
 
@@ -63,7 +63,7 @@ void Camera::SetCameraX(float pos_x, float t)
 
 	if (list[index].max_x == list[index].min_x) return;
 
-	currentCamX = pos_x - 320;
+	currentCamX = pos_x - 240;
 	
 	if (currentCamX < list[index].min_x)
 	{
@@ -95,6 +95,10 @@ void Camera::SetDemension(int mode)
 {
 	switch (mode)
 	{
+	case GAME_SCREEN_RESOLUTION_480_480_24:
+		width = 480;
+		height = 480;
+		break;
 	case GAME_SCREEN_RESOLUTION_640_480_24:
 		width = 640;
 		height = 480;

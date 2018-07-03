@@ -79,6 +79,7 @@ protected:
 public:
 	float health;	// Máu của Samus
 	bool isDeath;	// Trạng thái chết của Samus
+	bool isOnAir;	// Trạng thái trên không của Samus
 	Samus();
 	Samus(LPD3DXSPRITE spriteHandler, World * manager);
 	~Samus();
@@ -94,6 +95,7 @@ public:
 	void ResetAllSprites();
 	bool isSamusCrouch();
 	bool isSamusDeath();
+	bool isSamusOnAir();
 	bool GetStateActive();
 	void setListBullet(BulletObject ** listbullet)
 	{

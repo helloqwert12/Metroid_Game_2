@@ -337,6 +337,13 @@ bool Samus::isSamusCrouch()
 		return true;
 }
 
+bool Samus::isSamusOnAir()
+{
+	if (isOnAir == true)
+		return true;
+	return false;
+}
+
 bool Samus::GetStateActive()
 {
 	return isActive;
@@ -353,6 +360,9 @@ void Samus::Reset(int x, int y)
 	this->pos_y = y;
 	isMorph = false;
 	isDeath = false;
+	manager->morphItem->Init(706, 196);
+	Camera::currentCamX = pos_x - 240;
+	Camera::currentCamY = 480;
 	health = HEALTH_SAMUS;
 }
 

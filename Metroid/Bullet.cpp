@@ -8,7 +8,7 @@ void Bullet::Render()
 	if (isActive)
 	{
 		_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-		bullet->Render(pos_x, pos_y);
+		bullet->Render(pos_x, pos_y + 12);
 		_SpriteHandler->End();
 	}
 }

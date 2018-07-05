@@ -12,10 +12,10 @@ void Missile::Render()
 			missile_up->Render(pos_x, pos_y);
 			break;
 		case ON_LEFT:
-			missile_left->Render(pos_x, pos_y);
+			missile_left->Render(pos_x, pos_y + 10);
 			break;
 		case ON_RIGHT:
-			missile_right->Render(pos_x, pos_y);
+			missile_right->Render(pos_x, pos_y + 10);
 			break;
 		}
 		_SpriteHandler->End();

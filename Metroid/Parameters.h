@@ -58,7 +58,7 @@ class Energy;
 //================== SAMUS ===================
 #define GROUND_Y 120
 #define SHOOTING_SPEED 15
-#define SAMUS_SPEED 0.25f
+#define SAMUS_SPEED 0.15f
 //#define SAMUS_SPEED 0.05f
 
 #define SAMUS_SPRITES_PATH L"sprites\\samus\\samus_sprites.png"
@@ -142,7 +142,7 @@ class Energy;
 #define ANIMATE_RATE 20
 
 #define JUMP_VELOCITY_BOOST 0.2f
-#define JUMP_VELOCITY_BOOST_FIRST 0.45f
+#define JUMP_VELOCITY_BOOST_FIRST 0.47f
 #define FALLDOWN_VELOCITY_DECREASE 0.02f
 #define GRAVITY_VELOCITY 0.005f
 //================== END SAMUS ====================
@@ -515,7 +515,7 @@ enum EFFECT_TYPE
 #define HEALTH_GATE 1
 
 // SAMUS
-#define HEALTH_SAMUS 80
+#define HEALTH_SAMUS 200
 
 // BOSSES
 #define HEALTH_MOTHER_BRAIN 40

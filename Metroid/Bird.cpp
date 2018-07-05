@@ -70,7 +70,7 @@ void Bird::Update(float t)
 
 	if (this->IsCollide(manager->samus) == true)
 	{
-		vy = -0.1f;
+		vy = -0.3f;
 		animate_rate = BIRD_BOOST_ANIMATE_RATE;
 		if (pos_x < manager->samus->GetPosX())
 		{

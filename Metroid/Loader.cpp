@@ -165,7 +165,7 @@ void Loader::ReadMatrixFromFile(const char* path)
 
 				int pos_x = i * 32;
 				int pos_y = (97) * 32 - (((row_count - 3) + 97 - 15) * 32);	// trừ đi 3 dòng đầu không tính	-- 97 là số height của map 2
-				if (id == 99)
+				if (id == 99)	// LEFT GATE
 				{
 					Gate * gate = new Gate(spriteHandler, manager, GATE_TYPE::LEFT);
 					gate->SetPosX(pos_x);
@@ -174,7 +174,7 @@ void Loader::ReadMatrixFromFile(const char* path)
 					pair<int, GameObject*> pair_to_add(counter, gate);
 					mapGameObjects.insert(pair_to_add);
 				}
-				else if (id == 98)
+				else if (id == 98)  // RIGHT GATE
 				{
 					Gate * gate = new Gate(spriteHandler, manager, GATE_TYPE::RIGHT);
 					gate->SetPosX(pos_x);
@@ -183,7 +183,7 @@ void Loader::ReadMatrixFromFile(const char* path)
 					pair<int, GameObject*> pair_to_add(counter, gate);
 					mapGameObjects.insert(pair_to_add);
 				}
-				else
+				else   // BRICK
 				{
 					Brick * brick = new Brick(spriteHandler, manager, GROUND, id, pos_x, pos_y);
 					// Nếu gạch ngay cổng thì cho phép băng qua
@@ -217,7 +217,7 @@ void Loader::ReadMatrixFromFile(const char* path)
 	f.close();
 }
 
-void Loader::ReadFullMatrixFromFile(const char * path)
+void Loader::ReadFullMatrixFromFile(const char * path)	// chưa xài!!!
 {
 	int row_count = 0;		// index của dòng đang đọc
 	int width = 0;			// width của room

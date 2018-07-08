@@ -185,7 +185,7 @@ void Sprite::Render(int X, int Y)
 	D3DXMATRIX mt;
 	D3DXMatrixIdentity(&mt);
 	mt._22 = -1.0f;
-	mt._41 = -Camera::currentCamX;;
+	mt._41 = -Camera::currentCamX;
 	mt._42 = Camera::currentCamY;	// --TO DO:  Fix lại chỗ này sau
 	D3DXVECTOR4 vp_pos;
 	D3DXVec3Transform(&vp_pos, &position, &mt);

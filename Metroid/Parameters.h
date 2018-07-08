@@ -196,7 +196,7 @@ class Energy;
 #define BIRD_FLY "sprites\\enemy\\BIRD_FLY.txt"
 
 #define BIRD_STANDARD_ANIMATE_RATE 7
-#define BIRD_BOOST_ANIMATE_RATE 20
+#define BIRD_BOOST_ANIMATE_RATE 30
 //================== END BIRD =================
 
 //================== BLOCK =====================

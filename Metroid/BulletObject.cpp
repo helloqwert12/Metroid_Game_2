@@ -71,7 +71,8 @@ void BulletObject::Update(float t)
 	//// Đạn va chạm với samus	====>	Không dùng được ========> Xét từng TH riêng cho mỗi loại đạn trong class con
 	//if (manager->samus->GetStateActive())
 	//{
-	//	float timeScale = SweptAABB(manager->samus, t);
+	//	float timeScale = 
+	(manager->samus, t);
 	//	if (timeScale < 1.0f)
 	//	{
 	//		switch (getBulletType())

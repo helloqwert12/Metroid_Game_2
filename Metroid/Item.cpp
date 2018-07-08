@@ -61,7 +61,8 @@ void Item::Update(int t)
 		switch (manager->quadtreeGroup->objects[i]->GetType())
 		{
 		case BRICK:
-			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
+			float timeScale = 
+				(manager->quadtreeGroup->objects[i], t);
 
 			// Chỉ cần xét va chạm phía trên cục gạch thôi
 			if (timeScale < 1.0f && normaly > 0.1f)

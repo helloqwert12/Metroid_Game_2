@@ -154,7 +154,7 @@ Samus::Samus()
 	jump_left = NULL;
 	jump_right = NULL;
 
-	width = 40;
+	width = 28;
 	height = 64;
 
 	collider = new Collider();
@@ -176,7 +176,7 @@ Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
 	// Khởi tạo máu cho Samus
 	health = HEALTH_SAMUS;
 
-	width = 40;
+	width = 28;
 	height = 50;
 
 	//Collider

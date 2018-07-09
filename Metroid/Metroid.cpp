@@ -671,16 +671,16 @@ void Metroid::OnKeyDown(int KeyCode)
 						world->samus->ResetAllSprites();
 						world->samus->SetState(IDLE_LEFT);
 						//world->samus->setDirection(DirectCollision::RIGHT);
-						world->samus->SetPosY(world->samus->GetPosY() + world->samus->GetHeight() + MORPH_BALL_HEIGHT);
-						world->samus->GetCollider()->SetCollider(0, 0, -world->samus->GetHeight(), 32);
+						world->samus->SetPosY(world->samus->GetPosY() + world->samus->GetHeight() - 16);
+						world->samus->GetCollider()->SetCollider(0, 0, -world->samus->GetHeight(), world->samus->GetWidth());
 					}
 					else if (world->samus->GetState() == ON_MORPH_RIGHT)
 					{
 						world->samus->SetVelocityX(0);
 						world->samus->ResetAllSprites();
 						world->samus->SetState(IDLE_RIGHT);
-						world->samus->SetPosY(world->samus->GetPosY() + world->samus->GetHeight() + MORPH_BALL_HEIGHT);
-						world->samus->GetCollider()->SetCollider(0, 0, -world->samus->GetHeight(), 32);
+						world->samus->SetPosY(world->samus->GetPosY() + world->samus->GetHeight() - 16);
+						world->samus->GetCollider()->SetCollider(0, 0, -world->samus->GetHeight(), world->samus->GetWidth());
 						//world->samus->setDirection(DirectCollision::LEFT);
 					}
 					break;

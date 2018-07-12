@@ -153,6 +153,8 @@ void Metroid::UpdateFrame(float Delta)
 {	
 	if (isInGame)
 	{
+		for (int i = 0; i < 4; i++)
+			world->hogs_yellow[i]->SetActive(false);
 		time_in_game -= Delta;
 		if (time_in_game <= 0)
 		{

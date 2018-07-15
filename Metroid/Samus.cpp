@@ -360,7 +360,7 @@ void Samus::Reset(int x, int y)
 	this->pos_y = y;
 	isMorph = false;
 	isDeath = false;
-	manager->morphItem->Init(706, 196);
+	manager->morphItem->Init(704, 186);
 	Camera::currentCamX = 1000 - 240;
 	Camera::currentCamY = 480;
 	health = HEALTH_SAMUS;

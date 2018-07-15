@@ -24,8 +24,8 @@ Bee::Bee(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) : E
 	collider_area = new Collider();
 	collider_area->SetCollider(0, -width, -480, width * 2);
 
-	vy = -0.1f;
-	vx = 0.04f;
+	vy = -0.20f;
+	vx = 0.08f;
 }
 
 
@@ -71,7 +71,7 @@ void Bee::Update(float t)
 	//		vx = -0.05f;
 	//	}
 	//}
-	if (this->pos_y <= GROUND_Y + 50)
+	if (this->pos_y <= GROUND_Y)
 	{
 		vy *= (-1);
 	}
@@ -85,7 +85,7 @@ void Bee::Update(float t)
 			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
 			if (timeScale < 1.0f)
 			{
-				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
+				//SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
 				vy *= (-1);
 				//this->Destroy();
 			}

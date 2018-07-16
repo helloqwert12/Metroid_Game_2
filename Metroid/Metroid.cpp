@@ -491,8 +491,6 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 
 void Metroid::OnKeyDown(int KeyCode)
 {
-	world->samus->isOnAir = false;
-
 	if (world->samus->isSamusOnAir() == false)
 	{
 		switch (KeyCode)

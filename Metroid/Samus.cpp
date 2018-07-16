@@ -146,6 +146,16 @@ float Samus::GetHealth()
 	return health;
 }
 
+int Samus::GetMissileNumbers()
+{
+	return missile_numbers;
+}
+
+void Samus::SetMissileNumbers(int num)
+{
+	missile_numbers = num;
+}
+
 Samus::Samus()
 {
 	appearing = NULL;
@@ -184,6 +194,8 @@ Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
 
 	immortal_time = SAMUS_IMMORTAL_TIME;
 	isImmortal = false;
+
+	missile_numbers = 10; // set số lượng missile ban đầu
 
 	//Collider
 	this->collider = new Collider();
@@ -453,17 +465,6 @@ void Samus::Update(float t)
 		}
 	}
 
-	//if (isImmortal == true)
-	//{
-	//	collider->SetCollider(0, 0, 0, 0);
-	//	immortal_time -= t;
-	//	if (immortal_time <= 0)
-	//	{
-	//		isImmortal = false;
-	//		collider->SetCollider(0, 0, -this->height, this->width);
-	//	}
-	//}
-
 	//<======================
 
 	// Xử lý va chạm với Item
@@ -482,6 +483,7 @@ void Samus::Update(float t)
 		if (manager->missileItem->IsActive() == true)
 		{
 			Game::gameSound->playSound(SAMUS_HIT_LIFE_POINT);
+			manager->samus->missile_numbers += 1;
 			//manager->missiles->setNum(manager->missile.getNum() +manager->missileItem->getNumberGain(); Chưa dùng được
 			manager->missileItem->Destroy();
 		}

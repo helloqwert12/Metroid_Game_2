@@ -82,6 +82,8 @@ public:
 	float health;	// Máu của Samus
 	bool isDeath;	// Trạng thái chết của Samus
 	bool isOnAir;	// Trạng thái trên không của Samus
+	int missile_numbers;		//số lượng missile ban đầu
+
 	Samus();
 	Samus(LPD3DXSPRITE spriteHandler, World * manager);
 	~Samus();
@@ -123,6 +125,8 @@ public:
 	void Destroy();
 	void SetHealth(float value);
 	float GetHealth();
+	void SetMissileNumbers(int value);
+	int GetMissileNumbers();
 	void TakeDamage(float damage);
 	void Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	void SlideFromGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);

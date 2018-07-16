@@ -22,7 +22,7 @@ Bullet::Bullet(World * manager)
 
 	this->bulletType = STANDARD;
 	this->manager = manager;
-	collider = new Collider(0, 0, -BULLET_HEIGHT, BULLET_WIDTH);
+	collider = new Collider(BULLET_HEIGHT / 2, -BULLET_WIDTH / 2, -BULLET_HEIGHT / 2, BULLET_WIDTH / 2);
 }
 
 Bullet::Bullet(World * manager, int x_holder, int y_holder)

@@ -75,6 +75,8 @@ protected:
 	BulletObject ** listBullet;
 	int num;
 	bool isMorph;	// Kiểm tra xem Samus đã nhặt Morph ball Item chưa để có thể crouch
+	int immortal_time;
+	bool isImmortal;
 	//DirectCollision direction;
 public:
 	float health;	// Máu của Samus

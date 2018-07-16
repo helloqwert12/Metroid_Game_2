@@ -35,7 +35,7 @@ Missile::Missile(World * manager)
 	damage = DAMAGE_SAMUS_MISSILE;
 
 	//Set collider
-	collider = new Collider(0, 0, -MISSILE_HEIGHT, MISSILE_WIDTH);
+	collider = new Collider(MISSILE_HEIGHT / 2, -MISSILE_WIDTH / 2, -MISSILE_HEIGHT / 2, MISSILE_WIDTH / 2);
 }
 
 Missile::Missile(World * manager, int x_holder, int y_holder)

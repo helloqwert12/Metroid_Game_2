@@ -157,6 +157,9 @@ Samus::Samus()
 	width = 28;
 	height = 64;
 
+	immortal_time = SAMUS_IMMORTAL_TIME;
+	isImmortal = false;
+
 	collider = new Collider();
 	collider->SetCollider(0, 0, -this->height, this->width);
 	this->isActive = true;
@@ -178,6 +181,9 @@ Samus::Samus(LPD3DXSPRITE spriteHandler, World * manager)
 
 	width = 28;
 	height = 50;
+
+	immortal_time = SAMUS_IMMORTAL_TIME;
+	isImmortal = false;
 
 	//Collider
 	this->collider = new Collider();
@@ -381,57 +387,83 @@ void Samus::Update(float t)
 		Enemy * enemy = (Enemy*)manager->enemyGroup->objects[i];
 		if (enemy->IsActive())
 		{
-			float timeScale = SweptAABB(enemy, t);
-			if (timeScale < 1.0f)
+			if (isImmortal == false)
 			{
-				//Xử lý khi va chạm với enemy
-				Deflect(enemy, t, timeScale);
-				// xong rồi tùy con mà takedamage
-				switch (enemy->GetEnemyType())
+				float timeScale = SweptAABB(enemy, t);
+				if (timeScale < 1.0f)
 				{
-				case BEDGEHOG_YELLOW:
-				{// take damge cho samus, truyen vao dame cua con nay
-					// co the them thuoc tinh damage cho moi con enemy de truyen vao
-					// Vd: this->TakeDamage(float enemy_damage)
-					Bedgehog* hog_yellow = (Bedgehog*)manager->enemyGroup->objects[i];
-					TakeDamage(hog_yellow->damage);
+					//Xử lý khi va chạm với enemy
+					Deflect(enemy, t, timeScale);
+					isImmortal = true;
+
+					// xong rồi tùy con mà takedamage
+					switch (enemy->GetEnemyType())
+					{
+					case BEDGEHOG_YELLOW:
+					{// take damge cho samus, truyen vao dame cua con nay
+						// co the them thuoc tinh damage cho moi con enemy de truyen vao
+						// Vd: this->TakeDamage(float enemy_damage)
+						Bedgehog* hog_yellow = (Bedgehog*)manager->enemyGroup->objects[i];
+						TakeDamage(hog_yellow->damage);
+					}
+					break;
+					case BEDGEHOG_PINK:
+					{
+						Bedgehog * hog_pink = (Bedgehog*)manager->enemyGroup->objects[i];
+						TakeDamage(hog_pink->damage);
+					}
+					break;
+					case BIRD:
+					{
+						Bird * bird = (Bird*)manager->enemyGroup->objects[i];
+						TakeDamage(bird->damage);
+					}
+					break;
+					case BLOCK:
+					{
+						Block * block = (Block*)manager->enemyGroup->objects[i];
+						TakeDamage(block->damage);
+					}
+					break;
+					case BEE:
+					{
+						Bee * bee = (Bee*)manager->enemyGroup->objects[i];
+						TakeDamage(bee->damage);
+					}
+					break;
+					case RIDLEY:
+					{
+						Ridley * ridley = (Ridley*)manager->enemyGroup->objects[i];
+						TakeDamage(ridley->damage);
+					}
+					break;
+					// ...
+					}
 				}
-				break;
-				case BEDGEHOG_PINK:
+			}
+			else
+			{
+				immortal_time -= t;
+				if (immortal_time <= 0)
 				{
-					Bedgehog * hog_pink = (Bedgehog*)manager->enemyGroup->objects[i];
-					TakeDamage(hog_pink->damage);
-				}
-				break;
-				case BIRD:
-				{
-					Bird * bird = (Bird*)manager->enemyGroup->objects[i];
-					TakeDamage(bird->damage);
-				}
-				break;
-				case BLOCK:
-				{
-					Block * block = (Block*)manager->enemyGroup->objects[i];
-					TakeDamage(block->damage);
-				}
-				break;
-				case BEE:
-				{
-					Bee * bee = (Bee*)manager->enemyGroup->objects[i];
-					TakeDamage(bee->damage);
-				}
-				break;
-				case RIDLEY:
-				{
-					Ridley * ridley = (Ridley*)manager->enemyGroup->objects[i];
-					TakeDamage(ridley->damage);
-				}
-				break;
-				// ...
+					isImmortal = false;
+					immortal_time = SAMUS_IMMORTAL_TIME;
 				}
 			}
 		}
 	}
+
+	//if (isImmortal == true)
+	//{
+	//	collider->SetCollider(0, 0, 0, 0);
+	//	immortal_time -= t;
+	//	if (immortal_time <= 0)
+	//	{
+	//		isImmortal = false;
+	//		collider->SetCollider(0, 0, -this->height, this->width);
+	//	}
+	//}
+
 	//<======================
 
 	// Xử lý va chạm với Item

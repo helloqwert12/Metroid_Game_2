@@ -510,11 +510,15 @@ void Samus::Update(float t)
 					}
 				}
 				else
+				{
 					SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
+					manager->samus->isOnAir = false;
+				}
 				//Response(manager->quadtreeGroup->objects[i], t, timeScale);
 			}
 			break;
 		}
+		
 	}
 
 	//Xử lý va chạm với colBrick khi đang ở floor
@@ -570,7 +574,10 @@ void Samus::Update(float t)
 					}
 				}
 				else
+				{
 					SlideFromGround(brick, t, timeScale);
+					manager->samus->isOnAir = false;
+				}
 			}
 		}
 	}

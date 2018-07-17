@@ -483,8 +483,7 @@ void Samus::Update(float t)
 		if (manager->missileItem->IsActive() == true)
 		{
 			Game::gameSound->playSound(SAMUS_HIT_LIFE_POINT);
-			manager->samus->missile_numbers += 1;
-			//manager->missiles->setNum(manager->missile.getNum() +manager->missileItem->getNumberGain(); Chưa dùng được
+			manager->samus->SetMissileNumbers(manager->samus->GetMissileNumbers() + 1);
 			manager->missileItem->Destroy();
 		}
 

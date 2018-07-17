@@ -77,12 +77,12 @@ protected:
 	bool isMorph;	// Kiểm tra xem Samus đã nhặt Morph ball Item chưa để có thể crouch
 	int immortal_time;
 	bool isImmortal;
+	int missile_numbers;		//số lượng missile ban đầu
 	//DirectCollision direction;
 public:
 	float health;	// Máu của Samus
 	bool isDeath;	// Trạng thái chết của Samus
 	bool isOnAir;	// Trạng thái trên không của Samus
-	int missile_numbers;		//số lượng missile ban đầu
 
 	Samus();
 	Samus(LPD3DXSPRITE spriteHandler, World * manager);

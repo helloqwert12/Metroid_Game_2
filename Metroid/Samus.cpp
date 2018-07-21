@@ -503,66 +503,123 @@ void Samus::Update(float t)
 	//----------------------------
 	
 	//Xử lý va chạm với ground
-	for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	//for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	//{
+	//	switch (manager->quadtreeGroup->objects[i]->GetType())
+	//	{
+	//	case BRICK:
+	//		Brick * brick = (Brick*)(manager->quadtreeGroup->objects[i]);
+	//		float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
+	//		if (timeScale < 1.0f)
+	//		{
+	//			if (brick->IsPassable())
+	//			{
+	//				if (this->vx > 0)
+	//				{
+	//					Camera::moveRight = true;
+	//					
+	//					if (manager->posManager->GetIndexRoom() <= 1)
+	//						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+	//					else if (manager->posManager->GetIndexRoom() == 2)
+	//					{
+	//						manager->posManager->Next();
+	//						manager->metroid->isOnFloor = true;
+	//					}
+	//					else if (manager->posManager->GetIndexRoom() == 4)
+	//						manager->posManager->Back();
+
+	//					this->pos_x += 65;
+	//				}
+	//				else if (this->vx < 0)
+	//				{
+	//					Camera::moveLeft = true;
+
+	//					if (manager->posManager->GetIndexRoom() < 3)
+	//						manager->posManager->Back();	// giảm index pooling đến room phía sau
+	//					else if (manager->posManager->GetIndexRoom() == 3)
+	//						manager->posManager->Next();	// vào room boss
+	//					
+	//					this->pos_x -= 65;
+	//				}
+	//			}
+	//			else
+	//			{
+	//				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
+	//				manager->samus->isOnAir = false;
+	//			}
+	//			//Response(manager->quadtreeGroup->objects[i], t, timeScale);
+	//		}
+	//		break;
+	//	}
+	//	
+	//}
+
+	for (int i = 0; i < manager->colGroundBrick->size; i++)
 	{
-		switch (manager->quadtreeGroup->objects[i]->GetType())
+		float timeScale = SweptAABB(manager->colGroundBrick->objects[i], t);
+		if (timeScale < 1.0f)
 		{
-		case BRICK:
-			Brick * brick = (Brick*)(manager->quadtreeGroup->objects[i]);
-			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
-			if (timeScale < 1.0f)
+			ColliderBrick * brick = (ColliderBrick*)manager->colGroundBrick->objects[i];
+			if (brick->isPassable == true)
 			{
-				if (brick->IsPassable())
+				if (this->vx > 0)
 				{
-					if (this->vx > 0)
-					{
-						Camera::moveRight = true;
-						
-						if (manager->posManager->GetIndexRoom() <= 1)
-							manager->posManager->Next();	// tăng index pooling đến room kế tiếp
-						else if (manager->posManager->GetIndexRoom() == 2)
-						{
-							manager->posManager->Next();
-							manager->metroid->isOnFloor = true;
-						}
-						else if (manager->posManager->GetIndexRoom() == 4)
-							manager->posManager->Back();
+					Camera::moveRight = true;
 
-						this->pos_x += 65;
-					}
-					else if (this->vx < 0)
+					if (manager->posManager->GetIndexRoom() <= 1)
+						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
+					else if (manager->posManager->GetIndexRoom() == 2)
 					{
-						Camera::moveLeft = true;
-
-						if (manager->posManager->GetIndexRoom() < 3)
-							manager->posManager->Back();	// giảm index pooling đến room phía sau
-						else if (manager->posManager->GetIndexRoom() == 3)
-							manager->posManager->Next();	// vào room boss
-						
-						this->pos_x -= 65;
+						manager->posManager->Next();
+						manager->metroid->isOnFloor = true;
 					}
+					else if (manager->posManager->GetIndexRoom() == 4)	// ra khỏi phòng boss
+					{
+						manager->posManager->Back();
+
+						//Tắt nhạc phòng boss và bật nhạc nền ở đây
+						Game::gameSound->stopSound(BACKGROUND_MOTHER_BRAIN_BOSS);
+						Game::gameSound->playSoundLoop(BACKGROUND_MAP);
+					}
+
+					this->pos_x += 65;
 				}
-				else
+				else if (this->vx < 0)
 				{
-					SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
-					manager->samus->isOnAir = false;
+					Camera::moveLeft = true;
+
+					if (manager->posManager->GetIndexRoom() < 3)
+						manager->posManager->Back();	// giảm index pooling đến room phía sau
+					else if (manager->posManager->GetIndexRoom() == 3)
+					{
+						manager->posManager->Next();	// vào room boss
+
+														//tắt nhạc nền và thêm nhạc phòng boss ở đây
+						Game::gameSound->playSoundLoop(BACKGROUND_MOTHER_BRAIN_BOSS);
+						Game::gameSound->stopSound(BACKGROUND_MAP);
+					}
+
+					this->pos_x -= 65;
+
 				}
-				//Response(manager->quadtreeGroup->objects[i], t, timeScale);
 			}
-			break;
+			else
+			{
+				SlideFromGround(brick, t, timeScale);
+				manager->samus->isOnAir = false;
+			}
 		}
-		
 	}
 
 	//Xử lý va chạm với colBrick khi đang ở floor
 	if (manager->metroid->isOnFloor)
 	{
-		for (int i = 0; i < manager->colBrick->size; i++)
+		for (int i = 0; i < manager->colFloorBrick->size; i++)
 		{
-			float timeScale = SweptAABB(manager->colBrick->objects[i], t);
+			float timeScale = SweptAABB(manager->colFloorBrick->objects[i], t);
 			if (timeScale < 1.0f)
 			{
-				ColliderBrick * brick = (ColliderBrick*)manager->colBrick->objects[i];
+				ColliderBrick * brick = (ColliderBrick*)manager->colFloorBrick->objects[i];
 				if (brick->isPassable == true)
 				{
 					if (this->vx > 0)

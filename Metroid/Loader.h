@@ -35,7 +35,8 @@ public:
 	void ReadFullMatrixFromFile(const char* path);
 	void ReadQuadTreeFromFile(const char* path);
 	void ReadInfoFromFile(const char* path);
-	void ReadColliderFile(const char* path);
+	void ReadFloorColliderFile(const char* path);
+	void ReadGroundColliderFile(const char* path);
 	void ReadOtherGO(const char* path);
 	//============== END LOAD FILE METHOD ================
 

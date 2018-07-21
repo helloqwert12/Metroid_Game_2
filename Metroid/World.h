@@ -43,7 +43,8 @@ public:
 	QNode * rootQNode2;
 	GroupObject * quadtreeGroup;
 	GroupObject * qtreeGroup;
-	GroupObject * colBrick;
+	GroupObject * colFloorBrick;
+	GroupObject * colGroundBrick;
 	GroupObject * otherGO;	// hiện đang chứa sentry
 
 	//Enemy
@@ -101,7 +102,7 @@ public:
 
 	//void Init();
 	void Update(float t);
-	void Render();
+	void Render(LPDIRECT3DDEVICE9 d3ddv);
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);
 	//void Destroy();
 

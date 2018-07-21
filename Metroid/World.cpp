@@ -122,7 +122,8 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	posManager = new PositionManager(this);
 	posManager->ImportPositionFromFile();
 
-	colBrick = new GroupObject(this);
+	colFloorBrick = new GroupObject(this);
+	colGroundBrick = new GroupObject(this);
 
 	energy = new Energy(spriteHandler, this, ENERGYINFO);
 	missileinfo = new Energy(spriteHandler, this, MISSILEINFO);
@@ -223,7 +224,7 @@ void World::Update(float t)
 	//gateright->Update(t);
 }
 
-void World::Render()
+void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 {
 	samus->Render();
 	//zoomer->Render();
@@ -270,6 +271,8 @@ void World::Render()
 	otherGO->Render();
 
 	gate->Render();
+
+	colGroundBrick->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)

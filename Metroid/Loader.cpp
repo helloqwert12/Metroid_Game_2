@@ -43,7 +43,9 @@ Loader::Loader(LPD3DXSPRITE spriteHandler, int room_number, World * manager)
 	// Link các node lại
 	this->LinkNodes();
 
-	this->ReadColliderFile("map\\floor_pooling_full.txt");
+	//this->ReadColliderFile("map\\floor_pooling_full.txt");
+	this->ReadFloorColliderFile("map\\floor_pooling_full.txt");
+	this->ReadGroundColliderFile("map\\ground_collider.txt");
 
 	this->ReadOtherGO("map\\otherobject.txt");
 
@@ -514,7 +516,7 @@ void Loader::ReadInfoFromFile(const char * path)
 	f.close();
 }
 
-void Loader::ReadColliderFile(const char * path)
+void Loader::ReadFloorColliderFile(const char * path)
 {
 
 	int row_count = 0;
@@ -574,20 +576,94 @@ void Loader::ReadColliderFile(const char * path)
 			float y = (97 * 32) - stoi(pos[1]) -(15 * 32);
 			float w = stoi(pos[2]);
 			float h = stoi(pos[3]);
-			ColliderBrick *cbrick = new ColliderBrick(this->manager, x, y, w, h);
+			ColliderBrick *cbrick = new ColliderBrick(spriteHandler, this->manager, x, y, w, h);
 			
 			//Cổng
 			if (row_count >= 60 && row_count <= 62)
 			{
 				cbrick->isPassable = true;
 			}
-			manager->colBrick->AddGameObject(cbrick);
+			manager->colFloorBrick->AddGameObject(cbrick);
 			
 		//}
 		row_count++;
 	}
 	f.close();
 
+}
+
+void Loader::ReadGroundColliderFile(const char * path)
+{
+	int row_count = 0;
+	ifstream f;
+	try
+	{
+		f.open(path);
+	}
+	catch (std::fstream::failure e)
+	{
+		return;
+	}
+	string line;
+	while (!f.eof())
+	{
+		vector<string> pos;		// vector dùng để chứa dữ liệu từng dòng
+		int size = 0;				// size của vector
+		string split;			// chuỗi sau khi đã tách ra
+		getline(f, line);
+
+		istringstream iss(line);
+
+		// Nếu là dòng đầu tiên cũng bỏ qua, vì dòng đầu bị lỗi
+		/*if (row_count == 0)
+		{
+		row_count++;
+		continue;
+		}*/
+
+
+		// tách từng dòng ra thành các chuỗi dựa vào \t
+		while (getline(iss, split, '\t'))
+		{
+			// gán từng chuỗi trong dòng vào vector
+			pos.push_back(split);
+			size++;
+		}
+
+		// Nếu dòng không có gì thì push vào vector và tiếp tục
+		if (size == 0)
+		{
+			row_count++;
+			continue;
+		}
+
+		// Gặp END thì không đọc nữa
+		if (pos[0] == "END")
+			break;
+
+		// Đọc info
+		//for (int i = 0; i < size; i++)
+		//{
+		//int pos_x = (i + 160 - 33) * 32;
+		//int pos_y = 97 * 32 - ((row_count - 3) * 32) - (15 * 32);
+
+		float x = stoi(pos[0]);
+		float y = stoi(pos[1]);
+		float w = stoi(pos[2]);
+		float h = stoi(pos[3]);
+		ColliderBrick *cbrick = new ColliderBrick(spriteHandler, this->manager, x, y, w, h);
+
+		//Cổng
+		if (row_count >= 60 && row_count <= 62)
+		{
+			cbrick->isPassable = true;
+		}
+		manager->colGroundBrick->AddGameObject(cbrick);
+
+		//}
+		row_count++;
+	}
+	f.close();
 }
 
 void Loader::ReadOtherGO(const char * path)

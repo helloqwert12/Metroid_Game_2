@@ -241,7 +241,7 @@ void Metroid::RenderIntro(LPDIRECT3DDEVICE9 d3ddv)
 
 void Metroid::RenderFrame(LPDIRECT3DDEVICE9 d3ddv)
 {		
-	world->Render();
+	world->Render(d3ddv);
 
 	if (isOnFloor)
 		second_room->TestRenderMapGO();

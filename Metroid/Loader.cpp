@@ -654,7 +654,7 @@ void Loader::ReadGroundColliderFile(const char * path)
 		ColliderBrick *cbrick = new ColliderBrick(spriteHandler, this->manager, x, y, w, h);
 
 		//Cổng
-		if (row_count >= 60 && row_count <= 62)
+		if (row_count >= 0 && row_count <= 2)
 		{
 			cbrick->isPassable = true;
 		}

@@ -207,7 +207,6 @@ void Sprite::Reset()
 
 void Sprite::Render(int X, int Y)
 {
-
 	RECT rect;
 	rect.left = spriteInfo[_Index].pos_x;
 	rect.top = spriteInfo[_Index].pos_y;

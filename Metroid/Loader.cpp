@@ -648,7 +648,7 @@ void Loader::ReadGroundColliderFile(const char * path)
 		//int pos_y = 97 * 32 - ((row_count - 3) * 32) - (15 * 32);
 
 		float x = stoi(pos[0]);
-		float y = stoi(pos[1]);
+		float y = (15 * 32) - stoi(pos[1]);
 		float w = stoi(pos[2]);
 		float h = stoi(pos[3]);
 		ColliderBrick *cbrick = new ColliderBrick(spriteHandler, this->manager, x, y, w, h);

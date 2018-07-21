@@ -2,7 +2,6 @@
 #include "Metroid.h"
 #include "World.h"
 
-
 ColliderBrick::ColliderBrick()
 {
 }
@@ -39,52 +38,5 @@ ColliderBrick::~ColliderBrick()
 
 void ColliderBrick::Render()
 {
-	// đây là nơi để render cái khung hcn test nhưng chưa được
-
-	//if (d3ddv->BeginScene())
-	//{
-	//	// Clear back buffer with BLACK
-	//	d3ddv->ColorFill(back_buffer, NULL, D3DCOLOR_XRGB(255, 255, 255));
-
-	//	// Random color for the surface
-	//	int r = 255;
-	//	int g = 0;
-	//	int b = 0;
-
-	//	// Fill the bitmap
-	//	d3ddv->ColorFill(surface, NULL, D3DCOLOR_XRGB(r, g, b));
-
-	//	// Generate a random area (within back buffer) to draw the surface onto
-	//	RECT rect;
-	//	/*
-	//	rect.left = rand() % (SCREEN_WIDTH/2);
-	//	rect.top = rand() % (SCREEN_HEIGHT/2);
-	//	rect.right = rect.left + rand() % (SCREEN_WIDTH/2);
-	//	rect.bottom = rect.left + rand() % (SCREEN_HEIGHT/2);
-	//	*/
-
-	//	rect.left = pos_x;
-	//	rect.top = pos_y;
-	//	rect.right = pos_x + width;
-	//	rect.bottom = rect.top + height;
-
-
-	//	/*rect.left = 100;
-	//	rect.top = 100;
-	//	rect.right = 100+267;
-	//	rect.bottom = 100+120;
-	//	*/
-
-	//	// Draw the surface onto the back buffer
-	//	d3ddv->StretchRect(
-	//		surface,			// from 
-	//		NULL,				// which portion?
-	//		back_buffer,		// to 
-	//		&rect,				// which portion?
-	//		D3DTEXF_NONE);
-
-	//	d3ddv->EndScene();
-	//}
-
-	//d3ddv->Present(NULL, NULL, NULL, NULL);
+	
 }

@@ -2,9 +2,7 @@
 #ifndef _SAMUS_H
 #define _SAMUS_H_
 #include "Sprite.h"
-#include "Collision.h"
 #include "Parameters.h"
-#include "Collision.h"
 #include "GameObject.h"
 #include "trace.h"
 #include "Camera.h"

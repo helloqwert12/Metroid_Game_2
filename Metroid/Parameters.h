@@ -56,7 +56,7 @@ class Energy;
 //================ END GAME SCENEE ====================
 
 //================== SAMUS ===================
-#define GROUND_Y 100
+#define GROUND_Y 120
 #define SHOOTING_SPEED 15
 #define SAMUS_SPEED 0.15f
 #define SAMUS_IMMORTAL_TIME 4000;

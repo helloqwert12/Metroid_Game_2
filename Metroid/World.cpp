@@ -169,7 +169,7 @@ void World::Update(float t)
 
 	bullets->Update(t);
 	missiles->Update(t);
-	sentrybullets->Update(t);
+	
 	birdbullets->Update(t);
 	ridleyBoomerang->Update(t);
 
@@ -202,6 +202,7 @@ void World::Update(float t)
 	sentryLeft->Update(t);
 	sentryTop->Update(t);
 	sentryRight->Update(t);
+	sentrybullets->Update(t);
 
 	energy->Update(t);
 	missileinfo->Update(t);
@@ -230,7 +231,7 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	//zoomer->Render();
 	bullets->Render();
 	missiles->Render();
-	sentrybullets->Render();
+	
 	birdbullets->Render();
 	ridleyBoomerang->Render();
 
@@ -254,6 +255,7 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	sentryLeft->Render();
 	sentryTop->Render();
 	sentryRight->Render();
+	sentrybullets->Render();
 	//motherBrain->Render();
 	//ridley->Render();
 	energy->Render();

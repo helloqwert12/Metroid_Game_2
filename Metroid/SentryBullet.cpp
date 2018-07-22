@@ -62,7 +62,7 @@ void SentryBullet::Update(float t)
 	}
 
 	// Xử lý va chạm
-	for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	/*for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
 		switch (manager->quadtreeGroup->objects[i]->GetType())
 		{
@@ -74,7 +74,7 @@ void SentryBullet::Update(float t)
 			}
 			break;
 		}
-	}
+	}*/
 
 	for (int i = 0; i < manager->colFloorBrick->size; i++)
 	{

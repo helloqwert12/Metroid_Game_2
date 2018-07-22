@@ -77,19 +77,29 @@ void Bee::Update(float t)
 	}
 	vy += gravity*t;
 
-	for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	//for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	//{
+	//	switch (manager->quadtreeGroup->objects[i]->GetType())
+	//	{
+	//	case BRICK:
+	//		float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
+	//		if (timeScale < 1.0f)
+	//		{
+	//			//SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
+	//			vy *= (-1);
+	//			//this->Destroy();
+	//		}
+	//		break;
+	//	}
+	//}
+
+	// collider mới cho ground
+	for (int i = 0; i < manager->colGroundBrick->size; i++)
 	{
-		switch (manager->quadtreeGroup->objects[i]->GetType())
+		float timeScale = SweptAABB(manager->colGroundBrick->objects[i], t);
+		if (timeScale < 1.0f)
 		{
-		case BRICK:
-			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
-			if (timeScale < 1.0f)
-			{
-				//SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
-				vy *= (-1);
-				//this->Destroy();
-			}
-			break;
+			vy *= (-1);
 		}
 	}
 

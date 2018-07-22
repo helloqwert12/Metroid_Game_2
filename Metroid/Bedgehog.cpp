@@ -2,6 +2,7 @@
 #include "World.h"
 #include "GroupObject.h"
 #include "ColliderBrick.h"
+#include "Metroid.h"
 
 Bedgehog::Bedgehog()
 {
@@ -324,73 +325,92 @@ void Bedgehog::Update(float t)
 	//}
 
 	//Kiểm tra va chạm với ground
-	for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	//for (int i = 0; i < manager->quadtreeGroup->size; i++)
+	//{
+	//	switch (manager->quadtreeGroup->objects[i]->GetType())
+	//	{
+	//	case BRICK:
+	//		float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
+	//		if (timeScale < 1.0f)
+	//		{
+	//			isCollision = true;
+	//			ResponseGround(manager->quadtreeGroup->objects[i], t, timeScale);
+
+	//			//pos_x += vx * timeScale;
+	//			//pos_y += vy * timeScale;
+	//			//if (normaly > 0.1f)
+	//			//{
+	//			//	gravity = 0.03f;
+	//			//	pos_y += 0.1f;
+	//			//	vx = BEDGEHOG_SPEED;
+	//			//	vy = 0.05f;
+	//			//}
+	//			//if (normalx < -0.1f)
+	//			//{
+	//			//	pos_x -= 0.1f;
+	//			//	gravity = 0;
+	//			//	vy = 0.07f;
+	//			//	vx = BEDGEHOG_SPEED;
+	//			//}
+	//			///*if (normalx > 0.1f)
+	//			//{
+	//			//	pos_x += 0.1f;
+	//			//	gravity = 0;
+	//			//	vy = -0.07f;
+	//			//	vx = -BEDGEHOG_SPEED;
+	//			//}*/
+	//			//if (normaly < -0.1f)
+	//			//{
+	//			//	gravity = -0.03f;
+	//			//	pos_y -= 0.1f;
+	//			//	vx = -BEDGEHOG_SPEED;
+	//			//	vy = 0.05f;
+	//			//}
+
+	//			//float magnitude = sqrt(vx*vx + vy*vy)*(1 - timeScale);
+	//			//float dotprod = (vx*normaly + vy*normalx);
+	//			//if (dotprod > 0.0f)
+	//			//{
+	//			//	dotprod = 1.0f;
+	//			//}
+	//			//else if (dotprod < 0.0f)
+	//			//{
+	//			//	dotprod = -1.0f;
+	//			//}
+	//			//vx = dotprod*normaly*magnitude;
+	//			//vy = dotprod*normalx*magnitude;
+	//		}
+	//		break;
+	//	}
+	//}
+
+	
+	// collider mới cho ground - Quan
+	if (!(manager->metroid->isOnFloor))
 	{
-		switch (manager->quadtreeGroup->objects[i]->GetType())
+		for (int i = 0; i < manager->colGroundBrick->size; i++)
 		{
-		case BRICK:
-			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
+			float timeScale = SweptAABB(manager->colGroundBrick->objects[i], t);
 			if (timeScale < 1.0f)
 			{
+				ColliderBrick * brick = (ColliderBrick*)manager->colGroundBrick->objects[i];
 				isCollision = true;
-				ResponseGround(manager->quadtreeGroup->objects[i], t, timeScale);
-
-				//pos_x += vx * timeScale;
-				//pos_y += vy * timeScale;
-				//if (normaly > 0.1f)
-				//{
-				//	gravity = 0.03f;
-				//	pos_y += 0.1f;
-				//	vx = BEDGEHOG_SPEED;
-				//	vy = 0.05f;
-				//}
-				//if (normalx < -0.1f)
-				//{
-				//	pos_x -= 0.1f;
-				//	gravity = 0;
-				//	vy = 0.07f;
-				//	vx = BEDGEHOG_SPEED;
-				//}
-				///*if (normalx > 0.1f)
-				//{
-				//	pos_x += 0.1f;
-				//	gravity = 0;
-				//	vy = -0.07f;
-				//	vx = -BEDGEHOG_SPEED;
-				//}*/
-				//if (normaly < -0.1f)
-				//{
-				//	gravity = -0.03f;
-				//	pos_y -= 0.1f;
-				//	vx = -BEDGEHOG_SPEED;
-				//	vy = 0.05f;
-				//}
-
-				//float magnitude = sqrt(vx*vx + vy*vy)*(1 - timeScale);
-				//float dotprod = (vx*normaly + vy*normalx);
-				//if (dotprod > 0.0f)
-				//{
-				//	dotprod = 1.0f;
-				//}
-				//else if (dotprod < 0.0f)
-				//{
-				//	dotprod = -1.0f;
-				//}
-				//vx = dotprod*normaly*magnitude;
-				//vy = dotprod*normalx*magnitude;
+				ResponseGround(brick, t, timeScale);
 			}
-			break;
 		}
 	}
 
-	for (int i = 0; i < manager->colFloorBrick->objects.size(); i++)
+	if (manager->metroid->isOnFloor)
 	{
-		float timeScale = SweptAABB(manager->colFloorBrick->objects[i], t);
-		// Nếu có va chạm
-		if (timeScale < 1.0f)
+		for (int i = 0; i < manager->colFloorBrick->objects.size(); i++)
 		{
-			isCollision = true;
-			ResponseGround(manager->colFloorBrick->objects[i], t, timeScale);
+			float timeScale = SweptAABB(manager->colFloorBrick->objects[i], t);
+			// Nếu có va chạm
+			if (timeScale < 1.0f)
+			{
+				isCollision = true;
+				ResponseGround(manager->colFloorBrick->objects[i], t, timeScale);
+			}
 		}
 	}
 

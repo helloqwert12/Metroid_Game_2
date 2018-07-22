@@ -2,7 +2,6 @@
 #include <time.h>
 #include "trace.h"
 #include "utils.h"
-#include "Collision.h"
 #include "BulletManager.h"
 #include "World.h"
 #include "Samus.h"

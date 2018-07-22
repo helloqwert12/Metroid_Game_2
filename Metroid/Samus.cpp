@@ -429,6 +429,7 @@ void Samus::Update(float t)
 					{
 						Bird * bird = (Bird*)manager->enemyGroup->objects[i];
 						TakeDamage(bird->damage);
+						pos_y = GROUND_Y; // Set giá trị vị trí cho samus khi va chạm bird, tránh bị bug xuyên đất
 					}
 					break;
 					case BLOCK:

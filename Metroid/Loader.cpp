@@ -22,26 +22,38 @@ Loader::Loader(LPD3DXSPRITE spriteHandler, int room_number, World * manager)
 	this->room_number = room_number;
 	this->manager = manager;
 	// Build đường dẫn đến matrix dựa vào room
-	this->matrix_path = "map\\matrix_room_" + std::to_string(room_number) + ".txt";
+	this->matrix_path_1 = "map\\matrix_room_1.txt";
 	//this->matrix_path = "map\\matrix_room.txt";
 
 	// Build đường dẫn đến quadtree dựa vào room
-	this->quadtree_path = "map\\quadtree_room_" + std::to_string(room_number) + ".txt";
+	this->quadtree_path_1 = "map\\quadtree_room_1.txt";
 	//this->quadtree_path = "map\\quadtree_room.txt";
+
+	// Build đường dẫn đến matrix dựa vào room
+	this->matrix_path_2 = "map\\matrix_room_2.txt";
+
+	// Build đường dẫn đến quadtree dựa vào room
+	this->quadtree_path_2 = "map\\quadtree_room_2.txt";
 
 	// Build đường dẩn đến file info dựa vào room
 	//this->info_path = "map\\info_room_" + std::to_string(room_number) + ".txt";
 	this->info_path = "map\\info_room.txt";
 
 	// Đọc file matrix
-	this->ReadMatrixFromFile(matrix_path.c_str());
-
+	this->ReadMatrixFromFile(matrix_path_1.c_str(), 1);
 	// Đọc file quadtree
-	this->ReadQuadTreeFromFile(quadtree_path.c_str());
+	this->ReadQuadTreeFromFile(quadtree_path_1.c_str(), 1);
+	this->LinkNodes_1();
+	this->mapGameObjects.clear();
+	this->mapQNodes.clear();
 
-
-	// Link các node lại
-	this->LinkNodes();
+	// Đọc file matrix
+	this->ReadMatrixFromFile(matrix_path_2.c_str(), 2);
+	// Đọc file quadtree
+	//this->ReadQuadTreeFromFile(quadtree_path_2.c_str(), 2);
+	//this->LinkNodes_2();
+	//this->mapGameObjects.clear();
+	//this->mapQNodes.clear();
 
 	//this->ReadColliderFile("map\\floor_pooling_full.txt");
 	this->ReadFloorColliderFile("map\\floor_pooling_full.txt");
@@ -49,15 +61,18 @@ Loader::Loader(LPD3DXSPRITE spriteHandler, int room_number, World * manager)
 
 	this->ReadOtherGO("map\\otherobject.txt");
 
+	manager->rootQNode1 = this->rootQNode_1;
+	manager->rootQNode2 = this->rootQNode_2;
+
 	// rootGONode tại manager sẽ do ở đây quản lý
-	switch (room_number)
+	/*switch (room_number)
 	{
 	case 1:
 		manager->rootQNode1 = this->rootQNode;
 		break;
 	case 2:
 		manager->rootQNode2 = this->rootQNode;
-	}
+	}*/
 	
 }
 
@@ -67,7 +82,7 @@ Loader::~Loader()
 }
 
 // Tạo các GameObject dựa theo id
-void Loader::ReadMatrixFromFile(const char* path)
+void Loader::ReadMatrixFromFile(const char* path, int room)
 {
 	int row_count = 0;		// index của dòng đang đọc
 	int width = 0;			// width của room
@@ -146,13 +161,13 @@ void Loader::ReadMatrixFromFile(const char* path)
 			int id = stoi(pos[i]);
 			// Xét xem id là loại gì
 			// Nếu id là 9 thì bỏ qua (ô trống trong room 1)
-			if (room_number == 1 && id == 9)
+			if (room == 1 && id == 9)
 			{
 				counter++;
 				continue;
 			}
 			// Nếu id là 0 thì bỏ qua (ô trống trong room 2)
-			if (room_number == 2 && id == 0)
+			if (room == 2 && id == 0)
 			{
 				counter++;
 				continue;
@@ -162,7 +177,7 @@ void Loader::ReadMatrixFromFile(const char* path)
 
 			
 			// Tính pos_x và pos_y cho Brick
-			if (room_number == 1)
+			if (room == 1)
 			{
 
 				int pos_x = i * 32;
@@ -196,7 +211,7 @@ void Loader::ReadMatrixFromFile(const char* path)
 					mapGameObjects.insert(pair_to_add);
 				}
 			}
-			else if (room_number == 2)
+			else if (room == 2)
 			{
 				int pos_x = (i + 160 - 33) * 32;
 				int pos_y = 97 * 32 - ((row_count - 3) * 32) -(15 * 32);
@@ -324,7 +339,7 @@ void Loader::ReadFullMatrixFromFile(const char * path)	// chưa xài!!!
 }
 
 //Gọi hàm này sau khi gọi hàm ReadMatrixFromFile !!!
-void Loader::ReadQuadTreeFromFile(const char* path)
+void Loader::ReadQuadTreeFromFile(const char* path, int room)
 {
 	int row_count = 0;
 	//Read file info of file
@@ -746,7 +761,7 @@ void Loader::ReadOtherGO(const char * path)
 	f.close();
 }
 
-void Loader::LinkNodes()
+void Loader::LinkNodes_1()
 {
 	map<int, QNode*>::iterator it;
 	for (it = mapQNodes.begin(); it != mapQNodes.end(); it++)
@@ -756,7 +771,44 @@ void Loader::LinkNodes()
 		// Nếu là node Gốc thì gán vào rootQNode
 		if (it->first == 1)
 		{
-			rootQNode = it->second;
+			rootQNode_1 = it->second;
+			continue;
+		}
+
+		// Tính id của node cha và offset của node hiện tại
+		const int parent_id = it->second->GetParentID();
+		const int offset = it->second->GetOffsetID();
+
+		// Xét offset rồi lấy node cha trỏ vào
+		switch (offset)
+		{
+		case 1:
+			mapQNodes[parent_id]->tl = it->second;
+			break;
+		case 2:
+			mapQNodes[parent_id]->tr = it->second;
+			break;
+		case 3:
+			mapQNodes[parent_id]->bl = it->second;
+			break;
+		case 4:
+			mapQNodes[parent_id]->br = it->second;
+			break;
+		}
+	}
+}
+
+void Loader::LinkNodes_2()
+{
+	map<int, QNode*>::iterator it;
+	for (it = mapQNodes.begin(); it != mapQNodes.end(); it++)
+	{
+		// Trong map được sắp xếp tăng dần theo nodeID nên khỏi cần lo
+
+		// Nếu là node Gốc thì gán vào rootQNode
+		if (it->first == 1)
+		{
+			rootQNode_2 = it->second;
 			continue;
 		}
 

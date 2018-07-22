@@ -23,7 +23,7 @@ protected:
 	BulletManager * bulletManager;
 
 	Loader* first_room;
-	Loader* second_room;
+	//Loader* second_room;
 	Loader* room;
 
 	float time_jump;

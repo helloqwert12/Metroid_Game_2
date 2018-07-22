@@ -89,7 +89,7 @@ Metroid::~Metroid()
 	//delete(bulletManager);
 
 	delete(first_room);
-	delete(second_room);
+	//delete(second_room);
 	delete(room);
 	delete(intro);
 }
@@ -110,9 +110,9 @@ void Metroid::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 	//room = new Loader(spriteHandler, 1, world);
 	first_room = new Loader(spriteHandler, 1, world);
 	//room->Load();
-	second_room = new Loader(spriteHandler, 2, world);
+	//second_room = new Loader(spriteHandler, 2, world);
 	first_room->Load();
-	second_room->Load();
+	//second_room->Load();
 
 	Game::gameSound->playSoundLoop(BACKGROUND_INTRO);
 }
@@ -244,7 +244,8 @@ void Metroid::RenderFrame(LPDIRECT3DDEVICE9 d3ddv)
 	world->Render(d3ddv);
 
 	if (isOnFloor)
-		second_room->TestRenderMapGO();
+		//second_room->TestRenderMapGO();
+		first_room->TestRenderMapGO();
 	//room->TestRenderMapGO();
 	//first_room->TestRenderMapGO();
 	//bulletManager->Render();

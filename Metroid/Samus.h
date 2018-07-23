@@ -98,6 +98,10 @@ public:
 	bool isSamusCrouch();
 	bool isSamusDeath();
 	bool isSamusOnAir();
+	bool isSamusImmortal();
+	void setSamusImmortal(bool result);
+	float getImmortalTime();
+	void setImmortalTime(float time);
 	bool GetStateActive();
 	void setListBullet(BulletObject ** listbullet)
 	{

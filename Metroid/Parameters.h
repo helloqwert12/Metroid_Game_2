@@ -57,7 +57,7 @@ class Energy;
 #define GROUND_Y 120
 #define SHOOTING_SPEED 15
 #define SAMUS_SPEED 0.15f
-#define SAMUS_IMMORTAL_TIME 4000;
+#define SAMUS_IMMORTAL_TIME 4000.0f;
 
 #define SAMUS_SPRITES_PATH L"sprites\\samus\\samus_sprites.png"
 

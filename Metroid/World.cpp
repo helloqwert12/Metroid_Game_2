@@ -135,6 +135,10 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	numberofmissile2 = new Number(spriteHandler, this, DONVI, NUMBEROFMISSILE);
 
 
+	// test
+	testSentry = new Sentry(spriteHandler, this, SENTRY_TYPE::SENTRY_LEFT);
+	testSentry->SetPosX(1300);
+	testSentry->SetPosY(300);
 }
 
 
@@ -225,6 +229,9 @@ void World::Update(float t)
 
 	//gateleft->Update(t);
 	//gateright->Update(t);
+
+	// test
+	testSentry->Update(t);
 }
 
 void World::Render(LPDIRECT3DDEVICE9 d3ddv)
@@ -278,6 +285,9 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	gate->Render();
 
 	colGroundBrick->Render();
+
+	// test
+	testSentry->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
@@ -295,4 +305,6 @@ void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	missileItem->InitSprites(d3ddv);
 
 	explsEffect->InitSprites(d3ddv);
+
+	testSentry->InitSprites();
 }

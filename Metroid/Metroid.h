@@ -71,6 +71,7 @@ public:
 	bool isFreezing;
 	bool isOnFloor;
 	bool isInGame;
+	float jumpDistance = 0;
 };
 
 #endif // !_METROID_

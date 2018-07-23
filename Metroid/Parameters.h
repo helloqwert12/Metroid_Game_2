@@ -141,8 +141,8 @@ class Energy;
 
 #define ANIMATE_RATE 20
 
-#define JUMP_VELOCITY_BOOST 0.2f
-#define JUMP_VELOCITY_BOOST_FIRST 0.47f
+#define JUMP_VELOCITY_BOOST 0.5f
+#define JUMP_VELOCITY_BOOST_FIRST 0.3f
 #define FALLDOWN_VELOCITY_DECREASE 0.02f
 #define GRAVITY_VELOCITY 0.005f
 //================== END SAMUS ====================

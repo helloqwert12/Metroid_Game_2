@@ -45,8 +45,6 @@ class Energy;
 #define STARTSCREEN_FILE L"Resources\\scene\\start_background.png"
 #define INTROSCREEN_FILE L"Resources\\scene\\intro_background.png"
 #define GAMEOVERSCREEN_FILE L"Resources\\scene\\gameover_background.png"
-#define INTRO_FILE L"Resources\\intro\\intro.png"
-#define INTRO "Resources\\intro\\intro.txt"
 
 #define GAMEMODE_INTRO 0
 #define GAMEMODE_START 1
@@ -167,10 +165,9 @@ class Energy;
 #define NUMBER_HEIGHT 14
 #define NUMBER_PATH "sprites\\font\\font.txt"
 //////MISSILEINFO
-#define MISSILE_INFO_SPRITE_PATH L"sprites\\missile\\missile.png"
 #define MISSILE_INFO_WIDTH 20
 #define MISSILE_INFO_HEIGHT 30
-#define MISSILE_PATH "sprites\\missile\\missile.txt"
+#define MISSILE_PATH "sprites\\item\\ITEM_MISSILE.txt"
 #define MISSILE_SPRITE_COUNT 1
 
 //--YElLOW
@@ -266,6 +263,7 @@ enum BULLET_TYPE
 	SENTRY_BULLET,
 	BIRD_BULLET,
 	BOOMERANG,
+	ICEBEAM,	// Đạn băng của samus
 };
 //================ END BULLET TYPE ============
 
@@ -290,6 +288,7 @@ enum BULLET_DIRECTION
 //================= BULLET MANAGER ================
 #define STANDARD_NUM 5
 #define MISSILE_NUM 3
+#define ICEBEAM_NUM 3
 #define SENTRY_BULLET_NUM 10
 #define BIRD_BULLET_NUM 2
 #define RIDLEY_BOOMERANG_NUM 10
@@ -535,6 +534,7 @@ enum EFFECT_TYPE
 // SAMUS
 #define DAMAGE_SAMUS_BULLET 1
 #define DAMAGE_SAMUS_MISSILE 3
+#define DAMAGE_SAMUS_ICEBEAM 0
 
 // BOSSES
 #define DAMAGE_RIDLEY 8

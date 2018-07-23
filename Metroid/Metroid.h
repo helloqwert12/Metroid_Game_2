@@ -45,6 +45,7 @@ private:
 
 	void _Shoot(BULLET_DIRECTION dir);
 	void _ShootMissile(BULLET_DIRECTION dir);
+	void _ShootIceBeam(BULLET_DIRECTION dir);
 
 public:
 	Metroid(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, int FrameRate);
@@ -53,7 +54,6 @@ public:
 	virtual void LoadResources(LPDIRECT3DDEVICE9 d3ddv);
 	// ---------------------------
 	virtual void Update(float Delta); //Kiểm tra screen Mode
-	virtual void UpdateIntro(float Delta);
 	virtual void UpdateFrame(float Delta);
 	// -----------------------------
 	virtual void Render(LPDIRECT3DDEVICE9 d3ddv);

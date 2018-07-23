@@ -3,6 +3,7 @@
 #define _BULLETMANAGER_H_
 #include "Bullet.h"
 #include "Missile.h"
+#include "IceBeam.h"
 #include "Parameters.h"
 #define BULLET_COUNT 5
 

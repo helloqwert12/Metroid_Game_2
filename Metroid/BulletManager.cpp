@@ -28,6 +28,9 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 	case BOOMERANG:
 		num = RIDLEY_BOOMERANG_NUM;
 		break;
+	case ICEBEAM:
+		num = ICEBEAM_NUM;
+		break;
 	}
 	bullet_list = new BulletObject*[num];
 	switch (bullet_type)
@@ -67,6 +70,13 @@ BulletManager::BulletManager(World * manager, BULLET_TYPE bullet_type)
 		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new RidleyBoomerang(manager);
+		}
+		break;
+	case ICEBEAM:
+		//bullet_list = new BulletObject*[ICEBEAM_NUM];
+		for (int i = 0; i < num; i++)
+		{
+			bullet_list[i] = new IceBeam(manager);
 		}
 		break;
 		// ...

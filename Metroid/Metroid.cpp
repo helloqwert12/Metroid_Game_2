@@ -17,8 +17,6 @@ void Metroid::_InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 {
 	world->InitSprites(d3ddv);
 	//tiles->InitSprites(d3ddv);
-	//intro = new Sprite(spriteHandler, INTRO_FILE, INTRO, 640, 640, 156, 1);
-	//tiles->InitSprites(d3ddv);
 	
 }
 
@@ -26,20 +24,6 @@ void Metroid::_InitPositions()
 {
 	world->samus->InitPostition();
 	world->morphItem->Init(704, 186);
-	//world->hog_yellow->InitPostition(1350, 420);
-	//world->hog_pink->InitPostition(1800, 110);
-	//world->bird->InitPostition(1500, 410);
-	//world->block->InitPostition(1664,32);
-	//world->bee->InitPostition(1600, 410);
-	//world->sentryLeft->InitPostition(1500, 350);
-	//world->sentryTop->InitPostition(1700, 350);
-	//world->sentryRight->InitPostition(1900, 350);
-	//world->motherBrain->InitPostition(1400, 200);
-	//world->ridley->InitPostition(1550, 120);
-	
-	//world->morphItem->SetPosX(world->samus->GetPosX());
-	//world->morphItem->SetPosY(world->samus->GetPosX());
-	//bulletManager->InitPosition(world->samus->GetPosX(), world->samus->GetPosY());
 }
 
 
@@ -61,6 +45,11 @@ void Metroid::_Shoot(BULLET_DIRECTION dir)
 void Metroid::_ShootMissile(BULLET_DIRECTION dir)
 {
 	world->missiles->Next(dir, world->samus->GetPosX(), world->samus->GetPosY());
+}
+
+void Metroid::_ShootIceBeam(BULLET_DIRECTION dir)
+{
+	world->icebeam->Next(dir, world->samus->GetPosX(), world->samus->GetPosY());
 }
 
 Metroid::Metroid(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, int FrameRate):Game(hInstance, Name, Mode, IsFullScreen, FrameRate)
@@ -122,7 +111,6 @@ void Metroid::Update(float Delta)
 	{
 		// intro
 	case GAMEMODE_INTRO:
-		UpdateIntro(_DeltaTime);
 		break;
 		// start screen
 	case GAMEMODE_START:
@@ -136,16 +124,6 @@ void Metroid::Update(float Delta)
 	default:
 		break;
 	}
-}
-
-void Metroid::UpdateIntro(float Delta)
-{
-	//DWORD now = GetTickCount();
-	//if (now - Delta  > 1000 / 100)
-	//{
-	//	intro->Next();
-	//	Delta = now;
-	//}
 }
 
 void Metroid::UpdateFrame(float Delta)
@@ -223,12 +201,6 @@ void Metroid::RenderStartScreen(LPDIRECT3DDEVICE9 d3ddv)
 
 void Metroid::RenderIntro(LPDIRECT3DDEVICE9 d3ddv)
 {
-	//Camera::currentCamX = -310;
-	//Camera::currentCamY = 250;
-	//spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	//intro->Render(0, 0);
-	//spriteHandler->End();
-	// Background
 	d3ddv->StretchRect(
 		introscreen,		// from 
 		NULL,				// which portion?
@@ -332,15 +304,9 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 
 	if (IsKeyDown(DIK_X))
 	{
-		if(world->samus->GetPosY() < jumpDistance + 80)
+		if (world->samus->GetPosY() < jumpDistance + 80)
 			if (world->samus->GetVelocityY() > 0)
 				world->samus->SetVelocityY(JUMP_VELOCITY_BOOST);
-
-		//if (world->samus->GetVelocityY() < 0.67f)
-		//{
-		//	world->samus->SetVelocityY(world->samus->GetVelocityY() + 0.05f);
-		//	world->samus->setgravity(world->samus->getgravity() + 0.02f);
-		//}
 	}
 
 	if (IsKeyDown(DIK_UP))
@@ -504,131 +470,6 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 
 void Metroid::OnKeyDown(int KeyCode)
 {
-	if (KeyCode == DIK_X)
-	{
-		if (world->samus->isSamusOnAir() == false)
-		{
-			Game::gameSound->playSound(JUMP);
-			world->samus->isOnAir = true;
-			jumpDistance = world->samus->GetPosY();
-			world->samus->setNormaly(1.0f);
-			if (world->samus->GetState() != ON_SOMERSAULT_RIGHT && IsKeyDown(DIK_RIGHT)/*&& samus->GetState() != ON_JUMP_AIM_UP_RIGHT*/)
-			{
-				start_jump = GetTickCount();
-				now_jump = GetTickCount();
-
-				//time_jump = 50;
-
-				world->samus->SetState(ON_SOMERSAULT_RIGHT);
-				world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
-
-				//now_jump = GetTickCount();
-				//if ((now_jump - start_jump) <= 10 * tick_per_frame)
-				//{
-				//	world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-				//}
-			}
-			//else  // nếu đang nhảy
-			//{
-			//	now_jump = GetTickCount();
-			//	if ((now_jump - start_jump) <= 10 * tick_per_frame)
-			//	{
-			//		world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-			//	}
-			//	/*time_jump -= Delta;
-			//	if (time_jump > 0)
-			//	{
-			//	world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-			//	}*/
-			//	/*else
-			//	{
-			//	float c = time_jump;
-			//	}*/
-
-			//}
-
-			if (world->samus->GetState() != ON_SOMERSAULT_LEFT && IsKeyDown(DIK_LEFT)/*&& samus->GetState() != ON_JUMP_AIM_UP_LEFT*/)
-			{
-				start_jump = GetTickCount();
-				now_jump = GetTickCount();
-				world->samus->SetState(ON_SOMERSAULT_LEFT);
-				world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
-
-				//now_jump = GetTickCount();
-				//if ((now_jump - start_jump) <= 10 * tick_per_frame)
-				//{
-				//	world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-				//}
-			}
-			//else
-			//{
-			//	now_jump = GetTickCount();
-			//	if ((now_jump - start_jump) <= 10 * tick_per_frame)
-			//	{
-			//		world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-			//	}
-			//}
-
-			if (world->samus->GetVelocityXLast() < 0)
-			{
-				if (world->samus->GetState() != ON_JUMP_LEFT && world->samus->GetState() != ON_SOMERSAULT_LEFT
-					&& world->samus->GetState() != ON_JUMPING_SHOOTING_LEFT && world->samus->GetState() != ON_JUMP_AIM_UP_LEFT)
-				{
-					start_jump = GetTickCount();
-					now_jump = GetTickCount();
-					if (world->samus->GetState() == IDLING_AIM_UP_LEFT)
-						world->samus->SetState(ON_JUMP_AIM_UP_LEFT);
-					else
-						world->samus->SetState(ON_JUMP_LEFT);
-					world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
-
-					//now_jump = GetTickCount();
-					//if ((now_jump - start_jump) <= 10 * tick_per_frame)
-					//{
-					//	world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-					//}
-				}
-				//else
-				//{
-				//	now_jump = GetTickCount();
-				//	if ((now_jump - start_jump) <= 10 * tick_per_frame)
-				//	{
-				//		world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-				//	}
-				//}
-			}
-			if (world->samus->GetVelocityXLast() > 0)
-			{
-				if (world->samus->GetState() != ON_JUMP_RIGHT && world->samus->GetState() != ON_SOMERSAULT_RIGHT
-					&& world->samus->GetState() != ON_JUMPING_SHOOTING_RIGHT && world->samus->GetState() != ON_JUMP_AIM_UP_RIGHT)
-				{
-					start_jump = GetTickCount();
-					now_jump = GetTickCount();
-					if (world->samus->GetState() == IDLING_AIM_UP_RIGHT)
-						world->samus->SetState(ON_JUMP_AIM_UP_RIGHT);
-					else
-						world->samus->SetState(ON_JUMP_RIGHT);
-					world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
-
-					//now_jump = GetTickCount();
-					//if ((now_jump - start_jump) <= 10 * tick_per_frame)
-					//{
-					//	world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-					//}
-				}
-				//else
-				//{
-				//	now_jump = GetTickCount();
-				//	if ((now_jump - start_jump) <= 10 * tick_per_frame)
-				//	{
-				//		world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST);
-
-				//	}
-				//}
-			}
-		}
-	}
-
 	switch (screenMode)
 	{
 		// intro
@@ -657,6 +498,64 @@ void Metroid::OnKeyDown(int KeyCode)
 		{
 			switch (KeyCode)
 			{
+			case DIK_X:
+				if (world->samus->isSamusOnAir() == false)
+				{
+					Game::gameSound->playSound(JUMP);
+					world->samus->isOnAir = true;
+					jumpDistance = world->samus->GetPosY();
+					world->samus->setNormaly(1.0f);
+					if (world->samus->GetState() != ON_SOMERSAULT_RIGHT && IsKeyDown(DIK_RIGHT)/*&& samus->GetState() != ON_JUMP_AIM_UP_RIGHT*/)
+					{
+						start_jump = GetTickCount();
+						now_jump = GetTickCount();
+
+
+						world->samus->SetState(ON_SOMERSAULT_RIGHT);
+						world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
+
+					}
+
+					if (world->samus->GetState() != ON_SOMERSAULT_LEFT && IsKeyDown(DIK_LEFT)/*&& samus->GetState() != ON_JUMP_AIM_UP_LEFT*/)
+					{
+						start_jump = GetTickCount();
+						now_jump = GetTickCount();
+						world->samus->SetState(ON_SOMERSAULT_LEFT);
+						world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
+
+					}
+
+					if (world->samus->GetVelocityXLast() < 0)
+					{
+						if (world->samus->GetState() != ON_JUMP_LEFT && world->samus->GetState() != ON_SOMERSAULT_LEFT
+							&& world->samus->GetState() != ON_JUMPING_SHOOTING_LEFT && world->samus->GetState() != ON_JUMP_AIM_UP_LEFT)
+						{
+							start_jump = GetTickCount();
+							now_jump = GetTickCount();
+							if (world->samus->GetState() == IDLING_AIM_UP_LEFT)
+								world->samus->SetState(ON_JUMP_AIM_UP_LEFT);
+							else
+								world->samus->SetState(ON_JUMP_LEFT);
+							world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
+
+						}
+					}
+					if (world->samus->GetVelocityXLast() > 0)
+					{
+						if (world->samus->GetState() != ON_JUMP_RIGHT && world->samus->GetState() != ON_SOMERSAULT_RIGHT
+							&& world->samus->GetState() != ON_JUMPING_SHOOTING_RIGHT && world->samus->GetState() != ON_JUMP_AIM_UP_RIGHT)
+						{
+							start_jump = GetTickCount();
+							now_jump = GetTickCount();
+							if (world->samus->GetState() == IDLING_AIM_UP_RIGHT)
+								world->samus->SetState(ON_JUMP_AIM_UP_RIGHT);
+							else
+								world->samus->SetState(ON_JUMP_RIGHT);
+							world->samus->SetVelocityY(world->samus->GetVelocityY() + JUMP_VELOCITY_BOOST_FIRST);
+
+						}
+					}
+				}
 			case DIK_DOWN:
 				//if samus is idle then do morph
 				if (world->samus->isSamusCrouch() == true)
@@ -816,6 +715,86 @@ void Metroid::OnKeyDown(int KeyCode)
 					}
 					break;
 				}
+
+			case DIK_V:
+				Game::gameSound->playSound(SHOOT_ICEBEAM);
+				if (world->samus->GetState() == IDLING_AIM_UP_LEFT)
+				{
+					world->samus->SetState(IDLING_SHOOTING_UP_LEFT);
+
+					_ShootIceBeam(ON_UP);
+				}
+				if (world->samus->GetState() == IDLING_AIM_UP_RIGHT)
+				{
+					world->samus->SetState(IDLING_SHOOTING_UP_RIGHT);
+
+					_ShootIceBeam(ON_UP);
+				}
+				//State Chạy bắn lên
+				if (world->samus->GetState() == AIMING_UP_LEFT)
+				{
+					world->samus->SetState(AIMING_UP_LEFT);
+					_ShootIceBeam(ON_UP);
+				}
+				if (world->samus->GetState() == AIMING_UP_RIGHT)
+				{
+					world->samus->SetState(AIMING_UP_RIGHT);
+					_ShootIceBeam(ON_UP);
+				}
+				//State Nhảy bắn lên => bug
+				if (world->samus->GetState() == ON_JUMP_AIM_UP_LEFT)
+				{
+					world->samus->SetState(ON_JUMP_SHOOTING_UP_LEFT);
+
+					_ShootIceBeam(ON_UP);
+				}
+				if (world->samus->GetState() == ON_JUMP_AIM_UP_RIGHT)
+				{
+					world->samus->SetState(ON_JUMP_SHOOTING_UP_RIGHT);
+
+					_ShootIceBeam(ON_UP);
+				}
+				//State nhảy bắn
+				if (world->samus->GetState() == ON_JUMP_LEFT || world->samus->GetState() == ON_SOMERSAULT_LEFT || world->samus->GetState() == ON_JUMPING_SHOOTING_LEFT)
+				{
+					world->samus->SetState(ON_JUMPING_SHOOTING_LEFT);
+
+					_ShootIceBeam(ON_LEFT);
+				}
+				if (world->samus->GetState() == ON_JUMP_RIGHT || world->samus->GetState() == ON_SOMERSAULT_RIGHT || world->samus->GetState() == ON_JUMPING_SHOOTING_RIGHT)
+				{
+					world->samus->SetState(ON_JUMPING_SHOOTING_RIGHT);
+
+					_ShootIceBeam(ON_RIGHT);
+				}
+				//State chạy bắn
+				if (world->samus->GetState() == LEFTING)
+				{
+					world->samus->SetState(ON_RUN_SHOOTING_LEFT);
+
+					_ShootIceBeam(ON_LEFT);
+				}
+				if (world->samus->GetState() == RIGHTING)
+				{
+					world->samus->SetState(ON_RUN_SHOOTING_RIGHT);
+
+					_ShootIceBeam(ON_RIGHT);
+				}
+				//State đứng bắn
+				if (world->samus->GetState() == IDLE_LEFT)
+				{
+					world->samus->SetState(IDLING_SHOOTING_LEFT);
+
+					_ShootIceBeam(ON_LEFT);
+				}
+				if (world->samus->GetState() == IDLE_RIGHT)
+				{
+					world->samus->SetState(IDLING_SHOOTING_RIGHT);
+
+					_ShootIceBeam(ON_RIGHT);
+
+				}
+				break;
 			}
 		}
 		// game over

@@ -49,6 +49,9 @@ enum eSoundId
 	// Bắn Missile
 	SHOOT_MISSILE,
 
+	// Bắn IceBeam
+	SHOOT_ICEBEAM,
+
 	// Đạn hit enemy
 	BULLET_HIT_ENEMY,
 

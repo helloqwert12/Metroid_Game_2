@@ -156,6 +156,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="GroupObject.cpp" />
+    <ClCompile Include="IceBeam.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="main.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="GroupObject.h" />
+    <ClInclude Include="IceBeam.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Metroid.h" />

@@ -105,6 +105,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	hog_yellow->TakeDamage(this->damage); break;
 					case MISSILE:	hog_yellow->TakeDamage(this->damage); break;
+					case ICEBEAM: break;
 					}
 				}
 				break;
@@ -115,6 +116,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	hog_pink->TakeDamage(this->damage); break;
 					case MISSILE:	hog_pink->TakeDamage(this->damage); break;
+					case ICEBEAM: break;
 					}
 				}
 
@@ -126,6 +128,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	bird->TakeDamage(this->damage); break;
 					case MISSILE:	bird->TakeDamage(this->damage); break;
+					case ICEBEAM: break;
 					}
 				}
 				break;
@@ -136,6 +139,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	bee->TakeDamage(this->damage); break;
 					case MISSILE:	bee->TakeDamage(this->damage); break;
+					case ICEBEAM: break;
 					}
 				}
 				break;
@@ -146,6 +150,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	ridley->TakeDamage(this->damage); break;
 					case MISSILE:	ridley->TakeDamage(this->damage); break;
+					case ICEBEAM: break;
 					}
 				}
 				break;
@@ -156,10 +161,18 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	motherBrain->TakeDamage(this->damage); break;
 					case MISSILE:	motherBrain->TakeDamage(this->damage); break;
+					case ICEBEAM: break;
 					}
 				}
 				break;
 				case BLOCK:
+				{
+					Block * block = (Block*)manager->enemyGroup->objects[i];
+					if (getBulletType() == ICEBEAM)
+					{
+
+					}
+				}
 					break;
 				}
 				Reset();

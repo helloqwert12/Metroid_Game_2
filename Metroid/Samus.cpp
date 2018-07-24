@@ -937,13 +937,6 @@ void Samus::Update(float t)
 		case IDLING_SHOOTING_UP_RIGHT:
 			idle_shooting_up_right->Next();
 			break;
-		case ON_JUMP_SHOOTING_UP_LEFT:
-			jump_shooting_up_left->Next();
-			break;
-		case ON_JUMP_SHOOTING_UP_RIGHT:
-			jump_shooting_up_right->Next();
-			break;
-
 		}
 		last_time = now;
 	}	

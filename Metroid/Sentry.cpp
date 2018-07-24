@@ -245,6 +245,7 @@ void Sentry::Render()
 		a5->Render(pos_x, pos_y);
 		break;
 	}
+	spriteHandler->End();
 
 	DWORD statenow = GetTickCount();
 	
@@ -271,5 +272,5 @@ void Sentry::Render()
 		state_last_time = statenow;
 	}
 
-	spriteHandler->End();
+	
 }

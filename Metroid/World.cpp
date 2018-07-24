@@ -13,6 +13,7 @@
 #include "Energy.h"
 #include "Number.h"
 #include "Gate.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -236,7 +237,10 @@ void World::Update(float t)
 
 void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 {
-	samus->Render();
+	//samus->Render();
+	samus->RenderDebug(d3ddv);
+	//DrawCollider(d3ddv, 1275, 300, new Collider(-20, -20, 20, 20), D3DCOLOR_XRGB(255, 0, 0));
+	DrawCollider(d3ddv, samus->GetPosX(), samus->GetPosY(), samus->GetCollider(), D3DCOLOR_XRGB(255, 0, 0));
 
 	bullets->Render();
 	missiles->Render();
@@ -279,12 +283,12 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 
 	collisionGroup->Render();
 	effectgroup->Render();
-	enemyGroup->Render();
+	enemyGroup->RenderDebug(d3ddv);
 	otherGO->Render();
 
 	gate->Render();
 
-	colGroundBrick->Render();
+	colGroundBrick->RenderDebug(d3ddv);
 
 	// test
 	testSentry->Render();

@@ -12,6 +12,7 @@
 #include "EnergyItem.h"
 #include "MissileItem.h"
 #include "MorphItem.h"
+#include "utils.h"
 
 void Samus::Render()
 {	
@@ -108,6 +109,12 @@ void Samus::Render()
 	
 	spriteHandler->End();
 }
+
+//void Samus::RenderDebug(LPDIRECT3DDEVICE9 d3ddv)
+//{
+//	Render();
+//	DrawCollider(d3ddv, this->pos_x, this->pos_y, this->collider, D3DCOLOR_ARGB(0, 255, 0, 0));
+//}
 
 void Samus::Destroy()
 {

@@ -63,6 +63,17 @@ void Block::Update(float t)
 		return;
 	}
 
+	if (isHit)
+	{
+		time_freeze -= t;
+		if (time_freeze <= 0)
+		{
+			isHit = false;
+			time_freeze = ENEMY_FREEZE;
+		}
+		return;
+	}
+
 	// Xét va chạm, nếu va chạm thì đi ngược lại
 	for (int i = 0; i < manager->quadtreeGroup->size; i++)
 	{
@@ -122,14 +133,33 @@ void Block::Render()
 	if (!isActive)
 		return;
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	switch (state)
+
+	if (time_freeze <= 300)
 	{
-	case ON_BLOCK_LEFT:
-		left->Render(pos_x, pos_y);
-		break;
-	case ON_BLOCK_RIGHT:
-		right->Render(pos_x, pos_y);
-		break;
+		switch (state)
+		{
+		case ON_BLOCK_LEFT:
+			left->Render(pos_x, pos_y);
+			break;
+		case ON_BLOCK_RIGHT:
+			right->Render(pos_x, pos_y);
+			break;
+		}
+	}
+	else
+	{
+		D3DXCOLOR color;
+		color.r = 76; color.g = 117; color.b = 255;
+
+		switch (state)
+		{
+		case ON_BLOCK_LEFT:
+			left->Render(pos_x, pos_y, color);
+			break;
+		case ON_BLOCK_RIGHT:
+			right->Render(pos_x, pos_y, color);
+			break;
+		}
 	}
 	spriteHandler->End();
 }

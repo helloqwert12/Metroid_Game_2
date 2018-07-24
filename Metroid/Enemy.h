@@ -8,7 +8,7 @@
 
 #define SPRITE_PER_ROW 1
 #define ANIMATE_RATE 7
-#define ENEMY_FREEZE 500;
+#define ENEMY_FREEZE 300;
 
 class Enemy : public GameObject
 {

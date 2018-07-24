@@ -283,6 +283,7 @@ enum BULLET_DIRECTION
 };
 
 #define BULLET_PUSH_VELOCITY_Y 0.11f
+#define TIME_FREEZE_ICEBEAM 5000.0f
 //================= END BULLET ===========
 
 //================= BULLET MANAGER ================

@@ -633,6 +633,7 @@ void Metroid::OnKeyDown(int KeyCode)
 				break;
 
 			case DIK_C:
+			{
 				if (world->samus->GetMissileNumbers() > 0)
 				{
 					Game::gameSound->playSound(SHOOT_MISSILE);
@@ -713,8 +714,9 @@ void Metroid::OnKeyDown(int KeyCode)
 						_ShootMissile(ON_RIGHT);
 
 					}
-					break;
 				}
+			break;
+			}
 
 			case DIK_V:
 				Game::gameSound->playSound(SHOOT_ICEBEAM);

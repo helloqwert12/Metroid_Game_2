@@ -183,11 +183,24 @@ void Bullet::Update(float t)
 	
 
 	// Va chạm của Bird_bullet đối với samus
-	float TimeScale = SweptAABB(manager->samus, t);
-	if (TimeScale < 1.0f)
+	if (manager->samus->isSamusImmortal() == false)
 	{
-		manager->samus->TakeDamage(this->damage);
-		Reset();
+		float TimeScale = SweptAABB(manager->samus, t);
+		if (TimeScale < 1.0f)
+		{
+			manager->samus->TakeDamage(this->damage);
+			manager->samus->setSamusImmortal(true);
+		}
+	}
+	else
+	{
+		manager->samus->setImmortalTime(manager->samus->getImmortalTime() - t);
+		if (manager->samus->getImmortalTime() <= 0)
+		{
+			manager->samus->setSamusImmortal(false);
+			float temp = SAMUS_IMMORTAL_TIME;
+			manager->samus->setImmortalTime(temp);
+		}
 	}
 
 	//

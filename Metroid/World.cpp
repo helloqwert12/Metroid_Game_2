@@ -134,12 +134,6 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	numberofenergy2 = new Number(spriteHandler, this, DONVI, NUMBEROFENERGY);
 	numberofmissile1 = new Number(spriteHandler, this, CHUC, NUMBEROFMISSILE);
 	numberofmissile2 = new Number(spriteHandler, this, DONVI, NUMBEROFMISSILE);
-
-
-	// test
-	testSentry = new Sentry(spriteHandler, this, SENTRY_TYPE::SENTRY_LEFT);
-	testSentry->SetPosX(1300);
-	testSentry->SetPosY(300);
 }
 
 
@@ -230,9 +224,6 @@ void World::Update(float t)
 
 	//gateleft->Update(t);
 	//gateright->Update(t);
-
-	// test
-	testSentry->Update(t);
 }
 
 void World::Render(LPDIRECT3DDEVICE9 d3ddv)
@@ -240,7 +231,7 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	//samus->Render();
 	samus->RenderDebug(d3ddv);
 	//DrawCollider(d3ddv, 1275, 300, new Collider(-20, -20, 20, 20), D3DCOLOR_XRGB(255, 0, 0));
-	DrawCollider(d3ddv, samus->GetPosX(), samus->GetPosY(), samus->GetCollider(), D3DCOLOR_XRGB(255, 0, 0));
+	//DrawCollider(d3ddv, samus->GetPosX(), samus->GetPosY(), samus->GetCollider(), D3DCOLOR_XRGB(255, 0, 0));
 
 	bullets->Render();
 	missiles->Render();
@@ -290,8 +281,6 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 
 	colGroundBrick->RenderDebug(d3ddv);
 
-	// test
-	testSentry->Render();
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
@@ -309,6 +298,4 @@ void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	missileItem->InitSprites(d3ddv);
 
 	explsEffect->InitSprites(d3ddv);
-
-	testSentry->InitSprites();
 }

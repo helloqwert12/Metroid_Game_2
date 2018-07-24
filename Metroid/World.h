@@ -97,9 +97,6 @@ public:
 
 	Gate * gate;
 
-	//test
-	Sentry * testSentry;
-
 	World();
 	World(LPD3DXSPRITE spriteHandler, Metroid * metroid);
 	~World();

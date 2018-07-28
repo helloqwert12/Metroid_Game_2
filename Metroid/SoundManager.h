@@ -28,9 +28,6 @@ enum eSoundId
 	//Nhạc nền boss KRAID
 	BACKGROUND_KRAID_LAIR,
 
-	//Nhạc nền boss RIDLEY
-	BACKGROUND_RIDLEY_LAIR,
-
 	//Nhạc nền nhặt Item
 	BACKGROUND_ITEM_ACQUIRED,
 

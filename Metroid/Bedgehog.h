@@ -22,7 +22,7 @@ protected:
 	Sprite * left;
 	Sprite * right;
 
-	bool isCollision;
+	//bool isCollision;
 	float last_normalx;
 	float last_normaly;
 
@@ -33,6 +33,7 @@ public:
 	void InitSprites();
 	void ResponseGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	void ResponseGround2(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
+	void ResponseGround3(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 	//============== OVERRIDE VIRTUAL METHOD ===================
 	virtual void Update(float t);
 	virtual void Render();

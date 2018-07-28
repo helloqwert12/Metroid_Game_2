@@ -13,9 +13,10 @@ protected:
 	Sprite * bottomleft;
 	Sprite * bottomright;
 public:
-	SentryBullet(World * manager);
+	SentryBullet(LPD3DXSPRITE spriteHandler, World * manager);
 	~SentryBullet();
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);
+	void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 image);
 	void Update(float t);
 	void Render();
 	void Shoot(BULLET_DIRECTION dir, float posX, float posY);

@@ -36,11 +36,12 @@ private:
 
 public:
 
-	IceBeam(World * manager);
-	IceBeam(World * manager, int x_holder, int y_holder);
+	IceBeam(LPD3DXSPRITE spriteHandler, World * manager);
+	IceBeam(LPD3DXSPRITE spriteHandler, World * manager, int x_holder, int y_holder);
 	~IceBeam();
 
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);
+	void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 image);
 
 	void Render();
 };

@@ -7,9 +7,10 @@ BulletObject::BulletObject()
 {
 }
 
-BulletObject::BulletObject(World * manager)
+BulletObject::BulletObject(LPD3DXSPRITE spriteHandler, World * manager)
 {
 	this->manager = manager;
+	this -> spriteHandler = spriteHandler;
 }
 
 BulletObject::~BulletObject()
@@ -60,6 +61,10 @@ void BulletObject::SetDirection(BULLET_DIRECTION value)
 }
 
 void BulletObject::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
+{
+}
+
+void BulletObject::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 image)
 {
 }
 

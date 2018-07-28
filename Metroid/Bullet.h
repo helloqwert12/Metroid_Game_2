@@ -25,11 +25,12 @@ protected:
 	
 public:
 
-	Bullet(World * manager);
-	Bullet(World * manager, int x_holder, int y_holder);
+	Bullet(LPD3DXSPRITE spriteHandler, World * manager);
+	Bullet(LPD3DXSPRITE spriteHandler, World * manager, int x_holder, int y_holder);
 	~Bullet();
 
 	void InitSprites(LPDIRECT3DDEVICE9 d3ddv);
+	void InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 image);
 	void Update(float t);
 	void Render();
 };

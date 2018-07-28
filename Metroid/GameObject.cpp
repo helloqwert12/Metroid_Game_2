@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "utils.h"
 
+
 GameObject::GameObject()
 {
 }
@@ -455,12 +456,12 @@ float GameObject::SweptAABB(GameObject *target, const float &DeltaTime)
 	{
 		if (dxEntry < 0.0f)
 		{
-			normalx = 1.0f;
+			normalx = 1.0f;		// tông bên trái
 			normaly = 0.0f;
 		}
 		else
 		{
-			normalx = -1.0f;
+			normalx = -1.0f;	// tông bên phải
 			normaly = 0.0f;
 		}
 	}
@@ -469,12 +470,12 @@ float GameObject::SweptAABB(GameObject *target, const float &DeltaTime)
 		if (dyEntry < 0.0f)
 		{
 			normalx = 0.0f;
-			normaly = 1.0f;
+			normaly = 1.0f;		// tông ở dưới
 		}
 		else
 		{
 			normalx = 0.0f;
-			normaly = -1.0f;
+			normaly = -1.0f;	// tông ở trên
 		}
 	}
 

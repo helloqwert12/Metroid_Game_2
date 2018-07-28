@@ -4,9 +4,10 @@
 
 #define LIMIT_DISTANCE_BOOMERANG 500
 
-RidleyBoomerang::RidleyBoomerang(World * manager)
+RidleyBoomerang::RidleyBoomerang(LPD3DXSPRITE spriteHandler, World * manager)
 {
 	this->manager = manager;
+	this->spriteHandler = spriteHandler;
 	right = NULL;
 
 	limit_dist_x = 0;
@@ -29,12 +30,18 @@ void RidleyBoomerang::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 {
 	if (d3ddv == NULL) return;
 	//Create sprite handler
-	HRESULT result = D3DXCreateSprite(d3ddv, &_SpriteHandler);
+	HRESULT result = D3DXCreateSprite(d3ddv, &spriteHandler);
 	if (result != D3D_OK) return;
 
 	//Create sprite
-	right = new Sprite(_SpriteHandler, RIDLEY_BOOMERANG_SPIRTE_PATH, RIDLEY_BOOMERANG_PATH, RIDLEY_BOOMERANG_WIDTH, RIDLEY_BOOMERANG_HEIGHT, RIDLEY_BOOMERANG_SPRITE_COUNT, SPRITE_PER_ROW);
+	right = new Sprite(spriteHandler, RIDLEY_BOOMERANG_SPIRTE_PATH, RIDLEY_BOOMERANG_PATH, RIDLEY_BOOMERANG_WIDTH, RIDLEY_BOOMERANG_HEIGHT, RIDLEY_BOOMERANG_SPRITE_COUNT, SPRITE_PER_ROW);
 
+}
+
+void RidleyBoomerang::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 image)
+{
+	//Create sprite
+	right = new Sprite(spriteHandler, image, RIDLEY_BOOMERANG_PATH, RIDLEY_BOOMERANG_WIDTH, RIDLEY_BOOMERANG_HEIGHT, RIDLEY_BOOMERANG_SPRITE_COUNT, SPRITE_PER_ROW);
 }
 
 void RidleyBoomerang::Update(float t)
@@ -128,14 +135,14 @@ void RidleyBoomerang::Render()
 {
 	if (isActive)
 	{
-		_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 		switch (direction)
 		{
 		case ON_RIGHT:
 			right->Render(pos_x, pos_y);
 			break;
 		}
-		_SpriteHandler->End();
+		spriteHandler->End();
 	}
 }
 

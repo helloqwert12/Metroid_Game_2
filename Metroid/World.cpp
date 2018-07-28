@@ -39,14 +39,14 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	rootQNode1 = NULL;
 	rootQNode2 = NULL;
 
-	bullets = new BulletManager(this, STANDARD);
+	bullets = new BulletManager(spriteHandler, this, STANDARD);
 	//bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
-	missiles = new BulletManager(this, MISSILE);
-	icebeam = new BulletManager(this, ICEBEAM);
+	missiles = new BulletManager(spriteHandler, this, MISSILE);
+	icebeam = new BulletManager(spriteHandler, this, ICEBEAM);
 	//missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
-	sentrybullets = new BulletManager(this, SENTRY_BULLET);
-	birdbullets = new BulletManager(this, BIRD_BULLET);
-	ridleyBoomerang = new BulletManager(this, BOOMERANG);
+	sentrybullets = new BulletManager(spriteHandler, this, SENTRY_BULLET);
+	birdbullets = new BulletManager(spriteHandler, this, BIRD_BULLET);
+	ridleyBoomerang = new BulletManager(spriteHandler, this, BOOMERANG);
 
 	morphItem = new MorphItem(spriteHandler, this);
 	energyItem = new EnergyItem(spriteHandler, this);

@@ -68,8 +68,19 @@ void Bird::Update(float t)
 		isActive = false;
 		return;
 	}
-	// khi samus đi vào vùng va chạm
 
+	if (isHit)
+	{
+		time_freeze -= t;
+		if (time_freeze <= 0)
+		{
+			isHit = false;
+			time_freeze = ENEMY_FREEZE;
+		}
+		return;
+	}
+
+	// khi samus đi vào vùng va chạm
 	if (this->IsCollide(manager->samus) == true)
 	{
 		vy = -0.28f;
@@ -167,7 +178,14 @@ void Bird::Render()
 	if (!isActive)
 		return;
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	fly->Render(pos_x, pos_y);
+	if (time_freeze <= 300)
+		fly->Render(pos_x, pos_y);
+	else
+	{
+		D3DXCOLOR color;
+		color.r = 76; color.g = 117; color.b = 255;
+		fly->Render(pos_x, pos_y, color);
+	}
 	spriteHandler->End();
 }
 

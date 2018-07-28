@@ -110,7 +110,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	hog_yellow->TakeDamage(this->damage); break;
 					case MISSILE:	hog_yellow->TakeDamage(this->damage); break;
-					case ICEBEAM: break;
+					case ICEBEAM:	hog_yellow->time_freeze = TIME_FREEZE_ICEBEAM; break;
 					}
 				}
 				break;
@@ -121,7 +121,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	hog_pink->TakeDamage(this->damage); break;
 					case MISSILE:	hog_pink->TakeDamage(this->damage); break;
-					case ICEBEAM: break;
+					case ICEBEAM: 	hog_pink->time_freeze = TIME_FREEZE_ICEBEAM; break;
 					}
 				}
 
@@ -133,7 +133,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	bird->TakeDamage(this->damage); break;
 					case MISSILE:	bird->TakeDamage(this->damage); break;
-					case ICEBEAM: break;
+					case ICEBEAM:	bird->time_freeze = TIME_FREEZE_ICEBEAM; break;
 					}
 				}
 				break;
@@ -144,7 +144,7 @@ void BulletObject::Update(float t)
 					{
 					case STANDARD:	bee->TakeDamage(this->damage); break;
 					case MISSILE:	bee->TakeDamage(this->damage); break;
-					case ICEBEAM: break;
+					case ICEBEAM: 	bee->time_freeze = TIME_FREEZE_ICEBEAM; break;
 					}
 				}
 				break;
@@ -174,9 +174,7 @@ void BulletObject::Update(float t)
 				{
 					Block * block = (Block*)manager->enemyGroup->objects[i];
 					if (getBulletType() == ICEBEAM)
-					{
-
-					}
+						block->time_freeze = TIME_FREEZE_ICEBEAM;
 				}
 					break;
 				}

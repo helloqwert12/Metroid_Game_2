@@ -58,6 +58,17 @@ void Bee::Update(float t)
 		return;
 	}
 
+	if (isHit)
+	{
+		time_freeze -= t;
+		if (time_freeze <= 0)
+		{
+			isHit = false;
+			time_freeze = ENEMY_FREEZE;
+		}
+		return;
+	}
+
 	//// khi samus đi vào vùng va chạm (chưa làm)
 	//if (this->IsCollide(manager->samus) == true)
 	//{
@@ -132,7 +143,14 @@ void Bee::Render()
 		return;
 
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	fly->Render(pos_x, pos_y);
+	if (time_freeze <= 300)
+		fly->Render(pos_x, pos_y);
+	else
+	{
+		D3DXCOLOR color;
+		color.r = 76; color.g = 117; color.b = 255;
+		fly->Render(pos_x, pos_y, color);
+	}
 	spriteHandler->End();
 }
 

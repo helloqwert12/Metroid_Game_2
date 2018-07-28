@@ -445,21 +445,46 @@ void Bedgehog::Render()
 	if (!isActive)
 		return;
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	switch (state)
+
+	if (time_freeze <= 300) // Do ENEMY_FREEZE = 300
 	{
-	case ON_BEDGEHOG_UP:
-		up->Render(pos_x, pos_y);
-		break;
-	case ON_BEDGEHOG_BOTTOM:
-		bottom->Render(pos_x, pos_y);
-		break;
-	case ON_BEDGEHOG_LEFT:
-		left->Render(pos_x, pos_y);
-		break;
-	case ON_BEDGEHOG_RIGHT:
-		right->Render(pos_x, pos_y);
-		break;
+		switch (state)
+		{
+		case ON_BEDGEHOG_UP:
+			up->Render(pos_x, pos_y);
+			break;
+		case ON_BEDGEHOG_BOTTOM:
+			bottom->Render(pos_x, pos_y);
+			break;
+		case ON_BEDGEHOG_LEFT:
+			left->Render(pos_x, pos_y);
+			break;
+		case ON_BEDGEHOG_RIGHT:
+			right->Render(pos_x, pos_y);
+			break;
+		}
 	}
+	else
+	{
+		D3DXCOLOR color;
+		color.r = 76; color.g = 117; color.b = 255;
+		switch (state)
+		{
+		case ON_BEDGEHOG_UP:
+			up->Render(pos_x, pos_y, color);
+			break;
+		case ON_BEDGEHOG_BOTTOM:
+			bottom->Render(pos_x, pos_y, color);
+			break;
+		case ON_BEDGEHOG_LEFT:
+			left->Render(pos_x, pos_y, color);
+			break;
+		case ON_BEDGEHOG_RIGHT:
+			right->Render(pos_x, pos_y, color);
+			break;
+		}
+	}
+	
 	spriteHandler->End();
 }
 

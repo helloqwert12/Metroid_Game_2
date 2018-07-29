@@ -287,8 +287,8 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 
 		if (world->samus->GetState() == ON_MORPH_RIGHT)
 			world->samus->SetState(ON_MORPH_LEFT);
-		if (world->samus->GetState() == ON_SOMERSAULT_LEFT)
-			world->samus->SetState(ON_SOMERSAULT_RIGHT);
+		if (world->samus->GetState() == ON_SOMERSAULT_RIGHT)
+			world->samus->SetState(ON_SOMERSAULT_LEFT);
 		if (world->samus->GetState() == ON_JUMP_RIGHT)
 			world->samus->SetState(ON_JUMP_LEFT);
 		if (world->samus->GetState() == ON_JUMPING_SHOOTING_RIGHT || world->samus->GetState() == ON_JUMP_AIM_UP_RIGHT)

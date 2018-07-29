@@ -289,7 +289,7 @@ void Bedgehog::Update(float t)
 		last_normaly = 0;
 		return;
 	}
-		
+	
 
 	// Nếu không nằm trong Camera thì unactive
 	if (!IsInCamera())
@@ -299,6 +299,9 @@ void Bedgehog::Update(float t)
 		last_normaly = 0;
 		return;
 	}
+
+	if (time_freeze <= 300)
+		collider->SetCollider(0, 0, -BEDGEHOG_HEIGHT, BEDGEHOG_WIDTH);
 
 	if (isHit)
 	{

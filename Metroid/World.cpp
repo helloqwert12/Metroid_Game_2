@@ -229,7 +229,7 @@ void World::Update(float t)
 void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 {
 	//samus->Render();
-	samus->RenderDebug(d3ddv);
+	samus->Render();
 	//DrawCollider(d3ddv, 1275, 300, new Collider(-20, -20, 20, 20), D3DCOLOR_XRGB(255, 0, 0));
 	//DrawCollider(d3ddv, samus->GetPosX(), samus->GetPosY(), samus->GetCollider(), D3DCOLOR_XRGB(255, 0, 0));
 
@@ -274,12 +274,12 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 
 	collisionGroup->Render();
 	effectgroup->Render();
-	enemyGroup->RenderDebug(d3ddv);
+	enemyGroup->Render();
 	otherGO->Render();
 
 	gate->Render();
 
-	colGroundBrick->RenderDebug(d3ddv);
+	//colGroundBrick->RenderDebug(d3ddv);
 
 }
 

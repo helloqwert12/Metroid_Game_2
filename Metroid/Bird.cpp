@@ -69,6 +69,9 @@ void Bird::Update(float t)
 		return;
 	}
 
+	if (time_freeze <= 300)
+		collider->SetCollider(BIRD_HEIGHT / 2, -BIRD_WIDTH / 2, -BIRD_HEIGHT / 2, BIRD_WIDTH / 2);
+
 	if (isHit)
 	{
 		time_freeze -= t;

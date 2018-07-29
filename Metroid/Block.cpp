@@ -63,6 +63,9 @@ void Block::Update(float t)
 		return;
 	}
 
+	if (time_freeze <= 300)
+		collider->SetCollider(BLOCK_HEIGHT / 2, -BLOCK_WIDTH / 2, -BLOCK_HEIGHT / 2, BLOCK_WIDTH / 2);
+
 	if (isHit)
 	{
 		time_freeze -= t;

@@ -558,10 +558,10 @@ void Samus::Update(float t)
 					//Xử lý khi va chạm với enemy
 					if (enemy->time_freeze <= 300) // DoF ENEMY_FREEZE = 300
 					{
-						if (enemy->GetEnemyType() == BEDGEHOG_YELLOW || enemy->GetEnemyType() == BEDGEHOG_PINK)
-							enemy->GetCollider()->SetCollider(0, 0, -enemy->GetHeight(), enemy->GetWidth());
-						else
-							enemy->GetCollider()->SetCollider(enemy->GetHeight() / 2, -enemy->GetWidth() / 2, -enemy->GetHeight() / 2, enemy->GetWidth() / 2);
+						//if (enemy->GetEnemyType() == BEDGEHOG_YELLOW || enemy->GetEnemyType() == BEDGEHOG_PINK)
+						//	enemy->GetCollider()->SetCollider(0, 0, -BEDGEHOG_HEIGHT, BEDGEHOG_WIDTH);
+						//else
+						//	enemy->GetCollider()->SetCollider(enemy->GetHeight() / 2, -enemy->GetWidth() / 2, -enemy->GetHeight() / 2, enemy->GetWidth() / 2);
 						Deflect(enemy, t, timeScale);
 						isImmortal = true;
 
@@ -573,21 +573,18 @@ void Samus::Update(float t)
 							// co the them thuoc tinh damage cho moi con enemy de truyen vao
 							// Vd: this->TakeDamage(float enemy_damage)
 							Bedgehog* hog_yellow = (Bedgehog*)manager->enemyGroup->objects[i];
-							hog_yellow->GetCollider()->SetCollider(0, 0, -hog_yellow->GetHeight(), hog_yellow->GetWidth());
 							TakeDamage(hog_yellow->damage);
 						}
 						break;
 						case BEDGEHOG_PINK:
 						{
 							Bedgehog * hog_pink = (Bedgehog*)manager->enemyGroup->objects[i];
-							hog_pink->GetCollider()->SetCollider(0, 0, -hog_pink->GetHeight(), hog_pink->GetWidth());
 							TakeDamage(hog_pink->damage);
 						}
 						break;
 						case BIRD:
 						{
 							Bird * bird = (Bird*)manager->enemyGroup->objects[i];
-							bird->GetCollider()->SetCollider(bird->GetHeight() / 2, -bird->GetWidth() / 2, -bird->GetHeight() / 2, bird->GetWidth() / 2);
 							TakeDamage(bird->damage);
 							pos_y = GROUND_Y; // Set giá trị vị trí cho samus khi va chạm bird, tránh bị bug xuyên đất
 						}
@@ -595,14 +592,12 @@ void Samus::Update(float t)
 						case BLOCK:
 						{
 							Block * block = (Block*)manager->enemyGroup->objects[i];
-							block->GetCollider()->SetCollider(block->GetHeight() / 2, -block->GetWidth() / 2, -block->GetHeight() / 2, block->GetWidth() / 2);
 							TakeDamage(block->damage);
 						}
 						break;
 						case BEE:
 						{
 							Bee * bee = (Bee*)manager->enemyGroup->objects[i];
-							bee->GetCollider()->SetCollider(bee->GetHeight() / 2, -bee->GetWidth() / 2, -bee->GetHeight() / 2, bee->GetWidth() / 2);
 							TakeDamage(bee->damage);
 							pos_y = GROUND_Y; // Set giá trị vị trí cho samus khi va chạm bee, tránh bị bug xuyên đất
 						}
@@ -618,12 +613,10 @@ void Samus::Update(float t)
 					}
 					else
 					{
-						int temp = 8;
 						if (enemy->GetEnemyType() == BEDGEHOG_YELLOW || enemy->GetEnemyType() == BEDGEHOG_PINK)
-							enemy->GetCollider()->SetCollider(0, 0, -40, 40);
+							enemy->GetCollider()->SetCollider(0, 0, -30, 32);
 						else
-							enemy->GetCollider()->SetCollider(20, -20, -20, 20);
-						
+							enemy->GetCollider()->SetCollider(enemy->GetHeight() / 2, -enemy->GetWidth() / 2, -enemy->GetHeight() / 2, enemy->GetWidth() / 2);
 						SlideFromGround(enemy, t, timeScale);
 					}
 				}

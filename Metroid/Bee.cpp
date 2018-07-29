@@ -58,6 +58,9 @@ void Bee::Update(float t)
 		return;
 	}
 
+	if (time_freeze <= 300)
+		collider->SetCollider(BEE_HEIGHT / 2, -BEE_WIDTH / 2, -BEE_HEIGHT / 2, BEE_WIDTH / 2);
+
 	if (isHit)
 	{
 		time_freeze -= t;

@@ -30,6 +30,9 @@ Bird::Bird(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type) :
 	//Set animate rate ban đầu
 	animate_rate = BIRD_STANDARD_ANIMATE_RATE;
 
+	//Time of bird when hit  Ground
+	timeOnGround = BIRD_TIME_ON_GROUND;
+
 	//Set collider
 	collider = new Collider();
 	collider->SetCollider(BIRD_HEIGHT / 2, -BIRD_WIDTH / 2, -BIRD_HEIGHT / 2, BIRD_WIDTH / 2);
@@ -70,7 +73,7 @@ void Bird::Update(float t)
 	}
 
 	if (time_freeze <= 300)
-		collider->SetCollider(BIRD_HEIGHT / 2, -BIRD_WIDTH / 2, -BIRD_HEIGHT / 2, BIRD_WIDTH / 2);
+		collider->SetCollider(BIRD_HEIGHT / 2, -BIRD_WIDTH / 2, -BIRD_HEIGHT / 2 - 10, BIRD_WIDTH / 2);
 
 	if (isHit)
 	{
@@ -135,12 +138,15 @@ void Bird::Update(float t)
 				SlideFromGround(brick, t, timeScale);
 
 				DeathByShoot = false;
-				if (pos_y - height <= GROUND_Y && normalx == 0)
+				if (pos_y - height / 2 - 10 <= GROUND_Y && normalx == 0)
 				{
-					if (this->DeathByShoot == false)
+					timeOnGround -= t;
+					if (this->DeathByShoot == false && timeOnGround <= 0)
 					{
 						manager->birdbullets->Next(ON_LEFT, this->pos_x, pos_y);
+						timeOnGround = BIRD_TIME_ON_GROUND;
 						isActive = false;
+						vy = 0;
 					}
 				}
 			}

@@ -550,7 +550,8 @@ void GameObject::SlideFromGround(GameObject *target, const float &DeltaTime, con
 	{
 		this->pos_y = (target->pos_y + target->collider->GetTop() - this->collider->GetBottom()) + 0.1f;
 		pos_y -= vy*DeltaTime;
-		vy = 0;
+		//vy = 0;
+		vx = 0;
 	}
 	else if (normaly < -0.1f)	// tông ở dưới lên
 	{

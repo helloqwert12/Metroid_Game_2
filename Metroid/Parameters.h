@@ -194,6 +194,7 @@ class Energy;
 
 #define BIRD_STANDARD_ANIMATE_RATE 7
 #define BIRD_BOOST_ANIMATE_RATE 30
+#define BIRD_TIME_ON_GROUND 2000.0f
 //================== END BIRD =================
 
 //================== BLOCK =====================

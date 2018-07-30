@@ -9,7 +9,7 @@ class Bird : public Enemy
 {
 protected:
 	Sprite * fly;
-
+	float timeOnGround = BIRD_TIME_ON_GROUND;
 	Collider * collider_area;
 
 	int animate_rate;	// cần biến này vì khi dí theo Samus animate rate thay đổi

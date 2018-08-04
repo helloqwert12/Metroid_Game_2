@@ -52,6 +52,11 @@ void Metroid::_ShootIceBeam(BULLET_DIRECTION dir)
 	world->icebeam->Next(dir, world->samus->GetPosX(), world->samus->GetPosY());
 }
 
+void Metroid::_SetBomb(BULLET_DIRECTION dir)
+{
+	world->bomb->Next(dir, world->samus->GetPosX(), world->samus->GetPosY());
+}
+
 Metroid::Metroid(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, int FrameRate):Game(hInstance, Name, Mode, IsFullScreen, FrameRate)
 {
 	//tiles = new Tiles();
@@ -79,7 +84,6 @@ Metroid::~Metroid()
 	delete(first_room);
 	//delete(second_room);
 	delete(room);
-	delete(intro);
 }
 
 void Metroid::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
@@ -452,9 +456,9 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 				{
 					if (world->enemyGroup->objects[i]->IsActive())
 					{
-						float damge = DAMAGE_SAMUS_BULLET;
+						float damage = DAMAGE_SAMUS_BULLET;
 						((Enemy*)(world->enemyGroup->objects[i]))->DeathByShoot = true;
-						((Enemy*)(world->enemyGroup->objects[i]))->TakeDamage(damge);
+						((Enemy*)(world->enemyGroup->objects[i]))->TakeDamage(damage);
 						//list[j]->Reset();
 						break;
 					}
@@ -573,10 +577,11 @@ void Metroid::OnKeyDown(int KeyCode)
 				}
 			case DIK_DOWN:
 				//if samus is idle then do morph
-				if (world->samus->isSamusCrouch() == true)
+				if (world->samus->isSamusCanMorph() == true)
 				{
 					if (world->samus->GetState() == IDLE_LEFT)
 					{
+						world->samus->isCrouch = true;
 						world->samus->SetVelocityX(0);
 						world->samus->ResetAllSprites();
 						world->samus->SetState(ON_MORPH_LEFT);
@@ -584,6 +589,7 @@ void Metroid::OnKeyDown(int KeyCode)
 					}
 					else if (world->samus->GetState() == IDLE_RIGHT)
 					{
+						world->samus->isCrouch = true;
 						world->samus->SetVelocityX(0);
 						world->samus->ResetAllSprites();
 						world->samus->SetState(ON_MORPH_RIGHT);
@@ -591,6 +597,7 @@ void Metroid::OnKeyDown(int KeyCode)
 					}
 					else if (world->samus->GetState() == ON_MORPH_LEFT) //otherwise, reset to idle (left of right)
 					{
+						world->samus->isCrouch = false;
 						world->samus->SetVelocityX(0);
 						world->samus->ResetAllSprites();
 						world->samus->SetState(IDLE_LEFT);
@@ -600,6 +607,7 @@ void Metroid::OnKeyDown(int KeyCode)
 					}
 					else if (world->samus->GetState() == ON_MORPH_RIGHT)
 					{
+						world->samus->isCrouch = false;
 						world->samus->SetVelocityX(0);
 						world->samus->ResetAllSprites();
 						world->samus->SetState(IDLE_RIGHT);
@@ -730,7 +738,7 @@ void Metroid::OnKeyDown(int KeyCode)
 
 					}
 				}
-			break;
+				break;
 			}
 
 			case DIK_V:
@@ -810,6 +818,13 @@ void Metroid::OnKeyDown(int KeyCode)
 
 					_ShootIceBeam(ON_RIGHT);
 
+				}
+				break;
+			case DIK_SPACE:
+				if (world->samus->isSamusCrouch() == true)
+				{
+					Game::gameSound->playSound(SET_BOMB);
+					_SetBomb(ON_UP);
 				}
 				break;
 			}

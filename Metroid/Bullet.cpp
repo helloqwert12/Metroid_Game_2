@@ -39,7 +39,7 @@ Bullet::Bullet(LPD3DXSPRITE spriteHandler, World * manager, int x_holder, int y_
 	this->bulletType = STANDARD;
 	pos_x_holder = x_holder;
 	pos_y_holder = y_holder;
-	collider = new Collider(0, 0, -BULLET_HEIGHT, BULLET_WIDTH);
+	collider = new Collider(BULLET_HEIGHT / 2, -BULLET_WIDTH / 2, -BULLET_HEIGHT / 2, BULLET_WIDTH / 2);
 }
 
 
@@ -59,7 +59,7 @@ void Bullet::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	bullet = new Sprite(spriteHandler, BULLET_SPRITE_PATH, BULLET_SPRITE, BULLET_WIDTH, BULLET_HEIGHT, BULLET_COUNT, SPRITE_PER_ROW);
 
 	//Set collider
-	collider = new Collider(0, 0, -BULLET_HEIGHT, BULLET_WIDTH);
+	collider = new Collider(BULLET_HEIGHT / 2, -BULLET_WIDTH / 2, -BULLET_HEIGHT / 2, BULLET_WIDTH / 2);
 }
 
 void Bullet::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 image)
@@ -68,7 +68,7 @@ void Bullet::InitSprites(LPDIRECT3DDEVICE9 d3ddv, LPDIRECT3DTEXTURE9 image)
 	bullet = new Sprite(spriteHandler, image, BULLET_SPRITE, BULLET_WIDTH, BULLET_HEIGHT, BULLET_COUNT, SPRITE_PER_ROW);
 
 	//Set collider
-	collider = new Collider(0, 0, -BULLET_HEIGHT, BULLET_WIDTH);
+	collider = new Collider(BULLET_HEIGHT / 2, -BULLET_WIDTH / 2, -BULLET_HEIGHT / 2, BULLET_WIDTH / 2);
 }
 
 void Bullet::Update(float t)
@@ -76,7 +76,7 @@ void Bullet::Update(float t)
 	if (!isActive)
 		return;
 
-	// Đạn samus va chạm với Enemy (Hiện chỉ có Missile của samus là tác dụng va chạm dc tới enemy)
+	// Đạn samus va chạm với Enemy
 	for (int i = 0; i < manager->enemyGroup->size; i++)
 	{
 		if (manager->enemyGroup->objects[i]->IsActive())

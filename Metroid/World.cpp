@@ -43,6 +43,7 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	//bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
 	missiles = new BulletManager(spriteHandler, this, MISSILE);
 	icebeam = new BulletManager(spriteHandler, this, ICEBEAM);
+	bomb = new BulletManager(spriteHandler, this, BOMB);
 	//missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
 	sentrybullets = new BulletManager(spriteHandler, this, SENTRY_BULLET);
 	birdbullets = new BulletManager(spriteHandler, this, BIRD_BULLET);
@@ -170,6 +171,7 @@ void World::Update(float t)
 	bullets->Update(t);
 	missiles->Update(t);
 	icebeam->Update(t);
+	bomb->Update(t);
 
 	birdbullets->Update(t);
 	ridleyBoomerang->Update(t);
@@ -236,6 +238,7 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	bullets->Render();
 	missiles->Render();
 	icebeam->Render();
+	bomb->Render();
 
 	birdbullets->Render();
 	ridleyBoomerang->Render();
@@ -289,6 +292,8 @@ void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	bullets->InitSprites(d3ddv);
 	missiles->InitSprites(d3ddv);
 	icebeam->InitSprites(d3ddv);
+	bomb->InitSprites(d3ddv);
+
 	sentrybullets->InitSprites(d3ddv);
 	birdbullets->InitSprites(d3ddv);
 	ridleyBoomerang->InitSprites(d3ddv);

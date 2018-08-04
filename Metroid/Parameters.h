@@ -194,7 +194,7 @@ class Energy;
 
 #define BIRD_STANDARD_ANIMATE_RATE 7
 #define BIRD_BOOST_ANIMATE_RATE 30
-#define BIRD_TIME_ON_GROUND 2000.0f
+#define BIRD_TIME_ON_GROUND 1500.0f
 //================== END BIRD =================
 
 //================== BLOCK =====================
@@ -265,6 +265,7 @@ enum BULLET_TYPE
 	BIRD_BULLET,
 	BOOMERANG,
 	ICEBEAM,	// Đạn băng của samus
+	BOMB,		// Bomb của Samus
 };
 //================ END BULLET TYPE ============
 
@@ -291,6 +292,8 @@ enum BULLET_DIRECTION
 #define STANDARD_NUM 5
 #define MISSILE_NUM 3
 #define ICEBEAM_NUM 3
+#define BOMB_NUM 1000
+#define TIME_BOMB_EXIST 2000
 #define SENTRY_BULLET_NUM 10
 #define BIRD_BULLET_NUM 2
 #define RIDLEY_BOOMERANG_NUM 10
@@ -537,6 +540,7 @@ enum EFFECT_TYPE
 #define DAMAGE_SAMUS_BULLET 1
 #define DAMAGE_SAMUS_MISSILE 3
 #define DAMAGE_SAMUS_ICEBEAM 0
+#define DAMAGE_SAMUS_BOMB 5
 
 // BOSSES
 #define DAMAGE_RIDLEY 8

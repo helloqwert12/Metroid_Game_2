@@ -78,6 +78,7 @@ public:
 	BulletManager * bullets;
 	BulletManager * missiles;
 	BulletManager * icebeam;
+	BulletManager * bomb;
 	BulletManager * sentrybullets;
 	BulletManager * birdbullets;
 	BulletManager * ridleyBoomerang;

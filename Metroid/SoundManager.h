@@ -49,6 +49,12 @@ enum eSoundId
 	// Bắn IceBeam
 	SHOOT_ICEBEAM,
 
+	// Đặt bomb
+	SET_BOMB,
+
+	// Bomb nổ
+	BOMB_EXPLOSION,
+
 	// Đạn hit enemy
 	BULLET_HIT_ENEMY,
 

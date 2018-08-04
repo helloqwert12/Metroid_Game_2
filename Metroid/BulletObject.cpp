@@ -77,7 +77,7 @@ void BulletObject::Update(float t)
 	//if (manager->samus->GetStateActive())
 	//{
 	//	float timeScale = 
-	(manager->samus, t);
+	//(manager->samus, t);
 	//	if (timeScale < 1.0f)
 	//	{
 	//		switch (getBulletType())
@@ -92,7 +92,7 @@ void BulletObject::Update(float t)
 	//	}
 	//}
 
-	// Đạn samus va chạm với Enemy (Hiện chỉ có Missile của samus là tác dụng va chạm dc tới enemy)
+	// Đạn samus va chạm với Enemy
 	for (int i = 0; i < manager->enemyGroup->size; i++)
 	{
 		if (manager->enemyGroup->objects[i]->IsActive())
@@ -111,6 +111,7 @@ void BulletObject::Update(float t)
 					case STANDARD:	hog_yellow->TakeDamage(this->damage); break;
 					case MISSILE:	hog_yellow->TakeDamage(this->damage); break;
 					case ICEBEAM:	hog_yellow->time_freeze = TIME_FREEZE_ICEBEAM; break;
+					case BOMB:		hog_yellow->TakeDamage(this->damage); break;
 					}
 				}
 				break;
@@ -122,6 +123,7 @@ void BulletObject::Update(float t)
 					case STANDARD:	hog_pink->TakeDamage(this->damage); break;
 					case MISSILE:	hog_pink->TakeDamage(this->damage); break;
 					case ICEBEAM: 	hog_pink->time_freeze = TIME_FREEZE_ICEBEAM; break;
+					case BOMB:		hog_pink->TakeDamage(this->damage); break;
 					}
 				}
 
@@ -134,6 +136,7 @@ void BulletObject::Update(float t)
 					case STANDARD:	bird->TakeDamage(this->damage); break;
 					case MISSILE:	bird->TakeDamage(this->damage); break;
 					case ICEBEAM:	bird->time_freeze = TIME_FREEZE_ICEBEAM; break;
+					case BOMB:		bird->TakeDamage(this->damage); break;
 					}
 				}
 				break;
@@ -145,6 +148,7 @@ void BulletObject::Update(float t)
 					case STANDARD:	bee->TakeDamage(this->damage); break;
 					case MISSILE:	bee->TakeDamage(this->damage); break;
 					case ICEBEAM: 	bee->time_freeze = TIME_FREEZE_ICEBEAM; break;
+					case BOMB:		bee->TakeDamage(this->damage); break;
 					}
 				}
 				break;
@@ -156,6 +160,7 @@ void BulletObject::Update(float t)
 					case STANDARD:	ridley->TakeDamage(this->damage); break;
 					case MISSILE:	ridley->TakeDamage(this->damage); break;
 					case ICEBEAM: break;
+					case BOMB:		ridley->TakeDamage(this->damage); break;
 					}
 				}
 				break;
@@ -167,6 +172,7 @@ void BulletObject::Update(float t)
 					case STANDARD:	motherBrain->TakeDamage(this->damage); break;
 					case MISSILE:	motherBrain->TakeDamage(this->damage); break;
 					case ICEBEAM: break;
+					case BOMB:		motherBrain->TakeDamage(this->damage); break;
 					}
 				}
 				break;

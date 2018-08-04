@@ -30,6 +30,8 @@ void SoundManager::LoadSound(HWND _hWnd)
 	DSBuffer[SHOOT_BULLET] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\bullet.wav");
 	DSBuffer[SHOOT_MISSILE] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\missile.wav");
 	DSBuffer[SHOOT_ICEBEAM] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\icebeam.wav");
+	DSBuffer[SET_BOMB] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\set_bomb.wav");
+	DSBuffer[BOMB_EXPLOSION] = LoadWaveToSoundBuffer(L"Resources\\sound\\sfx\\bomb_explosion.wav");
 
 	if (!DSBuffer)
 	{

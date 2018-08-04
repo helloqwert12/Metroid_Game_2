@@ -476,12 +476,21 @@ bool Samus::isSamusDeath()
 {
 	if (isDeath == true)
 		return true;
+	return false;
+}
+
+bool Samus::isSamusCanMorph()
+{
+	if (isMorph == true)
+		return true;
+	return false;
 }
 
 bool Samus::isSamusCrouch()
 {
-	if (isMorph == true)
+	if (isCrouch == true)
 		return true;
+	return false;
 }
 
 bool Samus::isSamusOnAir()

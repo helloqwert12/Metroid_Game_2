@@ -19,7 +19,6 @@ protected:
 
 	LPD3DXSPRITE spriteHandler;
 	World * world;
-	Sprite * intro;
 	BulletManager * bulletManager;
 
 	Loader* first_room;
@@ -46,6 +45,7 @@ private:
 	void _Shoot(BULLET_DIRECTION dir);
 	void _ShootMissile(BULLET_DIRECTION dir);
 	void _ShootIceBeam(BULLET_DIRECTION dir);
+	void _SetBomb(BULLET_DIRECTION dir);
 
 public:
 	Metroid(HINSTANCE hInstance, LPWSTR Name, int Mode, int IsFullScreen, int FrameRate);

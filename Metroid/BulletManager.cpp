@@ -40,6 +40,10 @@ BulletManager::BulletManager(LPD3DXSPRITE spriteHandler, World * manager, BULLET
 		num = ICEBEAM_NUM;
 		image = LoadTexture(ICEBEAM_SPRITE_PATH, spriteHandler);
 		break;
+	case BOMB:
+		num = BOMB_NUM;
+		image = LoadTexture(BOMB_SPRITE_PATH, spriteHandler);
+		break;
 	}
 	bullet_list = new BulletObject*[num];
 	switch (bullet_type)
@@ -54,42 +58,44 @@ BulletManager::BulletManager(LPD3DXSPRITE spriteHandler, World * manager, BULLET
 		manager->samus->setListBullet(bullet_list);
 		break;
 	case MISSILE:
-		//bullet_list = new BulletObject*[MISSILE_NUM];
 		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new Missile(spriteHandler, manager);
 		}
 		break;
 	case SENTRY_BULLET:
-		//bullet_list = new BulletObject*[SENTRY_BULLET_NUM];
 		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new SentryBullet(spriteHandler, manager);
 		}
 		break;
 	case BIRD_BULLET:
-		//bullet_list = new BulletObject*[BIRD_BULLET_NUM];
 		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new BirdBullet(spriteHandler, manager);
 		}
 		break;
 	case BOOMERANG:
-		//bullet_list = new BulletObject*[BIRD_BULLET_NUM];
 		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new RidleyBoomerang(spriteHandler, manager);
 		}
 		break;
 	case ICEBEAM:
-		//bullet_list = new BulletObject*[ICEBEAM_NUM];
 		for (int i = 0; i < num; i++)
 		{
 			bullet_list[i] = new IceBeam(spriteHandler, manager);
 		}
 		break;
+	case BOMB:
+		for (int i = 0; i < num; i++)
+		{
+			bullet_list[i] = new Bomb(spriteHandler, manager);
+		}
+		break;
 		// ...
 	}
+
 
 	_Index = 0;
 	this->start_shoot = 0;

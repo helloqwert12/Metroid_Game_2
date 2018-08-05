@@ -1031,8 +1031,8 @@ void Samus::Response(GameObject *target, const float &DeltaTime, const float &Co
 
 	if (normaly != 0)
 	{
-		pos_x += vx * (CollisionTimeScale)* DeltaTime;
-		pos_y += vy * (CollisionTimeScale)* DeltaTime;
+		pos_x += vx * (CollisionTimeScale)* DeltaTime * 20.0*normalx;
+		pos_y += vy * (CollisionTimeScale)* DeltaTime * 20.0f*normaly;
 	}
 }
 

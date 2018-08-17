@@ -31,6 +31,8 @@ Bedgehog::Bedgehog(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy
 	last_normalx = 0;
 	last_normaly = 0;
 
+	state = ON_BEDGEHOG_UP;
+
 	//isCollision = false;
 }
 
@@ -299,6 +301,7 @@ void Bedgehog::Update(float t)
 		isActive = false;
 		last_normalx = 0;
 		last_normaly = 0;
+		state = ON_BEDGEHOG_UP;
 		return;
 	}
 
@@ -566,6 +569,7 @@ void Bedgehog::Destroy()
 
 	// Destroy
 	Enemy::Destroy();
+	state = ON_BEDGEHOG_UP;
 }
 
 // Phản xạ khi va chạm với ground

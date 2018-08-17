@@ -5,7 +5,7 @@
 #define BEDGEHOG_YELLOW_COUNT 1
 #define BEDGEHOG_PINK_COUNT 1
 #define BIRD_COUNT 1
-#define BLOCK_COUNT 1
+#define BLOCK_COUNT 3
 #define BEE_COUNT 1
 
 #include <d3dx9.h>

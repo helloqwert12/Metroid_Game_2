@@ -108,10 +108,11 @@ void Samus::Render()
 			break;
 		}
 	}
-	else if (isChangeColor == true)
+	else
 	{
 		D3DXCOLOR color;
-		color.r = 127; color.g = 127; color.b = 127;
+		int value = 127;
+		color.r = value; color.g = value; color.b = value;
 
 		switch (state)
 		{
@@ -198,8 +199,7 @@ void Samus::Render()
 			break;
 		}
 	}
-	
-	
+		
 	spriteHandler->End();
 }
 
@@ -640,13 +640,8 @@ void Samus::Update(float t)
 	{
 		isChangeColor = true;
 
-		DWORD nowChange = GetTickCount();
-		if (nowChange - lasttimeChange > 1000 / ANIMATE_RATE)
-		{
+		if (immortal_time % 2 != 0)
 			isChangeColor = false;
-
-		}
-		lasttimeChange = nowChange;
 
 		immortal_time -= t;
 		if (immortal_time <= 0)

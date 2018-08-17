@@ -562,7 +562,7 @@ void Samus::Update(float t)
 			if (isImmortal == false)
 			{
 				float timeScale = SweptAABB(enemy, t);
-				if (timeScale < 1.0f)
+				if (timeScale < 1.0f || this->IsCollide(enemy))
 				{
 					//Xử lý khi va chạm với enemy
 					if (enemy->time_freeze <= 300) // DoF ENEMY_FREEZE = 300
@@ -1102,23 +1102,33 @@ void Samus::Deflect(GameObject *target, const float &DeltaTime, const float &Col
 	// rồi mới bật ra
 	if (normalx > 0.1f)	// tông bên phải
 	{
-		if (vx < -0.0f)// đang chạy qua trái => văng ngược lại
-		{
-			vx *= -1;
-			vx += 1.f;
+		//if (vx < -0.0f)// đang chạy qua trái => văng ngược lại
+		//{
+		//	vx *= -1;
+		//	vx += 1.f;
 
-			vy -= 0.5f;
-		}
+		//	vy += 0.2f;
+		//}
+
+		vx *= -1;
+		vx += 1.f;
+
+		vy += 0.2f;
 	}
 	else if (normalx < -0.1f) // tông bên trái
 	{
-		if (vx > 0.0f)//	đang chạy qua phải => văng ngược lại
-		{
-			vx *= -1;
-			vx -= 1.f;
+		//if (vx > 0.0f)//	đang chạy qua phải => văng ngược lại
+		//{
+		//	vx *= -1;
+		//	vx -= 1.f;
 
-			vy -= 0.5f;
-		}
+		//	vy += 0.2f;
+		//}
+
+		vx *= -1;
+		vx -= 1.f;
+
+		vy += 0.2f;
 	}
 
 	if (normaly > 0.1f) // tông phía trên
@@ -1132,11 +1142,27 @@ void Samus::Deflect(GameObject *target, const float &DeltaTime, const float &Col
 			vy *= -1;
 	}
 
-	if (normaly != 0)
+	/*if (normaly != 0)
 	{
 		pos_x += vx * (CollisionTimeScale)* DeltaTime + 20.0f*normalx;
 		pos_y += vy * (CollisionTimeScale)* DeltaTime + 20.0f*normaly;
-	}
+	}*/
+}
+bool Samus::IsCollide(GameObject * target)
+{
+	// Kiềm tra bên trái
+	if (pos_x + collider->GetRight() < target->GetPosX())
+		return false;
+	// Kiểm tra phía trên
+	if (pos_y + collider->GetBottom() > target->GetPosY())
+		return false;
+	// Kiểm tra bên phải
+	if (pos_x > target->GetPosX() + target->GetCollider()->GetRight())
+		return false;
+	if (pos_y < target->GetPosY() + target->GetCollider()->GetBottom())
+		return false;
+
+	return true;
 }
 //void Samus::ResponseToEnemy(GameObject * target, const float & DeltaTime, const float & CollisionTimeScale)
 //{

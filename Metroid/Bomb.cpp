@@ -143,6 +143,13 @@ void Bomb::Update(float t)
 				}
 			}
 		}
+
+		// xét va chạm với samus
+		if (this->IsCollide(manager->samus))
+		{
+			manager->samus->DeflectWithBomb();
+		}
+
 		Game::gameSound->playSound(BOMB_EXPLOSION);
 		isActive = false;
 	}

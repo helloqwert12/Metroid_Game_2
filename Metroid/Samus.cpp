@@ -1148,6 +1148,12 @@ void Samus::Deflect(GameObject *target, const float &DeltaTime, const float &Col
 		pos_y += vy * (CollisionTimeScale)* DeltaTime + 20.0f*normaly;
 	}*/
 }
+void Samus::DeflectWithBomb()
+{
+		vx *= -1;
+		vx += 2.f;
+		vy += 0.7f;
+}
 bool Samus::IsCollide(GameObject * target)
 {
 	// Kiềm tra bên trái

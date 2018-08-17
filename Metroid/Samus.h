@@ -138,6 +138,7 @@ public:
 	void SlideFromGround(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
 
 	void Deflect(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);
+	void DeflectWithBomb();
 	bool IsCollide(GameObject *target);
 
 	//void ResponseToEnemy(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);

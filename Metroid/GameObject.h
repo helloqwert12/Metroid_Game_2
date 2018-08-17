@@ -132,6 +132,7 @@ public:
 	//bool IsInCamera();
 
 	float SweptAABB(GameObject *target, const float &DeltaTime);
+	static float SweptAABB(GameObject *src, GameObject *target, const float &DeltaTime);
 
 	// xử lý khi có va chạm
 	//void Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale);

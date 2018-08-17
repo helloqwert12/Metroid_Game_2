@@ -8,12 +8,10 @@ void Bomb::Render()
 	if (!isActive)
 		return;
 
-	else
-	{
-		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-		bomb->Render(pos_x, pos_y);
-		spriteHandler->End();
-	}
+	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+	bomb->Render(pos_x, pos_y);
+	spriteHandler->End();
+
 }
 
 Bomb::Bomb(LPD3DXSPRITE spriteHandler, World * manager)
@@ -27,7 +25,7 @@ Bomb::Bomb(LPD3DXSPRITE spriteHandler, World * manager)
 	this->bulletType = BOMB;
 	this->spriteHandler = spriteHandler;
 	this->manager = manager;
-	collider = new Collider(BOMB_HEIGHT / 2, -BOMB_WIDTH / 2, -BOMB_HEIGHT / 2, BOMB_WIDTH / 2);
+	collider = new Collider(BOMB_HEIGHT * 3, -BOMB_WIDTH * 3, -BOMB_HEIGHT * 3, BOMB_WIDTH * 3);
 }
 
 Bomb::Bomb(LPD3DXSPRITE spriteHandler, World * manager, int x_holder, int y_holder)
@@ -43,7 +41,7 @@ Bomb::Bomb(LPD3DXSPRITE spriteHandler, World * manager, int x_holder, int y_hold
 	this->spriteHandler = spriteHandler;
 	pos_x_holder = x_holder;
 	pos_y_holder = y_holder;
-	collider = new Collider(BOMB_HEIGHT / 2, -BOMB_WIDTH / 2, -BOMB_HEIGHT / 2, BOMB_WIDTH / 2);
+	collider = new Collider(BOMB_HEIGHT * 3, -BOMB_WIDTH * 3, -BOMB_HEIGHT * 3, BOMB_WIDTH * 3);
 }
 
 
@@ -96,7 +94,7 @@ void Bomb::Update(float t)
 			float timeScale = SweptAABB(manager->colFloorBrick->objects[i], t);
 			if (timeScale < 1.0f)
 			{
-				SlideFromGround(manager->colGroundBrick->objects[i], t, timeScale);
+				SlideFromGround(manager->colFloorBrick->objects[i], t, timeScale);
 				Reset();
 			}
 		}
@@ -104,21 +102,28 @@ void Bomb::Update(float t)
 
 	time_exist -= t;
 	// Nếu hết thời gian thì không hiển thị nữa
-	if (time_exist <= 0)
+	if (time_exist <= 500)
 	{
 		manager->explsEffect->Init(this->pos_x, this->pos_y);
-		collider->SetCollider(BOMB_HEIGHT * 3, -BOMB_WIDTH * 3, -BOMB_HEIGHT * 3, BOMB_WIDTH * 3);
+		//collider->SetCollider(BOMB_HEIGHT * 3, -BOMB_WIDTH * 3, -BOMB_HEIGHT * 3, BOMB_WIDTH * 3);
 		for (int i = 0; i < manager->enemyGroup->size; i++)
 		{
 			if (manager->enemyGroup->objects[i]->IsActive())
 			{
-				float timeScale = SweptAABB(manager->enemyGroup->objects[i], t);
+	 			float timeScale = manager->enemyGroup->objects[i]->SweptAABB(this, t);
 				if (timeScale < 1.0f)
 				{
 					manager->enemyGroup->objects[i]->isHit = true;
 					((Enemy*)manager->enemyGroup->objects[i])->TakeDamage(this->damage);
 					Reset();
 				}
+				/*bool collided = manager->enemyGroup->objects[i]->IsCollide(this);
+				if (collided)
+				{
+					manager->enemyGroup->objects[i]->isHit = true;
+					((Enemy*)manager->enemyGroup->objects[i])->TakeDamage(this->damage);
+					Reset();
+				}*/
 			}
 		}
 		Game::gameSound->playSound(BOMB_EXPLOSION);

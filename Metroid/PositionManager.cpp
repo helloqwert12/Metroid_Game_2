@@ -139,7 +139,9 @@ std::vector<PostInfo> PositionManager::GetListInCamera(int object_type)
 	for (int i = 0; i < list[index_room].size(); i++)
 	{
 		// Nếu nằm trong camera nhưng chưa active thì active
-		if (Camera::IsInCamera(list[index_room][i].x, list[index_room][i].y, list[index_room][i].width, list[index_room][i].height) && list[index_room][i].object_type == object_type)
+		if (Camera::IsInCamera(list[index_room][i].x, list[index_room][i].y, 
+			list[index_room][i].width, list[index_room][i].height) 
+			&& list[index_room][i].object_type == object_type)
 		{
 			// Nếu chưa được active
 			if (list[index_room][i].isActive == false)

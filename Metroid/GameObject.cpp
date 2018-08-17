@@ -484,6 +484,15 @@ float GameObject::SweptAABB(GameObject *target, const float &DeltaTime)
 	// 0.0f va chạm lồng vào nhau
 	return entryTimeScale;
 }
+float GameObject::SweptAABB(GameObject * src, GameObject * target, const float & DeltaTime)
+{
+	if (src->GetVelocityX() == 0 && src->GetVelocityY() == 0)
+	{
+		return target->SweptAABB(src, DeltaTime);
+	}
+	else
+		return src->SweptAABB(target, DeltaTime);
+}
 ////////////////////// khang
 // di chuyển sát tường (xử lý va chạm)
 void GameObject::Response(GameObject *target, const float &DeltaTime)

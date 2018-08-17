@@ -175,6 +175,14 @@ void BulletManager::Render()
 	}
 }
 
+void BulletManager::RenderDebug(LPDIRECT3DDEVICE9 d3ddv, D3DCOLOR color)
+{
+	for (int i = 0; i < num; i++)
+	{
+		bullet_list[i]->RenderDebug(d3ddv, color);
+	}
+}
+
 void BulletManager::setNum(int numBullet)
 {
 	num = numBullet;

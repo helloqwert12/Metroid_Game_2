@@ -36,6 +36,7 @@ public:
 	void Next(BULLET_DIRECTION dir, float posX, float posY);
 	void Update(float t);
 	void Render();
+	void RenderDebug(LPDIRECT3DDEVICE9 d3ddv, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 0));
 	void setNum(int numBullet);
 	int getNum();
 	//void Shoot(BULLET_DIRECTION dir);

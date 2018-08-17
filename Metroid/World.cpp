@@ -238,7 +238,8 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	bullets->Render();
 	missiles->Render();
 	icebeam->Render();
-	bomb->Render();
+	//bomb->Render();
+	bomb->RenderDebug(d3ddv);
 
 	birdbullets->Render();
 	ridleyBoomerang->Render();

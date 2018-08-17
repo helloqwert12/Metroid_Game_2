@@ -277,12 +277,12 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 
 	collisionGroup->Render();
 	effectgroup->Render();
-	enemyGroup->Render();
+	enemyGroup->RenderDebug(d3ddv);
 	otherGO->Render();
 
 	gate->Render();
 
-	//colGroundBrick->RenderDebug(d3ddv);
+	colGroundBrick->RenderDebug(d3ddv);
 
 }
 

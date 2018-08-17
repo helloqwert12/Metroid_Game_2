@@ -3,6 +3,8 @@
 #include "GroupObject.h"
 #include "ColliderBrick.h"
 #include "Metroid.h"
+#include "utils.h"
+
 
 Bedgehog::Bedgehog()
 {
@@ -324,37 +326,72 @@ void Bedgehog::Update(float t)
 			if (timeScale < 1.0f)
 			{
 				ColliderBrick * brick = (ColliderBrick*)manager->colGroundBrick->objects[i];
-				// isCollision = true;
 				ResponseGround3(brick, t, timeScale);
-				isCollide = true;
-				OutputDebugString(L"Is Collided!!!\n");
+				
+				//OutputDebugString(L"Is Collided!!!\n");
+
+				//if (last_normalx > 0.1f && normaly > 0.1f /*&& !isChange*/)
+				//{
+				//	OutputDebugString(L"Va cham goc |_\n");
+				//	//isChange = true;
+				//	vx *= -1;
+				//}
+				
+		/*
 				last_normalx = normalx;
-				last_normaly = normaly;
-				break;
+				last_normaly = normaly;*/
+
+			
+	
+				isCollide = true;
+				isChange = false;
+
+				
+				//break;
 			}
 		}
 	}
 
 	if (manager->metroid->isOnFloor)
 	{
-		for (int i = 0; i < manager->colFloorBrick->objects.size(); i++)
+		for (int i = 0; i < manager->colFloorBrick->size; i++)
 		{
 			float timeScale = SweptAABB(manager->colFloorBrick->objects[i], t);
 			// Nếu có va chạm
 			if (timeScale < 1.0f)
 			{
-				// isCollision = true;
-				ResponseGround(manager->colFloorBrick->objects[i], t, timeScale);
+				ColliderBrick * brick = (ColliderBrick*)manager->colFloorBrick->objects[i];
+				ResponseGround3(brick, t, timeScale);
+				
+				isCollide = true;
+				isChange = false;
 			}
 		}
 	}
-	
-	if (!isCollide)
-	{
 
+	
+	
+	if (!isCollide && !isChange)
+	{
+		isChange = true;
+		//OutputDebugString(L"NOT Collided\n");
 		if ((last_normaly > 0.1f) || (last_normaly < -0.1f))// nếu frame trước va chạm dưới hoặc trên còn bây giờ thì ko
 		{
+			if (vx > 0)
+			{
+				pos_x += 2.f;
+			}
+			else
+			{
+				pos_x -= 2.f;
+			}
+
+			//OutputDebugString(L"pos_x: ");
+			//Output(pos_x);
+			//OutputDebugString(L"\n");
+
 			vx *= -1;
+			//vx = 0;
 			if (vx > 0)
 				OutputDebugString(L"vx > 0 \n");
 			else
@@ -367,22 +404,39 @@ void Bedgehog::Update(float t)
 			{
 				OutputDebugString(L"Down --> Left\n");
 			}
-			//last_normalx = 0;
+			last_normalx = 0;
+			last_normaly = 0;
 		}
 	
 		if ((last_normalx > 0.1f) || (last_normalx < -0.1f))// nếu frame trước va chạm trái hoặc phải còn bây giờ thì ko
 		{
+			if (vy > 0)
+			{
+				pos_y += 2.f;	// +
+				OutputDebugString(L"vy > 0\n");
+			}
+			else
+			{
+				pos_y -= 2.f;
+				OutputDebugString(L"vy < 0\n");
+			}
 			vy *= -1;
 			if (last_normalx > 0.1f)
 				OutputDebugString(L"Right --> Down\n");
 			else
 				OutputDebugString(L"Left --> Up\n");
-			//last_normaly = 0;
+			last_normaly = 0;
+			last_normalx = 0;
 		}
 
 		/*last_normalx = normalx;
 		last_normaly = normaly;*/
 	}
+
+	
+
+	/*last_normalx = normalx;
+	last_normaly = normaly;*/
 
 	
 
@@ -642,33 +696,41 @@ void Bedgehog::ResponseGround3(GameObject * target, const float & DeltaTime, con
 	{
 		this->pos_x = (target->GetPosX() + target->GetCollider()->GetRight() - this->collider->GetLeft()) + 0.1f;
 		pos_x -= vx * DeltaTime;
-		//last_normalx = normalx;
+		last_normalx = normalx;
 		//last_normaly = 0;
+
+		state = ON_BEDGEHOG_RIGHT;
 	}
 
 	if (normalx < -0.1f)// tông bên trái gạch
 	{
 		this->pos_x = (target->GetPosX() + target->GetCollider()->GetLeft() - this->collider->GetRight()) - 0.1f;
 		pos_x -= vx * DeltaTime;
-		//last_normalx = normalx;
+		last_normalx = normalx;
 		//last_normaly = 0;
+
+		state = ON_BEDGEHOG_LEFT;
 	}
 
 	if (normaly > 0.1f) // trên xuống 
 	{
 		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) + 0.1f;
 		pos_y -= vy * DeltaTime;
-		//last_normaly = normaly;
+		last_normaly = normaly;
 		//last_normalx = 0;
+
+		state = ON_BEDGEHOG_UP;
 	}
 	
 	if (normaly < -0.1f)	// tông ở dưới lên
 	{
-		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) - 0.1f;
+		//this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) - 0.1f;
 		pos_y -= vy * DeltaTime;
-		vy = 0;
-		//last_normaly = normaly;
+		//vy = 0;
+		last_normaly = normaly;
 		//last_normalx = 0;
+
+		state = ON_BEDGEHOG_BOTTOM;
 	}
 
 	

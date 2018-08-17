@@ -26,6 +26,8 @@ protected:
 	float last_normalx;
 	float last_normaly;
 
+	bool isChange = false;
+
 public:
 	Bedgehog();
 	Bedgehog(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type);

@@ -383,6 +383,7 @@ float GameObject::SweptAABB(GameObject *target, const float &DeltaTime)
 	{
 		normalx = 0.0f;
 		normaly = 0.0f;
+		OutputDebugString(L"Already Collide\n");
 		return 0.0f;
 	}
 

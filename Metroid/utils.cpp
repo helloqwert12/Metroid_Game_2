@@ -3,6 +3,8 @@
 #include "utils.h"
 #include "trace.h"
 #include "Camera.h"
+#include <string>
+#include <sstream>
 
 LPDIRECT3DSURFACE9 CreateSurfaceFromFile(LPDIRECT3DDEVICE9 d3ddv, LPWSTR FilePath)
 {
@@ -155,4 +157,11 @@ LPDIRECT3DTEXTURE9 LoadTexture(LPWSTR imgPath, LPD3DXSPRITE spriteHandler)
 	}
 
 	return _Image;
+}
+
+void Output(float t)
+{
+	std::ostringstream ss;
+	ss << t;
+	OutputDebugString((LPCWSTR)ss.str().c_str());
 }

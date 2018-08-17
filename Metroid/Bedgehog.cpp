@@ -302,6 +302,8 @@ void Bedgehog::Update(float t)
 		last_normalx = 0;
 		last_normaly = 0;
 		state = ON_BEDGEHOG_UP;
+		vx = BEDGEHOG_SPEED;
+		vy = -BEDGEHOG_SPEED;
 		return;
 	}
 
@@ -569,7 +571,10 @@ void Bedgehog::Destroy()
 
 	// Destroy
 	Enemy::Destroy();
+
 	state = ON_BEDGEHOG_UP;
+	vx = BEDGEHOG_SPEED;
+	vy = -BEDGEHOG_SPEED;
 }
 
 // Phản xạ khi va chạm với ground

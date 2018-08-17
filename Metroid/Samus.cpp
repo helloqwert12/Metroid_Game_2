@@ -21,7 +21,7 @@ void Samus::Render()
 		return;
 
 	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	if (immortal_time == 4000.0f) // Do SAMUS_IMMORTAL_TIME = 4000.0f
+	if (isChangeColor == false)
 	{
 		switch (state)
 		{
@@ -111,7 +111,8 @@ void Samus::Render()
 	else
 	{
 		D3DXCOLOR color;
-		color.r = 127; color.g = 127; color.b = 127;
+		int value = 127;
+		color.r = value; color.g = value; color.b = value;
 
 		switch (state)
 		{
@@ -198,8 +199,7 @@ void Samus::Render()
 			break;
 		}
 	}
-	
-	
+		
 	spriteHandler->End();
 }
 
@@ -630,19 +630,30 @@ void Samus::Update(float t)
 					}
 				}
 			}
-			else
-			{
-				immortal_time -= t;
-				if (immortal_time <= 0)
-				{
-					isImmortal = false;
-					immortal_time = SAMUS_IMMORTAL_TIME;
-				}
-			}
 		}
 	}
 
 	//<======================
+
+	// Xử lý nhấp nháy khi va chạm enemy của Samus
+	if (isImmortal == true)
+	{
+		isChangeColor = true;
+
+		if (immortal_time % 2 != 0)
+			isChangeColor = false;
+
+		immortal_time -= t;
+		if (immortal_time <= 0)
+		{
+			isImmortal = false;
+			immortal_time = SAMUS_IMMORTAL_TIME;
+		}
+	}
+	else
+	{
+		isChangeColor = false;
+	}
 
 	// Xử lý va chạm với Item
 	if (SweptAABB(manager->energyItem, t) < 1.0f)

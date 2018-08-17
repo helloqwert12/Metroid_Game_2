@@ -174,9 +174,6 @@
     <ClCompile Include="PositionManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="BirdBullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Item</Filter>
     </ClCompile>
@@ -227,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Source Files\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="BirdBullet.cpp">
+      <Filter>Source Files\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,9 +329,6 @@
     <ClInclude Include="Sentry.h">
       <Filter>Header Files\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BirdBullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Header Files\Item</Filter>
     </ClInclude>
@@ -382,6 +379,9 @@
     </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>Header Files\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="BirdBullet.h">
+      <Filter>Header Files\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

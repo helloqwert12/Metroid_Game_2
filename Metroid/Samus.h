@@ -82,6 +82,7 @@ public:
 	bool isDeath;	// Trạng thái chết của Samus
 	bool isOnAir;	// Trạng thái trên không của Samus
 	bool isCrouch;
+	bool isChangeColor = false; // Mặc định là ko thay đổi màu
 
 	Samus();
 	Samus(LPD3DXSPRITE spriteHandler, World * manager);

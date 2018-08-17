@@ -141,6 +141,7 @@ void Metroid::UpdateFrame(float Delta)
 		{
 			Game::gameSound->stopSound(BACKGROUND_APPEARANCE);
 			Game::gameSound->playSoundLoop(BACKGROUND_MAP);
+			world->samus->SetState(IDLE_RIGHT);
 			isInGame = false;
 		}
 	}

@@ -238,8 +238,7 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	bullets->Render();
 	missiles->Render();
 	icebeam->Render();
-	//bomb->Render();
-	bomb->RenderDebug(d3ddv);
+	bomb->Render();
 
 	birdbullets->Render();
 	ridleyBoomerang->Render();
@@ -278,12 +277,12 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 
 	collisionGroup->Render();
 	effectgroup->Render();
-	enemyGroup->RenderDebug(d3ddv);
+	enemyGroup->Render();
 	otherGO->Render();
 
 	gate->Render();
 
-	colGroundBrick->RenderDebug(d3ddv);
+	
 
 }
 

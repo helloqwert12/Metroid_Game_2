@@ -350,10 +350,10 @@ void Metroid::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, float Delta)
 			world->samus->SetState(ON_JUMP_AIM_UP_LEFT);
 		if (world->samus->GetState() == ON_JUMP_RIGHT/* || world->samus->GetState() == ON_JUMPING_SHOOTING_RIGHT*/)
 			world->samus->SetState(ON_JUMP_AIM_UP_RIGHT);
-		if (world->samus->GetState() == ON_MORPH_LEFT)
+		/*if (world->samus->GetState() == ON_MORPH_LEFT)
 			world->samus->SetState(IDLE_LEFT);
 		if (world->samus->GetState() == ON_MORPH_RIGHT)
-			world->samus->SetState(IDLE_RIGHT);
+			world->samus->SetState(IDLE_RIGHT);*/
 		if (world->samus->GetState() == ON_SOMERSAULT_LEFT)
 			world->samus->SetState(ON_JUMP_AIM_UP_LEFT);
 		if (world->samus->GetState() == ON_SOMERSAULT_RIGHT)
@@ -529,7 +529,7 @@ void Metroid::OnKeyDown(int KeyCode)
 			switch (KeyCode)
 			{
 			case DIK_X:
-				if (world->samus->isSamusOnAir() == false)
+				if (world->samus->isSamusOnAir() == false && world->samus->GetState() != ON_MORPH_LEFT && world->samus->GetState() != ON_MORPH_RIGHT)
 				{
 					Game::gameSound->playSound(JUMP);
 					world->samus->isOnAir = true;

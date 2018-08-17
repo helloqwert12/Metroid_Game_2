@@ -1152,7 +1152,7 @@ void Samus::DeflectWithBomb()
 {
 		vx *= -1;
 		vx += 2.f;
-		vy += 0.7f;
+		vy += 0.5f;
 }
 bool Samus::IsCollide(GameObject * target)
 {

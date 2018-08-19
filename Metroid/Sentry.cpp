@@ -98,36 +98,6 @@ void Sentry::Update(float t)
 		return;
 	}
 
-	//vy += -FALLDOWN_VELOCITY_DECREASE;
-
-	//Kiểm tra va chạm
-	//for (int i = 0; i < manager->quadtreeGroup->size; i++)
-	//{
-	//	switch (manager->quadtreeGroup->objects[i]->GetType())
-	//	{
-	//	case BRICK:
-	//		float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
-	//		if (timeScale < 1.0f)
-	//		{
-	//			
-	//			pos_x += vx * timeScale;
-	//			pos_y += vy * timeScale;
-
-	//			//Push
-	//			float magnitude = sqrt((vx * vx + vy * vy)) * (1.0f - timeScale);
-	//			float dotprod = vx * normaly + vy * normalx;
-	//			if (dotprod > 0.0f)
-	//				dotprod = 1.0f;
-	//			else if (dotprod < 0.0f)
-	//				dotprod = -1.0f;
-	//			vx = dotprod * normaly * magnitude;
-	//			vy = dotprod * normalx * magnitude;
-
-	//		}
-	//		break;
-	//	}
-	//}
-
 	pos_x += vx * t;
 	pos_y += vy * t;
 
@@ -214,11 +184,6 @@ void Sentry::Update(float t)
 		}
 		last_time = now;
 	}
-
-	// --TO DO: Xử lý va chạm
-	// ...
-	// Khi cần xử lý va chạm, gọi groupCollision ở world
-	//	
 }
 
 void Sentry::Render()

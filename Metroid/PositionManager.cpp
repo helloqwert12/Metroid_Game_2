@@ -3,7 +3,6 @@
 #include <fstream>
 #include <sstream>
 #include <utility>
-#include "PosInfo.h"
 using namespace std;
 
 PositionManager::PositionManager()

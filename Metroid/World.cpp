@@ -9,7 +9,6 @@
 #include "ExplosionEffect.h"
 #include "PositionManager.h"
 #include <vector>
-#include "PosInfo.h"
 #include "Energy.h"
 #include "Number.h"
 #include "Gate.h"
@@ -40,11 +39,9 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	rootQNode2 = NULL;
 
 	bullets = new BulletManager(spriteHandler, this, STANDARD);
-	//bullets->InitPosition(samus->GetPosX(), samus->GetPosY());
 	missiles = new BulletManager(spriteHandler, this, MISSILE);
 	icebeam = new BulletManager(spriteHandler, this, ICEBEAM);
 	bomb = new BulletManager(spriteHandler, this, BOMB);
-	//missiles->InitPosition(samus->GetPosX(), samus->GetPosY());
 	sentrybullets = new BulletManager(spriteHandler, this, SENTRY_BULLET);
 	birdbullets = new BulletManager(spriteHandler, this, BIRD_BULLET);
 	ridleyBoomerang = new BulletManager(spriteHandler, this, BOOMERANG);
@@ -71,11 +68,6 @@ World::World(LPD3DXSPRITE spriteHandler, Metroid * metroid)
 	gate = new Gate(spriteHandler, this, LEFT);
 	gate->Init(1700, 150);
 
-	//hog_yellow = new Bedgehog(spriteHandler, this, BEDGEHOG_YELLOW);
-	//hog_pink = new Bedgehog(spriteHandler, this, BEDGEHOG_PINK);
-	//bird = new Bird(spriteHandler, this, BIRD);
-	//block = new Block(spriteHandler, this, BLOCK);
-	//bee = new Bee(spriteHandler, this, BEE);
 	
 	// hog yellow
 	for (int i = 0; i < BEDGEHOG_YELLOW_COUNT; i++)
@@ -145,7 +137,7 @@ World::~World()
 
 void World::Update(float t)
 {
-	//====> Quan update - chưa test!!!
+	//====> Quan update
 
 	//Lấy danh sách các vị trí xuất hiện trong camera nhưng chưa được active
 	std::vector<PostInfo> listEnemy = posManager->GetListInCamera((int)OBJECT_TYPE::ENEMY);
@@ -154,12 +146,6 @@ void World::Update(float t)
 		//enemyGroup->SetEnemyActive(list[i].detail_type, list[i].x, list[i].y);
 		GroupObject::SetGameObjectActive(enemyGroup, listEnemy[i].object_type, listEnemy[i].detail_type, listEnemy[i].x, listEnemy[i].y);
 	}
-
-	/*std::vector<PostInfo> listStatic = posManager->GetListInCamera((int)OBJECT_TYPE::GATE);
-	for (int i = 0; i < listStatic.size(); i++)
-	{
-		GroupObject::SetGameObjectActive(staticGroup, listStatic[i].object_type, listStatic[i].detail_type, listStatic[i].x, listStatic[i].y);
-	}*/
 	
 	otherGO->SetOtherGOActive();
 
@@ -183,9 +169,6 @@ void World::Update(float t)
 	explsEffect->Update(t);
 
 	quadtreeGroup->GetCollisionObjectQTree(1);
-	//qtreeGroup->GetCollisionObjectQTree(1);
-
-	//qtreeGroup->Update(t);
 
 	quadtreeGroup->Update(t);
 
@@ -193,14 +176,6 @@ void World::Update(float t)
 	collisionGroup->GetCollisionObjects();
 	effectgroup->Update(t);
 	collisionGroup->Update(t);
-
-	/*hog_yellow->Update(t);
-	hog_pink->Update(t);
-	
-	bird->Update(t);
-	bee->Update(t);*/
-
-	//block->Update(t);
 
 	sentryLeft->Update(t);
 	sentryTop->Update(t);
@@ -216,24 +191,15 @@ void World::Update(float t)
 	numberofmissile1->Update(t);
 	numberofmissile2->Update(t);
 
-	//motherBrain->Update(t);
-	//ridley->Update(t);
-
 	enemyGroup->UpdateActive(t);
 	otherGO->UpdateActive(t);
 
 	gate->Update(t);
-
-	//gateleft->Update(t);
-	//gateright->Update(t);
 }
 
 void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 {
-	//samus->Render();
 	samus->Render();
-	//DrawCollider(d3ddv, 1275, 300, new Collider(-20, -20, 20, 20), D3DCOLOR_XRGB(255, 0, 0));
-	//DrawCollider(d3ddv, samus->GetPosX(), samus->GetPosY(), samus->GetCollider(), D3DCOLOR_XRGB(255, 0, 0));
 
 	bullets->Render();
 	missiles->Render();
@@ -248,24 +214,12 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	missileItem->Render();
 
 	explsEffect->Render();
-	//qtreeGroup->Render();
 	quadtreeGroup->Render();
-	
-
-	/*hog_yellow->Render();
-	hog_pink->Render();
-	
-	bird->Render();
-	bee->Render();*/
-
-	//block->Render();
 
 	sentryLeft->Render();
 	sentryTop->Render();
 	sentryRight->Render();
 	sentrybullets->Render();
-	//motherBrain->Render();
-	//ridley->Render();
 	energy->Render();
 	missileinfo->Render();
 
@@ -281,9 +235,6 @@ void World::Render(LPDIRECT3DDEVICE9 d3ddv)
 	otherGO->Render();
 
 	gate->Render();
-
-	
-
 }
 
 void World::InitSprites(LPDIRECT3DDEVICE9 d3ddv)

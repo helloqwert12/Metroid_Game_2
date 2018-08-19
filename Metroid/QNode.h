@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "QTreeObject.h"
 #include <list>
 #include "GroupObject.h"
 #include "Camera.h"

@@ -13,7 +13,7 @@ MotherBrain::MotherBrain(LPD3DXSPRITE spriteHandler, World * manager)
 	unbroken = new Sprite(spriteHandler, BOSS_SPRITE_PATH, MOTHER_BRAIN_UNBROKEN_PATH, MOTHER_BRAIN_WIDTH, MOTHER_BRAIN_HEIGHT, MOTHER_BRAIN_SPRITE_COUNT, SPRITE_PER_ROW);
 	broken = new Sprite(spriteHandler, BOSS_SPRITE_PATH, MOTHER_BRAIN_BROKEN_PATH, MOTHER_BRAIN_WIDTH, MOTHER_BRAIN_HEIGHT, MOTHER_BRAIN_SPRITE_COUNT, SPRITE_PER_ROW);
 
-	//--TO DO: Khởi tạo collider cho Mother Brain
+	//Khởi tạo collider cho Mother Brain
 	collider = new Collider();
 	collider->SetCollider(MOTHER_BRAIN_HEIGHT / 2, -MOTHER_BRAIN_WIDTH / 2, -MOTHER_BRAIN_HEIGHT / 2, MOTHER_BRAIN_WIDTH / 2);
 }

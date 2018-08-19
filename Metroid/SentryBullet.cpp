@@ -150,24 +150,6 @@ void SentryBullet::Update(float t)
 
 	pos_x += vx*t;
 	pos_y += vy*t;
-
-	//int temp_x = vx*t;
-	//int temp_y = vy*t;
-
-	//if (temp_x < 0)
-	//	temp_x = -temp_x;
-	//if (temp_y < 0)
-	//	temp_y = -temp_y;
-
-	//limit_dist_x += temp_x;
-	//limit_dist_y += temp_y;
-
-
-	////Check if the bullet reach the limit
-	//if (limit_dist_x >= LIMIT_DISTANCE || limit_dist_y >= LIMIT_DISTANCE)
-	//{
-	//	Reset();
-	//}
 }
 
 void SentryBullet::Render()

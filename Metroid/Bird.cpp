@@ -101,30 +101,6 @@ void Bird::Update(float t)
 		}
 	}
 
-	/*for (int i = 0; i < manager->quadtreeGroup->size; i++)
-	{
-		switch (manager->quadtreeGroup->objects[i]->GetType())
-		{
-		case BRICK:
-			float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
-			if (timeScale < 1.0f)
-			{
-				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
-
-				DeathByShoot = false;
-				if (pos_y - height <= GROUND_Y && normalx == 0)
-				{
-					if (this->DeathByShoot == false)
-					{
-						manager->birdbullets->Next(ON_LEFT, this->pos_x, pos_y);
-						isActive = false;
-					}
-				}
-			}
-			break;
-		}
-	}*/
-
 
 	// collider mới cho ground
 	if (!(manager->metroid->isOnFloor))
@@ -174,11 +150,6 @@ void Bird::Update(float t)
 		fly->Next();
 		last_time = now;
 	}
-
-	// --TO DO: Xử lý va chạm
-	// ...
-	// Khi cần xử lý va chạm, gọi groupCollision ở world
-	//	
 }
 
 void Bird::Render()

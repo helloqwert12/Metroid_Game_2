@@ -167,11 +167,8 @@
     <ClCompile Include="MorphItem.cpp" />
     <ClCompile Include="MotherBrain.cpp" />
     <ClCompile Include="Number.cpp" />
-    <ClCompile Include="PosInfo.cpp" />
     <ClCompile Include="PositionManager.cpp" />
     <ClCompile Include="QNode.cpp" />
-    <ClCompile Include="QTreeObject.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="Ridley.cpp" />
     <ClCompile Include="RidleyBoomerang.cpp" />
     <ClCompile Include="Samus.cpp" />
@@ -219,11 +216,8 @@
     <ClInclude Include="MotherBrain.h" />
     <ClInclude Include="Number.h" />
     <ClInclude Include="Parameters.h" />
-    <ClInclude Include="PosInfo.h" />
     <ClInclude Include="PositionManager.h" />
     <ClInclude Include="QNode.h" />
-    <ClInclude Include="QTreeObject.h" />
-    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="Ridley.h" />
     <ClInclude Include="RidleyBoomerang.h" />
     <ClInclude Include="Samus.h" />

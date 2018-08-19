@@ -82,11 +82,6 @@ void Ridley::Update(float t)
 		fly->Next();
 		last_time = now;
 	}
-
-	// --TO DO: Xử lý va chạm
-	// ...
-	// Khi cần xử lý va chạm, gọi groupCollision ở world
-	//	
 }
 
 void Ridley::Render()

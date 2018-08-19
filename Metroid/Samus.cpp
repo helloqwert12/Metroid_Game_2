@@ -203,12 +203,6 @@ void Samus::Render()
 	spriteHandler->End();
 }
 
-//void Samus::RenderDebug(LPDIRECT3DDEVICE9 d3ddv)
-//{
-//	Render();
-//	DrawCollider(d3ddv, this->pos_x, this->pos_y, this->collider, D3DCOLOR_ARGB(0, 255, 0, 0));
-//}
-
 void Samus::Destroy()
 {
 	//Ngưng active
@@ -337,14 +331,6 @@ Samus::~Samus()
 	delete(jump_shooting_up_right);
 }
 
-//DirectCollision Samus::getDirection()
-//{
-//	return this->direction;
-//}
-//void Samus::setDirection(DirectCollision direction)
-//{
-//	this->direction = direction;
-//}
 
 
 void Samus::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
@@ -353,34 +339,6 @@ void Samus::InitSprites(LPDIRECT3DDEVICE9 d3ddv)
 	LPDIRECT3DTEXTURE9 image = LoadTexture(SAMUS_SPRITES_PATH, spriteHandler);
 
 	//Create instance of sprites
-	/*appearing = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, APPEARING, APPEARING_WIDTH, APPEARING_HEIGHT, APPEARING_COUNT, SPRITE_PER_ROW);
-	running_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, RUNNING_LEFT, RUNNING_WIDTH, RUNNING_HEIGHT, RUNNING_COUNT, SPRITE_PER_ROW);
-	running_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, RUNNING_RIGHT, RUNNING_WIDTH, RUNNING_HEIGHT, RUNNING_COUNT, SPRITE_PER_ROW);
-	jump_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMP_LEFT, JUMP_WIDTH, JUMP_HEIGHT, JUMP_COUNT, SPRITE_PER_ROW);
-	jump_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMP_RIGHT, JUMP_WIDTH, JUMP_HEIGHT, JUMP_COUNT, SPRITE_PER_ROW);
-	run_shooting_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, RUN_SHOOTING_LEFT, RUN_SHOOTING_WIDTH, RUN_SHOOTING_HEIGHT, RUN_SHOOTING_COUNT, SPRITE_PER_ROW);
-	run_shooting_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, RUN_SHOOTING_RIGHT, RUN_SHOOTING_WIDTH, RUN_SHOOTING_HEIGHT, RUN_SHOOTING_COUNT, SPRITE_PER_ROW);
-	run_aim_up_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, RUN_AIM_UP_LEFT, RUN_AIM_UP_WIDTH, RUN_AIM_UP_HEIGHT, RUN_AIM_UP_COUNT, SPRITE_PER_ROW);
-	run_aim_up_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, RUN_AIM_UP_RIGHT, RUN_AIM_UP_WIDTH, RUN_AIM_UP_HEIGHT, RUN_AIM_UP_COUNT, SPRITE_PER_ROW);
-	idle_aim_up_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, IDLE_AIM_UP_LEFT, IDLE_AIM_UP_WIDTH, IDLE_AIM_UP_HEIGHT, IDLE_AIM_UP_COUNT, SPRITE_PER_ROW);
-	idle_aim_up_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, IDLE_AIM_UP_RIGHT, IDLE_AIM_UP_WIDTH, IDLE_AIM_UP_HEIGHT, IDLE_AIM_UP_COUNT, SPRITE_PER_ROW);
-	idle_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, STANDING_LEFT, STANDING_WIDTH, STANDING_HEIGHT, STANDING_COUNT, SPRITE_PER_ROW);
-	idle_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, STANDING_RIGHT, STANDING_WIDTH, STANDING_HEIGHT, STANDING_COUNT, SPRITE_PER_ROW);
-	morph_ball_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, MORPH_BALL_LEFT, MORPH_BALL_WIDTH, MORPH_BALL_HEIGHT, MORPH_BALL_COUNT, SPRITE_PER_ROW);
-	morph_ball_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, MORPH_BALL_RIGHT, MORPH_BALL_WIDTH, MORPH_BALL_HEIGHT, MORPH_BALL_COUNT, SPRITE_PER_ROW);
-	somersault_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, SOMERSAULT_LEFT, SOMERSAULT_WIDTH, SOMERSAULT_HEIGHT, SOMERSAULT_COUNT, SPRITE_PER_ROW);
-	somersault_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, SOMERSAULT_RIGHT, SOMERSAULT_WIDTH, SOMERSAULT_HEIGHT, SOMERSAULT_COUNT, SPRITE_PER_ROW);
-	jumping_shooting_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMPING_SHOOTING_LEFT, JUMPING_SHOOTING_WIDTH, JUMPING_SHOOTING_HEIGHT, JUMPING_SHOOTING_COUNT, SPRITE_PER_ROW);
-	jumping_shooting_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMPING_SHOOTING_RIGHT, JUMPING_SHOOTING_WIDTH, JUMPING_SHOOTING_HEIGHT, JUMPING_SHOOTING_COUNT, SPRITE_PER_ROW);
-	jump_aim_up_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMP_AIM_UP_LEFT, JUMP_AIM_UP_WIDTH, JUMP_AIM_UP_HEIGHT, JUMP_AIM_UP_COUNT, SPRITE_PER_ROW);
-	jump_aim_up_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMP_AIM_UP_RIGHT, JUMP_AIM_UP_WIDTH, JUMP_AIM_UP_HEIGHT, JUMP_AIM_UP_COUNT, SPRITE_PER_ROW);
-	idle_shooting_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, STAND_SHOOTING_LEFT, STANDING_SHOOTING_WIDTH, STANDING_SHOOTING_HEIGHT, STAND_SHOOTING_COUNT, SPRITE_PER_ROW);
-	idle_shooting_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, STAND_SHOOTING_RIGHT, STANDING_SHOOTING_WIDTH, STANDING_SHOOTING_HEIGHT, STAND_SHOOTING_COUNT, SPRITE_PER_ROW);
-	idle_shooting_up_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, STAND_SHOOTING_UP_LEFT, STANDING_SHOOTING_UP_WIDTH, STANDING_SHOOTING_UP_HEIGHT, STAND_SHOOTING_UP_COUNT, SPRITE_PER_ROW);
-	idle_shooting_up_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, STAND_SHOOTING_UP_RIGHT, STANDING_SHOOTING_UP_WIDTH, STANDING_SHOOTING_UP_HEIGHT, STAND_SHOOTING_UP_COUNT, SPRITE_PER_ROW);
-	jump_shooting_up_left = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMP_SHOOTING_UP_LEFT, JUMP_SHOOTING_UP_WIDTH, JUMP_SHOOTING_UP_HEIGHT, JUMP_SHOOTING_UP_COUNT, SPRITE_PER_ROW);
-	jump_shooting_up_right = new Sprite(spriteHandler, SAMUS_SPRITES_PATH, JUMP_SHOOTING_UP_RIGHT, JUMP_SHOOTING_UP_WIDTH, JUMP_SHOOTING_UP_HEIGHT, JUMP_SHOOTING_UP_COUNT, SPRITE_PER_ROW);*/
-
 	appearing = new Sprite(spriteHandler, image, APPEARING, APPEARING_WIDTH, APPEARING_HEIGHT, APPEARING_COUNT, SPRITE_PER_ROW);
 	running_left = new Sprite(spriteHandler, image, RUNNING_LEFT, RUNNING_WIDTH, RUNNING_HEIGHT, RUNNING_COUNT, SPRITE_PER_ROW);
 	running_right = new Sprite(spriteHandler, image, RUNNING_RIGHT, RUNNING_WIDTH, RUNNING_HEIGHT, RUNNING_COUNT, SPRITE_PER_ROW);
@@ -549,7 +507,6 @@ void Samus::Update(float t)
 	//
 	// Update samus status
 	//
-	//GameObject::Update(t);
 
 	vy -= gravity;
 	
@@ -565,12 +522,8 @@ void Samus::Update(float t)
 				if (timeScale < 1.0f || this->IsCollide(enemy))
 				{
 					//Xử lý khi va chạm với enemy
-					if (enemy->time_freeze <= 300) // DoF ENEMY_FREEZE = 300
+					if (enemy->time_freeze <= 300) // Do ENEMY_FREEZE = 300
 					{
-						//if (enemy->GetEnemyType() == BEDGEHOG_YELLOW || enemy->GetEnemyType() == BEDGEHOG_PINK)
-						//	enemy->GetCollider()->SetCollider(0, 0, -BEDGEHOG_HEIGHT, BEDGEHOG_WIDTH);
-						//else
-						//	enemy->GetCollider()->SetCollider(enemy->GetHeight() / 2, -enemy->GetWidth() / 2, -enemy->GetHeight() / 2, enemy->GetWidth() / 2);
 						Deflect(enemy, t, timeScale);
 						isImmortal = true;
 
@@ -691,57 +644,6 @@ void Samus::Update(float t)
 	//----------------------------
 	
 	//Xử lý va chạm với ground
-	//for (int i = 0; i < manager->quadtreeGroup->size; i++)
-	//{
-	//	switch (manager->quadtreeGroup->objects[i]->GetType())
-	//	{
-	//	case BRICK:
-	//		Brick * brick = (Brick*)(manager->quadtreeGroup->objects[i]);
-	//		float timeScale = SweptAABB(manager->quadtreeGroup->objects[i], t);
-	//		if (timeScale < 1.0f)
-	//		{
-	//			if (brick->IsPassable())
-	//			{
-	//				if (this->vx > 0)
-	//				{
-	//					Camera::moveRight = true;
-	//					
-	//					if (manager->posManager->GetIndexRoom() <= 1)
-	//						manager->posManager->Next();	// tăng index pooling đến room kế tiếp
-	//					else if (manager->posManager->GetIndexRoom() == 2)
-	//					{
-	//						manager->posManager->Next();
-	//						manager->metroid->isOnFloor = true;
-	//					}
-	//					else if (manager->posManager->GetIndexRoom() == 4)
-	//						manager->posManager->Back();
-
-	//					this->pos_x += 65;
-	//				}
-	//				else if (this->vx < 0)
-	//				{
-	//					Camera::moveLeft = true;
-
-	//					if (manager->posManager->GetIndexRoom() < 3)
-	//						manager->posManager->Back();	// giảm index pooling đến room phía sau
-	//					else if (manager->posManager->GetIndexRoom() == 3)
-	//						manager->posManager->Next();	// vào room boss
-	//					
-	//					this->pos_x -= 65;
-	//				}
-	//			}
-	//			else
-	//			{
-	//				SlideFromGround(manager->quadtreeGroup->objects[i], t, timeScale);
-	//				manager->samus->isOnAir = false;
-	//			}
-	//			//Response(manager->quadtreeGroup->objects[i], t, timeScale);
-	//		}
-	//		break;
-	//	}
-	//	
-	//}
-
 	for (int i = 0; i < manager->colGroundBrick->size; i++)
 	{
 		float timeScale = SweptAABB(manager->colGroundBrick->objects[i], t);
@@ -878,25 +780,6 @@ void Samus::Update(float t)
 		}
 	}
 
-
-	//float collisiontime = SweptAABB(manager->gateleft, t);
-	//	if (collisiontime < 1.0f)
-	//	{
-	//		if (manager->gateleft->IsActive())
-	//		{
-	//			this->SlideFromGround(manager->gateleft, t, collisiontime);
-	//		}
-	//	}
-
-	//	float collisiontime1 = SweptAABB(manager->gateright, t);
-	//	if (collisiontime1 < 1.0f)
-	//	{
-	//		if (manager->gateright->IsActive())
-	//		{
-	//			this->SlideFromGround(manager->gateright, t, collisiontime1);
-	//		}
-	//	}
-	
 	pos_x += vx*t;
 	pos_y += vy*t;
 
@@ -982,29 +865,6 @@ void Samus::Update(float t)
 		}
 		last_time = now;
 	}	
-
-	//Check if samus is on ground or not
-	/*if (pos_y > GROUND_Y)
-	{
-		vy -= gravity;
-	}
-	else
-	{
-		pos_y = GROUND_Y;
-		vy = 0;
-		if (state == ON_JUMP_LEFT || state == ON_JUMPING_SHOOTING_LEFT || state == ON_SOMERSAULT_LEFT || state == ON_JUMP_AIM_UP_LEFT)
-		{
-			state = IDLE_LEFT;
-		}
-		else if (state == ON_JUMP_RIGHT || state == ON_JUMPING_SHOOTING_RIGHT || state == ON_SOMERSAULT_RIGHT || state == ON_JUMP_AIM_UP_RIGHT)
-		{
-			state = IDLE_RIGHT;
-		}
-	}*/
-
-	//Render
-	//Render();
-
 }
 
 void Samus::Response(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale)
@@ -1072,7 +932,6 @@ void Samus::SlideFromGround(GameObject *target, const float &DeltaTime, const fl
 	if (normaly > 0.1f) // trên xuống (không vào normaly được)
 	{
 		this->pos_y = (target->GetPosY() + target->GetCollider()->GetTop() - this->collider->GetBottom()) + 0.1f;
-		//pos_y -= vy*DeltaTime;
 		vy = 0;
 
 		// Xử lý trạng thái cho samus
@@ -1088,7 +947,6 @@ void Samus::SlideFromGround(GameObject *target, const float &DeltaTime, const fl
 	}
 	else if (normaly < -0.1f)	// tông ở dưới lên
 	{
-		//this->pos_y = (target->pos_y + target->collider->GetTop() - this->collider->GetBottom()) - 0.1f;
 		pos_y -= vy*DeltaTime;
 		vy = 0;
 	}
@@ -1096,20 +954,9 @@ void Samus::SlideFromGround(GameObject *target, const float &DeltaTime, const fl
 }
 void Samus::Deflect(GameObject *target, const float &DeltaTime, const float &CollisionTimeScale)
 {
-	// di chuyển vào sát tường trước
-	//this->Response(target, DeltaTime, CollisionTimeScale);
-
 	// rồi mới bật ra
 	if (normalx > 0.1f)	// tông bên phải
 	{
-		//if (vx < -0.0f)// đang chạy qua trái => văng ngược lại
-		//{
-		//	vx *= -1;
-		//	vx += 1.f;
-
-		//	vy += 0.2f;
-		//}
-
 		vx *= -1;
 		vx += 1.f;
 
@@ -1117,14 +964,6 @@ void Samus::Deflect(GameObject *target, const float &DeltaTime, const float &Col
 	}
 	else if (normalx < -0.1f) // tông bên trái
 	{
-		//if (vx > 0.0f)//	đang chạy qua phải => văng ngược lại
-		//{
-		//	vx *= -1;
-		//	vx -= 1.f;
-
-		//	vy += 0.2f;
-		//}
-
 		vx *= -1;
 		vx -= 1.f;
 
@@ -1141,12 +980,6 @@ void Samus::Deflect(GameObject *target, const float &DeltaTime, const float &Col
 		if (vy > 0.0f)// đang bay lên => văng xuống
 			vy *= -1;
 	}
-
-	/*if (normaly != 0)
-	{
-		pos_x += vx * (CollisionTimeScale)* DeltaTime + 20.0f*normalx;
-		pos_y += vy * (CollisionTimeScale)* DeltaTime + 20.0f*normaly;
-	}*/
 }
 void Samus::DeflectWithBomb()
 {
@@ -1170,7 +1003,5 @@ bool Samus::IsCollide(GameObject * target)
 
 	return true;
 }
-//void Samus::ResponseToEnemy(GameObject * target, const float & DeltaTime, const float & CollisionTimeScale)
-//{
-//}
+
 //----------------------------------

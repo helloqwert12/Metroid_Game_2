@@ -575,10 +575,7 @@ void Samus::Update(float t)
 					}
 					else
 					{
-						if (enemy->GetEnemyType() == BEDGEHOG_YELLOW || enemy->GetEnemyType() == BEDGEHOG_PINK)
-							enemy->GetCollider()->SetCollider(0, 0, -30, 32);
-						else
-							enemy->GetCollider()->SetCollider(enemy->GetHeight() / 2 + 10, -enemy->GetWidth() / 2, -enemy->GetHeight() / 2, enemy->GetWidth() / 2);
+						enemy->GetCollider()->SetCollider(0, 0, -30, 32);
 						SlideFromGround(enemy, t, timeScale);
 					}
 				}

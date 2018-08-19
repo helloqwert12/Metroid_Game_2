@@ -22,7 +22,7 @@ Block::Block(LPD3DXSPRITE spriteHandler, World * manager, ENEMY_TYPE enemy_type)
 
 	//Set collider
 	collider = new Collider();
-	collider->SetCollider(BLOCK_HEIGHT / 2, -BLOCK_WIDTH / 2, -BLOCK_HEIGHT / 2, BLOCK_WIDTH / 2);
+	collider->SetCollider(0, 0, -BLOCK_HEIGHT, BLOCK_WIDTH);
 
 	vy = 0;
 	vx = BLOCK_SPEED;
@@ -64,7 +64,7 @@ void Block::Update(float t)
 	}
 
 	if (time_freeze <= 300)
-		collider->SetCollider(BLOCK_HEIGHT / 2, -BLOCK_WIDTH / 2, -BLOCK_HEIGHT / 2, BLOCK_WIDTH / 2);
+		collider->SetCollider(0, 0, -BLOCK_HEIGHT, BLOCK_WIDTH);
 
 	if (isHit)
 	{
